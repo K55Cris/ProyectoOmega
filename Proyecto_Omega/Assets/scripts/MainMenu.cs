@@ -12,12 +12,12 @@ public class MainMenu : MonoBehaviour {
 
     public void Tamer()
     {
-        
+        //
     }
 
     public void IA()
     {
-
+        SceneManager.LoadScene("vsIA");
     }
 
     public void Quit()
