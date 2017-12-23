@@ -4,6 +4,7 @@
 [Aa]ssets/AssetStoreTools*
 [Bb]uild/
 [Ll]ibrary/
+[Bb]uilds/
 [Ll]ocal[Cc]ache/
 [Oo]bj/
 [Tt]emp/
@@ -26,7 +27,13 @@ sysinfo.txt
 *.user
 *.userprefs
 *.pidb
+*.meta
 .DS_Store
+*.tmp
+*.booproj
+*.svd
+*.pdb
+
 
 ###
 # OS generated
@@ -39,3 +46,32 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
+
+
+
+
+.consulo/
+
+
+
+
+# Unity3D generated meta files
+
+*.pidb.meta
+
+*.pdb.meta
+
+
+
+# Unity3D Generated File On Crash Reports
+
+sysinfo.txt
+
+
+
+# Builds
+
+*.apk
+
+*.unitypackage
