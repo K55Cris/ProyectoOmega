@@ -9,20 +9,15 @@ public class Carta : MonoBehaviour
 public class Deck : MonoBehaviour {
     private List<string> deck = new List<string>();
     public Carta[] mazo = new Carta[29];
-
+    //este seria el metodo de cargar, SI TUVIERA UNO!
     private void ReadFromLine()
     {
         StreamReader reader = new StreamReader("/Users/DK_RZ/Documents/scripts/Assets/deck/Deck.txt");
-        string s = reader.ReadLine();
-        //int i = 0;
-
-        for (int i = 0; i <= 29; i++)
+        string s;
+        while ((s = reader.ReadLine()) != null)
         {
-            char[] delimiter = { ';' };
-            string[] codes = s.Split(delimiter);
-            print(i);
-            mazo[i].Code = codes;
-            i++;
+            print(s);
+            deck.Add(s);
         }
     }
     private void OnMouseUp()
@@ -86,8 +81,9 @@ public class Deck : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        //ReadFromLine();
-        deck = CNTdrag.deck;
+        ReadFromLine();
+        //yo actualmente cargo el deck desde otra clase
+        //deck = CNTdrag.deck;
         foreach (var item in mazo)
         {
             print(item);
