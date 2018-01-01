@@ -65,7 +65,6 @@ public class Deck : MonoBehaviour {
         int i = 0;
         foreach (var item in deck)
         {
-            print(item + " " + codCarta);
             if (item.Equals(codCarta))
             {
                 string x = deck[i];

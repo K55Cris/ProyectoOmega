@@ -28,7 +28,7 @@ public class Rookie : MonoBehaviour
             CNTdrag.elegida = true;
             Destroy(GetComponent<Rookie>());
             Destroy(GameObject.Find("Seleccion De cartas Scroll"));
-            //GameObject.Find("Deck").GetComponent<Deck>().RobarEspecifico("");
+            GameObject.Find("Deck").GetComponent<Deck>().RobarEspecifico(imagen.mainTexture.name);
         }
     }
     private void OnMouseUp()

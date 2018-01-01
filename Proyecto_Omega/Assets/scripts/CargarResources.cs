@@ -19,10 +19,7 @@ public class CargarResources : MonoBehaviour {
             {
                 rookie.Add(s.Split(';')[0]);
             }
-            else
-            {
-                deckAUtilizar.GetComponent<Deck>().GetDeck().Add(s.Split(';')[0]);
-            }
+            deckAUtilizar.GetComponent<Deck>().GetDeck().Add(s.Split(';')[0]);
         }
     }
 	// Use this for initialization
