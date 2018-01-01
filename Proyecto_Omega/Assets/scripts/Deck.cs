@@ -9,7 +9,7 @@ public class Carta : MonoBehaviour
 public class Deck : MonoBehaviour {
     private List<string> deck = new List<string>();
     //este seria el metodo de cargar, SI TUVIERA UNO!
-    private void ReadFromLine()
+    /*private void ReadFromLine()
     {
         StreamReader reader = new StreamReader("/Users/DK_RZ/Documents/scripts/Assets/deck/Deck.txt");
         string s;
@@ -18,7 +18,7 @@ public class Deck : MonoBehaviour {
             print(s);
             deck.Add(s);
         }
-    }
+    }*/
     private void OnMouseUp()
     {
         //print(RobarEspecifico("st-1"));
@@ -36,10 +36,9 @@ public class Deck : MonoBehaviour {
     }
     void Mezclar()
     {
-        print("a");
-        for (int i = 29; i > 1; i--)
+        for (int i = deck.ToArray().Length-1; i > 1; i--)
         {
-            int aleatorio = Random.Range(0, 29);
+            int aleatorio = Random.Range(0, deck.ToArray().Length-1);
             string temp = deck[i];
             deck[i] = deck[aleatorio];
             deck[aleatorio] = temp;
@@ -80,9 +79,8 @@ public class Deck : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        ReadFromLine();
+        //ReadFromLine();
         //yo actualmente cargo el deck desde otra clase
-        //deck = CNTdrag.deck;
         foreach (var item in deck)
         {
             print(item);
@@ -96,4 +94,12 @@ public class Deck : MonoBehaviour {
 
     }
 
+    public List<string> GetDeck()
+    {
+        return deck;
+    }
+    public void SetDeck(List<string> deck)
+    {
+        this.deck = deck;
+    }
 }
