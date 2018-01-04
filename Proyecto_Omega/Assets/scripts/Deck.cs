@@ -4,17 +4,7 @@ using System.IO;
 using UnityEngine;
 public class Deck : MonoBehaviour {
     private List<string> deck = new List<string>();
-    //este seria el metodo de cargar, SI TUVIERA UNO!
-    /*private void ReadFromLine()
-    {
-        StreamReader reader = new StreamReader("/Users/DK_RZ/Documents/scripts/Assets/deck/Deck.txt");
-        string s;
-        while ((s = reader.ReadLine()) != null)
-        {
-            print(s);
-            deck.Add(s);
-        }
-    }*/
+
     private void OnMouseUp()
     {
         //print(RobarEspecifico("st-1"));
@@ -27,17 +17,21 @@ public class Deck : MonoBehaviour {
         {
 
             print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            Shuffle();
+            FisherYates(deck);
         }
     }
-    void Shuffle()
+    private void Swap(List<string> deck, int primero, int segundo)
     {
-        for (int i = deck.Count-1; i > 1; i--)
+        string temp = deck[primero];
+        deck[primero] = deck[segundo];
+        deck[segundo] = temp;
+    }
+    public void FisherYates(List<string> deck)
+    {
+        for (int i = 0; i < deck.Count - 1; i++)
         {
-            int aleatorio = Random.Range(0, deck.Count);
-            string temp = deck[i];
-            deck[i] = deck[aleatorio];
-            deck[aleatorio] = temp;
+            int index = Random.Range(0, i);
+            Swap(deck, i, index);
         }
     }
     string Robar()
@@ -51,7 +45,7 @@ public class Deck : MonoBehaviour {
         catch (System.ArgumentOutOfRangeException)
         {
             deck = GameObject.Find("DarkArea").GetComponent<DarArea>().Devolver();
-            Shuffle();
+            FisherYates(deck);
             return ("");
         }
 
@@ -80,7 +74,7 @@ public class Deck : MonoBehaviour {
         {
             print(item);
         }
-        Shuffle();
+        FisherYates(deck);
     }
 
     // Update is called once per frame
