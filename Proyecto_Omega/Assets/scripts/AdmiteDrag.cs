@@ -10,7 +10,6 @@ public class AdmiteDrag : MonoBehaviour {
     private float lerp;
     public float duration = 1.0f;
     private Material materialOriginal;
-    public bool estaEnMesa = false;
     public int nroSlot;
 
     private void OnMouseOver()
@@ -18,11 +17,10 @@ public class AdmiteDrag : MonoBehaviour {
         if (CNTdrag.clikeado) {
             CNTdrag.tipo = tipo;
             CNTdrag.objetoQuieto = gameObject;
-            //renderer.material
+            CNTdrag.slot = name;
             GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
             color1.a = 0.5f;
             color2.a = 0.5f;
-            //renderer.material
             GetComponent<Renderer>().material.color = Color.Lerp(color1, color2, lerp);
         }
     }
@@ -44,24 +42,16 @@ public class AdmiteDrag : MonoBehaviour {
             default:
                 break;
         }
-        if (this.estaEnMesa || CNTdrag.estoyEnMesa)
-        {
-            transform.Translate(0, 0, 10);
-        }
     }
-
     private void OnMouseExit()
     {
         CNTdrag.objetoQuieto = null;
         CNTdrag.tipo = -1;
-        //renderer.material
         GetComponent<Renderer>().material = materialOriginal;
         
     }
-
     // Use this for initialization
     void Start () {
-        //renderer.material
         materialOriginal = GetComponent<Renderer>().material;
     }
 	

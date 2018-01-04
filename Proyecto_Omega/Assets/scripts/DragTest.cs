@@ -76,7 +76,7 @@ public class DragTest : MonoBehaviour{
         bol = false;
         if (!necesitaMesa)
         {
-            if (CNTdrag.objetoQuieto != null && CNTdrag.tipo == tipo && !CNTdrag.estoyEnMesa)
+            if (CNTdrag.objetoQuieto != null && CNTdrag.tipo == tipo)
             {
                 transform.position = CNTdrag.objetoQuieto.transform.position;
                 CNTdrag.clikeado = false;
@@ -84,25 +84,24 @@ public class DragTest : MonoBehaviour{
                 //PosicionDeLasCartas.cartaMovida = this.name;
                 name = "CartaEnMesa";
                 PosicionDeLasCartas.QuitarCarta();
+                estoyEn = CNTdrag.slot;
             }
             
         }
         else
         {
-            if (!CNTdrag.estoyEnMesa)
+            if (CNTdrag.objetoQuieto != null && CNTdrag.tipo == tipo)
             {
-                if (CNTdrag.objetoQuieto != null && CNTdrag.tipo == tipo)
-                {
-                    transform.position = CNTdrag.objetoQuieto.transform.position;
-                    CNTdrag.clikeado = false;
-                    this.clikeado = false;
-                    estoyEnMesa = true;
-                    //PosicionDeLasCartas.cartaMovida = this.name;
-                    name = "CartaEnMesa";
-                    PosicionDeLasCartas.QuitarCarta();
-                }
-                
+                transform.position = CNTdrag.objetoQuieto.transform.position;
+                CNTdrag.clikeado = false;
+                this.clikeado = false;
+                estoyEnMesa = true;
+                //PosicionDeLasCartas.cartaMovida = this.name;
+                name = "CartaEnMesa";
+                PosicionDeLasCartas.QuitarCarta();
+                estoyEn = CNTdrag.slot;
             }
+                
         }
         CNTdrag.objetoQuieto = null;
 
@@ -276,10 +275,6 @@ public class DragTest : MonoBehaviour{
         yClon = h - (pos2.y);
         zClon = distProfundidadIcono;
         actualizado = false;
-    }
-    private void OnMouseOver()
-    {
-        CNTdrag.estoyEnMesa = this.estoyEnMesa;
     }
     public void SetEstoyEnMesa(bool estoyEnMesa)
     {

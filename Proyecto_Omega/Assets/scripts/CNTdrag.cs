@@ -13,13 +13,13 @@ public class CNTdrag : MonoBehaviour {
     public static int posicionOpcion;
     public static int tipo;
     public static bool clikeado;
-    public static bool estoyEnMesa;
     public static bool elegida;
     public static Component claseCartas;
     public static List<Sprite> arrayRookie;
     public static List<Sprite> arrayImage;
     public static OptionSlot optionSlot;
     public static List<string> deck;
+    public static string slot;
 
     //valores de la mesa
     public static bool pointGauge;
