@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-public class Carta : MonoBehaviour
-{
-    public string[] Code;
-}
 public class Deck : MonoBehaviour {
     private List<string> deck = new List<string>();
     //este seria el metodo de cargar, SI TUVIERA UNO!
@@ -31,14 +27,14 @@ public class Deck : MonoBehaviour {
         {
 
             print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            Mezclar();
+            Shuffle();
         }
     }
-    void Mezclar()
+    void Shuffle()
     {
-        for (int i = deck.ToArray().Length-1; i > 1; i--)
+        for (int i = deck.Count-1; i > 1; i--)
         {
-            int aleatorio = Random.Range(0, deck.ToArray().Length-1);
+            int aleatorio = Random.Range(0, deck.Count);
             string temp = deck[i];
             deck[i] = deck[aleatorio];
             deck[aleatorio] = temp;
@@ -55,7 +51,7 @@ public class Deck : MonoBehaviour {
         catch (System.ArgumentOutOfRangeException)
         {
             deck = GameObject.Find("DarkArea").GetComponent<DarArea>().Devolver();
-            Mezclar();
+            Shuffle();
             return ("");
         }
 
@@ -84,7 +80,7 @@ public class Deck : MonoBehaviour {
         {
             print(item);
         }
-        Mezclar();
+        Shuffle();
     }
 
     // Update is called once per frame

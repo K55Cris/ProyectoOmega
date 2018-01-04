@@ -10,7 +10,6 @@ public class AdmiteDrag : MonoBehaviour {
     private float lerp;
     public float duration = 1.0f;
     private Material materialOriginal;
-    private bool x = false;
     public bool estaEnMesa = false;
     public int nroSlot;
 
