@@ -28,7 +28,7 @@ public class Deck : MonoBehaviour {
     }
     public void FisherYates(List<string> deck)
     {
-        for (int i = 0; i < deck.Count - 1; i++)
+        for (int i = deck.Count - 1; i > 0; i--)
         {
             int index = Random.Range(0, i);
             Swap(deck, i, index);
