@@ -16,6 +16,7 @@ public class CNTdrag : MonoBehaviour {
     public static bool estoyEnMesa;
     public static bool elegida;
     public static Component claseCartas;
+    public static List<Sprite> arrayRookie;
     public static List<Sprite> arrayImage;
     public static OptionSlot optionSlot;
     public static List<string> deck;

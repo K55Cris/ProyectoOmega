@@ -28,14 +28,16 @@ public class CargarResources : MonoBehaviour {
         //CNTdrag.arrayTextura = Resources.LoadAll<Texture>("Digimon");
         Cargar();
         arrayImage = Resources.LoadAll<Sprite>("Digimon");
+        CNTdrag.arrayRookie = new List<Sprite>();
         CNTdrag.arrayImage = new List<Sprite>();
         foreach (var imagen in arrayImage)
         {
+            CNTdrag.arrayImage.Add(imagen);
             foreach (var nombre in rookie)
             {
                 if (imagen.name.Equals(nombre))
                 {
-                    CNTdrag.arrayImage.Add(imagen);
+                    CNTdrag.arrayRookie.Add(imagen);
                 }
             }
         }

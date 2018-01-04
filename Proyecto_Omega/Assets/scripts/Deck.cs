@@ -3,21 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 public class Deck : MonoBehaviour {
+    public GameObject modeladoDeLaCarta;
+    public Camera camara = new Camera();
     private List<string> deck = new List<string>();
 
     private void OnMouseUp()
     {
         //print(RobarEspecifico("st-1"));
         //print(Robar());
-        string robada = Robar();
-        if (!robada.Equals("")) {
-            GameObject.Find("DarkArea").GetComponent<DarArea>().Meter(robada);
-        }
-        else
+        if (!(PosicionDeLasCartas.GetCantidadActualDeCartas() == 6))
         {
-
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            FisherYates(deck);
+            string robada = Robar();
+            Texture imagenRobada = new Texture();
+            foreach (var item in CNTdrag.arrayImage)
+            {
+                if (item.name.ToLower().Equals(robada.ToLower()))
+                {
+                    imagenRobada = item.texture;
+                    break;
+                }
+            }
+            GameObject carta = Instantiate(modeladoDeLaCarta);
+            carta.GetComponent<DragTest>().SetCamera(camara);
+            carta.GetComponent<Renderer>().material.mainTexture = imagenRobada;
+            carta.name = ("Carta" + (PosicionDeLasCartas.GetCantidadActualDeCartas() + 1));
+            PosicionDeLasCartas.AumentarCarta();
         }
     }
     private void Swap(List<string> deck, int primero, int segundo)

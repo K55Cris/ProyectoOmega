@@ -41,7 +41,7 @@ public class ScrollBaryCantidadDeCartas : MonoBehaviour {
         
        GetComponent<RectTransform>().sizeDelta = new Vector2((w* cantidadDeCartas) -(w*5),h);
        */
-        foreach (var item in CNTdrag.arrayImage)
+        foreach (var item in CNTdrag.arrayRookie)
         {
             GameObject cartas = Instantiate(prefCarta, contenedor);
             cartas.GetComponent<DetalleCarta>().Cargar(item);

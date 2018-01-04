@@ -81,6 +81,9 @@ public class DragTest : MonoBehaviour{
                 transform.position = CNTdrag.objetoQuieto.transform.position;
                 CNTdrag.clikeado = false;
                 estoyEnMesa = true;
+                //PosicionDeLasCartas.cartaMovida = this.name;
+                name = "CartaEnMesa";
+                PosicionDeLasCartas.QuitarCarta();
             }
             
         }
@@ -94,6 +97,9 @@ public class DragTest : MonoBehaviour{
                     CNTdrag.clikeado = false;
                     this.clikeado = false;
                     estoyEnMesa = true;
+                    //PosicionDeLasCartas.cartaMovida = this.name;
+                    name = "CartaEnMesa";
+                    PosicionDeLasCartas.QuitarCarta();
                 }
                 
             }
@@ -129,16 +135,22 @@ public class DragTest : MonoBehaviour{
                     {
                         GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 1";
+                        name = "CartaEnMesa";
+                        PosicionDeLasCartas.QuitarCarta();
                     }
                     else if (!GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().GetOcupado())
                     {
                         GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 2";
+                        name = "CartaEnMesa";
+                        PosicionDeLasCartas.QuitarCarta();
                     }
                     else if (!GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().GetOcupado())
                     {
                         GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 3";
+                        name = "CartaEnMesa";
+                        PosicionDeLasCartas.QuitarCarta();
                     }
                 }
             }
@@ -272,5 +284,9 @@ public class DragTest : MonoBehaviour{
     public void SetEstoyEnMesa(bool estoyEnMesa)
     {
         this.estoyEnMesa = estoyEnMesa;
+    }
+    public void SetCamera(Camera camera)
+    {
+        this.camara = camera;
     }
 }
