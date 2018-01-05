@@ -5,17 +5,21 @@ using UnityEngine;
 public class Deck : MonoBehaviour {
     public GameObject modeladoDeLaCarta;
     public Camera camara = new Camera();
+    public static Deck instance;
+    private List<Sprite> arrayImage;
     private List<string> deck = new List<string>();
 
+    private void Awake()
+    {
+        instance = this;
+    }
     private void OnMouseUp()
     {
-        //print(RobarEspecifico("st-1"));
-        //print(Robar());
         if (!(PosicionDeLasCartas.GetCantidadActualDeCartas() == 6))
         {
             string robada = Robar();
             Texture imagenRobada = new Texture();
-            foreach (var item in CNTdrag.arrayImage)
+            foreach (var item in arrayImage)
             {
                 if (item.name.ToLower().Equals(robada.ToLower()))
                 {
@@ -76,23 +80,6 @@ public class Deck : MonoBehaviour {
         throw new System.Exception();
     }
 
-    // Use this for initialization
-    void Start() {
-        //ReadFromLine();
-        //yo actualmente cargo el deck desde otra clase
-        foreach (var item in deck)
-        {
-            print(item);
-        }
-        FisherYates(deck);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public List<string> GetDeck()
     {
         return deck;
@@ -100,5 +87,13 @@ public class Deck : MonoBehaviour {
     public void SetDeck(List<string> deck)
     {
         this.deck = deck;
+    }
+    public List<Sprite> GetArrayImage()
+    {
+        return arrayImage;
+    }
+    public void SetArrayImage(List<Sprite> arrayImage)
+    {
+        this.arrayImage = arrayImage;
     }
 }

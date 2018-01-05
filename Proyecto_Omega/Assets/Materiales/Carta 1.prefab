@@ -131,4 +131,4 @@ MonoBehaviour:
   duration: 1
   velocidad: 4
   necesitaMesa: 0
-  delayDelDobleClick: 1
+  delayDelDobleClick: 0.5

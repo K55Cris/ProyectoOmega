@@ -5,11 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CargarResources : MonoBehaviour {
-    public GameObject canvasAUtilizar;
     public GameObject deckAUtilizar;
     private Sprite[] arrayImage;
     private List<string> rookie = new List<string>();
-    void Cargar()
+    void CargarDeck()
     {
         StreamReader reader = new StreamReader(Application.dataPath+"/deck/Deck.txt");
         string s;
@@ -22,27 +21,34 @@ public class CargarResources : MonoBehaviour {
             deckAUtilizar.GetComponent<Deck>().GetDeck().Add(s.Split(';')[0]);
         }
     }
-	// Use this for initialization
-	void Start () {
-        //clase que carga todas las cartas de la partida en CNT
-        //CNTdrag.arrayTextura = Resources.LoadAll<Texture>("Digimon");
-        Cargar();
+    void CargarImagenes()
+    {
         arrayImage = Resources.LoadAll<Sprite>("Digimon");
-        CNTdrag.arrayRookie = new List<Sprite>();
-        CNTdrag.arrayImage = new List<Sprite>();
+        ScrollBaryCantidadDeCartas.instance.SetArrayRookie(new List<Sprite>());
+        Deck.instance.SetArrayImage(new List<Sprite>());
         foreach (var imagen in arrayImage)
         {
-            CNTdrag.arrayImage.Add(imagen);
+            Deck.instance.GetArrayImage().Add(imagen);
             foreach (var nombre in rookie)
             {
                 if (imagen.name.Equals(nombre))
                 {
-                    CNTdrag.arrayRookie.Add(imagen);
+                    ScrollBaryCantidadDeCartas.instance.GetArrayRookie().Add(imagen);
                 }
             }
         }
-        canvasAUtilizar.SetActive(true);
-        deckAUtilizar.SetActive(true);
+        ScrollBaryCantidadDeCartas.instance.CargarDatos();
+        Deck.instance.FisherYates(Deck.instance.GetDeck());
+    }
+    void CargarListaCdartas()
+    {
+
+    }
+    // Use this for initialization
+    void Start () {
+        CargarListaCdartas();
+        CargarDeck();
+        CargarImagenes();
 
     }
 	

@@ -171,7 +171,6 @@ MonoBehaviour:
   color1: {r: 1, g: 0, b: 0, a: 1}
   color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   duration: 1
-  estaEnMesa: 1
   nroSlot: 3
 --- !u!54 &48038253
 Rigidbody:
@@ -407,7 +406,6 @@ MonoBehaviour:
   color1: {r: 1, g: 0, b: 0, a: 1}
   color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   duration: 1
-  estaEnMesa: 1
   nroSlot: 1
 --- !u!23 &313411346
 MeshRenderer:
@@ -651,6 +649,15 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 326042139}
+    - target: {fileID: 1159943193876488, guid: e3c83df59342f2e4ab66bf55feb53739, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224716649811385220, guid: e3c83df59342f2e4ab66bf55feb53739,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -265
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3c83df59342f2e4ab66bf55feb53739, type: 2}
   m_IsPrefabParent: 0
@@ -672,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &446007947
 Transform:
   m_ObjectHideFlags: 0
@@ -857,7 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d858d9fb634508c4f8958b0476648f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasAUtilizar: {fileID: 2027886366}
   deckAUtilizar: {fileID: 446007946}
 --- !u!114 &1169527931
 MonoBehaviour:
@@ -933,7 +939,6 @@ MonoBehaviour:
   color1: {r: 1, g: 0, b: 0, a: 1}
   color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   duration: 1
-  estaEnMesa: 1
   nroSlot: 2
 --- !u!54 &1285299907
 Rigidbody:
@@ -1095,11 +1100,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1880092857}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2027886366 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1159943193876488, guid: e3c83df59342f2e4ab66bf55feb53739,
-    type: 2}
-  m_PrefabInternal: {fileID: 419386213}
 --- !u!1 &2036943249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122895338}
   m_Layer: 0
-  m_Name: CNT
+  m_Name: MainGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

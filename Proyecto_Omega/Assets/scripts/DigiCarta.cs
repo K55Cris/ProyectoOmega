@@ -10,6 +10,7 @@ namespace DigiCartas
     public class DigiCarta
     {
         public int id; //Nro de Carta
+        public string codigo; 
         public string Descripcion;
         public string Habilidad;
         public int dañoBase;
@@ -30,6 +31,11 @@ namespace DigiCartas
         public string keyREvolucion2;
         public string keyREvolucion3;
         public string keyREvolucion4;
+
+        public bool CompararCodigo(string codigo)
+        {
+            return this.codigo.Equals(codigo);
+        }
     }
 
     [Serializable]
