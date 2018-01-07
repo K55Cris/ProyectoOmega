@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Menu.unity
     guid: cdbe9f40e6147d54d856f594cb16f441
-  - enabled: 1
+  - enabled: 0
     path: Assets/Deck.unity
     guid: 57430f7946e21144d991334a1850e81f
   - enabled: 1

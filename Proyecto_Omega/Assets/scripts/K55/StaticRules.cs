@@ -100,5 +100,29 @@ public class StaticRules : MonoBehaviour
                 loRule.LifepointsPlayer2 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
         }
     }
+    private static bool WaithPlayer = false;
+    public static void WaithPlayers(UnityAction<string> player)
+    {
+        if (WaithPlayer)
+        {
+            StaticRules loRule = FailSafeInstance();
+            if (loRule.NowPhase==7)
+            {
+                loRule.NowPhase = 0;
+            }
+            loRule.NowPhase += 1;
+            // Aca va metodo de siguiente phase yo lo calcule aqui pero se puede hacer por separado
+
+            WaithPlayer = false;
+        }
+        else
+        {
+            WaithPlayer = true;
+        }
+    }
+    
+
+    
+    
 }
 
