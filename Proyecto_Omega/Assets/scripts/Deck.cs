@@ -15,23 +15,32 @@ public class Deck : MonoBehaviour {
     }
     private void OnMouseUp()
     {
-        if (!(PosicionDeLasCartas.GetCantidadActualDeCartas() == 6))
+        if (!(deck == null))
         {
-            string robada = Robar();
-            Texture imagenRobada = new Texture();
-            foreach (var item in arrayImage)
+            if (!(PosicionDeLasCartas.GetCantidadActualDeCartas() == 6))
             {
-                if (item.name.ToLower().Equals(robada.ToLower()))
+                string robada = Robar();
+                Texture imagenRobada = new Texture();
+                foreach (var item in arrayImage)
                 {
-                    imagenRobada = item.texture;
-                    break;
+                    if (item.name.ToLower().Equals(robada.ToLower()))
+                    {
+                        imagenRobada = item.texture;
+                        break;
+                    }
                 }
+                GameObject carta = Instantiate(modeladoDeLaCarta);
+                carta.GetComponent<DragTest>().SetCamera(camara);
+                carta.GetComponent<Renderer>().material.mainTexture = imagenRobada;
+                carta.name = ("Carta" + (PosicionDeLasCartas.GetCantidadActualDeCartas() + 1));
+                PosicionDeLasCartas.AumentarCarta();
             }
-            GameObject carta = Instantiate(modeladoDeLaCarta);
-            carta.GetComponent<DragTest>().SetCamera(camara);
-            carta.GetComponent<Renderer>().material.mainTexture = imagenRobada;
-            carta.name = ("Carta" + (PosicionDeLasCartas.GetCantidadActualDeCartas() + 1));
-            PosicionDeLasCartas.AumentarCarta();
+        }
+        else
+        {
+            print("El deck esta vacio, se volvera a cargar");
+            deck = GameObject.Find("DarkArea").GetComponent<DarArea>().Devolver();
+            FisherYates(deck);
         }
     }
     private void Swap(List<string> deck, int primero, int segundo)
@@ -58,10 +67,15 @@ public class Deck : MonoBehaviour {
         }
         catch (System.ArgumentOutOfRangeException)
         {
+            deck = null;
+            return null;
+        }
+        /*catch (System.ArgumentOutOfRangeException)
+        {
             deck = GameObject.Find("DarkArea").GetComponent<DarArea>().Devolver();
             FisherYates(deck);
             return ("");
-        }
+        }*/
 
     }
     public string RobarEspecifico(string codCarta)
