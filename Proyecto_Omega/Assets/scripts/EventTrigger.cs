@@ -9,5 +9,9 @@ public class EventTrigger : MonoBehaviour {
         {
             EventManager.TriggerEvent("RobarYAcomodarEnMano");
         }
-	}
+        if (true/*esta en la face gamesetup*/)
+        {
+            EventManager.TriggerEvent("RobarRookie");
+        }
+    }
 }
