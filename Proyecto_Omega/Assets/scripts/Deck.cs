@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class Deck : MonoBehaviour {
     [TooltipAttribute("Modelado de la carta.")]
     public GameObject modeladoDeLaCarta;
@@ -11,13 +13,19 @@ public class Deck : MonoBehaviour {
     public static Deck instance;
     private List<Sprite> arrayImage;
     private List<string> deck = new List<string>();
-
+    private UnityAction roboLisener;
     private void Awake()
     {
+        roboLisener = new UnityAction(RobarYAcomodarEnMano);
         instance = this;
     }
-    //Al cliker sobre el deck realiza esto:
-    private void OnMouseUp()
+
+    private void OnEnable()
+    {
+        EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
+    }
+
+    private void RobarYAcomodarEnMano()
     {
         //revista si el deck esta bacio
         if (!(deck == null))
@@ -54,6 +62,7 @@ public class Deck : MonoBehaviour {
             FisherYates(deck);
         }
     }
+
     private void Swap(List<string> deck, int primero, int segundo)
     {
         string temp = deck[primero];

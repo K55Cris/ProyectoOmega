@@ -10,6 +10,7 @@ public class Rookie : MonoBehaviour
     public GameObject carta;
     public Button btn;
     public Image imagen;
+
     private void OnMouseDown()
     {
         if (!unClick)
@@ -31,9 +32,7 @@ public class Rookie : MonoBehaviour
             GameObject.Find("Deck").GetComponent<Deck>().RobarEspecifico(imagen.mainTexture.name);
         }
     }
-    private void OnMouseUp()
-    {
-    }
+
     // Use this for initialization
     void Start()
     {

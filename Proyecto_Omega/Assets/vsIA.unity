@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 446007950}
   - component: {fileID: 446007949}
   - component: {fileID: 446007948}
+  - component: {fileID: 446007952}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -758,6 +759,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 446007946}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &446007952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446007946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c18bba12800f7448a995a7be937e3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1087745025
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,8 +845,9 @@ GameObject:
   - component: {fileID: 1169527929}
   - component: {fileID: 1169527931}
   - component: {fileID: 1169527930}
+  - component: {fileID: 1169527932}
   m_Layer: 0
-  m_Name: CNTDrag
+  m_Name: EventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -874,6 +887,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ff23d7576a269049a903ef07a4f8d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1169527932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169527928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19d60ac26b4fce43bdfa74d296f442b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1285299903

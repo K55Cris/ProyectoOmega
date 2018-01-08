@@ -54,9 +54,9 @@ public class CargarResources : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        CargarListaCdartas();
-        CargarDeck();
-        CargarImagenes();
+       CargarListaCdartas();
+       CargarDeck();
+       CargarImagenes();
 
     }
 	

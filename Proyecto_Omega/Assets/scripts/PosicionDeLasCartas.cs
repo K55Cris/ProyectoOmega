@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PosicionDeLasCartas : MonoBehaviour {
-    public int cantidadTotalDeCartas = 6;
+    public static int cantidadTotalDeCartas = 6;
     private static int cantidadActualDeCartas = 0;
 
     public static void Renombrar()
@@ -80,5 +80,9 @@ public class PosicionDeLasCartas : MonoBehaviour {
     public static int GetCantidadActualDeCartas()
     {
         return cantidadActualDeCartas;
+    }
+    public static int GetCantidadTotalDeCartas()
+    {
+        return cantidadTotalDeCartas;
     }
 }

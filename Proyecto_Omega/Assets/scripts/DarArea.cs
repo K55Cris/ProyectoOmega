@@ -6,7 +6,6 @@ public class DarArea : MonoBehaviour {
     private List<string> dark = new List<string>();
     public void Meter(string carta)
     {
-        print(carta);
         dark.Add(carta);
     }
     public List<string> Devolver()
