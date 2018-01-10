@@ -48,7 +48,7 @@ public class Deck : MonoBehaviour {
                 }
                 //instancia la carta con su modelado y se le dan sus valores
                 GameObject carta = Instantiate(modeladoDeLaCarta);
-                carta.GetComponent<DragTest>().SetCamera(camara);
+                //carta.GetComponent<DragTest>().SetCamera(camara);
                 carta.GetComponent<Renderer>().material.mainTexture = imagenRobada;
                 carta.name = ("Carta" + (PosicionDeLasCartas.GetCantidadActualDeCartas() + 1));
                 //posiciona la carta

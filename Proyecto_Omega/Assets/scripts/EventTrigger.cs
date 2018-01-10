@@ -12,6 +12,7 @@ public class EventTrigger : MonoBehaviour {
         if (true/*esta en la face gamesetup*/)
         {
             EventManager.TriggerEvent("RobarRookie");
+            EventManager.TriggerEvent("JugarCarta");
         }
     }
 }

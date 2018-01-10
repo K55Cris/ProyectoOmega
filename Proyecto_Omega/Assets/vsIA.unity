@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598faace827dcb245be7d22a4f360c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modeladoDeLaCarta: {fileID: 1239232953963326, guid: bbfc7f2f7b812a546b3d9acc837c0f34,
+  modeladoDeLaCarta: {fileID: 1742074199533164, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
     type: 2}
   camara: {fileID: 326042139}
 --- !u!23 &446007949

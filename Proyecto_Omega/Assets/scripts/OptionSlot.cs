@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class OptionSlot : Mesa
 {
-    public float x;
-    public float y;
-    public float z;
     private bool ocupado = false;
     public override void Jugar(DragTest carta)
     {
