@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using DigiCartas;
+using System;
+using Random = UnityEngine.Random;
+
 public class StaticRules : MonoBehaviour
 {
     public static StaticRules instance = null;
@@ -9,9 +12,9 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer1 = 100;
     public int PointGaugePlayer2 = 100;
 
-    public int NowPhase = 0;
+    public static int NowPhase = 0;
 	
-	public bool FaseFinalizada;
+	public static bool FaseFinalizada;
 
     public enum Phases { GameSetup = 0, PreparationPhase = 1, EvolutionPhase = 2, EvolutionRequirements = 3, FusionRequirements = 4,
                            AppearanceRequirements = 5, BattlePhase = 6, PointCalculationPhase = 7, EndPhase = 8, };
@@ -28,7 +31,7 @@ public class StaticRules : MonoBehaviour
         FaseFinalizada = false;
     }
 
-    public void SelectDigimonChild()
+    public static void SelectDigimonChild()
     {
         StaticRules loRule = FailSafeInstance();
         // player 1 selecciona digimon child
@@ -100,11 +103,11 @@ public class StaticRules : MonoBehaviour
         if (Habilidades(Digimon)=="RestoreLife")
         if (player==1)
         {
-                loRule.LifepointsPlayer1 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+                loRule.PointGaugePlayer1 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
         }
         else
         {
-                loRule.LifepointsPlayer2 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+                loRule.PointGaugePlayer2 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
         }
     }
     private static bool WaithPlayer = false;
@@ -127,7 +130,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Aumenta en 1 el indice de la fase actual y ejecuta la siguiente.
     /// </summary>
-    private void SiguienteFase()
+    private static void SiguienteFase()
     {
         NowPhase++;
         switch (NowPhase)
@@ -163,7 +166,7 @@ public class StaticRules : MonoBehaviour
                 Console.WriteLine("Error en el cambio de fase");
                 break;
         }
-        faseFinalizada = true;
+        FaseFinalizada = true;
     }
 
 	//INICIO metodos para cada fase
@@ -171,7 +174,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la Game Setup phase
     /// </summary>
-    private void StartGameSetup()
+    private static void StartGameSetup()
     {
         //A ejecutar por ambos jugadores:
 		SelectDigimonChild();
@@ -183,7 +186,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la Preparation phase
     /// </summary>
-    private void StartPreparationPhase()
+    private static void StartPreparationPhase()
     {
         //El jugador atacante realiza su Preparation Phase en primer lugar
 
@@ -224,7 +227,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la Evolution phase
     /// </summary>
-    private void StartEvolutionPhase()
+    private static void StartEvolutionPhase()
     {
         /*
          El jugador que resultó primer atacante será quien complete su Evolution Phase antes de que 
@@ -260,7 +263,7 @@ public class StaticRules : MonoBehaviour
          */
     }
 
-    private void CheckEvolutionRequirements()
+    private static void CheckEvolutionRequirements()
     {
         /*
         Un ciclo de evolución típica usa los niveles: Level III (Child) → Level IV
@@ -296,7 +299,7 @@ public class StaticRules : MonoBehaviour
          */
     }
 
-    private void CheckFusionRequirements()
+    private static void CheckFusionRequirements()
     {
         /*
         Los Digimon que evolucionan mediante una Armor Evolution o que
@@ -318,7 +321,7 @@ public class StaticRules : MonoBehaviour
          */
     }
 
-    private void CheckAppearanceRequirements()
+    private static void CheckAppearanceRequirements()
     {
         /*
         Los digimon que aparecen mediante “Requerimientos de Aparición”
@@ -357,7 +360,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la Battle phase
     /// </summary>
-    private void StartBattlePhase()
+    private static void StartBattlePhase()
     {
         /*
         
@@ -403,7 +406,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la Point Calculation phase
     /// </summary>
-    private void StartPointCalculationPhase()
+    private static void StartPointCalculationPhase()
     {
         //Ambos jugadores usaran cualquier Option Card que requiera ser usada durante la Point Calculation Phase.
         //El jugador que haya perdido la batalla recibe daño
@@ -419,7 +422,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Inicial la End phase
     /// </summary>
-    private void StartEndPhase()
+    private static void StartEndPhase()
     {
         NowPhase = 0;
     }
@@ -431,7 +434,7 @@ public class StaticRules : MonoBehaviour
     /// </summary>
     private bool CumplidaCondicionVictoria()
     {
-        if (pointGaugePlayer1 <= 0 || pointGaugePlayer2 <= 0 || rendicion)
+        if (PointGaugePlayer1 <= 0 || PointGaugePlayer2 <= 0)
         {
             //Mostrar mensaje de victoria o derrota.
             return true; //Fin de la partida.
@@ -443,7 +446,7 @@ public class StaticRules : MonoBehaviour
     /// Fija el jugador activo al inicio de la partida.
 	/// Metodo redundante, comprobar WhoFirstPlayer()
     /// </summary>
-    public void SeleccionPrimerJugador()
+    public static void SeleccionPrimerJugador()
     {
         int aux = Random.Range(0,2);
         if(aux == 0)
@@ -459,7 +462,7 @@ public class StaticRules : MonoBehaviour
 	/// <summary>
     /// Calcula el daño recibido en cada combate
     /// </summary>
-    public void CalcularPuntosPerdidos()
+    public static void CalcularPuntosPerdidos()
     {
         /*
         Fijándose en los Lost Points que dice su Digimon, y
