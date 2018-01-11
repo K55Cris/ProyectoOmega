@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class CartaOption : CartaPadre
 {
     private List<OptionSlot> slots = new List<OptionSlot>();
+    private int lugar = 0;
 
     private void Start()
     {
@@ -15,19 +16,34 @@ public class CartaOption : CartaPadre
     }
     public override void JugarCarta()
     {
-        if (GetDoubleClick() && !name.Equals("fuera"))
+        if (GetDoubleClick() && (!name.Equals("OptionSlot" + lugar)))
         {
+            int i = 1;
             foreach (var item in slots)
             {
                 if (!item.GetOcupado())
                 {
-                    name = "fuera";
+                    name = "OptionSlot" + i;
                     item.SetOcupado(true);
+                    lugar = i;
                     transform.position = new Vector3(item.x, item.y, item.z);
                     PosicionDeLasCartas.QuitarCarta();
+                    SetDoubleClick(false);
                     break;
                 }
+                i++;
             }
+        }
+    }
+
+    public override void QuitarCarta()
+    {
+        if (GetDoubleClick() && name.Equals("OptionSlot" + lugar))
+        {
+            GameObject.Find("Option Slot " + lugar).GetComponent<OptionSlot>().SetOcupado(false);
+            DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
+            SetDoubleClick(false);
+            Destroy(this.gameObject);
         }
     }
 }

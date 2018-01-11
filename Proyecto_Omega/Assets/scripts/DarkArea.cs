@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DarArea : MonoBehaviour {
+public class DarkArea : MonoBehaviour {
+
     private List<string> dark = new List<string>();
+    public static DarkArea instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void Meter(string carta)
     {
         dark.Add(carta);
     }
+
     public List<string> Devolver()
     {
         print("se volvio a cargar el deck");
@@ -19,6 +28,7 @@ public class DarArea : MonoBehaviour {
         dark.Clear();
         return devolver;
     }
+
 	// Use this for initialization
 	void Start () {
 		

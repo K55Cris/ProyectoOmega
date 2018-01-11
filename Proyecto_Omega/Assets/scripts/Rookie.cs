@@ -18,7 +18,6 @@ public class Rookie : MonoBehaviour, IPointerClickHandler
     {
         EventManager.StartListening("RobarRookie", rookieLisener);
     }
-    
     public void OnPointerClick(PointerEventData eventData)
     {
         clickCouter = eventData.clickCount;

@@ -58,7 +58,7 @@ public class Deck : MonoBehaviour {
         else
         {
             //si esta vacio en vez de robar carga el deck, y lo mezcla
-            deck = GameObject.Find("DarkArea").GetComponent<DarArea>().Devolver();
+            deck = DarkArea.instance.Devolver();
             FisherYates(deck);
         }
     }

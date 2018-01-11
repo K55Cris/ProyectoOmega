@@ -7,10 +7,41 @@ public abstract class CartaPadre : MonoBehaviour {
     private int id;
     private string descripcion;
     private Image imagen;
-    private UnityAction jugarLisener;
-    private bool clickEnable = true;
+    private UnityAction jugarListener;
+    private UnityAction quitarListener;
+    private UnityAction mulliganListener;
+    private UnityAction seleccionListener;
+    private UnityAction empiezaElMulliganListener;
+    private bool seleccionMulligan = false;
+    private bool clickEnable = false;
     private bool doubleClick = false;
+    private bool simpleClick = false;
+    private bool marca = true;
+    private float time1, time2;
 
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0) && !marca)
+        {
+            seleccionMulligan = !seleccionMulligan;
+            this.GetComponent<Renderer>().transform.Rotate(new Vector3(90, 0, 0));//contorno o algo que diga que esta seleccionada
+        }
+
+    }
+    void sad()
+    {
+        time2 = Time.time;
+        if (clickEnable && (time1 - time2 < 0.2f))
+        {
+            clickEnable = false;
+            doubleClick = true;
+        }
+        else
+        {
+            time1 = Time.time;
+            clickEnable = true;
+        }
+    }
     void OnMouseUp()
     {
         if (clickEnable)
@@ -18,7 +49,6 @@ public abstract class CartaPadre : MonoBehaviour {
             clickEnable = false;
             StartCoroutine(TrapDoubleClicks(0.5f));
         }
-
     }
     IEnumerator TrapDoubleClicks(float timer)
     {
@@ -30,7 +60,7 @@ public abstract class CartaPadre : MonoBehaviour {
                 yield return new WaitForSeconds(0);
                 clickEnable = true;
                 doubleClick = true;
-
+                simpleClick = false;
             }
             yield return 0;
         }
@@ -46,20 +76,60 @@ public abstract class CartaPadre : MonoBehaviour {
 
     private void Awake()
     {
-        jugarLisener = new UnityAction(JugarCarta);
+        jugarListener = new UnityAction(JugarCarta);
+        quitarListener = new UnityAction(QuitarCarta);
+        mulliganListener = new UnityAction(MulliganCarta);
+        seleccionListener = new UnityAction(SeleccionCarta);
+        empiezaElMulliganListener = new UnityAction(StartMulliganCarta);
     }
 
     private void OnEnable()
     {
-        EventManager.StartListening("JugarCarta", jugarLisener);
+        EventManager.StartListening("JugarCarta", jugarListener);
+        EventManager.StartListening("QuitarCarta", quitarListener);
+        EventManager.StartListening("MulliganCarta", mulliganListener);
+        EventManager.StartListening("SeleccionCarta", seleccionListener);
+        EventManager.StartListening("StartMulliganCarta", empiezaElMulliganListener);
     }
 
     public abstract void JugarCarta();
+    public abstract void QuitarCarta();
     public void MulliganCarta() {
+        //desde la mano al dark
+        if (seleccionMulligan)
+        {
+            DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
+            Destroy(this.gameObject);
+            PosicionDeLasCartas.QuitarCarta();
+        }
     }
-
+    public void SeleccionCarta()
+    {
+        if (simpleClick)
+        {
+            this.GetComponent<Renderer>().transform.Rotate(new Vector3(90,0,0));
+            this.seleccionMulligan = true;
+            simpleClick = false;
+        }
+    }
+    public void StartMulliganCarta()
+    {
+        if (marca)
+        {
+            marca = !marca;
+            this.SetSeleccionMulligan(false);
+        }
+    }
+    public void SetSeleccionMulligan(bool SeleccionMulligan)
+    {
+        this.seleccionMulligan = SeleccionMulligan;
+    }
     public bool GetDoubleClick()
     {
         return doubleClick;
+    }
+    public void SetDoubleClick(bool doubleClick)
+    {
+        this.doubleClick = doubleClick;
     }
 }
