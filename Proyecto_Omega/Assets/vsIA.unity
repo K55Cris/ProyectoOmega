@@ -988,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mulligan: 0
+  robar: 1
 --- !u!1 &612456986
 GameObject:
   m_ObjectHideFlags: 0

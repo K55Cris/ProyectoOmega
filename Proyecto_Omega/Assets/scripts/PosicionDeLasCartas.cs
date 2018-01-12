@@ -1,30 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PosicionDeLasCartas : MonoBehaviour {
     public static int cantidadTotalDeCartas = 6;
     private static int cantidadActualDeCartas = 0;
+    private UnityAction acomodarListener;
 
-    public static void Renombrar()
+    private void Awake()
     {
-        string nombre = "Carta1";
-        bool marca = false;
-        for (int i = 1; i <= cantidadActualDeCartas+1; i++)
+        acomodarListener = new UnityAction(AcomodarCartas);
+    }
+    private void OnEnable()
+    {
+        EventManager.StartListening("AcomodarCartas", acomodarListener);
+    }
+    public static void Renombrar(int nro)
+    {
+        for (int i = nro; i <= GetCantidadActualDeCartas(); i++)
         {
-            if (marca)
-            {
-                GameObject.Find("Carta" + i).name = nombre;
-                marca = false;
-            }
-            if (GameObject.Find("Carta" + i) == null)
-            {
-                nombre = "Carta" + i;
-                marca = true;
-            }
+            GameObject.Find("Carta" + (i + 1)).name = "Carta" + i;
         }
     }
-    public static void Acomodar()
+    public static void AcomodarCartas()
     {
         switch (cantidadActualDeCartas)
         {
@@ -69,13 +68,12 @@ public class PosicionDeLasCartas : MonoBehaviour {
     public static void AumentarCarta()
     {
         cantidadActualDeCartas++;
-        Acomodar();
+        AcomodarCartas();
     }
-    public static void QuitarCarta()
+    public static void QuitarCarta(int nro)
     {
         cantidadActualDeCartas--;
-        Renombrar();
-        Acomodar();
+        Renombrar(nro);
     }
     public static int GetCantidadActualDeCartas()
     {

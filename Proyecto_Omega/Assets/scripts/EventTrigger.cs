@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventTrigger : MonoBehaviour {
-    public bool mulligan = false;
+    public bool mulligan = false, robar = true;
 	void Update () {
-        if (PosicionDeLasCartas.GetCantidadActualDeCartas() < PosicionDeLasCartas.GetCantidadTotalDeCartas() /* && (inicio de su turno || despues del mulligan)*/)
+        if (robar)//PosicionDeLasCartas.GetCantidadActualDeCartas() < PosicionDeLasCartas.GetCantidadTotalDeCartas() /* && (inicio de su turno || despues del mulligan)*/)
         {
             EventManager.TriggerEvent("RobarYAcomodarEnMano");
         }
@@ -22,6 +22,7 @@ public class EventTrigger : MonoBehaviour {
         {
             EventManager.TriggerEvent("StartMulliganCarta");
             EventManager.TriggerEvent("SeleccionCarta");
+            EventManager.TriggerEvent("AcomodarCartas");
         }
     }
 }

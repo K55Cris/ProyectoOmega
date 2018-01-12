@@ -83,7 +83,7 @@ public class DragTest : MonoBehaviour{
                 estoyEnMesa = true;
                 //PosicionDeLasCartas.cartaMovida = this.name;
                 name = "CartaEnMesa";
-                PosicionDeLasCartas.QuitarCarta();
+                //PosicionDeLasCartas.QuitarCarta();
                 estoyEn = CNTdrag.slot;
             }
             
@@ -98,7 +98,7 @@ public class DragTest : MonoBehaviour{
                 estoyEnMesa = true;
                 //PosicionDeLasCartas.cartaMovida = this.name;
                 name = "CartaEnMesa";
-                PosicionDeLasCartas.QuitarCarta();
+                //PosicionDeLasCartas.QuitarCarta();
                 estoyEn = CNTdrag.slot;
             }
                 
@@ -135,21 +135,21 @@ public class DragTest : MonoBehaviour{
                         GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 1";
                         name = "CartaEnMesa";
-                        PosicionDeLasCartas.QuitarCarta();
+                        //PosicionDeLasCartas.QuitarCarta();
                     }
                     else if (!GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().GetOcupado())
                     {
                         GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 2";
                         name = "CartaEnMesa";
-                        PosicionDeLasCartas.QuitarCarta();
+                        //PosicionDeLasCartas.QuitarCarta();
                     }
                     else if (!GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().GetOcupado())
                     {
                         GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().Jugar(this);
                         estoyEn = "Option Slot 3";
                         name = "CartaEnMesa";
-                        PosicionDeLasCartas.QuitarCarta();
+                        //PosicionDeLasCartas.QuitarCarta();
                     }
                 }
             }

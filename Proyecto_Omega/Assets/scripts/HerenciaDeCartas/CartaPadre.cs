@@ -99,8 +99,9 @@ public abstract class CartaPadre : MonoBehaviour {
         if (seleccionMulligan)
         {
             DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
-            Destroy(this.gameObject);
-            PosicionDeLasCartas.QuitarCarta();
+            PosicionDeLasCartas.QuitarCarta(int.Parse(name.Substring(5)));
+            PosicionDeLasCartas.AcomodarCartas();
+            Destroy(gameObject);
         }
     }
     public void SeleccionCarta()
