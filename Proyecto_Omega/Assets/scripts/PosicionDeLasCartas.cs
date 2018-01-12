@@ -25,6 +25,7 @@ public class PosicionDeLasCartas : MonoBehaviour {
     }
     public static void AcomodarCartas()
     {
+        print("asd");
         switch (cantidadActualDeCartas)
         {
             case 1:

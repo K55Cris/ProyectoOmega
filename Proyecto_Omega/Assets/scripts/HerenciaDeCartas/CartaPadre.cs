@@ -100,7 +100,6 @@ public abstract class CartaPadre : MonoBehaviour {
         {
             DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
             PosicionDeLasCartas.QuitarCarta(int.Parse(name.Substring(5)));
-            PosicionDeLasCartas.AcomodarCartas();
             Destroy(gameObject);
         }
     }
