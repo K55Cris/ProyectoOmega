@@ -12,8 +12,9 @@ public abstract class CartaPadre : MonoBehaviour {
     private UnityAction mulliganListener;
     private UnityAction seleccionListener;
     private UnityAction empiezaElMulliganListener;
+    private UnityAction terminaElMulliganListener;
     private bool seleccionMulligan = false;
-    private bool clickEnable = false;
+    private bool clickEnable = true;
     private bool doubleClick = false;
     private bool simpleClick = false;
     private bool marca = true;
@@ -81,6 +82,7 @@ public abstract class CartaPadre : MonoBehaviour {
         mulliganListener = new UnityAction(MulliganCarta);
         seleccionListener = new UnityAction(SeleccionCarta);
         empiezaElMulliganListener = new UnityAction(StartMulliganCarta);
+        terminaElMulliganListener = new UnityAction(StopMulliganCarta);
     }
 
     private void OnEnable()
@@ -90,16 +92,22 @@ public abstract class CartaPadre : MonoBehaviour {
         EventManager.StartListening("MulliganCarta", mulliganListener);
         EventManager.StartListening("SeleccionCarta", seleccionListener);
         EventManager.StartListening("StartMulliganCarta", empiezaElMulliganListener);
+        EventManager.StartListening("StopMulliganCarta", terminaElMulliganListener);
     }
 
     public abstract void JugarCarta();
     public abstract void QuitarCarta();
     public void MulliganCarta() {
         //desde la mano al dark
-        if (seleccionMulligan)
+        if (seleccionMulligan && name.Substring(0,5).Equals("Carta"))
         {
             DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
             PosicionDeLasCartas.QuitarCarta(int.Parse(name.Substring(5)));
+            Destroy(gameObject);
+        }
+        else if (seleccionMulligan)
+        {
+            DarkArea.instance.Meter(/*id*/GetComponent<Renderer>().material.mainTexture.name);
             Destroy(gameObject);
         }
     }
@@ -120,9 +128,20 @@ public abstract class CartaPadre : MonoBehaviour {
             this.SetSeleccionMulligan(false);
         }
     }
+    public void StopMulliganCarta()
+    {
+        if (!marca)
+        {
+            marca = !marca;
+        }
+    }
     public void SetSeleccionMulligan(bool SeleccionMulligan)
     {
         this.seleccionMulligan = SeleccionMulligan;
+    }
+    public bool GetSeleccionMulligan()
+    {
+        return this.seleccionMulligan;
     }
     public bool GetDoubleClick()
     {

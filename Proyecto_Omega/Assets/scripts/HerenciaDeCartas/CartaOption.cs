@@ -27,7 +27,7 @@ public class CartaOption : CartaPadre
                     item.SetOcupado(true);
                     lugar = i;
                     transform.position = new Vector3(item.x, item.y, item.z);
-                    PosicionDeLasCartas.QuitarCarta(int.Parse(name.Substring(5)));
+                    PosicionDeLasCartas.QuitarCarta2();
                     SetDoubleClick(false);
                     break;
                 }

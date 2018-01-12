@@ -23,9 +23,26 @@ public class PosicionDeLasCartas : MonoBehaviour {
             GameObject.Find("Carta" + (i + 1)).name = "Carta" + i;
         }
     }
+    public static void Renombrar2()
+    {
+        string nombre = "Carta1";
+        bool marca = false;
+        for (int i = 1; i <= cantidadActualDeCartas + 1; i++)
+        {
+            if (marca)
+            {
+                GameObject.Find("Carta" + i).name = nombre;
+                marca = false;
+            }
+            if (GameObject.Find("Carta" + i) == null)
+            {
+                nombre = "Carta" + i;
+                marca = true;
+            }
+        }
+    }
     public static void AcomodarCartas()
     {
-        print("asd");
         switch (cantidadActualDeCartas)
         {
             case 1:
@@ -75,6 +92,11 @@ public class PosicionDeLasCartas : MonoBehaviour {
     {
         cantidadActualDeCartas--;
         Renombrar(nro);
+    }
+    public static void QuitarCarta2()
+    {
+        cantidadActualDeCartas--;
+        Renombrar2();
     }
     public static int GetCantidadActualDeCartas()
     {

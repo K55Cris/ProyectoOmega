@@ -26,6 +26,11 @@ public class Rookie : MonoBehaviour, IPointerClickHandler
     {
         if (clickCouter == 2)
         {
+            //prueba para ahora
+            EventTrigger.inicio = false;
+            EventManager.TriggerEvent("Botonazo"); //Ubicacion EventTrigger
+            EventManager.TriggerEvent("Roba"); //Ubicacion EventTrigger
+            //EventTrigger.boton.interactable = true;
             //movimiento de carta
             GameObject rookie = Instantiate(carta);
             rookie.GetComponent<Renderer>().material.mainTexture = imagen.mainTexture;
