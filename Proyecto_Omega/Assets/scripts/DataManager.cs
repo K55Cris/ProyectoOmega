@@ -6,14 +6,15 @@ using UnityEngine;
 public class DataManager : MonoBehaviour {
 
     public static DataManager instance;
-    private List<DigiCarta> ColeccionDeCartas;
+
+    public List<DigiCarta> ColeccionDeCartas;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public DigiCarta GetDigicarta(string codigo)
+   public DigiCarta GetDigicarta(string codigo)
     {
         foreach (var item in ColeccionDeCartas)
         {
@@ -23,5 +24,10 @@ public class DataManager : MonoBehaviour {
             }
         }
         return new DigiCarta(); // error
+    }
+    
+    public void LoadCartas(string jsonData)
+    {
+        ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData).DigiCartas;
     }
 }
