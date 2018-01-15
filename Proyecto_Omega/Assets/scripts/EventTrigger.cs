@@ -24,13 +24,13 @@ public class EventTrigger : MonoBehaviour {
         }
         if (true/*esta en la face gamesetup*/)
         {
+            EventManager.TriggerEvent("AcomodarCartas"); //Ubicacion PosicionDeLasCartas
             //EventManager.TriggerEvent("QuitarCarta"); //Ubicacion CartaPadre
         }
         if (mulligan)
         {
             EventManager.TriggerEvent("StartMulliganCarta"); //Ubicacion CartaPadre
             EventManager.TriggerEvent("SeleccionCarta"); //Ubicacion CartaPadre
-            EventManager.TriggerEvent("AcomodarCartas"); //Ubicacion PosicionDeLasCartas
         }
     }
 
