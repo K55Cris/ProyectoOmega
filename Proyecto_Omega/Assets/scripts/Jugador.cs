@@ -7,7 +7,8 @@ public class Jugador : MonoBehaviour {
     public int PointGauge;
     public List<string> Mano;
     public Deck Deck;
-    
+    public DarkArea DarkArea;
+
     // Use this for initialization
     void Start () {
 		
@@ -18,17 +19,26 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void Robar()
     {
-        
+        //Mano.Add(Deck.Robar());
     }
 
     /// <summary>
     /// Descarta las cartas seleccionadas.
     /// </summary>
-    public void Descartar()
+    public void Descartar(string idCartaDescartada)
     {
-        
+        Mano.Remove(idCartaDescartada);
+        DarkArea.Meter(idCartaDescartada);
     }
 
+    /// <summary>
+    /// Juega la carta indicada por parametro.
+    /// </summary>
+    public void JugarCarta(string idCartaJugada)
+    {
+        Mano.Remove(idCartaJugada);
+        //cartaJugada.JugarCarta();
+    }
 
     /*----------METODOS PARA LA IA----------*/
 
@@ -45,7 +55,9 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void ColocarOptionCards()
     {
-        
+        Mano.ForEach(carta => {
+            //if(carta.getTipo() == "OptionCard") then carta.JugarCarta();
+        });
     }
 
     /// <summary>
@@ -53,7 +65,9 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void ColocarEvolucion()
     {
-        
+        Mano.ForEach(carta => {
+            //if(carta.getTipo() == "DigiCard" & esSiguienteDigievolucion) => carta.JugarCarta();
+        });
     }
 
     /// <summary>
@@ -61,7 +75,15 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void BalancearMano()
     {
-        
+        int cantidadCartasDigimon = 0;
+        int cantidadCartasOpcion = 0;
+
+        Mano.ForEach(carta => {
+            //Contar cuantas cartas de cada hay 
+
+        });
+
+        //Mano.Descartar(Las que correspondan);
     }
 
     /// <summary>
@@ -70,5 +92,10 @@ public class Jugador : MonoBehaviour {
     public void JugarDigimonSupport()
     {
         
+    }
+
+    public void activarOptionCard()
+    {
+
     }
 }
