@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Jugador : MonoBehaviour {
@@ -8,6 +9,13 @@ public class Jugador : MonoBehaviour {
     public List<string> Mano;
     public Deck Deck;
     public DarkArea DarkArea;
+    //public DigimonBox DigimonBox;
+    private bool optionSlotLibre;
+
+    private enum EtapaDigimon
+    {
+        III, IV, PERFECT, ULTIMATE
+    };
 
     // Use this for initialization
     void Start () {
@@ -19,12 +27,13 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void Robar()
     {
-        //Mano.Add(Deck.Robar());
+        Mano.Add(Deck.Robar());
     }
 
     /// <summary>
     /// Descarta las cartas seleccionadas.
     /// </summary>
+    /// <param name="idCartaDescartada">ID de la carta a descartar</param>
     public void Descartar(string idCartaDescartada)
     {
         Mano.Remove(idCartaDescartada);
@@ -34,6 +43,7 @@ public class Jugador : MonoBehaviour {
     /// <summary>
     /// Juega la carta indicada por parametro.
     /// </summary>
+    /// <param name="idCartaJugada">ID de la carta a jugar</param>
     public void JugarCarta(string idCartaJugada)
     {
         Mano.Remove(idCartaJugada);
@@ -47,16 +57,24 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void CambiarRookie()
     {
-
+        //Por ahora que la ia no cambia el rookie
     }
-    
+
     /// <summary>
     /// Colocara Option Cards de la mano a la mesa.
     /// </summary>
     public void ColocarOptionCards()
     {
         Mano.ForEach(carta => {
-            //if(carta.getTipo() == "OptionCard") then carta.JugarCarta();
+            if (optionSlotLibre)
+            {
+                /*
+                if (carta.getTipo() == "OptionCard")
+                {
+                    carta.JugarCarta();
+                }
+                */
+            }
         });
     }
 
@@ -65,9 +83,16 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void ColocarEvolucion()
     {
+        /*
+        bool cartaJugada = false;
         Mano.ForEach(carta => {
-            //if(carta.getTipo() == "DigiCard" & esSiguienteDigievolucion) => carta.JugarCarta();
+            if (carta.getTipo() == "DigiCard" & carta.getNivel() == nivelDigimonActivo + 1 & !cartaJugada)
+            {
+                carta.JugarCarta();
+                cartaJugada = true;
+            }
         });
+        */
     }
 
     /// <summary>
@@ -75,15 +100,56 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void BalancearMano()
     {
+        //Requiere mucha optimizacion
+
+
         int cantidadCartasDigimon = 0;
         int cantidadCartasOpcion = 0;
 
-        Mano.ForEach(carta => {
-            //Contar cuantas cartas de cada hay 
 
+        Mano.ForEach(carta => {
+            /*
+            if (carta.getTipo() == "OptionCard")
+            {
+                cantidadCartasOpcion++;
+            }
+            else
+            {
+
+                cantidadCartasDigimon++;
+            }
+            */
         });
 
-        //Mano.Descartar(Las que correspondan);
+        int cartasSobrantes = cantidadCartasDigimon - cantidadCartasOpcion;
+
+        if (cartasSobrantes != 0)
+        {
+            string tipoCartaSobrante = (cartasSobrantes > 0) ? "DigimonCard" : "OptionCard";
+            cartasSobrantes = Math.Abs(cartasSobrantes);
+
+
+
+
+            //Contar cartas digimon de cada nivel.
+            //Quedarse al menos con una de cada.
+
+
+
+
+
+            //Pendiente comprobar digievoluciones para descartar las peores
+            Mano.ForEach(carta => {
+                /*
+                if (carta.getTipo() == tipoCartaSobrante & cartasSobrantes!=0)
+                {
+                    Descartar(carta);
+                    cartasSobrantes--;
+                }
+                */
+            });
+        }
+
     }
 
     /// <summary>
@@ -91,11 +157,14 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void JugarDigimonSupport()
     {
-        
+        //A contemplar mas adelante
     }
 
+    /// <summary>
+    /// Activará si se puede una option card.
+    /// </summary>
     public void activarOptionCard()
     {
-
+        //Iterar sobre las option slot y activar la que se requiera.
     }
 }

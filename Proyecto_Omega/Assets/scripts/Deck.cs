@@ -80,7 +80,7 @@ public class Deck : MonoBehaviour {
         }
     }
     //devuelve el codigo de una carta
-    string Robar()
+    public string Robar()
     {
         try
         {
