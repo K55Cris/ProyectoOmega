@@ -92,11 +92,13 @@ public class PosicionDeLasCartas : MonoBehaviour {
     {
         cantidadActualDeCartas--;
         Renombrar(nro);
+        AcomodarCartas();
     }
     public static void QuitarCarta2()
     {
         cantidadActualDeCartas--;
         Renombrar2();
+        AcomodarCartas();
     }
     public static int GetCantidadActualDeCartas()
     {
