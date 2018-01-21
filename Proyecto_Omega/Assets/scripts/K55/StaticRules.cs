@@ -11,9 +11,7 @@ public class StaticRules : MonoBehaviour
     public int Turno = 0;
     public int PointGaugePlayer1 = 100;
     public int PointGaugePlayer2 = 100;
-
-    public static int NowPhase = 0;
-	
+    public static Phases NowPhase;
 	public static bool FaseFinalizada;
 
     public enum Phases { GameSetup = 0, PreparationPhase = 1, EvolutionPhase = 2, EvolutionRequirements = 3, FusionRequirements = 4,
@@ -127,45 +125,51 @@ public class StaticRules : MonoBehaviour
         }
     }
     
+
+    public static void SaltoFase(Phases phase)
+    {
+        NowPhase = phase;
+    }
 	/// <summary>
     /// Aumenta en 1 el indice de la fase actual y ejecuta la siguiente.
     /// </summary>
     private static void SiguienteFase()
     {
-        NowPhase++;
+        NowPhase++; // 
         switch (NowPhase)
         {
-            case 0:
+            case Phases.GameSetup:
                 StartGameSetup();
                 break;
-            case 1:
+            case Phases.PreparationPhase:
                 StartPreparationPhase();
                 break;
-            case 2:
+            case Phases.EvolutionPhase:
                 StartEvolutionPhase();
                 break;
-            case 3:
+            case Phases.EvolutionRequirements:
                 CheckEvolutionRequirements();
                 break;
-            case 4:
+            case Phases.FusionRequirements:
                 CheckFusionRequirements();
                 break;
-            case 5:
+            case Phases.AppearanceRequirements:
                 CheckAppearanceRequirements();
                 break;
-            case 6:
+            case Phases.BattlePhase:
                 StartBattlePhase();
                 break;
-            case 7:
+            case Phases.PointCalculationPhase:
                 StartPointCalculationPhase();
                 break;
-            case 8:
+            case Phases.EndPhase:
                 StartEndPhase();
                 break;
             default:
                 Console.WriteLine("Error en el cambio de fase");
                 break;
         }
+        
         FaseFinalizada = true;
     }
 

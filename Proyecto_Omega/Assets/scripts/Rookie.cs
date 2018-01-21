@@ -34,6 +34,7 @@ public class Rookie : MonoBehaviour, IPointerClickHandler
             //movimiento de carta
             GameObject rookie = Instantiate(carta);
             rookie.GetComponent<Renderer>().material.mainTexture = imagen.mainTexture;
+            
             rookie.transform.position = new Vector3(241.4f, 0.2f, 177.2f);
             rookie.transform.Rotate(0, 180, 0);
             Destroy(GetComponent<Rookie>());

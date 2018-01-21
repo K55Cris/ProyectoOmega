@@ -5,6 +5,7 @@ using UnityEngine;
 public class OptionSlot : Mesa
 {
     private bool ocupado = false;
+
     public override void Jugar(DragTest carta)
     {
             this.ocupado = true;
