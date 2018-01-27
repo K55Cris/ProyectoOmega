@@ -5,12 +5,9 @@ using UnityEngine;
 public class Jugador : MonoBehaviour {
 
     public string Apodo;
-    public int PointGauge;
-    public List<string> Mano;
-    public Deck Deck;
-    public DarkArea DarkArea;
-    //public DigimonBox DigimonBox;
-    private bool optionSlotLibre;
+    public Mesa Mesa;
+    public Mano Mano;
+    public PointGauge PointGauge;
 
     private enum EtapaDigimon
     {
@@ -27,7 +24,7 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void Robar()
     {
-        Mano.Add(Deck.Robar());
+        //Mano.Add(Deck.Robar());
     }
 
     /// <summary>
@@ -36,8 +33,8 @@ public class Jugador : MonoBehaviour {
     /// <param name="idCartaDescartada">ID de la carta a descartar</param>
     public void Descartar(string idCartaDescartada)
     {
-        Mano.Remove(idCartaDescartada);
-        DarkArea.Meter(idCartaDescartada);
+        //Mano.Remove(idCartaDescartada);
+        //DarkArea.Meter(idCartaDescartada);
     }
 
     /// <summary>
@@ -46,7 +43,7 @@ public class Jugador : MonoBehaviour {
     /// <param name="idCartaJugada">ID de la carta a jugar</param>
     public void JugarCarta(string idCartaJugada)
     {
-        Mano.Remove(idCartaJugada);
+        //Mano.Remove(idCartaJugada);
         //cartaJugada.JugarCarta();
     }
 
@@ -65,17 +62,17 @@ public class Jugador : MonoBehaviour {
     /// </summary>
     public void ColocarOptionCards()
     {
-        Mano.ForEach(carta => {
-            if (optionSlotLibre)
-            {
+        //Mano.ForEach(carta => {
+            //if (optionSlotLibre)
+            //{
                 /*
                 if (carta.getTipo() == "OptionCard")
                 {
                     carta.JugarCarta();
                 }
                 */
-            }
-        });
+            //}
+        //});
     }
 
     /// <summary>
@@ -107,7 +104,7 @@ public class Jugador : MonoBehaviour {
         int cantidadCartasOpcion = 0;
 
 
-        Mano.ForEach(carta => {
+        //Mano.ForEach(carta => {
             /*
             if (carta.getTipo() == "OptionCard")
             {
@@ -119,7 +116,7 @@ public class Jugador : MonoBehaviour {
                 cantidadCartasDigimon++;
             }
             */
-        });
+        //});
 
         int cartasSobrantes = cantidadCartasDigimon - cantidadCartasOpcion;
 
@@ -139,7 +136,7 @@ public class Jugador : MonoBehaviour {
 
 
             //Pendiente comprobar digievoluciones para descartar las peores
-            Mano.ForEach(carta => {
+           // Mano.ForEach(carta => {
                 /*
                 if (carta.getTipo() == tipoCartaSobrante & cartasSobrantes!=0)
                 {
@@ -147,7 +144,7 @@ public class Jugador : MonoBehaviour {
                     cartasSobrantes--;
                 }
                 */
-            });
+           // });
         }
 
     }

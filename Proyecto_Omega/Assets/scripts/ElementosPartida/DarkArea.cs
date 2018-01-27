@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class DarkArea : MonoBehaviour {
 
+    public List<Carta> Cartas;
+
+    public List<Cartas> Vaciar()
+    {
+
+    }
+
+    /*
+     * Comentado tras el diseño del diagrama de clases.
+     * 
     private List<string> dark = new List<string>();
     public static DarkArea instance;
 
@@ -38,4 +48,5 @@ public class DarkArea : MonoBehaviour {
 	void Update () {
 		
 	}
+    */
 }

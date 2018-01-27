@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointGauge : Mesa
+public class PointGauge : MonoBehaviour
 {
+    public int Valor;
+    private Carta carta;
+
     //public AnimationClip pierdeVida = new AnimationClip();
+    /*
+     * Comentado tras el diseño del diagrama de clases.
+     * 
     private void OnMouseDown()
     {
         Jugar();
@@ -22,5 +28,16 @@ public class PointGauge : Mesa
     public override void Quitar(DragTest carta)
     {
         throw new System.NotImplementedException();
+    }
+    */
+
+    public void Disminuir(int cantidad)
+    {
+
+    }
+
+    public void Aumentar(int cantidad)
+    {
+
     }
 }

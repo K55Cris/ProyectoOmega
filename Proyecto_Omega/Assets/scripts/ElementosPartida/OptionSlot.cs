@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionSlot : Mesa
+public class OptionSlot : Slot
 {
+    public void ActivarCarta()
+    {
+
+    }
+
+    /*
+     * Comentado tras el diseño del diagrama de clases.
+     * 
     private bool ocupado = false;
 
     public override void Jugar(DragTest carta)
@@ -25,9 +33,11 @@ public class OptionSlot : Mesa
     {
         this.ocupado = ocupado;
     }
+
     public bool GetOcupado()
     {
         return this.ocupado;
     }
+    */
 
 }
