@@ -17,7 +17,6 @@ namespace DigiCartas
     public class DigiCarta
     {
         public int id;
-        public string codigo;
         public string Nombre;
         public string descripcion;
         public string TipoBatalla;
@@ -37,12 +36,6 @@ namespace DigiCartas
         public int PerdidaVidaPerfect;
         public int PerdidaVidaUltimate;
         public string Habilidad;
-
-        public bool CompararCodigo(string codigo)
-        {
-            return this.codigo.Equals(codigo);
-        }
-
         public string keyREvolucion;
         public string keyREvolucion2;
         public string keyREvolucion3;
