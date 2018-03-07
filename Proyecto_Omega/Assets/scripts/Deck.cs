@@ -16,7 +16,7 @@ public class Deck : MonoBehaviour {
     private UnityAction roboLisener;
     private void Awake()
     {
-        roboLisener = new UnityAction(RobarYAcomodarEnMano);
+     //   roboLisener = new UnityAction(RobarYAcomodarEnMano);
         instance = this;
     }
 
@@ -25,6 +25,8 @@ public class Deck : MonoBehaviour {
         EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
     }
 
+/// Esto hay que Corrigirlo <<
+/*
     private void RobarYAcomodarEnMano()
     {
         //revista si el deck esta bacio
@@ -58,10 +60,12 @@ public class Deck : MonoBehaviour {
         else
         {
             //si esta vacio en vez de robar carga el deck, y lo mezcla
-            deck = DarkArea.instance.Devolver();
+            //deck = DarkArea.instance.Devolver();
             FisherYates(deck);
         }
     }
+
+*/
 
     private void Swap(List<string> deck, int primero, int segundo)
     {

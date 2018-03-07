@@ -124,39 +124,7 @@ public class DragTest : MonoBehaviour{
         }
         else
         {
-            unClick = false;
-            //movimiento de carta
-            if (!estoyEnMesa)
-            {
-                if (tipo == CNTdrag.OPTION_SLOT)
-                {
-                    if (!GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().GetOcupado())
-                    {
-                        GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().Jugar(this);
-                        estoyEn = "Option Slot 1";
-                        name = "CartaEnMesa";
-                        //PosicionDeLasCartas.QuitarCarta();
-                    }
-                    else if (!GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().GetOcupado())
-                    {
-                        GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().Jugar(this);
-                        estoyEn = "Option Slot 2";
-                        name = "CartaEnMesa";
-                        //PosicionDeLasCartas.QuitarCarta();
-                    }
-                    else if (!GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().GetOcupado())
-                    {
-                        GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().Jugar(this);
-                        estoyEn = "Option Slot 3";
-                        name = "CartaEnMesa";
-                        //PosicionDeLasCartas.QuitarCarta();
-                    }
-                }
-            }
-            else //if(face de mulligan)
-            {
-                GameObject.Find(estoyEn).GetComponent<OptionSlot>().Quitar(this);
-            }
+           
         }
         CNTdrag.clikeado = true;
         this.clikeado = true;

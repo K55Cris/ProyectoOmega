@@ -8,7 +8,7 @@ public class Slot : MonoBehaviour
 
     public void ColocarCarta(Carta carta)
     {
-        Cartas.add(carta);
+        Cartas.Add(carta);
     }
 
     public void VaciarSlot()

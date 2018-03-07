@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public class CartaOption : Carta{
+public class CartaOption : Carta
+{
     //Es la capacidad de la carta.
     private int capacity;
     //Cualquier información adicional sobre como jugar la carta.

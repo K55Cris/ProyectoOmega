@@ -14,11 +14,11 @@ public class DataManager : MonoBehaviour {
         instance = this;
     }
 
-   public DigiCarta GetDigicarta(string codigo)
+   public DigiCarta GetDigicarta(int codigo)
     {
         foreach (var item in ColeccionDeCartas)
         {
-            if (item.CompararCodigo(codigo))
+            if (item.id==codigo)
             {
                 return item;
             }

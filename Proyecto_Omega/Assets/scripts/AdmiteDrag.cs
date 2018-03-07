@@ -28,7 +28,7 @@ public class AdmiteDrag : MonoBehaviour {
         
     private void OnTriggerEnter(Collider other)
     {
-        switch (nroSlot)
+     /*   switch (nroSlot)
         {
             case 1:
                 GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().SetOcupado(true);
@@ -42,6 +42,7 @@ public class AdmiteDrag : MonoBehaviour {
             default:
                 break;
         }
+        */
     }
     private void OnMouseExit()
     {

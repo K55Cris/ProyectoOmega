@@ -19,7 +19,7 @@ public class Mano : MonoBehaviour
 
     public void RecibirCarta(Carta carta)
     {
-        Cartas.add(carta);
+        Cartas.Add(carta);
     }
 
     private void Reordenar()

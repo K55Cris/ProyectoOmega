@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DigiCartas;
 public class Carta : MonoBehaviour {
     //Id o nro de la carta.
-    private int cardNumber;
-    //nombre de la carta.
-    private string cardName;
+    public int cardNumber;
+    //Datos de la Carta
+    public DigiCarta DatosDigimon;
     //Es el icono en la parte superior derecha, para CartaDigimon (battle type) puede ser A, B o C y para CartaOption (icon) Program, Item y Field.
     private string icon;
-    //Descripcion de la carta.
-    private string descripcion;
     //Imagen de la carta.
     private Image imagen;
     //El color del borde que rodea la carta, (Azul, Rojo o Dorado).
@@ -36,18 +34,7 @@ public class Carta : MonoBehaviour {
         }
     }
 
-    public string CardName
-    {
-        get
-        {
-            return cardName;
-        }
 
-        set
-        {
-            cardName = value;
-        }
-    }
 
     public string Icon
     {
@@ -62,18 +49,6 @@ public class Carta : MonoBehaviour {
         }
     }
 
-    public string Descripcion
-    {
-        get
-        {
-            return descripcion;
-        }
-
-        set
-        {
-            descripcion = value;
-        }
-    }
 
     public Image Imagen
     {
