@@ -36,6 +36,7 @@ public class PartidaManager : MonoBehaviour {
         {
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
             DigiCarta.transform.localPosition = Vector3.zero;
+            DigiCarta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             DigiCarta.transform.localScale = new Vector3(1, 1, 0.015f);
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
@@ -54,7 +55,8 @@ public class PartidaManager : MonoBehaviour {
 
             Carta.transform.parent = Mano;
             Carta.transform.localPosition = Vector3.zero;
-            Carta.transform.localScale = new Vector3(53, 90, 0.015f);
+            Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            Carta.transform.localScale = new Vector3(26, 45, 0.015f);
         }
     }
     
