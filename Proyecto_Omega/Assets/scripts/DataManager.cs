@@ -6,12 +6,16 @@ using UnityEngine;
 public class DataManager : MonoBehaviour {
 
     public static DataManager instance;
+    public TextAsset jsonData;
+    public Sprite[] Cartas;
 
     public List<DigiCarta> ColeccionDeCartas;
+    public Texture[] arrayImage;
 
     private void Awake()
     {
         instance = this;
+        LoadCartas();
     }
 
    public DigiCarta GetDigicarta(int codigo)
@@ -25,9 +29,20 @@ public class DataManager : MonoBehaviour {
         }
         return new DigiCarta(); // error
     }
-    
-    public void LoadCartas(string jsonData)
+   
+    public void LoadCartas()
     {
-        ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData).DigiCartas;
+        ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text).DigiCartas;
+        arrayImage = Resources.LoadAll<Texture>("Digimon");
+    
+    }
+    public Texture GetTextureDigimon(int IDigimon)
+    {
+        foreach (var item in arrayImage)
+        {
+            if (item.name == IDigimon.ToString())
+                return item;
+        }
+        return null;
     }
 }

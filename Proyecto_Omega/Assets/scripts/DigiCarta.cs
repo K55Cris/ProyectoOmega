@@ -9,7 +9,7 @@ namespace DigiCartas
     [Serializable]
     public class Mazo
     {
-        public List<DigiCarta> cartas;
+        public List<CartaDigimon> cartas;
     }
     [Serializable]
     public class DigiCarta

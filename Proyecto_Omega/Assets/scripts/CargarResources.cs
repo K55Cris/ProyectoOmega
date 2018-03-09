@@ -33,10 +33,10 @@ public class CargarResources : MonoBehaviour {
     {
         arrayImage = Resources.LoadAll<Sprite>("Digimon");
         ScrollBaryCantidadDeCartas.instance.SetArrayRookie(new List<Sprite>());
-        Deck.instance.SetArrayImage(new List<Sprite>());
+      //  Deck.instance.SetArrayImage(new List<Sprite>());
         foreach (var imagen in arrayImage)
         {
-            Deck.instance.GetArrayImage().Add(imagen);
+     //       Deck.instance.GetArrayImage().Add(imagen);
             foreach (var nombre in rookie)
             {
                 if (imagen.name.Equals(nombre))
@@ -46,7 +46,7 @@ public class CargarResources : MonoBehaviour {
             }
         }
         ScrollBaryCantidadDeCartas.instance.CargarDatos();
-        Deck.instance.FisherYates(Deck.instance.GetDeck());
+     //   Deck.instance.FisherYates(Deck.instance.GetDeck());
     }
     //Este es el que se deberia usar (si estubiera completo) en este carga todos los datos al DataManager
     void CargarListaCdartas()

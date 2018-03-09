@@ -16,7 +16,7 @@ public class Rookie : MonoBehaviour, IPointerClickHandler
     }
     private void OnEnable()
     {
-        EventManager.StartListening("RobarRookie", rookieLisener);
+     //   EventManager.StartListening("RobarRookie", rookieLisener);
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -28,8 +28,8 @@ public class Rookie : MonoBehaviour, IPointerClickHandler
         {
             //prueba para ahora
             EventTrigger.inicio = false;
-            EventManager.TriggerEvent("Botonazo"); //Ubicacion EventTrigger
-            EventManager.TriggerEvent("Roba"); //Ubicacion EventTrigger
+      //      EventManager.TriggerEvent("Botonazo"); //Ubicacion EventTrigger
+     //       EventManager.TriggerEvent("Roba"); //Ubicacion EventTrigger
             //EventTrigger.boton.interactable = true;
             //movimiento de carta
             GameObject rookie = Instantiate(carta);

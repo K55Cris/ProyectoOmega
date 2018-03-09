@@ -44,20 +44,20 @@ public class AdmiteDrag : MonoBehaviour {
         }
         */
     }
-    private void OnMouseExit()
-    {
-        CNTdrag.objetoQuieto = null;
-        CNTdrag.tipo = -1;
-        GetComponent<Renderer>().material = materialOriginal;
+ //   private void OnMouseExit()
+ //   {
+ //       CNTdrag.objetoQuieto = null;
+ //       CNTdrag.tipo = -1;
+ //       GetComponent<Renderer>().material = materialOriginal;
         
-    }
-    // Use this for initialization
-    void Start () {
-        materialOriginal = GetComponent<Renderer>().material;
-    }
+ //   }
+ //   // Use this for initialization
+ //   void Start () {
+ //       materialOriginal = GetComponent<Renderer>().material;
+ //   }
 	
-	// Update is called once per frame
-	void Update () {
-        lerp = Mathf.PingPong(Time.time, duration) / duration;
-    }
+	//// Update is called once per frame
+	//void Update () {
+ //       lerp = Mathf.PingPong(Time.time, duration) / duration;
+ //   }
 }

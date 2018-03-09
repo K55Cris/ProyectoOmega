@@ -7,9 +7,4 @@ public class LoadData : MonoBehaviour {
     public TextAsset jsonData;
     
 
-	public void LoadDataDigiCartas()
-    {
-        DataManager.instance.LoadCartas(jsonData.text);
-      
-    }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour
 {
-
+/*
     private Dictionary<string, UnityEvent> eventDictionary;
 
     private static EventManager eventManager;
@@ -73,4 +73,5 @@ public class EventManager : MonoBehaviour
             thisEvent.Invoke();
         }
     }
+    */
 }

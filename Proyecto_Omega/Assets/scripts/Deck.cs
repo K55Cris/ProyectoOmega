@@ -7,55 +7,39 @@ using UnityEngine.Events;
 public class Deck : MonoBehaviour {
     [TooltipAttribute("Modelado de la carta.")]
     public GameObject modeladoDeLaCarta;
-    [TooltipAttribute("Ingresa la mainCamera.")]
-    public Camera camara = new Camera();
-    [TooltipAttribute("Deck del jugador/Bot/cualquier deck")]
-    public static Deck instance;
-    private List<Sprite> arrayImage;
+
     private List<string> deck = new List<string>();
     private UnityAction roboLisener;
-    private void Awake()
-    {
-     //   roboLisener = new UnityAction(RobarYAcomodarEnMano);
-        instance = this;
-    }
+   
 
     private void OnEnable()
     {
-        EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
+    //    EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
     }
 
 /// Esto hay que Corrigirlo <<
-/*
+
     private void RobarYAcomodarEnMano()
     {
         //revista si el deck esta bacio
         if (!(deck == null))
         {
             //mira la mano y revisa si esta llena
-            if (!(PosicionDeLasCartas.GetCantidadActualDeCartas() == 6))
-            {
+  
                 //roba el codigo
                 string robada = Robar();
                 //carga los datos (en este caso solo las imagenes, deberia llamar a DataManager y pedir la carta y su info o cargar los datos al deck y solo robar hmm)
                 //Y compara todas las imagenes en busca de la necesaria (Si es un asco pero era para probar)
                 Texture imagenRobada = new Texture();
-                foreach (var item in arrayImage)
-                {
-                    if (item.name.ToLower().Equals(robada.ToLower()))
-                    {
-                        imagenRobada = item.texture;
-                        break;
-                    }
-                }
+    
                 //instancia la carta con su modelado y se le dan sus valores
                 GameObject carta = Instantiate(modeladoDeLaCarta);
                 //carta.GetComponent<DragTest>().SetCamera(camara);
                 carta.GetComponent<Renderer>().material.mainTexture = imagenRobada;
-                carta.name = ("Carta" + (PosicionDeLasCartas.GetCantidadActualDeCartas() + 1));
+              
                 //posiciona la carta
-                PosicionDeLasCartas.AumentarCarta();
-            }
+             
+            
         }
         else
         {
@@ -65,7 +49,8 @@ public class Deck : MonoBehaviour {
         }
     }
 
-*/
+
+
 
     private void Swap(List<string> deck, int primero, int segundo)
     {
@@ -132,12 +117,12 @@ public class Deck : MonoBehaviour {
     {
         this.deck = deck;
     }
-    public List<Sprite> GetArrayImage()
-    {
-        return arrayImage;
-    }
-    public void SetArrayImage(List<Sprite> arrayImage)
-    {
-        this.arrayImage = arrayImage;
-    }
+    //public List<Sprite> GetArrayImage()
+    //{
+    //    return arrayImage;
+    //}
+    //public void SetArrayImage(List<Sprite> arrayImage)
+    //{
+    //    this.arrayImage = arrayImage;
+    //}
 }

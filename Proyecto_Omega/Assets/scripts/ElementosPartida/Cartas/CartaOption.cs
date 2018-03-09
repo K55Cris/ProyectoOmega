@@ -109,4 +109,5 @@ public class CartaOption : Carta
             limit = value;
         }
     }
+
 }

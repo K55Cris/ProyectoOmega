@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mano : MonoBehaviour
 {
-    public List<Carta> Cartas;
+    public List<CartaDigimon> Cartas;
     public int Limite;
 
     public void JugarCarta(Carta Index)
@@ -17,9 +17,11 @@ public class Mano : MonoBehaviour
 
     }
 
-    public void RecibirCarta(Carta carta)
+    public void RecibirCarta(CartaDigimon carta, bool PlayerOrIA=false)
     {
         Cartas.Add(carta);
+        if(PlayerOrIA)
+        carta.Mostrar();
     }
 
     private void Reordenar()
