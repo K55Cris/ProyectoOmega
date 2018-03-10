@@ -25,11 +25,7 @@ public class MovimientoCartas : MonoBehaviour {
     {
 
         Vector3 temp = Input.mousePosition;
-        temp.z = this.distancia;
-        print(temp.x);
-        print(temp.y);
-        print(temp.z);
-        print(temp);
+        temp.z = this.distancia; 
         transform.parent.position = Maincam.ScreenToWorldPoint(temp);
 
     }
@@ -37,6 +33,7 @@ public class MovimientoCartas : MonoBehaviour {
     {
         print(transform.position);
         // Reralizar Cambio 
+        MesaManager.SetOptionSlot(transform.parent.gameObject);
         StartCoroutine(TerminarDesicion());
     }
     IEnumerator TerminarDesicion()

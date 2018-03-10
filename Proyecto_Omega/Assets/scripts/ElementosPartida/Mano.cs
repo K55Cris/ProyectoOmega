@@ -14,7 +14,7 @@ public class Mano : MonoBehaviour
 
     public void DescartarCarta(Carta Index)
     {
-
+        
     }
 
     public void RecibirCarta(CartaDigimon carta, bool PlayerOrIA=false)

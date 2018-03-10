@@ -61,5 +61,9 @@ namespace DigiCartas
     {
         public List<DigiCarta> DigiCartas;
     }
-
+    [Serializable]
+    public class Campos
+    {
+        public Transform OptionSlot1, OptionSlot2, OptionSlot3, DigimonSlot, NetOcean, DarkArea, EvolutionBox, SupportBox,Campo;
+    }
 }

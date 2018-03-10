@@ -35,9 +35,7 @@ public class PartidaManager : MonoBehaviour {
         foreach (var carta in Deck)
         {
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
-            DigiCarta.transform.localPosition = Vector3.zero;
-            DigiCarta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            DigiCarta.transform.localScale = new Vector3(1, 1, 0.015f);
+            DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
             contador++;
