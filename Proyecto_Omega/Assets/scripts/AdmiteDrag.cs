@@ -24,25 +24,14 @@ public class AdmiteDrag : MonoBehaviour {
             GetComponent<Renderer>().material.color = Color.Lerp(color1, color2, lerp);
         }
     }
-    
-        
+    public void SendMessageTo()
+    {
+       
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-     /*   switch (nroSlot)
-        {
-            case 1:
-                GameObject.Find("Option Slot 1").GetComponent<OptionSlot>().SetOcupado(true);
-                break;
-            case 2:
-                GameObject.Find("Option Slot 2").GetComponent<OptionSlot>().SetOcupado(true);
-                break;
-            case 3:
-                GameObject.Find("Option Slot 3").GetComponent<OptionSlot>().SetOcupado(true);
-                break;
-            default:
-                break;
-        }
-        */
+        Debug.Log("Entro");
     }
  //   private void OnMouseExit()
  //   {
