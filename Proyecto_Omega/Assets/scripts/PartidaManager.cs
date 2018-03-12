@@ -30,7 +30,7 @@ public class PartidaManager : MonoBehaviour {
 
     public void CargarMazos(List<int> Deck,Transform Espacio)
     {
-        List<DigiCarta> DatosDigi = DataManager.instance.ColeccionDeCartas;
+        List<DigiCarta> DatosDigi = DataManager.instance.TodasLasCartas;
         int contador = 1;
         foreach (var carta in Deck)
         {
@@ -45,6 +45,7 @@ public class PartidaManager : MonoBehaviour {
     {
         for (int i = 1; i < 7; i++)
         {
+    
             GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count-i).gameObject;
             if(jugador==Player1)
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(),true);

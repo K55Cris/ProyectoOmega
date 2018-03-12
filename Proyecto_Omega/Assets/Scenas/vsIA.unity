@@ -804,8 +804,7 @@ RectTransform:
   m_LocalRotation: {x: 0.69467694, y: -0, z: -0, w: 0.7193219}
   m_LocalPosition: {x: 0, y: 0, z: 112.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 380392064}
+  m_Children: []
   m_Father: {fileID: 54729496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 88.003006, y: 0, z: 0}
@@ -1182,11 +1181,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 87.898, y: 0, z: 0}
---- !u!224 &380392064 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-    type: 2}
-  m_PrefabInternal: {fileID: 951655351}
 --- !u!1001 &419386213
 Prefab:
   m_ObjectHideFlags: 0
@@ -1396,13 +1390,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 446007946}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 390.9, y: 0.8, z: 132.7}
   m_LocalScale: {x: 30.85843, y: 41.080452, z: 11.170439}
   m_Children: []
   m_Father: {fileID: 1610215096}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &446007948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,111 +1848,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872921515}
---- !u!1001 &951655351
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 264659169}
-    m_Modifications:
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 108.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224793826725219156, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114729390006378474, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
-        type: 2}
-      propertyPath: Maincam
-      value: 
-      objectReference: {fileID: 326042139}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3ecedad9a52a2a849a23c5dbc7152ac5, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1087745025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,7 +2375,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jsonData: {fileID: 4900000, guid: 0fa49527a975cab42ac5457292c61dc7, type: 3}
   Cartas: []
-  ColeccionDeCartas: []
+  ColeccionDeCartas:
+  - id: 0
+    Nombre: 
+    descripcion: 
+    TipoBatalla: 
+    Familia: 
+    Atributo: 
+    Tipo: 
+    Nivel: 
+    Borde: 
+    NombreAtaqueA: 
+    DanoAtaqueA: 0
+    NombreAtaqueB: 
+    DanoAtaqueB: 0
+    NombreAtaqueC: 
+    DanoAtaqueC: 0
+    PerdidaVidaIII: 0
+    PerdidaVidaIV: 0
+    PerdidaVidaPerfect: 0
+    PerdidaVidaUltimate: 0
+    Habilidad: 
+    keyREvolucion: 
+    keyREvolucion2: 
+    keyREvolucion3: 
+    keyREvolucion4: 
+    codigo: 
+    Capasidad: 0
+    ListaActivacion: []
+    Limite: 
   arrayImage: []
 --- !u!4 &1573372142
 Transform:

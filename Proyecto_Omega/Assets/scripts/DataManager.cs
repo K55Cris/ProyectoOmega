@@ -9,7 +9,8 @@ public class DataManager : MonoBehaviour {
     public TextAsset jsonData;
     public Sprite[] Cartas;
 
-    public List<DigiCarta> ColeccionDeCartas;
+    public Cartas ColeccionDeCartas;
+    public List<DigiCarta> TodasLasCartas;
     public Texture[] arrayImage;
 
     private void Awake()
@@ -20,7 +21,7 @@ public class DataManager : MonoBehaviour {
 
    public DigiCarta GetDigicarta(int codigo)
     {
-        foreach (var item in ColeccionDeCartas)
+        foreach (var item in TodasLasCartas)
         {
             if (item.id==codigo)
             {
@@ -32,7 +33,12 @@ public class DataManager : MonoBehaviour {
    
     public void LoadCartas()
     {
-        ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text).DigiCartas;
+        ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text);
+        TodasLasCartas = ColeccionDeCartas.DigiCartas;
+        foreach (var item in ColeccionDeCartas.OptionCartas)
+        {
+            TodasLasCartas.Add(item);
+        }
         arrayImage = Resources.LoadAll<Texture>("Digimon");
     
     }

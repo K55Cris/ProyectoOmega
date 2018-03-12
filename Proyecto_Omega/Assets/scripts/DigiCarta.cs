@@ -54,12 +54,26 @@ namespace DigiCartas
         public string keyREvolucion2;
         public string keyREvolucion3;
         public string keyREvolucion4;
+
+        public string codigo;
+        public int Capasidad;
+        public List<string> ListaActivacion;
+        public List<string> ListaCatrgoria;
+        public List<string> ListaCosto;
+        public List<string> ListaRequerimientos;
+        public List<string> ListaEfectos;
+        public string Limite;
+
     }
 
-    [Serializable]
+
+  
+
+[Serializable]
     public class Cartas
     {
         public List<DigiCarta> DigiCartas;
+        public List<DigiCarta> OptionCartas;
     }
     [Serializable]
     public class Campos
