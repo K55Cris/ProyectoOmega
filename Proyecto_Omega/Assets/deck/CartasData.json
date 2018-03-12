@@ -1091,15 +1091,13 @@
       "Nombre": "Plug-in Ofensivo A",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Item" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "allyChageAtack to A",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "allyChageAtack to A",
+        "drop in allyDarkArea"
       ],
       "Limite": "End Phase"
     },
@@ -1109,15 +1107,13 @@
       "Nombre": "Plug-in Ofensivo C",
       "Capasidad": 50,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Item" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "allyChageAtack to C",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "allyChageAtack to C",
+        "drop in allyDarkArea"
       ],
       "Limite": "End Phase"
     },
@@ -1127,15 +1123,14 @@
       "Nombre": "Plug-in De alta velocidad B",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Item" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "allyChageAtack to B",
-          "Efecto2": "drop in allyDarkArea"
-        }
+
+        "allyChageAtack to B",
+        "drop in allyDarkArea"
       ],
       "Limite": "End Phase"
     },
@@ -1145,15 +1140,13 @@
       "Nombre": "¡Si pierdo, te llevo conmigo!",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "drop in allyOptionSlot faceUp" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyOptionSlot faceUp" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "lostBattle (view enemyNetOcean drop in enemyDarkArea)3",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "lostBattle (view enemyNetOcean drop in enemyDarkArea)3",
+        "drop in allyDarkArea"
       ],
       "Limite": "Battle Phase"
     },
@@ -1163,15 +1156,13 @@
       "Nombre": "Una pequeña mejora de metal",
       "Capasidad": 40,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "allyHand drop in allyDarkArea" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "allyHand drop in allyDarkArea" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "allyAttackPoints + 50",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "allyAttackPoints + 50",
+        "drop in allyDarkArea"
       ],
       "Limite": "Battle Phase"
     },
@@ -1181,16 +1172,14 @@
       "Nombre": "¡Un contraataque desde la crisis!",
       "Capasidad": 40,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ null ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "battlePhase enemyBigDigimon allyAttackPoints * 2",
-          "Efecto2": "allyL3 not use",
-          "Efecto3": "drop in allyDarkArea"
-        }
+        "battlePhase enemyBigDigimon allyAttackPoints * 2",
+        "allyL3 not use",
+        "drop in allyDarkArea"
       ],
       "Limite": "End Phase"
     },
@@ -1200,16 +1189,14 @@
       "Nombre": "¡Transformate en Nivel IV!",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Evolution Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "drop in allyEvolutionRequirementsBox faceDown" } ],
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "! allyEvolutionRequierimets allyDigivolution to Lv4",
-          "Efecto2": "allyL3 not use",
-          "Efecto3": "drop in allyDarkArea"
-        }
+        "! allyEvolutionRequierimets allyDigivolution to Lv4",
+        "allyL3 not use",
+        "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase"
     },
@@ -1219,15 +1206,13 @@
       "Nombre": "¡Apunta a la evolución más fuerte!",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Evolution Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "drop in allyEvolutionRequirementsBox faceDown" } ],
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "! allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "! allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea",
+        "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase"
     },
@@ -1237,15 +1222,13 @@
       "Nombre": "Ese fue un buen momento",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "allyHand drop in allyDarkArea" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "allyHand drop in allyDarkArea" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "return to Lv3 allyLv4 or enemyLv4",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "return to Lv3 allyLv4 or enemyLv4",
+        "drop in allyDarkArea"
       ],
       "Limite": "Battle Phase"
     },
@@ -1255,16 +1238,14 @@
       "Nombre": "¡La batalla en la que aposté mi orgullo!",
       "Capasidad": 20,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Battle Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "onlyOne (allyNetOcean top drop in allyDarkArea)3" } ],
+      "ListaActivacion": [ "Battle Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "onlyOne (allyNetOcean top drop in allyDarkArea)3" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "winBattle enemyLostPoints * 2",
-          "Efecto2": "allyL3 not use",
-          "Efecto3": "drop in allyDarkArea"
-        }
+        "winBattle enemyLostPoints * 2",
+        "allyL3 not use",
+        "drop in allyDarkArea"
       ],
       "Limite": "Battle Phase"
     },
@@ -1274,15 +1255,13 @@
       "Nombre": "¡Porcentaje de victorias: 40%!",
       "Capasidad": 20,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Evolution Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "drop in allyEvolutionRequirementsBox faceDown" } ],
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "Digivolution to nextLevel 40%",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "Digivolution to nextLevel 40%",
+        "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase"
     },
@@ -1292,16 +1271,15 @@
       "Nombre": "¡Porcentaje de victorias: 60%!",
       "Capasidad": 30,
       "Borde": "Azul",
-      "ListaActivacion": [ { "Activacion1": "Evolution Phase" } ],
-      "ListaCatrgoria": [ { "Categoria1": "Program" } ],
-      "ListaCosto": [ { "Costo1": "drop in allyEvolutionRequirementsBox faceDown" } ],
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        {
-          "Efecto1": "Digivolution to nextLevel 60%",
-          "Efecto2": "drop in allyDarkArea"
-        }
+        "Digivolution to nextLevel 60%",
+        "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase"
     }
-  ]}
+  ]
+}
