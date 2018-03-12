@@ -43,6 +43,7 @@ public class PartidaManager : MonoBehaviour {
     }
     public void cargarManos(Transform Mano, Player jugador, Transform Deck)
     {
+        Barajear(Deck);
         for (int i = 1; i < 7; i++)
         {
     
@@ -58,6 +59,21 @@ public class PartidaManager : MonoBehaviour {
             Carta.transform.localScale = new Vector3(26, 45, 0.015f);
         }
     }
-    
+
+
+    public static void Barajear(Transform Deck)
+    {
+        int k = 0;
+        while (k < 25)
+        {
+            int val = Random.Range(0, 29);
+            Transform _Carta = Deck.transform.GetChild(val);
+            _Carta.transform.parent = null;
+            _Carta.transform.parent = Deck;
+            k++;
+        }
+
+    }
+
 
 }

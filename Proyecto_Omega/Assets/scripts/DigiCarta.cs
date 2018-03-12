@@ -73,8 +73,10 @@ namespace DigiCartas
     public class Cartas
     {
         public List<DigiCarta> DigiCartas;
-        public List<DigiCarta> OptionCartas;
+        public List<DigiCarta> CartaOption;
     }
+
+
     [Serializable]
     public class Campos
     {

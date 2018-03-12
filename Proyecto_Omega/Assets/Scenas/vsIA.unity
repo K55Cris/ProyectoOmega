@@ -665,7 +665,6 @@ GameObject:
   - component: {fileID: 223856839}
   - component: {fileID: 223856838}
   - component: {fileID: 223856837}
-  - component: {fileID: 223856836}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -692,17 +691,6 @@ RectTransform:
   m_AnchoredPosition: {x: 243.8, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &223856836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 223856834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca3ffcb0fe68b44b801fab484525ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &223856837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,34 +2364,9 @@ MonoBehaviour:
   jsonData: {fileID: 4900000, guid: 0fa49527a975cab42ac5457292c61dc7, type: 3}
   Cartas: []
   ColeccionDeCartas:
-  - id: 0
-    Nombre: 
-    descripcion: 
-    TipoBatalla: 
-    Familia: 
-    Atributo: 
-    Tipo: 
-    Nivel: 
-    Borde: 
-    NombreAtaqueA: 
-    DanoAtaqueA: 0
-    NombreAtaqueB: 
-    DanoAtaqueB: 0
-    NombreAtaqueC: 
-    DanoAtaqueC: 0
-    PerdidaVidaIII: 0
-    PerdidaVidaIV: 0
-    PerdidaVidaPerfect: 0
-    PerdidaVidaUltimate: 0
-    Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
-    codigo: 
-    Capasidad: 0
-    ListaActivacion: []
-    Limite: 
+    DigiCartas: []
+    CartaOption: []
+  TodasLasCartas: []
   arrayImage: []
 --- !u!4 &1573372142
 Transform:

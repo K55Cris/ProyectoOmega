@@ -11,6 +11,8 @@ public class DataManager : MonoBehaviour {
 
     public Cartas ColeccionDeCartas;
     public List<DigiCarta> TodasLasCartas;
+
+
     public Texture[] arrayImage;
 
     private void Awake()
@@ -35,7 +37,7 @@ public class DataManager : MonoBehaviour {
     {
         ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text);
         TodasLasCartas = ColeccionDeCartas.DigiCartas;
-        foreach (var item in ColeccionDeCartas.OptionCartas)
+        foreach (var item in ColeccionDeCartas.CartaOption)
         {
             TodasLasCartas.Add(item);
         }
