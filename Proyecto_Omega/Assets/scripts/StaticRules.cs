@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using DigiCartas;
 using System;
+using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class StaticRules : MonoBehaviour
@@ -13,6 +14,7 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
 	public static bool FaseFinalizada;
+ 
 
     public enum Phases { GameSetup = 0, PreparationPhase = 1, EvolutionPhase = 2, EvolutionRequirements = 3, FusionRequirements = 4,
                            AppearanceRequirements = 5, BattlePhase = 6, PointCalculationPhase = 7, EndPhase = 8, };
@@ -27,20 +29,98 @@ public class StaticRules : MonoBehaviour
         PointGaugePlayer1 = 100;
         PointGaugePlayer2 = 100;
         FaseFinalizada = false;
+
+
     }
 
-    public static void SelectDigimonChild()
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
+
+        public static void SelectDigimonChild()
     {
         StaticRules loRule = FailSafeInstance();
+
+        //Cargamos Mazos de Ambos Jugadores 
+        PartidaManager.instance.CargarMazos(PartidaManager.instance.Player1.IDCartasMazo, PartidaManager.instance.DeckPlayer1, PartidaManager.instance.Player1);
+        PartidaManager.instance.CargarMazos(PartidaManager.instance.Player2.IDCartasMazo, PartidaManager.instance.DeckPlayer2, PartidaManager.instance.Player2);
+
         // player 1 selecciona digimon child
-        // player 2 selecciona digimon child
-        // barajear mazo player 1
-		// barajear mazo player 2
+        SelectedDigimons.instance.Activar(SetDigimonChildPlayer1, GetDigimonChildInDeck(PartidaManager.instance.Player1.Deck));
+
     }
 
-	/// <summary>
+    public static void SetDigimonChildPlayer1(string IDCarta)
+    {
+      
+        foreach (Transform item in MesaManager.instance.Campo1.NetOcean)
+        {
+            CartaDigimon ID = item.GetComponent<CartaDigimon>();
+            if (IDCarta == ID.cardNumber.ToString())
+            {
+                ID.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                ID.AjustarSlot();
+                ID.Mostrar();
+                // player 2 selecciona digimon child
+                SelectedDigimons.instance.Activar(SetDigimonChildPlayer2, GetDigimonChildInDeck(PartidaManager.instance.Player2.Deck));
+                break;
+            }
+        } 
+    }
+    public static void SetDigimonChildPlayer2(string IDCarta)
+    {
+        foreach (Transform item in MesaManager.instance.Campo2.NetOcean)
+        {
+            CartaDigimon ID = item.GetComponent<CartaDigimon>();
+            if (IDCarta == ID.cardNumber.ToString())
+            {
+                ID.transform.parent = MesaManager.instance.Campo2.DigimonSlot;
+                ID.AjustarSlot();
+                ID.Mostrar();
+                SelectDigimonChildPart2();
+                break;
+            }
+        }
+    }
+
+    public static void SelectDigimonChildPart2()
+    {
+        Transform Deck1 = PartidaManager.instance.DeckPlayer1;
+        Transform Deck2 = PartidaManager.instance.DeckPlayer2;
+        // barajear mazo player 1
+        PartidaManager.Barajear(Deck1);
+        // barajear mazo player 2
+        PartidaManager.Barajear(Deck2);
+        //cargar Manos player1
+        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, Deck1);
+        //cargar Manos player 2
+        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, Deck2);
+    }
+
+
+
+    public static List<CartaDigimon> GetDigimonChildInDeck(Mazo netocean)
+    {
+        List<CartaDigimon> DigimonChild= new List<CartaDigimon>();
+        foreach (var item in netocean.cartas)
+        {
+         
+            if (item.DatosDigimon.Nivel == "III")
+            {
+                DigimonChild.Add(item);
+            }
+        }        
+        return DigimonChild;
+    }
+   
+    /// <summary>
     /// Fija el jugador activo al inicio de la partida.
-	/// Metodo redundante, comprobar SeleccionPrimerJugador()
+    /// Metodo redundante, comprobar SeleccionPrimerJugador()
     /// </summary>
     public void WhoFirstPlayer()
     {

@@ -18,36 +18,36 @@ public class PartidaManager : MonoBehaviour {
     {
         instance = this;
     }
-    public void Start()
+
+    private void Start()
     {
-        CargarMazos(Player1.IDCartasMazo,DeckPlayer1);
-        CargarMazos(Player2.IDCartasMazo, DeckPlayer2);
-        cargarManos(ManoPlayer1, Player1, DeckPlayer1);
-        cargarManos(ManoPlayer2, Player2, DeckPlayer2);
+        StaticRules.SelectDigimonChild();
     }
-    
 
 
-    public void CargarMazos(List<int> Deck,Transform Espacio)
+    public void CargarMazos(List<int> Deck,Transform Espacio,Player _Player)
     {
         List<DigiCarta> DatosDigi = DataManager.instance.TodasLasCartas;
         int contador = 1;
+        List<CartaDigimon> MazoPlayer = new List<CartaDigimon>();
         foreach (var carta in Deck)
         {
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
             DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
+           
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
+            MazoPlayer.Add(DigiCarta.GetComponent<CartaDigimon>());
             contador++;
         }
+        _Player.Deck.cartas = MazoPlayer;
     }
     public void cargarManos(Transform Mano, Player jugador, Transform Deck)
     {
-        Barajear(Deck);
         for (int i = 1; i < 7; i++)
         {
     
-            GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count-i).gameObject;
+            GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count-i-1).gameObject;
             if(jugador==Player1)
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(),true);
             else

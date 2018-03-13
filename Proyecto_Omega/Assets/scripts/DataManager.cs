@@ -7,13 +7,13 @@ public class DataManager : MonoBehaviour {
 
     public static DataManager instance;
     public TextAsset jsonData;
-    public Sprite[] Cartas;
 
     public Cartas ColeccionDeCartas;
     public List<DigiCarta> TodasLasCartas;
 
 
     public Texture[] arrayImage;
+    public Sprite[] arraySprites;
 
     private void Awake()
     {
@@ -42,7 +42,8 @@ public class DataManager : MonoBehaviour {
             TodasLasCartas.Add(item);
         }
         arrayImage = Resources.LoadAll<Texture>("Digimon");
-    
+     //   arraySprites = Resources.LoadAll<Sprite>("Digimon");
+
     }
     public Texture GetTextureDigimon(int IDigimon)
     {
@@ -52,5 +53,21 @@ public class DataManager : MonoBehaviour {
                 return item;
         }
         return null;
+    }
+    public Sprite GetSprite(int id)
+    {
+       Sprite arraySprite = Resources.Load<Sprite>("Digimon/"+id.ToString());
+
+        return arraySprite;
+
+      /*  foreach (Sprite item in arraySprites)
+        {
+            if (item.name == id.ToString())
+            {
+                return item;
+            }
+        }
+        return null;
+        */
     }
 }

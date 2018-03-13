@@ -48,8 +48,9 @@ public class CartaDigimon : Carta {
     }
     public void Mostrar()
     {
-        transform.localRotation= Quaternion.Euler(90,0,0);
+      // transform.localRotation= Quaternion.Euler(90,0,0);
       //  Front.GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
+
         Front.GetComponent<Renderer>().material.mainTexture=DataManager.instance.GetTextureDigimon(DatosDigimon.id);
     }
     public void AjustarSlot()
