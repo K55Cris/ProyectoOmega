@@ -96,6 +96,13 @@ public class StaticRules : MonoBehaviour
         PartidaManager.Barajear(Deck1);
         // barajear mazo player 2
         PartidaManager.Barajear(Deck2);
+
+        //Colocar primera carta del mazo boca abajo en la Point Gauge PLAYER1
+        Transform FirstCarta= MesaManager.instance.Campo1.NetOcean.GetChild(0);
+        FirstCarta.transform.parent = MesaManager.instance.Campo1.PointGauge;
+        FirstCarta.GetComponent<CartaDigimon>().AjustarSlot();
+        // Sacamos del juego la carta del PointGauge
+        PartidaManager.instance.Player1.Deck.cartas.Remove(FirstCarta.GetComponent<CartaDigimon>());
         //cargar Manos player1
         PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, Deck1);
         //cargar Manos player 2
@@ -261,10 +268,7 @@ public class StaticRules : MonoBehaviour
     private static void StartGameSetup()
     {
         //A ejecutar por ambos jugadores:
-		SelectDigimonChild();
-        //Colocar primera carta del mazo boca abajo en la Point Gauge
-        //Robar 6 cartas del Net Ocean y ponerlas en la mano del jugador
-        SeleccionPrimerJugador();
+        SelectDigimonChild();
     }
 
 	/// <summary>
