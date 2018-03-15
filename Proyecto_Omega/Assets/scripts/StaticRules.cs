@@ -10,6 +10,7 @@ public class StaticRules : MonoBehaviour
     public static StaticRules instance = null;
     // Use this for initialization
     public int Turno = 0;
+    public Player PlayerFirstAtack;
     public int PointGaugePlayer1 = 100;
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
@@ -22,8 +23,6 @@ public class StaticRules : MonoBehaviour
     public void Start()
     {
         NowPhase = 0;
-        WhoFirstPlayer();
-		
 		//Referenciar los puntos de vida con cada jugador o
         //Codificar clase jugador con sus atributos publicos
         PointGaugePlayer1 = 100;
@@ -103,13 +102,31 @@ public class StaticRules : MonoBehaviour
         FirstCarta.GetComponent<CartaDigimon>().AjustarSlot();
         // Sacamos del juego la carta del PointGauge
         PartidaManager.instance.Player1.Deck.cartas.Remove(FirstCarta.GetComponent<CartaDigimon>());
-        //cargar Manos player1
-        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, Deck1);
-        //cargar Manos player 2
-        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, Deck2);
+
+        //Colocar primera carta del mazo boca abajo en la Point Gauge PLAYER2
+        Transform FirstCarta2 = MesaManager.instance.Campo2.NetOcean.GetChild(0);
+        // Sacamos del juego la carta del PointGauge PLAYER2
+        PartidaManager.instance.Player2.Deck.cartas.Remove(FirstCarta2.GetComponent<CartaDigimon>());
+        Destroy(FirstCarta2.gameObject);
+
+
+        ///Acomodamos el Deck por Bug que mueve las cartas >> Revisar que pasa en la fase de seledDigimonChild
+        foreach (Transform item in MesaManager.instance.Campo1.NetOcean)
+        {
+            item.GetComponent<CartaDigimon>().AjustarSlot();
+        }
+
+        foreach (Transform item in MesaManager.instance.Campo2.NetOcean)
+        {
+            item.GetComponent<CartaDigimon>().AjustarSlot();
+        }
+    
+
+        // Elegir Primer Jugador
+        WhoIsPlayer1.instance.Activar(PartidaManager.instance.Player1, PartidaManager.instance.Player2, StaticRules.instance.WhoFirstPlayer);
     }
 
-
+   
 
     public static List<CartaDigimon> GetDigimonChildInDeck(Mazo netocean)
     {
@@ -129,10 +146,16 @@ public class StaticRules : MonoBehaviour
     /// Fija el jugador activo al inicio de la partida.
     /// Metodo redundante, comprobar SeleccionPrimerJugador()
     /// </summary>
-    public void WhoFirstPlayer()
+    public void WhoFirstPlayer(Player jugador)
     {
         StaticRules loRule = FailSafeInstance();
-        // juego al azar para saber quien va primero
+        Debug.Log(jugador.name);
+        loRule.PlayerFirstAtack = jugador;
+
+        //cargar Manos player1
+        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, PartidaManager.instance.DeckPlayer1);
+        //cargar Manos player 2
+        PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, PartidaManager.instance.DeckPlayer2);
     }
 
     /// <summary>

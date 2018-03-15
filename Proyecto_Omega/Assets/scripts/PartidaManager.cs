@@ -44,19 +44,26 @@ public class PartidaManager : MonoBehaviour {
     }
     public void cargarManos(Transform Mano, Player jugador, Transform Deck)
     {
+        StartCoroutine(CrearYColocar(Mano,jugador,Deck));
+    }
+
+    IEnumerator CrearYColocar(Transform Mano, Player jugador, Transform Deck)
+    {
+       
         for (int i = 1; i < 7; i++)
         {
-    
-            GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count-i-1).gameObject;
-            if(jugador==Player1)
-            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(),true);
+            yield return new WaitForSecondsRealtime(0.3f);
+
+            GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count - i - 1).gameObject;
+            if (jugador == Player1)
+                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
             else
-            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
+                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
 
             Carta.transform.parent = Mano;
             Carta.transform.localPosition = Vector3.zero;
             Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            Carta.transform.localScale = new Vector3(26, 45, 0.015f);
+            Carta.transform.localScale = new Vector3(25, 40, 0.015f);
         }
     }
 

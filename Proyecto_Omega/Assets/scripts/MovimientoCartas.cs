@@ -26,7 +26,7 @@ public class MovimientoCartas : MonoBehaviour {
 
         Vector3 temp = Input.mousePosition;
         temp.z = this.distancia; 
-        transform.parent.position = Maincam.ScreenToWorldPoint(temp);
+        transform.parent.position = Maincam.ScreenToWorldPoint(new Vector3(temp.x, temp.y,90));
 
     }
     private void OnMouseUp()
