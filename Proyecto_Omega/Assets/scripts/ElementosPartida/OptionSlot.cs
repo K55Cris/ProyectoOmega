@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class OptionSlot : Slot
 {
-    public void ActivarCarta()
+    void OnMouseDown()
     {
-
+        Debug.Log("Optioon");
     }
 }
