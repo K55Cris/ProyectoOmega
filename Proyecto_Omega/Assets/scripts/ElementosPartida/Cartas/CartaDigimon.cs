@@ -33,10 +33,18 @@ public class CartaDigimon : Carta {
     }
     public void Mostrar()
     {
-      // transform.localRotation= Quaternion.Euler(90,0,0);
+      // 
       //  Front.GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
 
         Front.GetComponent<Renderer>().material.mainTexture=DataManager.instance.GetTextureDigimon(DatosDigimon.id);
+    }
+    void OnMouseDown()
+    {
+        Debug.Log("cARTA");
+    }
+    public void Volteo()
+    {
+        transform.localRotation = Quaternion.Euler(180, 0, 0);
     }
     public void AjustarSlot()
     {
@@ -44,4 +52,5 @@ public class CartaDigimon : Carta {
         transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         transform.localScale = new Vector3(1, 1, 0.015f);
     }
+   
 }

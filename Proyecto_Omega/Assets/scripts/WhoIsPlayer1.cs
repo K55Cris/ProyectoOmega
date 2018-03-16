@@ -73,18 +73,18 @@ public class WhoIsPlayer1 : MonoBehaviour {
    public void CerrarPanel()
     {
         Moneda.SetActive(false);
-        StartCoroutine(ReduceAlpha());
+        StartCoroutine(ReduceAlpha(_CGroup));
     }
     
-    IEnumerator ReduceAlpha()
+   public static IEnumerator ReduceAlpha(CanvasGroup cv)
     {
-        while (_CGroup.alpha > 0)
+        while (cv.alpha > 0)
         {
             yield return new WaitForSeconds(0.1f);
-            _CGroup.alpha -= 0.1f;
+            cv.alpha -= 0.1f;
         }
-        _CGroup.blocksRaycasts = false;
-        _CGroup.interactable = false;
+        cv.blocksRaycasts = false;
+        cv.interactable = false;
     }
 	
 }

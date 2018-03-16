@@ -46,5 +46,9 @@ public class MovimientoCartas : MonoBehaviour {
             particle.SetActive(false);
         }
     }
+    public void OnMouseOver()
+    {
+        VentanaMoreInfo.instance.Show(transform.parent.GetComponent<CartaDigimon>().DatosDigimon);
+    }
 
 }

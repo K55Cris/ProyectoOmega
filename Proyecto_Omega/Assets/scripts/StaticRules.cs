@@ -65,6 +65,7 @@ public class StaticRules : MonoBehaviour
                 ID.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
                 ID.AjustarSlot();
                 ID.Mostrar();
+                ID.Volteo();
                 // player 2 selecciona digimon child
                 SelectedDigimons.instance.Activar(SetDigimonChildPlayer2, GetDigimonChildInDeck(PartidaManager.instance.Player2.Deck));
                 break;
@@ -81,6 +82,7 @@ public class StaticRules : MonoBehaviour
                 ID.transform.parent = MesaManager.instance.Campo2.DigimonSlot;
                 ID.AjustarSlot();
                 ID.Mostrar();
+                ID.Volteo();
                 SelectDigimonChildPart2();
                 break;
             }
@@ -156,6 +158,8 @@ public class StaticRules : MonoBehaviour
         PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, PartidaManager.instance.DeckPlayer1);
         //cargar Manos player 2
         PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, PartidaManager.instance.DeckPlayer2);
+        
+        SiguienteFase();
     }
 
     /// <summary>
@@ -299,6 +303,9 @@ public class StaticRules : MonoBehaviour
     /// </summary>
     private static void StartPreparationPhase()
     {
+        StaticRules loRule = FailSafeInstance();
+
+        Debug.Log("PreparetionFace" + loRule.PlayerFirstAtack.Nombre);
         //El jugador atacante realiza su Preparation Phase en primer lugar
 
 
