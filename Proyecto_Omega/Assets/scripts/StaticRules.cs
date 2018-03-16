@@ -298,10 +298,86 @@ public class StaticRules : MonoBehaviour
         SelectDigimonChild();
     }
 
-	/// <summary>
-    /// Inicial la Preparation phase
-    /// </summary>
-    private static void StartPreparationPhase()
+    public static bool CheckEvolutionList(CartaDigimon evolucion)
+    {
+        string nombreRookie = MesaManager.instance.Campo1.DigimonSlot.GetChild(0).GetComponent<DigiCarta>().Nombre;
+        foreach (string requerimiento in evolucion.GetComponent<DigiCarta>().ListaRequerimientos)
+        {
+            switch (requerimiento.Split(' ')[1])
+            {
+                //Jogress
+                case "+":
+                    if (nombreRookie.Equals(requerimiento.Split(' ')[0]))
+                    {
+                        if (MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(0).GetComponent<DigiCarta>().Nombre.Equals(requerimiento.Split(' ')[2]))
+                        {
+                            return true;
+                        }
+                    }
+                    else if(nombreRookie.Equals(requerimiento.Split(' ')[2]))
+                    {
+                        if (MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(0).GetComponent<DigiCarta>().Nombre.Equals(requerimiento.Split(' ')[0]))
+                        {
+                            return true;
+                        }
+                    }
+                    break;
+                //Chip
+                case "%":
+                    if (nombreRookie.Equals(requerimiento.Split(' ')[0]))
+                    {
+                        if (requerimiento.Split(' ')[2].Equals("40"))
+                        {
+                            if (MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<DigiCarta>().id.Equals(59))
+                            {
+                                return true;
+                            }
+                            else if (MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<DigiCarta>().id.Equals(59))
+                            {
+                                return true;
+                            }
+                            else if (MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<DigiCarta>().id.Equals(59))
+                            {
+                                return true;
+                            }
+                        }
+                        else if (requerimiento.Split(' ')[2].Equals("60"))
+                        {
+                            if (MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<DigiCarta>().id.Equals(60))
+                            {
+                                return true;
+                            }
+                            else if (MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<DigiCarta>().id.Equals(60))
+                            {
+                                return true;
+                            }
+                            else if (MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<DigiCarta>().id.Equals(60))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    break;
+                //Normal
+                default:
+                    int x = 0;
+                    foreach (char item in requerimiento.Split(' ')[1])
+                    {
+                        x++;
+                    }
+                    if (MesaManager.instance.Campo1.EvolutionRequerimentBox.childCount.Equals(x))
+                    {
+                        return true;
+                    }
+                    break;
+            }
+        }
+        return false;
+    }
+        /// <summary>
+        /// Inicial la Preparation phase
+        /// </summary>
+        private static void StartPreparationPhase()
     {
         StaticRules loRule = FailSafeInstance();
 

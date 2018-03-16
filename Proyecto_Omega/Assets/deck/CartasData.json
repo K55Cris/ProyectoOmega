@@ -493,7 +493,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "NANIMON 40%" ]
+      "ListaRequerimientos": [ "NANIMON % 40" ]
     },
     {
       "id": 22,
@@ -657,7 +657,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 20,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "KABUTERIMON 40%","TORTAMON 40%","BIRDRAMON 40%" ]
+      "ListaRequerimientos": [ "KABUTERIMON % 40","TORTAMON % 40","BIRDRAMON % 40" ]
     },
     {
       "id": 29,
@@ -680,7 +680,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "STARMON 40%", "MONOCHROMON 40%", "GREYMON 40%" ]
+      "ListaRequerimientos": [ "STARMON % 40", "MONOCHROMON % 40", "GREYMON % 40" ]
     },
     {
       "id": 30,
@@ -728,7 +728,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "KUWAGAMON 40%", "GEKOMON 40%" ]
+      "ListaRequerimientos": [ "KUWAGAMON % 40", "GEKOMON % 40" ]
     },
     {
       "id": 32,
@@ -751,7 +751,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "KABUTERIMON 40%", "ANGEMON 40%", "BIRDRAMON 40%", "GREYMON 40%" ]
+      "ListaRequerimientos": [ "KABUTERIMON % 40", "ANGEMON % 40", "BIRDRAMON % 40", "GREYMON % 40" ]
     },
     {
       "id": 33,
@@ -775,7 +775,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 20,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "ATLURKABUTERIMON 60%", "OKUWAMON 60%" ]
+      "ListaRequerimientos": [ "ATLURKABUTERIMON % 60", "OKUWAMON % 60" ]
     },
     {
       "id": 34,
@@ -895,7 +895,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "IKKAKUMON 40%", "RUKAMON 40%", "GOLEMON 40%" ]
+      "ListaRequerimientos": [ "IKKAKUMON % 40", "RUKAMON % 40", "GOLEMON % 40" ]
     },
     {
       "id": 39,
@@ -919,7 +919,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "GESOMON 40%", "OCTMON 40%" ]
+      "ListaRequerimientos": [ "GESOMON % 40", "OCTMON % 40" ]
     },
     {
       "id": 40,
@@ -943,7 +943,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 20,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "MARINDEVIMON, PERFECT" , "DAGOMON, PERFECT"]
+      "ListaRequerimientos": [ "MARINDEVIMON + PERFECT" , "DAGOMON + PERFECT"]
     },
     {
       "id": 41,
@@ -1083,7 +1083,7 @@
       "PerdidaVidaIV": 20,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "HANUMON 60%", "GARURUMON 60%" ]
+      "ListaRequerimientos": [ "HANUMON % 60", "GARURUMON % 60" ]
     },
     {
       "id": 47,
@@ -1129,7 +1129,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "MERAMON 40%", "WIZARMON 40%", "ANGEMON 40%" ]
+      "ListaRequerimientos": [ "MERAMON % 40", "WIZARMON % 40", "ANGEMON % 40" ]
     }
   ],
   "CartaOption": [

@@ -4671,7 +4671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43650f88191077945836429f3e7dd9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonData: {fileID: 4900000, guid: 0fa49527a975cab42ac5457292c61dc7, type: 3}
+  jsonData: {fileID: 4900000, guid: 498b99878f179814da63402e507e0e48, type: 3}
   ColeccionDeCartas:
     DigiCartas: []
     CartaOption: []
