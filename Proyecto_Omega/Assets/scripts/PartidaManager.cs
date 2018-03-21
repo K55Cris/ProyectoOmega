@@ -67,6 +67,21 @@ public class PartidaManager : MonoBehaviour {
         }
     }
 
+    public void TomarCarta(Transform Mano, Player jugador, Transform Deck)
+    {
+        GameObject Carta = Deck.transform.GetChild(0).gameObject;
+        if (jugador == Player1)
+            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
+        else
+            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
+
+        Carta.transform.parent = Mano;
+        Carta.transform.localPosition = Vector3.zero;
+        Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        Carta.transform.localScale = new Vector3(25, 40, 0.015f);
+    }
+
+
 
     public static void Barajear(Transform Deck)
     {
@@ -80,6 +95,10 @@ public class PartidaManager : MonoBehaviour {
             k++;
         }
 
+    }
+    public void BotonListo()
+    {
+        StaticRules.SiguienteFase();
     }
 
 

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DigiCartas;
 public class DigimonBoxSlot : MonoBehaviour {
-
-
+    public bool Cambiado = false;
+    
     public void NowPhase()
     {
         switch (StaticRules.NowPhase)
         {
-            case StaticRules.Phases.GameSetup:
-                OptionGameSetup();
-                break;
             case StaticRules.Phases.PreparationPhase:
                 PreparationPhase();
                 break;
@@ -33,9 +30,9 @@ public class DigimonBoxSlot : MonoBehaviour {
 
         }
     }
-    public void OptionGameSetup()
+    void OnMouseDown()
     {
-
+        Debug.Log("Digimon Slot");
     }
     public void PreparationPhase()
     {
@@ -57,5 +54,39 @@ public class DigimonBoxSlot : MonoBehaviour {
     {
 
     }
+    public void SetDigimon(Transform Carta)
+    {
+        // Verificamos si hay Otro Digimon en el slot
+        if (transform.childCount > 0)
+        {
+            
+            Transform Child = transform.GetChild(transform.childCount-1);
+            if (Child.GetComponent<CartaDigimon>().DatosDigimon.Nivel== "III")
+            {
+                if (!Cambiado)
+                { 
+                    Carta.transform.parent = transform;
+                    Carta.GetComponent<CartaDigimon>().AjustarSlot();
+                    StartCoroutine(AutoAjustar(Carta));
+                    StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Child);
+                    Cambiado = true;
+                }
+            }
+        }
+        else
+        {
+            Carta.transform.parent = transform;
+            Carta.GetComponent<CartaDigimon>().AjustarSlot();
+            StartCoroutine(AutoAjustar(Carta));
+        }
+     
 
+    }
+      
+
+public IEnumerator AutoAjustar(Transform Carta)
+{
+    yield return new WaitForEndOfFrame();
+    Carta.localPosition = new Vector3(0, 0, -100 - transform.childCount);
+}
 }

@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class OptionSlot : Slot
 {
-    void OnMouseDown()
+    public bool AddOrRemove = false;
+    private bool Vacio=true;
+
+    public void SetCard(Transform Carta)
     {
-        Debug.Log("Optioon");
+    
+        if (Vacio)
+        {
+            Carta.transform.parent = transform;
+            Carta.GetComponent<CartaDigimon>().AjustarSlot();
+            Vacio = false;
+        }
     }
 }

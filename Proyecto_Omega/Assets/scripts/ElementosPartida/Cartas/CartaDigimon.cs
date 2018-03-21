@@ -9,7 +9,7 @@ public class CartaDigimon : Carta {
 
     //Datos de la Carta
     public DigiCarta DatosDigimon;
-
+    public bool AddOrRemove;
     public GameObject Front;
     //Las habilidades de support del Digimon. Son las habilidades marcadas con un ■.
     private string abilitieSupport;
@@ -42,10 +42,8 @@ public class CartaDigimon : Carta {
             abilitieSupport = value;
         }
     }
-    public void Hola(string lol)
-    {
-        Debug.Log("Holi" + lol);
-    }
+
+   
     public void Mostrar()
     {
       // 
@@ -55,7 +53,13 @@ public class CartaDigimon : Carta {
     }
     void OnMouseDown()
     {
-        Debug.Log("cARTA");
+        if (StaticRules.NowPhase == StaticRules.Phases.DiscardPhase && transform.parent.name.Contains("Option Slot"))
+        {
+            AddOrRemove = !AddOrRemove;
+            StaticRules.instance.AddListDiscard(gameObject, AddOrRemove);
+            Front.GetComponent<MovimientoCartas>().CanvasSeleted.SetActive(AddOrRemove);
+                
+        }
     }
     public void Volteo()
     {
@@ -63,7 +67,7 @@ public class CartaDigimon : Carta {
     }
     public void AjustarSlot()
     {
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         transform.localScale = new Vector3(1, 1, 0.015f);
     }

@@ -11,14 +11,15 @@ public class StaticRules : MonoBehaviour
     // Use this for initialization
     public int Turno = 0;
     public Player PlayerFirstAtack;
+    public Player WhosPlayer;
     public int PointGaugePlayer1 = 100;
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
 	public static bool FaseFinalizada;
- 
+    public List<GameObject> CartasDescartadas = new List<GameObject>();
 
-    public enum Phases { GameSetup = 0, PreparationPhase = 1, EvolutionPhase = 2, EvolutionRequirements = 3, FusionRequirements = 4,
-                           AppearanceRequirements = 5, BattlePhase = 6, PointCalculationPhase = 7, EndPhase = 8, };
+    public enum Phases { GameSetup = 0,DiscardPhase=1, PreparationPhase = 2, EvolutionPhase = 3, EvolutionRequirements = 4, FusionRequirements = 5,
+                           AppearanceRequirements = 6, BattlePhase = 7, PointCalculationPhase = 8, EndPhase = 9, };
 
     public void Start()
     {
@@ -28,7 +29,7 @@ public class StaticRules : MonoBehaviour
         PointGaugePlayer1 = 100;
         PointGaugePlayer2 = 100;
         FaseFinalizada = false;
-
+        WhosPlayer = PartidaManager.instance.Player1;
 
     }
 
@@ -62,10 +63,9 @@ public class StaticRules : MonoBehaviour
             CartaDigimon ID = item.GetComponent<CartaDigimon>();
             if (IDCarta == ID.cardNumber.ToString())
             {
-                ID.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().SetDigimon(item);
                 ID.AjustarSlot();
                 ID.Mostrar();
-                ID.Volteo();
                 // player 2 selecciona digimon child
                 SelectedDigimons.instance.Activar(SetDigimonChildPlayer2, GetDigimonChildInDeck(PartidaManager.instance.Player2.Deck));
                 break;
@@ -79,10 +79,9 @@ public class StaticRules : MonoBehaviour
             CartaDigimon ID = item.GetComponent<CartaDigimon>();
             if (IDCarta == ID.cardNumber.ToString())
             {
-                ID.transform.parent = MesaManager.instance.Campo2.DigimonSlot;
+                MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().SetDigimon(item);
                 ID.AjustarSlot();
                 ID.Mostrar();
-                ID.Volteo();
                 SelectDigimonChildPart2();
                 break;
             }
@@ -116,6 +115,7 @@ public class StaticRules : MonoBehaviour
         foreach (Transform item in MesaManager.instance.Campo1.NetOcean)
         {
             item.GetComponent<CartaDigimon>().AjustarSlot();
+         
         }
 
         foreach (Transform item in MesaManager.instance.Campo2.NetOcean)
@@ -238,22 +238,67 @@ public class StaticRules : MonoBehaviour
             WaithPlayer = true;
         }
     }
-    
 
-    public static void SaltoFase(Phases phase)
+    public static void CheckSetDigiCardSlot(Transform Slot,Transform _Digicarta)
+    {
+        if (Slot != null)
+        {
+            StaticRules loRule = FailSafeInstance();
+            if (loRule.WhosPlayer == PartidaManager.instance.Player1)
+            {
+                DigiCarta _Carta = _Digicarta.GetComponent<CartaDigimon>().DatosDigimon;
+                switch (Slot.name)
+                {
+              
+                    case "DigimonSlot":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase || StaticRules.NowPhase == StaticRules.Phases.GameSetup)
+                        {
+                            if (_Carta.Nivel== "III")
+                            {
+                                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().SetDigimon(_Digicarta.transform);
+                            }
+                        }
+                        break;
+                    case "Option Slot 1":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase || StaticRules.NowPhase == StaticRules.Phases.GameSetup)
+                        {
+                            if(isDigimonOrChip(_Carta))
+                            MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
+                        }
+                        break;
+                    case "DarkArea":
+                        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(_Digicarta.transform);
+                        break;
+                }
+            }
+        }
+    }
+public static void SaltoFase(Phases phase)
     {
         NowPhase = phase;
+    }
+
+    public static bool isDigimonOrChip(DigiCarta carta)
+    {
+        if (carta.Capasidad > 0)
+            return true;
+        return false;
     }
 	/// <summary>
     /// Aumenta en 1 el indice de la fase actual y ejecuta la siguiente.
     /// </summary>
-    private static void SiguienteFase()
+    public static void SiguienteFase()
     {
         NowPhase++; // 
         switch (NowPhase)
         {
             case Phases.GameSetup:
                 StartGameSetup();
+                break;
+            case Phases.DiscardPhase:
+                StartDiscardPhase();
                 break;
             case Phases.PreparationPhase:
                 StartPreparationPhase();
@@ -297,17 +342,46 @@ public class StaticRules : MonoBehaviour
         //A ejecutar por ambos jugadores:
         SelectDigimonChild();
     }
-
-	/// <summary>
-    /// Inicial la Preparation phase
-    /// </summary>
-    private static void StartPreparationPhase()
+    private static void StartDiscardPhase()
     {
         StaticRules loRule = FailSafeInstance();
+        Debug.Log("DiscardFace" + loRule.PlayerFirstAtack.Nombre);
+    }
+    public void AddListDiscard(GameObject Carta, bool addOrRemove)
+    {
+        StaticRules loRule = FailSafeInstance();
+        if (addOrRemove)
+        {
+            loRule.CartasDescartadas.Add(Carta);
+        }
+        else
+        {
+            loRule.CartasDescartadas.Remove(Carta);
+        }
+    }
+    /// <summary>
+    /// Inicial la Preparation phase
+    /// </summary>
+    private static void StartPreparationPhase(){
+        StaticRules loRule = FailSafeInstance();
+        Debug.Log("preparationPhase" + loRule.PlayerFirstAtack.Nombre);
 
-        Debug.Log("PreparetionFace" + loRule.PlayerFirstAtack.Nombre);
+        foreach (var item in loRule.CartasDescartadas)
+        {
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(item.transform);
+            item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().CanvasSeleted.SetActive(false);
+        }
+
+        //agregamos a la mano las cartas descartadas
+        for (int i = PartidaManager.instance.ManoPlayer1.childCount; i < 6; i++)
+        {
+            PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, PartidaManager.instance.DeckPlayer1);
+        }
+
+        //Vaciamos lista de Cartas 
+        loRule.CartasDescartadas = new List<GameObject>();
+
         //El jugador atacante realiza su Preparation Phase en primer lugar
-
 
         //(OPCIONAL)Descartar tantas cartas de la mano como se desee colocandolas boca abajo en el Dark Area. 
 
@@ -332,11 +406,7 @@ public class StaticRules : MonoBehaviour
 
         //(OPCIONAL)Coloca option Cards boca abajo de tu mano a tus Option Slots. (No puedes descartar ninguna Option Cards en esta accion).
 
-
-        
         //Antes de terminar la fase debe ejecutarla el jugador defensor
-
-
 
         //Una vez ambos jugadores terminen sus Preparation Phase.
         //Voltear Digimon Nivel III boca arriba en sus respectivas Digimon Box.
@@ -387,6 +457,7 @@ public class StaticRules : MonoBehaviour
         Un ciclo de evolución típica usa los niveles: Level III (Child) → Level IV
         (Adult) → Perfect → Ultimate.
 
+        
         Level III → Level IV usualmente requiere “O” o “X” en su evolución.
 
         Las evoluciones Perfect y Ultimate usualmente requieren el uso de
