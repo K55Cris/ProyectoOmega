@@ -60,6 +60,7 @@ namespace DigiCartas
         public List<string> ListaActivacion;
         public List<string> ListaCatrgoria;
         public List<string> ListaCosto;
+        //Son los requisitos que deben cumplirse antes de poder evolucionar al digimon //Indica los requisitos que deben cumplirse para activar la carta.
         public List<string> ListaRequerimientos;
         public List<string> ListaEfectos;
         public string Limite;
@@ -80,6 +81,6 @@ namespace DigiCartas
     [Serializable]
     public class Campos
     {
-        public Transform OptionSlot1, OptionSlot2, OptionSlot3, DigimonSlot, NetOcean, DarkArea, EvolutionBox, SupportBox,Campo, PointGauge;
+        public Transform OptionSlot1, OptionSlot2, OptionSlot3, DigimonSlot, NetOcean, DarkArea, EvolutionBox, SupportBox, Campo, PointGauge, EvolutionRequerimentBox;
     }
 }

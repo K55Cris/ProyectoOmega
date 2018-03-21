@@ -342,6 +342,7 @@ public static void SaltoFase(Phases phase)
         //A ejecutar por ambos jugadores:
         SelectDigimonChild();
     }
+
     private static void StartDiscardPhase()
     {
         StaticRules loRule = FailSafeInstance();
@@ -362,7 +363,226 @@ public static void SaltoFase(Phases phase)
     /// <summary>
     /// Inicial la Preparation phase
     /// </summary>
-    private static void StartPreparationPhase(){
+    private static void StartPreparationPhase() {
+    }
+
+    public static bool CheckEvolutionList(CartaDigimon evolucion)
+    {
+        string nombreDigimon;
+        bool noRookie = false;
+        try
+        {
+            nombreDigimon = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper();
+            noRookie = true;
+        }
+        catch (UnityException)
+        {
+            nombreDigimon = MesaManager.instance.Campo1.DigimonSlot.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper();
+        }
+        foreach (string requerimiento in evolucion.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
+        {
+            switch (requerimiento.Split(' ')[1])
+            {
+                //Jogress
+                case "+":
+                    if (nombreDigimon.Equals(requerimiento.Split(' ')[0]))
+                    {
+                        for (int i = 0; i < MesaManager.instance.Campo1.EvolutionRequerimentBox.childCount; i++)
+                        {
+                            if (MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(i).GetComponent<CartaDigimon>().DatosDigimon.Nombre.Equals(requerimiento.Split(' ')[2]))
+                            {
+                                if (noRookie)
+                                {
+                                    Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                    cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                }
+                                Transform carta = MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(i).GetComponent<Transform>();
+                                carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                return true;
+                            }
+                        }
+                    }
+                    else if(nombreDigimon.Equals(requerimiento.Split(' ')[2]))
+                    {
+                        for (int i = 0; i < MesaManager.instance.Campo1.EvolutionRequerimentBox.childCount; i++)
+                        {
+                            if (MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(i).GetComponent<CartaDigimon>().DatosDigimon.Nombre.Equals(requerimiento.Split(' ')[0]))
+                            {
+                                if (noRookie)
+                                {
+                                    Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                    cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                }
+                                Transform carta = MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(i).GetComponent<Transform>();
+                                carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                return true;
+                            }
+                        }
+                    }
+                    break;
+                //Chip
+                case "%":
+                    if (nombreDigimon.Equals(requerimiento.Split(' ')[0]))
+                    {
+                        if (requerimiento.Split(' ')[2].Equals("40"))
+                        {
+                            if (!MesaManager.instance.Campo1.OptionSlot1.childCount.Equals(0))
+                            {
+                                if (MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(59))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                            if (!MesaManager.instance.Campo1.OptionSlot2.childCount.Equals(0))
+                            {
+                                if (MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(59))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                            if (!MesaManager.instance.Campo1.OptionSlot3.childCount.Equals(0)) {
+                                if (MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(59))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                        }
+                        else if (requerimiento.Split(' ')[2].Equals("60"))
+                        {
+                            if (!MesaManager.instance.Campo1.OptionSlot1.childCount.Equals(0))
+                            {
+                                if (MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(60))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot1.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                            if (!MesaManager.instance.Campo1.OptionSlot2.childCount.Equals(0))
+                            {
+                                if (MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(60))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot2.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                            if (!MesaManager.instance.Campo1.OptionSlot3.childCount.Equals(0))
+                            {
+                                if (MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<CartaDigimon>().DatosDigimon.id.Equals(60))
+                                {
+                                    if (noRookie)
+                                    {
+                                        Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                                        cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                        cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    }
+                                    Transform carta = MesaManager.instance.Campo1.OptionSlot3.GetChild(0).GetComponent<Transform>();
+                                    carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                                    carta.GetComponent<CartaDigimon>().AjustarSlot();
+                                    evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                                    evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                //Normal
+                default:
+                    int x = 0;
+                    foreach (char item in requerimiento.Split(' ')[1])
+                    {
+                        x++;
+                    }
+                    if (MesaManager.instance.Campo1.EvolutionRequerimentBox.childCount.Equals(x))
+                    {
+                        if (noRookie)
+                        {
+                            Transform cartaEvolucion = MesaManager.instance.Campo1.DigimonSlot.GetChild(1).GetComponent<Transform>();
+                            cartaEvolucion.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                            cartaEvolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                        }
+                        for (int i = x-1; i >= 0; i--)
+                        {
+                            Transform carta = MesaManager.instance.Campo1.EvolutionRequerimentBox.GetChild(i).GetComponent<Transform>();
+                            carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                            carta.GetComponent<CartaDigimon>().AjustarSlot();
+                        }
+                        evolucion.transform.parent = MesaManager.instance.Campo1.DigimonSlot;
+                        evolucion.GetComponent<CartaDigimon>().AjustarSlot();
+                        return true;
+                    }
+                    break;
+            }
+        }
+        return false;
+    }
+        /// <summary>
+        /// Inicial la Preparation phase
+        /// </summary>
+    private static void StartPreparationPhase()
+    {
+
         StaticRules loRule = FailSafeInstance();
         Debug.Log("preparationPhase" + loRule.PlayerFirstAtack.Nombre);
 
@@ -401,7 +621,8 @@ public static void SaltoFase(Phases phase)
         //Sin mirar, se colocan boca abajo en la Evolution Requirement Box, verticalmente para denotar “O” u horizontalmente para denotar “X”.
         //En caso de una Jogress:
         //Uno de los Digimon que se requieran debe encontrarse en el actual Digimon Box, y el otro, vinculado a él por un “+” en los requisitos de evolución del Digimon, debe ser colocado en el Evolution Requirement Box.
-
+        
+        
         //(OPCIONAL)Activar cualquier Habilidad u Option Cards que requieran ser activadas en la Preparation Phase
 
         //(OPCIONAL)Coloca option Cards boca abajo de tu mano a tus Option Slots. (No puedes descartar ninguna Option Cards en esta accion).
@@ -411,8 +632,8 @@ public static void SaltoFase(Phases phase)
         //Una vez ambos jugadores terminen sus Preparation Phase.
         //Voltear Digimon Nivel III boca arriba en sus respectivas Digimon Box.
     }
-    
-	/// <summary>
+
+    /// <summary>
     /// Inicial la Evolution phase
     /// </summary>
     private static void StartEvolutionPhase()
@@ -449,6 +670,30 @@ public static void SaltoFase(Phases phase)
         todas las cartas que se encuentran en la Evolution Box y la Evolution
         Requirement Box que no fueron utilizadas, serán enviadas al Dark Area.
          */
+        int X = MesaManager.instance.Campo1.EvolutionBox.childCount, j = 0;
+        for (int i = 0; i < X; i++)
+        {
+            if (CheckEvolutionList(MesaManager.instance.Campo1.EvolutionBox.GetChild(j).GetComponent<CartaDigimon>()))
+            {
+                j = 0;
+                i = 0;
+                X--;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        X = MesaManager.instance.Campo1.EvolutionBox.childCount;
+        if (MesaManager.instance.Campo1.EvolutionBox.childCount > 0)
+        {
+            for (int i = 0; i < X; i++)
+            {
+                Transform carta = MesaManager.instance.Campo1.EvolutionBox.GetChild(0).GetComponent<Transform>();
+                carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                carta.GetComponent<CartaDigimon>().AjustarSlot();
+            }
+        }
     }
 
     private static void CheckEvolutionRequirements()
@@ -487,7 +732,7 @@ public static void SaltoFase(Phases phase)
         “ignora los Evolution Requirements”
          */
     }
-
+    
     private static void CheckFusionRequirements()
     {
         /*
