@@ -360,11 +360,6 @@ public static void SaltoFase(Phases phase)
             loRule.CartasDescartadas.Remove(Carta);
         }
     }
-    /// <summary>
-    /// Inicial la Preparation phase
-    /// </summary>
-    private static void StartPreparationPhase() {
-    }
 
     public static bool CheckEvolutionList(CartaDigimon evolucion)
     {
