@@ -268,6 +268,30 @@ public class StaticRules : MonoBehaviour
                             MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
                         }
                         break;
+                    case "Option Slot 2":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase || StaticRules.NowPhase == StaticRules.Phases.GameSetup)
+                        {
+                            if (isDigimonOrChip(_Carta))
+                                MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot2).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
+                        }
+                        break;
+                    case "Option Slot 3":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase || StaticRules.NowPhase == StaticRules.Phases.GameSetup)
+                        {
+                            if (isDigimonOrChip(_Carta))
+                                MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot3).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
+                        }
+                        break;
+                    case "EvolutionBox":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase)
+                        {
+                            if (!isDigimonOrChip(_Carta))
+                                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
+                        }
+                        break;
                     case "DarkArea":
                         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(_Digicarta.transform);
                         break;

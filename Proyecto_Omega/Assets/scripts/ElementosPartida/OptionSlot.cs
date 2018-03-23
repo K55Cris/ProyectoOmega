@@ -17,4 +17,8 @@ public class OptionSlot : Slot
             Vacio = false;
         }
     }
+    private void OnMouseDown()
+    {
+        Debug.Log(gameObject.name);
+    }
 }

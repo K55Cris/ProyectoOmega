@@ -318,7 +318,6 @@ GameObject:
   - component: {fileID: 48038255}
   - component: {fileID: 48038254}
   - component: {fileID: 48038253}
-  - component: {fileID: 48038252}
   - component: {fileID: 48038251}
   m_Layer: 0
   m_Name: Option Slot 3
@@ -353,22 +352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cartas: []
   AddOrRemove: 0
---- !u!114 &48038252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 48038249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e9619ca606fef45b2f029dff478b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: 0
-  color1: {r: 1, g: 0, b: 0, a: 1}
-  color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  duration: 1
-  nroSlot: 3
 --- !u!54 &48038253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1457,7 +1440,6 @@ GameObject:
   - component: {fileID: 313411348}
   - component: {fileID: 313411347}
   - component: {fileID: 313411346}
-  - component: {fileID: 313411345}
   - component: {fileID: 313411344}
   - component: {fileID: 313411343}
   m_Layer: 0
@@ -1508,22 +1490,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &313411345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 313411341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e9619ca606fef45b2f029dff478b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: 0
-  color1: {r: 1, g: 0, b: 0, a: 1}
-  color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  duration: 1
-  nroSlot: 1
 --- !u!23 &313411346
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3728,7 +3694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1077365161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4175,7 +4141,6 @@ GameObject:
   - component: {fileID: 1285299909}
   - component: {fileID: 1285299908}
   - component: {fileID: 1285299907}
-  - component: {fileID: 1285299906}
   - component: {fileID: 1285299905}
   m_Layer: 0
   m_Name: Option Slot 2
@@ -4210,22 +4175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cartas: []
   AddOrRemove: 0
---- !u!114 &1285299906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1285299903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e9619ca606fef45b2f029dff478b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: 0
-  color1: {r: 1, g: 0, b: 0, a: 1}
-  color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  duration: 1
-  nroSlot: 2
 --- !u!54 &1285299907
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5523,7 +5472,6 @@ GameObject:
   - component: {fileID: 1718489456}
   - component: {fileID: 1718489455}
   - component: {fileID: 1718489454}
-  - component: {fileID: 1718489453}
   - component: {fileID: 1718489452}
   - component: {fileID: 1718489451}
   m_Layer: 0
@@ -5554,11 +5502,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1718489449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf12504949794d44ab999ff692471b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc8dc20ae7acbe4fa621835c3652a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cartas: []
-  AddOrRemove: 0
+  Cambiado: 0
 --- !u!54 &1718489452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5574,22 +5522,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1718489453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1718489449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e9619ca606fef45b2f029dff478b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: 0
-  color1: {r: 1, g: 0, b: 0, a: 1}
-  color2: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  duration: 1
-  nroSlot: 1
 --- !u!23 &1718489454
 MeshRenderer:
   m_ObjectHideFlags: 0
