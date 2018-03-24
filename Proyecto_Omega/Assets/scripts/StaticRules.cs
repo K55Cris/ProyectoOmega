@@ -15,11 +15,16 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer1 = 100;
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
-	public static bool FaseFinalizada;
+    public static PreparationPhase NowPreparationPhase;
+    public static bool FaseFinalizada;
     public List<GameObject> CartasDescartadas = new List<GameObject>();
 
     public enum Phases { GameSetup = 0,DiscardPhase=1, PreparationPhase = 2, EvolutionPhase = 3, EvolutionRequirements = 4, FusionRequirements = 5,
                            AppearanceRequirements = 6, BattlePhase = 7, PointCalculationPhase = 8, EndPhase = 9, };
+    public enum PreparationPhase
+    {
+       DiscardPhase=0,ChangeDigimon=1, SetEvolition = 2, ActivarOption = 3, SetOptionCard =4
+    };
 
     public void Start()
     {
@@ -264,8 +269,10 @@ public class StaticRules : MonoBehaviour
                         // Verificar Si se puede colocar la Carta 
                         if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase || StaticRules.NowPhase == StaticRules.Phases.GameSetup)
                         {
-                            if(isDigimonOrChip(_Carta))
-                            MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
+                            if (isDigimonOrChip(_Carta))
+                            {
+                                MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
+                            }
                         }
                         break;
                     case "Option Slot 2":
@@ -292,6 +299,14 @@ public class StaticRules : MonoBehaviour
                                 MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
                         }
                         break;
+                    case "SupportBox":
+                        // Verificar Si se puede colocar la Carta 
+                        if (StaticRules.NowPhase == StaticRules.Phases.BattlePhase)
+                        {
+                            if (!isDigimonOrChip(_Carta))
+                                MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
+                        }
+                        break;
                     case "DarkArea":
                         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(_Digicarta.transform);
                         break;
@@ -301,7 +316,7 @@ public class StaticRules : MonoBehaviour
     }
 public static void SaltoFase(Phases phase)
     {
-        NowPhase = phase;
+       
     }
 
     public static bool isDigimonOrChip(DigiCarta carta)
@@ -310,10 +325,15 @@ public static void SaltoFase(Phases phase)
             return true;
         return false;
     }
-	/// <summary>
-    /// Aumenta en 1 el indice de la fase actual y ejecuta la siguiente.
-    /// </summary>
-    public static void SiguienteFase()
+
+
+
+        /// <summary>
+        /// Aumenta en 1 el indice de la fase actual y ejecuta la siguiente.
+        /// </summary>
+        /// 
+
+        public static void SiguienteFase()
     {
         NowPhase++; // 
         switch (NowPhase)
@@ -370,7 +390,6 @@ public static void SaltoFase(Phases phase)
     private static void StartDiscardPhase()
     {
         StaticRules loRule = FailSafeInstance();
-        Debug.Log("DiscardFace" + loRule.PlayerFirstAtack.Nombre);
     }
     public void AddListDiscard(GameObject Carta, bool addOrRemove)
     {
@@ -420,7 +439,7 @@ public static void SaltoFase(Phases phase)
 
         StaticRules loRule = FailSafeInstance();
         Debug.Log("preparationPhase" + loRule.PlayerFirstAtack.Nombre);
-
+        NowPreparationPhase++;
         foreach (var item in loRule.CartasDescartadas)
         {
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(item.transform);

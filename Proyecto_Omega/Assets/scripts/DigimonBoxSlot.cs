@@ -4,7 +4,7 @@ using UnityEngine;
 using DigiCartas;
 public class DigimonBoxSlot : MonoBehaviour {
     public bool Cambiado = false;
-    
+    public CartaDigimon _DigiCarta;
     public void NowPhase()
     {
         switch (StaticRules.NowPhase)
@@ -64,12 +64,18 @@ public class DigimonBoxSlot : MonoBehaviour {
             if (Child.GetComponent<CartaDigimon>().DatosDigimon.Nivel== "III")
             {
                 if (!Cambiado)
-                { 
-                    Carta.transform.parent = transform;
-                    Carta.GetComponent<CartaDigimon>().AjustarSlot();
-                    StartCoroutine(AutoAjustar(Carta));
-                    StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Child);
-                    Cambiado = true;
+                {
+                    if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+                    {
+                        StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ChangeDigimon;
+
+                        Carta.transform.parent = transform;
+                        Carta.GetComponent<CartaDigimon>().AjustarSlot();
+                        StartCoroutine(AutoAjustar(Carta));
+                        StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Child);
+                        _DigiCarta = Carta.GetComponent<CartaDigimon>();
+                        Cambiado = true;
+                    }
                 }
             }
         }
@@ -77,6 +83,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         {
             Carta.transform.parent = transform;
             Carta.GetComponent<CartaDigimon>().AjustarSlot();
+            _DigiCarta = Carta.GetComponent<CartaDigimon>();
             StartCoroutine(AutoAjustar(Carta));
         }
      

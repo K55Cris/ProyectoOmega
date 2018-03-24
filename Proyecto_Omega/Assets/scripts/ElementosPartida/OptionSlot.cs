@@ -15,10 +15,17 @@ public class OptionSlot : Slot
             Carta.transform.parent = transform;
             Carta.GetComponent<CartaDigimon>().AjustarSlot();
             Vacio = false;
+            if(StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)
+               StaticRules.NowPreparationPhase=StaticRules.PreparationPhase.SetOptionCard;
         }
     }
     private void OnMouseDown()
     {
-        Debug.Log(gameObject.name);
+        if (!Vacio)
+        {
+            Debug.Log("Carta Activada");
+            if(StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.SetOptionCard)
+            StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ActivarOption;
+        }
     }
 }

@@ -61,9 +61,14 @@ public class EvolutionBox : Slot
             {
                 if (!Cambiado)
                 {
+                if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+                {
+                    StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
+
                     Carta.transform.parent = transform;
                     Carta.GetComponent<CartaDigimon>().AjustarSlot();
                     Cambiado = true;
+                }
                 }
             }
     }
