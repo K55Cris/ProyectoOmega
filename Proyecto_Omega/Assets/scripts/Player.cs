@@ -9,4 +9,5 @@ public class Player : MonoBehaviour {
     public Mazo Deck;
     public List<int> IDCartasMazo;
     public int PuntosDeVida;
+
 }

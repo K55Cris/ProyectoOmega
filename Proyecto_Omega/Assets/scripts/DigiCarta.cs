@@ -11,6 +11,9 @@ namespace DigiCartas
     {
         public List<CartaDigimon> cartas;
     }
+
+
+
     [Serializable]
     public class DigiCarta
     {
@@ -82,5 +85,13 @@ namespace DigiCartas
     public class Campos
     {
         public Transform OptionSlot1, OptionSlot2, OptionSlot3, DigimonSlot, NetOcean, DarkArea, EvolutionBox, SupportBox, Campo, PointGauge, EvolutionRequerimentBox;
+    }
+
+    [Serializable]
+    public class SavePlayer
+    {
+        public string Nombre;
+        public List<int> IDCartasMazo;
+        public List<int> IDCartasDisponibles;
     }
 }
