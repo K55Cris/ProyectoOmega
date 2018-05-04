@@ -71,9 +71,9 @@ namespace DigiCartas
     }
 
 
-  
 
-[Serializable]
+
+    [Serializable]
     public class Cartas
     {
         public List<DigiCarta> DigiCartas;
@@ -92,6 +92,18 @@ namespace DigiCartas
     {
         public string Nombre;
         public List<int> IDCartasMazo;
-        public List<int> IDCartasDisponibles;
+        public List<DIDCarta> IDCartasDisponibles;
+    }
+
+    [Serializable]
+    public class DIDCarta
+    {
+        public int ID;
+        public int Cantidad;
+    }
+    [Serializable]
+    public class ListCard
+    {
+        public List<int> cards;
     }
 }
