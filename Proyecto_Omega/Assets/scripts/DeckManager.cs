@@ -30,6 +30,7 @@ public class DeckManager : MonoBehaviour {
     public Player PlayerDefault;
     public EditorCardBase CartaSeleccionada;
     public DeckItem[] SlotsDeck;
+    public GameObject PanelAlertaBackDeck;
     private void Awake()
     {
         instance = this;
@@ -126,7 +127,7 @@ public class DeckManager : MonoBehaviour {
         else
         {
             // Mostrar panel "Los mazos deben tener 30 cartas" 
-            
+            PanelAlertaBackDeck.SetActive(true);
         }
     }
 
@@ -142,6 +143,11 @@ public class DeckManager : MonoBehaviour {
         {
             Destroy(item.gameObject);
         }
+        foreach (var item in SlotsDeck)
+        {
+            item.lleno=false;
+        }
+        TemporalDeckEdition = new List<DigiCarta>();
         ViewDeck();
     }
     public void GuardarDeck()
