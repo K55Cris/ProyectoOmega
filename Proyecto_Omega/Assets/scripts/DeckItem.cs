@@ -33,11 +33,15 @@ public class DeckItem : MonoBehaviour {
     }
     public void Resetear()
     {
+        if (lleno)
+        { 
         Nombre.text = "Empty Slot";
         Nivel.text = "-";
+        TipoBatalla.color = Color.white;
         TipoBatalla.text = "-";
         lleno = false;
         DeckManager.instance.QuitDeck(_Datos);
+        }
     }
   
 }

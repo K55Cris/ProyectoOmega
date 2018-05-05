@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class DeckManager : MonoBehaviour {
 
     public static DeckManager instance;
@@ -40,8 +41,12 @@ public class DeckManager : MonoBehaviour {
         // Cargar datos del Player
         Biblioteca.SetActive(false);
         ViewDeck();
-        
+    }
 
+    public void BorarDatos()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
     }
 
     public void AddDeck()
@@ -78,6 +83,7 @@ public class DeckManager : MonoBehaviour {
                     if (slotVacio >= 0)
                     {
                         SlotsDeck[slotVacio].Llenar(CartaSeleccionada.DatosDigimon);
+                        CartaSeleccionada = null;
                     }
                 }
             }
@@ -122,7 +128,7 @@ public class DeckManager : MonoBehaviour {
         if (cartasMaximos == 30)
         {
             GuardarDeck();
-            BackDontSave();
+            BackSave();
         }
         else
         {
@@ -131,14 +137,14 @@ public class DeckManager : MonoBehaviour {
         }
     }
 
-    public void BackDontSave()
+    public void BackSave()
     {
         Deck = TemporalDeckEdition;
         DeckEditor.SetActive(false);
         Paginas = 0;
         nowPageB = 1;
         MaxCartas = 0;
-
+        CartaSeleccionada = null;
         foreach (Transform item in DeckEditorContent)
         {
             Destroy(item.gameObject);
@@ -150,7 +156,26 @@ public class DeckManager : MonoBehaviour {
         TemporalDeckEdition = new List<DigiCarta>();
         ViewDeck();
     }
-    public void GuardarDeck()
+    public void BackDontSave()
+    {
+        DeckEditor.SetActive(false);
+        Paginas = 0;
+        nowPageB = 1;
+        MaxCartas = 0;
+        CartaSeleccionada = null;
+        foreach (Transform item in DeckEditorContent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (var item in SlotsDeck)
+        {
+            item.lleno = false;
+        }
+        TemporalDeckEdition = new List<DigiCarta>();
+        ViewDeck();
+    }
+
+        public void GuardarDeck()
     {
         Deck = new List<DigiCarta>();
         foreach (var item in SlotsDeck)
@@ -172,10 +197,6 @@ public class DeckManager : MonoBehaviour {
         }
     }
 
-    private void OnEnable()
-    {
-       
-    }
 
     public void LoadAllCards()
     {
@@ -196,6 +217,7 @@ public class DeckManager : MonoBehaviour {
 
     public void ViewDeck()
     {
+        CartaSeleccionada = null;
         if (Deck.Count == 0)
         {
             GetDeck();
@@ -246,8 +268,8 @@ public class DeckManager : MonoBehaviour {
             }
         }
 
-       
-       
+      
+
     }
 
     public EditorCardBase FindCardDeck(DigiCarta datos)

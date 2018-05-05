@@ -70,4 +70,17 @@ public class DataManager : MonoBehaviour {
         return null;
         */
     }
+    public void FadeCanvas(CanvasGroup _Canvas)
+    {
+        StartCoroutine(_FadeCanvas(_Canvas));
+    }
+    public IEnumerator _FadeCanvas(CanvasGroup _Canvas)
+    {
+        while (_Canvas.alpha>0)
+        {
+            yield return new WaitForSeconds(0.01f);
+            _Canvas.alpha-=0.08f;
+        }
+        _Canvas.blocksRaycasts = false;
+    }
 }
