@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: c7d32c46b68f5d643ac307b06718444c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenas/vsIA.unity
     guid: b6a7ca0d4a9108b49bc1ec68ae2cf5e0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenas/Main Menu.unity
     guid: cdbe9f40e6147d54d856f594cb16f441
   - enabled: 0

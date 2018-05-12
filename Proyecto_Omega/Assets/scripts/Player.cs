@@ -11,3 +11,4 @@ public class Player : MonoBehaviour {
     public int PuntosDeVida;
 
 }
+

@@ -5,11 +5,20 @@ using DigiCartas;
 public class PlayerManager : MonoBehaviour {
 
     public static PlayerManager instance;
-    public Player Jugador;
+    public SavePlayer Jugador;
     public List<DIDCarta> IDCartasDisponibles;
 
-    private void Awake()
+    void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+
+        }
+           
+        else if (instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }

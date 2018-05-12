@@ -15,13 +15,25 @@ public class DataManager : MonoBehaviour {
     public Texture[] arrayImage;
     public Sprite[] arraySprites;
 
-    private void Awake()
+    void Awake()
     {
-        instance = this;
-        LoadCartas();
+        if (instance == null)
+        {
+            instance = this;
+
+        }
+
+        else if (instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
-   public DigiCarta GetDigicarta(int codigo)
+    private void Start()
+    {
+        LoadCartas();
+    }
+    public DigiCarta GetDigicarta(int codigo)
     {
         foreach (var item in TodasLasCartas)
         {

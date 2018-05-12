@@ -12,8 +12,7 @@ public class DeckManager : MonoBehaviour {
     public List<DigiCarta> Deck;
     public List<DigiCarta> TemporalDeckEdition;
 
-    public List<int> DeckDefecto;
-    public List<int> DeckDefectoDisponible;
+
 
     public List<int> DeckInt;
     public GameObject CartaBase;
@@ -28,7 +27,6 @@ public class DeckManager : MonoBehaviour {
     public Color PuntoDiseble;
     public GameObject Biblioteca,DeckEditor;
     public List<DIDCarta> IDCartasDisponibles;
-    public Player PlayerDefault;
     public EditorCardBase CartaSeleccionada;
     public DeckItem[] SlotsDeck;
     public GameObject PanelAlertaBackDeck;
@@ -418,6 +416,7 @@ public class DeckManager : MonoBehaviour {
         string JSON = JsonUtility.ToJson(lD);
         Debug.Log(JSON);
         PlayerPrefs.SetString("MainDeck", JSON);
+        PlayerManager.instance.Jugador.IDCartasMazo = IdCartas;
     }
 
 
@@ -437,8 +436,8 @@ public class DeckManager : MonoBehaviour {
         }
         else
         {
-            DeckInt = DeckDefecto;
-            foreach (var item in DeckDefecto)
+            DeckInt = PlayerDefault.instance.Default.IDCartasMazo;
+            foreach (var item in DeckInt)
             {
                 Deck.Add(DataManager.instance.GetDigicarta(item));
             }
@@ -473,30 +472,13 @@ public class DeckManager : MonoBehaviour {
             // no existe un datos de jugador 
             Debug.Log("NO EXISTE JUGADOR");
             // cargar datos por defecto
-            IDCartasDisponibles = new List<DIDCarta>();
-
-            foreach (var item in DeckDefectoDisponible)
+            PlayerManager.instance.IDCartasDisponibles = PlayerDefault.instance.Default.IDCartasDisponibles;
+            PlayerManager.instance.Jugador = PlayerDefault.instance.Default;
+            DeckInt = PlayerManager.instance.Jugador.IDCartasMazo;
+            foreach (var item in DeckInt)
             {
-                bool repetida = false;
-                foreach (var item2 in IDCartasDisponibles)
-                {
-                    if (item2.ID == item)
-                    {
-                        item2.Cantidad++;
-                        repetida = true;
-                    }
-                }
-                if (!repetida)
-                {
-                    DIDCarta DIDC = new DIDCarta();
-                    DIDC.Cantidad++;
-                    DIDC.ID = item;
-                    IDCartasDisponibles.Add(DIDC);
-                }
+                Deck.Add(DataManager.instance.GetDigicarta(item));
             }
-            PlayerManager.instance.IDCartasDisponibles = IDCartasDisponibles;
-            PlayerManager.instance.Jugador = PlayerDefault;
-            PlayerManager.instance.Jugador.IDCartasMazo = DeckDefecto;
         }
     }
 }
