@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    public List<Carta> Cartas;
+    public List<Transform> Cartas= new List<Transform>();
 
-    public void ColocarCarta(Carta carta)
-    {
-        Cartas.Add(carta);
-    }
 
-    public void VaciarSlot()
-    {
-        Cartas.Clear();
-    }
 }

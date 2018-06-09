@@ -15,7 +15,9 @@ public class OptionSlot : Slot
             Carta.transform.parent = transform;
             Carta.GetComponent<CartaDigimon>().AjustarSlot();
             Vacio = false;
-            if(StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)
+            Cartas.Add(Carta);
+            SoundManager.instance.PlaySfx(Sound.SetCard);
+            if (StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)
                StaticRules.NowPreparationPhase=StaticRules.PreparationPhase.SetOptionCard;
         }
     }
@@ -23,7 +25,7 @@ public class OptionSlot : Slot
     {
         if (!Vacio)
         {
-            Debug.Log("Carta Activada");
+      
             if(StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.SetOptionCard)
             StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ActivarOption;
         }

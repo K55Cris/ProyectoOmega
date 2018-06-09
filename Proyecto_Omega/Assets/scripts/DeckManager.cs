@@ -16,6 +16,7 @@ public class DeckManager : MonoBehaviour {
 
     public List<int> DeckInt;
     public GameObject CartaBase;
+    public CanvasGroup CGViewDeck;
     public Transform BibliotecaContent, ViewEditorContent, DeckEditorContent;
     private float MaxCartas=0;
     public int Paginas = 0;
@@ -108,11 +109,13 @@ public class DeckManager : MonoBehaviour {
     public void AbrirBiblioteca()
     {
         Biblioteca.SetActive(true);
+        CGViewDeck.interactable = false;
         LoadAllCards();
     }
     public void OpenDeckEditor()
     {
         DeckEditor.SetActive(true);
+        CGViewDeck.interactable = false;
         EditDeck();
     }
     public void CloseViewDeck()
@@ -193,6 +196,7 @@ public class DeckManager : MonoBehaviour {
         {
             Destroy(item.gameObject);
         }
+        ViewDeck();
     }
 
 
@@ -216,6 +220,7 @@ public class DeckManager : MonoBehaviour {
     public void ViewDeck()
     {
         CartaSeleccionada = null;
+
         if (Deck.Count == 0)
         {
             GetDeck();
@@ -266,7 +271,7 @@ public class DeckManager : MonoBehaviour {
             }
         }
 
-      
+        CGViewDeck.interactable = true;
 
     }
 

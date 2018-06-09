@@ -15,7 +15,7 @@ public class MesaManager : MonoBehaviour {
     public enum Slots
     {
         OptionSlot1 = 0, OptionSlot2 = 1, OptionSlot3 = 2, DigimonSlot = 3, NetOcean = 4, DarkArea = 5,
-        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9,
+        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10,
     }
    
     public Transform GetSlot(Slots slot)
@@ -44,6 +44,8 @@ public class MesaManager : MonoBehaviour {
                     return Campo1.Campo;
                 case Slots.PointGauge:
                     return Campo1.PointGauge;
+                case Slots.EvolutionRequerimentBox:
+                    return Campo1.EvolutionRequerimentBox;
             }
         }
         else
@@ -70,6 +72,8 @@ public class MesaManager : MonoBehaviour {
                     return Campo2.Campo;
                 case Slots.PointGauge:
                     return Campo2.PointGauge;
+                case Slots.EvolutionRequerimentBox:
+                    return Campo2.EvolutionRequerimentBox;
             }
         }
         return null;

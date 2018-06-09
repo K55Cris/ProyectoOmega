@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class EvolutionBox : Slot
 {
     public bool Cambiado = false;
-
+    public GameObject Canvas;
     public void NowPhase()
     {
         switch (StaticRules.NowPhase)
         {
+
             case StaticRules.Phases.PreparationPhase:
                 PreparationPhase();
                 break;
@@ -33,7 +34,12 @@ public class EvolutionBox : Slot
     }
     void OnMouseDown()
     {
-        Debug.Log("Digimon Slot");
+        Debug.Log("Evolution slot");
+        NowPhase();
+    }
+    void OnMouseExit()
+    {
+        Canvas.SetActive(false);
     }
     public void PreparationPhase()
     {
@@ -41,11 +47,12 @@ public class EvolutionBox : Slot
     }
     public void EvolutionPhase()
     {
-
+        Canvas.SetActive(true);
+        Cartas.Remove(Cartas[0]);
     }
     public void EvolutionRequirements()
     {
-
+       
     }
     public void FusionRequirements()
     {
@@ -68,8 +75,34 @@ public class EvolutionBox : Slot
                     Carta.transform.parent = transform;
                     Carta.GetComponent<CartaDigimon>().AjustarSlot();
                     Cambiado = true;
+                    Cartas.Add(Carta);
+                    SoundManager.instance.PlaySfx(Sound.SetCard);
                 }
                 }
             }
+            else if (Cartas.Count>0)
+            {
+            if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+            {
+                // obtener evolucion
+                CartaDigimon Evo = Cartas[Cartas.Count-1].GetComponent<CartaDigimon>();
+
+                foreach (string item in Carta.transform.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
+                {
+                    string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
+                    if (item.Contains(nameDigi))
+                    {
+                        Carta.transform.parent = transform;
+                        Carta.GetComponent<CartaDigimon>().AjustarSlot();
+                        Cambiado = true;
+                        Cartas.Add(Carta);
+                        SoundManager.instance.PlaySfx(Sound.SetCard);
+
+                    }
+                    Debug.Log(nameDigi);
+                }
+            }
+            }
+                
     }
 }

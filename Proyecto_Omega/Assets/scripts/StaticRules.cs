@@ -16,6 +16,7 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
     public static PreparationPhase NowPreparationPhase;
+    public static EvolutionPhase NowEvolutionPhase;
     public static bool FaseFinalizada;
     public List<GameObject> CartasDescartadas = new List<GameObject>();
 
@@ -25,10 +26,15 @@ public class StaticRules : MonoBehaviour
     {
        DiscardPhase=0,ChangeDigimon=1, SetEvolition = 2, ActivarOption = 3, SetOptionCard =4
     };
+    public enum EvolutionPhase 
+    {
+        FirstRequeriment = 0, SecondRequerimient = 1
+    };
 
     public void Start()
     {
         NowPhase = 0;
+        NowEvolutionPhase = 0;
 		//Referenciar los puntos de vida con cada jugador o
         //Codificar clase jugador con sus atributos publicos
         PointGaugePlayer1 = 100;
@@ -244,14 +250,19 @@ public class StaticRules : MonoBehaviour
         }
     }
 
-    public static void CheckSetDigiCardSlot(Transform Slot,Transform _Digicarta)
+    public static void CheckSetDigiCardSlot(Transform Slot,Transform _Digicarta=null)
     {
         if (Slot != null)
         {
             StaticRules loRule = FailSafeInstance();
             if (loRule.WhosPlayer == PartidaManager.instance.Player1)
             {
-                DigiCarta _Carta = _Digicarta.GetComponent<CartaDigimon>().DatosDigimon;
+
+                DigiCarta _Carta= new DigiCarta();
+
+                if(_Digicarta)
+                 _Carta = _Digicarta.GetComponent<CartaDigimon>().DatosDigimon;
+
                 switch (Slot.name)
                 {
               
@@ -299,6 +310,7 @@ public class StaticRules : MonoBehaviour
                                 MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
                         }
                         break;
+
                     case "SupportBox":
                         // Verificar Si se puede colocar la Carta 
                         if (StaticRules.NowPhase == StaticRules.Phases.BattlePhase)
@@ -309,6 +321,24 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "DarkArea":
                         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(_Digicarta.transform);
+                        break;
+                    case "EvolutionRequerimentBox":
+
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase)
+                        {
+                            if (StaticRules.NowPreparationPhase == StaticRules.PreparationPhase.SetEvolition)
+                            {
+                                if (StaticRules.NowEvolutionPhase == StaticRules.EvolutionPhase.FirstRequeriment)
+                                {
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos();
+                                }
+                                else
+                                {
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(_Digicarta.transform);
+                                }
+                            }
+                           
+                        }
                         break;
                 }
             }
@@ -431,9 +461,60 @@ public static void SaltoFase(Phases phase)
         }
         return false;
     }
-        /// <summary>
-        /// Inicial la Preparation phase
-        /// </summary>
+    public static List<string> GetListRequerimentsDigimon(DigiCarta DatosDigimon,DigiCarta BaseDigimon)
+    {
+        Debug.Log(DatosDigimon.Nombre + ":" + BaseDigimon.Nombre);
+        foreach (var item in DatosDigimon.ListaRequerimientos)
+        {
+            string Requerimiento = item.ToUpper();
+            string FiltroNombre = BaseDigimon.Nombre.ToUpper().Replace(" ", "");
+            Debug.Log(Requerimiento + ":" + FiltroNombre);
+            if (Requerimiento.Contains(FiltroNombre))
+            {
+                List<string> RequerimientosFinales = new List<string>();
+
+                string[] Reque = Requerimiento.Split(' ');
+                bool k = false;
+                foreach (string item2 in Reque)
+                {
+                        RequerimientosFinales.Add(item2);
+                }
+                return RequerimientosFinales;
+            }
+        }
+        return new List<string>();
+    }
+    public void Evolucionar()
+    {
+        int X = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).childCount, j = 0;
+        for (int i = 0; i < X; i++)
+        {
+            if (CheckEvolutionList(MesaManager.instance.Campo1.EvolutionBox.GetChild(j).GetComponent<CartaDigimon>()))
+            {
+                j = 0;
+                i = 0;
+                X--;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        X = MesaManager.instance.Campo1.EvolutionBox.childCount;
+        if (MesaManager.instance.Campo1.EvolutionBox.childCount > 0)
+        {
+            for (int i = 0; i < X; i++)
+            {
+                Transform carta = MesaManager.instance.Campo1.EvolutionBox.GetChild(0).GetComponent<Transform>();
+                carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                carta.GetComponent<CartaDigimon>().AjustarSlot();
+            }
+        }
+
+    }
+    /// <summary>
+    /// Inicial la Preparation phase
+    /// </summary>
     private static void StartPreparationPhase()
     {
 
@@ -486,12 +567,121 @@ public static void SaltoFase(Phases phase)
         //Una vez ambos jugadores terminen sus Preparation Phase.
         //Voltear Digimon Nivel III boca arriba en sus respectivas Digimon Box.
     }
-
-    /// <summary>
-    /// Inicial la Evolution phase
-    /// </summary>
-    private static void StartEvolutionPhase()
+    public List<Transform> ListEvos= new List<Transform>();
+    public void Evol(Transform Evolucion, int CantEvos)
     {
+        ListEvos.Add(Evolucion);
+        if (ListEvos.Count == CantEvos)
+        {
+            RecursivoEvo(ListEvos[0]);
+        }
+    }
+    public void RecursivoEvo(Transform Evolucion)
+    {
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolucionar(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nivel);
+        //foreach (var Request in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().ListaRequerimientos)
+        //{);
+        Debug.Log(Evolucion.GetComponent<CartaDigimon>().name);
+
+        List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(Evolucion.GetComponent<CartaDigimon>().DatosDigimon,
+             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon);
+
+        int contO = 0;
+        int contX = 0;
+        int RequestEvo = 0;
+        if (requerimientos.Count > 0)
+        {
+
+            foreach (var item in requerimientos)
+            {
+                if (item == "O")
+                {
+                    // quitar carta delos requisitos 
+                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().O.GetChild(contO).transform;
+                    contO++;
+                    RequestEvo++;
+                    SendDarkArea(_DigiCarta);
+
+                }
+                else if (item == ("X"))
+                {
+                    // quitar carta delos requisitos 
+                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().X.GetChild(contX).transform;
+                    contX++;
+                    RequestEvo++;
+                    SendDarkArea(_DigiCarta);
+                }
+                else
+                {
+                    CartaDigimon DBox = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
+                    // Revisar si el requisto es el digimon base 
+                    if (item.ToUpper().Contains(DBox.DatosDigimon.Nombre.ToUpper()))
+                    {
+                        RequestEvo++;
+                    }
+                    else
+                    {
+                        // fusion o digimons extra o cartas de plugin
+                        // revisar si la carta esta en los requisitos
+                        Transform ReEvo = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox);
+                        foreach (var Requeriment in ReEvo.GetComponent<EvolutionRequerimentBox>().ListaRequerimientosAdicionales)
+                        {
+                            Debug.Log(Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper() + ":" + item + ",XD");
+                            string name = Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre;
+                            string ShapeName = name.Substring(name.Length - 4, 3);
+                           
+                            if (ShapeName.Contains(item) )
+                            {
+                                RequestEvo++;
+                                SendDarkArea(Requeriment);
+                            }
+                        }
+                    }
+                }
+            }
+            Debug.Log(RequestEvo + ":" + requerimientos.Count);
+            if (RequestEvo == requerimientos.Count)
+            {
+                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.instance.SetEvolution);
+                ListEvos.Remove(Evolucion);
+                Invoke("ReEvent",3.5f);
+            }
+        }
+    }
+    public void ReEvent()
+    {
+        if (ListEvos.Count == 0)
+        {
+            StaticRules.SecondEvolutionPhase();
+        }
+        else
+        {
+            MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+            RecursivoEvo(ListEvos[0]);
+        }
+    }
+    public static void SecondEvolutionPhase()
+    {
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+    }
+
+        /// <summary>
+        /// Inicial la Evolution phase
+        /// </summary>
+     public static void StartEvolutionPhase()
+    {
+        // voltear Digimon de Player 1
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.Volteo();
+
+        // Realizar Evolucion correspondiente 
+        foreach (var Evolucion in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
+        {
+            StaticRules.instance.Evol(Evolucion, MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count);
+        }
+
+    
+
+
         /*
          El jugador que resultó primer atacante será quien complete su Evolution Phase antes de que 
          el segundo jugador comience la suya, antes de comenzar la siguiente fase.
@@ -524,32 +714,48 @@ public static void SaltoFase(Phases phase)
         todas las cartas que se encuentran en la Evolution Box y la Evolution
         Requirement Box que no fueron utilizadas, serán enviadas al Dark Area.
          */
-        int X = MesaManager.instance.Campo1.EvolutionBox.childCount, j = 0;
-        for (int i = 0; i < X; i++)
-        {
-            if (CheckEvolutionList(MesaManager.instance.Campo1.EvolutionBox.GetChild(j).GetComponent<CartaDigimon>()))
-            {
-                j = 0;
-                i = 0;
-                X--;
-            }
-            else
-            {
-                j++;
-            }
-        }
-        X = MesaManager.instance.Campo1.EvolutionBox.childCount;
-        if (MesaManager.instance.Campo1.EvolutionBox.childCount > 0)
-        {
-            for (int i = 0; i < X; i++)
-            {
-                Transform carta = MesaManager.instance.Campo1.EvolutionBox.GetChild(0).GetComponent<Transform>();
-                carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
-                carta.GetComponent<CartaDigimon>().AjustarSlot();
-            }
-        }
+        /*      int X = MesaManager.instance.Campo1.EvolutionBox.childCount, j = 0;
+              for (int i = 0; i < X; i++)
+              {
+                  if (CheckEvolutionList(MesaManager.instance.Campo1.EvolutionBox.GetChild(j).GetComponent<CartaDigimon>()))
+                  {
+                      j = 0;
+                      i = 0;
+                      X--;
+                  }
+                  else
+                  {
+                      j++;
+                  }
+              }
+              X = MesaManager.instance.Campo1.EvolutionBox.childCount;
+              if (MesaManager.instance.Campo1.EvolutionBox.childCount > 0)
+              {
+                  for (int i = 0; i < X; i++)
+                  {
+                      Transform carta = MesaManager.instance.Campo1.EvolutionBox.GetChild(0).GetComponent<Transform>();
+                      carta.transform.parent = MesaManager.instance.Campo1.DarkArea;
+                      carta.GetComponent<CartaDigimon>().AjustarSlot();
+                  }
+              }
+
+              */
+    }
+    public void SetEvolution(string tiempo)
+    {
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolution(
+        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas[0]);
+        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().NowPhase();
+    }
+    public void ProcederAEvolucionar()
+    {
+
     }
 
+    public static void SendDarkArea(Transform Dcard)
+    {
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(Dcard,0.8f);
+    }
     private static void CheckEvolutionRequirements()
     {
         /*

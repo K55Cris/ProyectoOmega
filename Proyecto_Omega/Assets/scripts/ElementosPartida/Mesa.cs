@@ -15,12 +15,12 @@ public class Mesa : MonoBehaviour {
 
     public void VaciarMesa()
     {
-        DigimonBox.VaciarSlot();
-        OptionSlot1.VaciarSlot();
-        OptionSlot2.VaciarSlot();
-        OptionSlot3.VaciarSlot();
-        EvolutionBox.VaciarSlot();
-        EvolutionRequerimentBox.VaciarSlot();
-        SupportBox.VaciarSlot();
+        //DigimonBox.VaciarSlot();
+        //OptionSlot1.VaciarSlot();
+        //OptionSlot2.VaciarSlot();
+        //OptionSlot3.VaciarSlot();
+        //EvolutionBox.VaciarSlot();
+        //EvolutionRequerimentBox.VaciarSlot();
+        //SupportBox.VaciarSlot();
     }
 }

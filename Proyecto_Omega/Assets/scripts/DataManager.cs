@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DataManager : MonoBehaviour {
 
@@ -94,5 +95,17 @@ public class DataManager : MonoBehaviour {
             _Canvas.alpha-=0.08f;
         }
         _Canvas.blocksRaycasts = false;
+    }
+
+    public void EndFrame(UnityAction<string> funcion)
+    {
+        StartCoroutine(_EndFrame(funcion));
+    }
+    public IEnumerator _EndFrame(UnityAction<string> funcion)
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        funcion("");
     }
 }
