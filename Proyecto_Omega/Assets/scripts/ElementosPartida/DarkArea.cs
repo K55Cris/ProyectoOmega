@@ -6,8 +6,7 @@ using DigiCartas;
 
 public class DarkArea : MonoBehaviour {
 
-    public List<Carta> Cartas;
-    public List<Transform> DigiCartas = new List<Transform>();
+    public List<CartaDigimon> DigiCartas = new List<CartaDigimon>();
     public bool moviendo = false;
     public UnityAction<string> TermineDescarte;
 
@@ -18,15 +17,15 @@ public class DarkArea : MonoBehaviour {
 
     public void Vaciar()
     {
-        Cartas = new List<Carta>();
+    DigiCartas = new List<CartaDigimon>();
     }
     public void SetCard(Transform Carta)
     {
-        Carta.transform.parent = transform;
+        PartidaManager.instance.SetMoveCard(this.transform, Carta);
         Carta.GetComponent<CartaDigimon>().AjustarSlot();
         Carta.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
     }
-    public void AddListDescarte(Transform Dcarta, float segundos)
+    public void AddListDescarte(CartaDigimon Dcarta, float segundos)
     {
         DigiCartas.Add(Dcarta);
         StartCoroutine(MoviendiaDarkArea(segundos));
@@ -41,20 +40,20 @@ public class DarkArea : MonoBehaviour {
             moviendo = true;
             foreach (var item in DigiCartas)
             {
-                item.transform.parent = transform;
-                item.GetComponent<CartaDigimon>().AjustarSlot();
+                PartidaManager.instance.SetMoveCard(this.transform,item.transform);
+                item.AjustarSlot();
                 SoundManager.instance.PlaySfx(Sound.SetCard);
-                if (item.GetComponent<CartaDigimon>().DatosDigimon.id!=7)
-                item.GetComponent<CartaDigimon>().Mostrar();
+                if (item.DatosDigimon.id!=7)
+                item.Mostrar();
 
-                item.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
+                item.transform.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
                 yield return new WaitForSeconds(segundos);
             }
             if (TermineDescarte != null)
             {
                 TermineDescarte("Completado");
                 moviendo = false;
-                DigiCartas = new List<Transform>();
+                DigiCartas = new List<CartaDigimon>();
                 TermineDescarte = null;
             }
         }

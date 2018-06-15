@@ -74,8 +74,7 @@ public class DigimonBoxSlot : MonoBehaviour {
                     if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                     {
                         StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ChangeDigimon;
-
-                        Carta.SetParent(transform);
+                        PartidaManager.instance.SetMoveCard(this.transform,Carta);
                         Carta.GetComponent<CartaDigimon>().AjustarSlot();
                         StartCoroutine(AutoAjustar(Carta));
                         StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Carta);
@@ -88,7 +87,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         }
         else
         {
-            Carta.transform.parent = transform;
+            PartidaManager.instance.SetMoveCard(this.transform, Carta);
             Carta.GetComponent<CartaDigimon>().AjustarSlot();
             _DigiCarta = Carta.GetComponent<CartaDigimon>();
             StartCoroutine(AutoAjustar(Carta));
@@ -99,7 +98,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void Evolution(Transform Evolucion)
     {
-        Evolucion.SetParent(transform);
+        PartidaManager.instance.SetMoveCard(this.transform,Evolucion);
         Evolucion.GetComponent<CartaDigimon>().AjustarSlot();
         _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
         Evolucion.localPosition = new Vector3(0, 0, 0 + transform.childCount);

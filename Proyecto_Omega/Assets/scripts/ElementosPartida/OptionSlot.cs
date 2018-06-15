@@ -6,16 +6,17 @@ public class OptionSlot : Slot
 {
     public bool AddOrRemove = false;
     private bool Vacio=true;
-
+    public CartaDigimon OpCarta;
     public void SetCard(Transform Carta)
     {
     
         if (Vacio)
         {
-            Carta.transform.parent = transform;
+            PartidaManager.instance.SetMoveCard(this.transform,Carta);
             Carta.GetComponent<CartaDigimon>().AjustarSlot();
             Vacio = false;
             Cartas.Add(Carta);
+            OpCarta = Carta.GetComponent<CartaDigimon>();
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)
                StaticRules.NowPreparationPhase=StaticRules.PreparationPhase.SetOptionCard;

@@ -7,8 +7,6 @@ public class PartidaManager : MonoBehaviour {
     public Player Player1;
     public Player Player2;
     public GameObject CartaPrefap;
-    public Transform DeckPlayer1;
-    public Transform DeckPlayer2;
     public Transform ManoPlayer1;
     public Transform ManoPlayer2;
 
@@ -34,7 +32,7 @@ public class PartidaManager : MonoBehaviour {
     }
 
 
-    public void CargarMazos(List<int> Deck,Transform Espacio,Player _Player)
+    public void CargarMazos(List<int> Deck, Transform Espacio, Player _Player)
     {
         List<DigiCarta> DatosDigi = DataManager.instance.TodasLasCartas;
         int contador = 1;
@@ -43,33 +41,35 @@ public class PartidaManager : MonoBehaviour {
         {
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
             DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
-           
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
             MazoPlayer.Add(DigiCarta.GetComponent<CartaDigimon>());
             contador++;
         }
         _Player.Deck.cartas = MazoPlayer;
+        Transform netocean = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, _Player);
+        netocean.GetComponent<NetOcean>().Cartas = MazoPlayer;
     }
     public void cargarManos(Transform Mano, Player jugador, Transform Deck)
     {
-        StartCoroutine(CrearYColocar(Mano,jugador,Deck));
+        StartCoroutine(CrearYColocar(Mano, jugador, Deck));
     }
 
     IEnumerator CrearYColocar(Transform Mano, Player jugador, Transform Deck)
     {
-       
+
         for (int i = 1; i < 7; i++)
         {
             yield return new WaitForSecondsRealtime(0.3f);
 
-            GameObject Carta = Deck.transform.GetChild(jugador.Deck.cartas.Count - i - 1).gameObject;
-            if (jugador == Player1)
-                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
-            else
-                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
+            CartaDigimon Carta =  MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
 
-            Carta.transform.parent = Mano;
+            if (jugador == Player1)
+                jugador._Mano.RecibirCarta(Carta, true);
+            else
+                jugador._Mano.RecibirCarta(Carta);
+
+            PartidaManager.instance.SetMoveCard(Mano, Carta.transform);
             Carta.transform.localPosition = Vector3.zero;
             Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
             Carta.transform.localScale = new Vector3(25, 40, 0.015f);
@@ -84,7 +84,7 @@ public class PartidaManager : MonoBehaviour {
         else
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
 
-        Carta.transform.parent = Mano;
+        PartidaManager.instance.SetMoveCard(Mano,Carta.transform);
         Carta.transform.localPosition = Vector3.zero;
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Carta.transform.localScale = new Vector3(25, 40, 0.015f);
@@ -94,13 +94,15 @@ public class PartidaManager : MonoBehaviour {
 
     public static void Barajear(Transform Deck)
     {
+        NetOcean NDeck = Deck.GetComponent<NetOcean>();
+
         int k = 0;
-        while (k < 25)
+        while (k < 45)
         {
             int val = Random.Range(0, 29);
-            Transform _Carta = Deck.transform.GetChild(val);
-            _Carta.transform.parent = null;
-            _Carta.transform.parent = Deck;
+            CartaDigimon _Carta = NDeck.Cartas[val];
+            NDeck.Cartas.Remove(_Carta);
+            NDeck.Cartas.Add(_Carta);
             k++;
         }
 
@@ -109,6 +111,31 @@ public class PartidaManager : MonoBehaviour {
     {
         StaticRules.SiguienteFase();
     }
+    public Transform GetHand()
+    {
+        if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+        {
+            return ManoPlayer1;
+        }
+        else
+        {
+            return ManoPlayer2;
+        }
+    }
+    public void SetMoveCard(Transform Padre,Transform Carta)
+    {
+        if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+        {
+            Player1.moveCard(Padre, Carta.GetComponent<CartaDigimon>());
+        }
+        else
+        {
+            Player2.moveCard(Padre, Carta.GetComponent<CartaDigimon>());
+        }
+    }
 
-
+    public void TomarOtraCarta()
+    {
+        MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().RobarInteligente();
+    }
 }

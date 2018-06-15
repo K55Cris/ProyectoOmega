@@ -50,6 +50,7 @@ public class CartaDigimon : Carta {
     {
         transform.localRotation = Quaternion.Euler(180, 0, 0);
     }
+
     public void AjustarSlot()
     {
         transform.localPosition = new Vector3(0, 0, 0);

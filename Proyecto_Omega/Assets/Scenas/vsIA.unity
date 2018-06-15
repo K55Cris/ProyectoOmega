@@ -160,6 +160,8 @@ MonoBehaviour:
   X: {fileID: 121628369}
   O: {fileID: 1960972502}
   ListaRequerimientos: []
+  ListaRequerimientosAdicionales: []
+  ListaXO: []
   lol:
     m_PersistentCalls:
       m_Calls:
@@ -420,6 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cartas: []
   AddOrRemove: 0
+  OpCarta: {fileID: 0}
 --- !u!54 &48038253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -520,6 +523,80 @@ RectTransform:
   m_AnchoredPosition: {x: 303.4, y: -69.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &62620935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 62620936}
+  - component: {fileID: 62620938}
+  - component: {fileID: 62620937}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &62620936
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 62620935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1599054335}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &62620937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 62620935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: jALAR
+--- !u!222 &62620938
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 62620935}
 --- !u!1 &64873290
 GameObject:
   m_ObjectHideFlags: 0
@@ -8226,6 +8303,7 @@ RectTransform:
   - {fileID: 563730213}
   - {fileID: 1906147441}
   - {fileID: 150588494}
+  - {fileID: 1599054335}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8281,6 +8359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cartas: []
   AddOrRemove: 0
+  OpCarta: {fileID: 0}
 --- !u!54 &313411344
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8902,6 +8981,7 @@ GameObject:
   - component: {fileID: 446007950}
   - component: {fileID: 446007948}
   - component: {fileID: 446007952}
+  - component: {fileID: 446007949}
   m_Layer: 0
   m_Name: NetOcean
   m_TagString: Untagged
@@ -8935,6 +9015,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeladoDeLaCarta: {fileID: 1742074199533164, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
     type: 2}
+--- !u!114 &446007949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446007946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a8a435af8fbb141bc67261759ec7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cartas: []
 --- !u!65 &446007950
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9650,7 +9742,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cambiado: 0
   _DigiCarta: {fileID: 0}
-  _Evos: []
   AuraEvolucion: {fileID: 303987832}
   EnergiaEvolucion: {fileID: 162725435}
 --- !u!65 &654850986
@@ -10966,7 +11057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cambiado: 0
   _DigiCarta: {fileID: 0}
-  _Evos: []
   AuraEvolucion: {fileID: 0}
   EnergiaEvolucion: {fileID: 0}
 --- !u!33 &1067845871
@@ -11544,6 +11634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cartas: []
   AddOrRemove: 0
+  OpCarta: {fileID: 0}
 --- !u!54 &1285299907
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12174,6 +12265,7 @@ GameObject:
   - component: {fileID: 1436822997}
   - component: {fileID: 1436822996}
   - component: {fileID: 1436822995}
+  - component: {fileID: 1436822999}
   m_Layer: 0
   m_Name: NetOcean
   m_TagString: Untagged
@@ -12241,6 +12333,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1436822993}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1436822999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436822993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a8a435af8fbb141bc67261759ec7c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cartas: []
 --- !u!1 &1466599837
 GameObject:
   m_ObjectHideFlags: 0
@@ -12285,8 +12389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d0705b670b9b04fb83a5e7c28677f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cartas: []
   DigiCartas: []
+  moviendo: 0
 --- !u!54 &1466599840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12598,6 +12702,128 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1599054334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1599054335}
+  - component: {fileID: 1599054338}
+  - component: {fileID: 1599054337}
+  - component: {fileID: 1599054336}
+  m_Layer: 5
+  m_Name: Button (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1599054335
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1599054334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 62620936}
+  m_Father: {fileID: 310398479}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 557.2, y: 43.9}
+  m_SizeDelta: {x: 79, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1599054336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1599054334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1599054337}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2116703508}
+        m_MethodName: TomarOtraCarta
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1599054337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1599054334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1599054338
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1599054334}
 --- !u!1 &1610215095
 GameObject:
   m_ObjectHideFlags: 0
@@ -14961,8 +15187,6 @@ MonoBehaviour:
   Player2: {fileID: 168942244}
   CartaPrefap: {fileID: 1156290952722806, guid: 3ecedad9a52a2a849a23c5dbc7152ac5,
     type: 2}
-  DeckPlayer1: {fileID: 446007947}
-  DeckPlayer2: {fileID: 1436822994}
   ManoPlayer1: {fileID: 264659169}
   ManoPlayer2: {fileID: 668689830}
 --- !u!4 &2116703509

@@ -10,6 +10,7 @@ public class EvolutionRequerimentBox : Slot
     public Transform X, O;
     public List<string> ListaRequerimientos;
     public List<Transform> ListaRequerimientosAdicionales = new List<Transform>();
+    public List<Transform> ListaXO = new List<Transform>();
     public UnityEvent lol;
 
     public void GetX()
@@ -96,7 +97,7 @@ public class EvolutionRequerimentBox : Slot
         {
             if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.Contains(item))
             {
-                Carta.SetParent(this.transform);
+                PartidaManager.instance.SetMoveCard(this.transform, Carta);
                 ListaRequerimientosAdicionales.Add(Carta);
                 Carta.GetComponent<CartaDigimon>().AjustarSlot();
                 StartCoroutine(QuitarDeListaRequerimientos(item));
@@ -124,7 +125,8 @@ public class EvolutionRequerimentBox : Slot
         if (MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).childCount > 0)
         {
             Transform _carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetChild(0);
-            _carta.transform.parent = Slot;
+            ListaXO.Add(_carta);
+            PartidaManager.instance.SetMoveCard(Slot, _carta);
             _carta.GetComponent<CartaDigimon>().AjustarSlot();
             SoundManager.instance.PlaySfx(Sound.SetCard);
         }

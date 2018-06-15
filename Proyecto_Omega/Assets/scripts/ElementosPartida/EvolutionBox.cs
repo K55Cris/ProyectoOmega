@@ -72,7 +72,7 @@ public class EvolutionBox : Slot
                 {
                     StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
 
-                    Carta.transform.parent = transform;
+                    PartidaManager.instance.SetMoveCard(this.transform, Carta);
                     Carta.GetComponent<CartaDigimon>().AjustarSlot();
                     Cambiado = true;
                     Cartas.Add(Carta);
@@ -92,7 +92,7 @@ public class EvolutionBox : Slot
                     string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
                     if (item.Contains(nameDigi))
                     {
-                        Carta.transform.parent = transform;
+                        PartidaManager.instance.SetMoveCard(this.transform, Carta);
                         Carta.GetComponent<CartaDigimon>().AjustarSlot();
                         Cambiado = true;
                         Cartas.Add(Carta);

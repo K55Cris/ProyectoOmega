@@ -18,9 +18,14 @@ public class MesaManager : MonoBehaviour {
         EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10,
     }
    
-    public Transform GetSlot(Slots slot)
+    public Transform GetSlot(Slots slot,Player player= null)
     {
-     if(PartidaManager.instance.Player1== StaticRules.instance.WhosPlayer)
+        Player _player = StaticRules.instance.WhosPlayer;
+        if (player)
+            _player = player;
+
+
+     if(PartidaManager.instance.Player1== _player)
         {
             switch (slot)
             {
@@ -78,7 +83,28 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
-
+    public Transform GetOptionSlotForCard(DigiCarta Dcarta)
+    {
+        if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+        {
+            if (Campo1.OptionSlot1.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot1;
+            if (Campo1.OptionSlot2.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot2;
+            if (Campo1.OptionSlot3.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot3;
+        }
+        else
+        {
+            if (Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot1;
+            if (Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot2;
+            if (Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+                return Campo1.OptionSlot3;
+        }
+        return null;
+    }
     public static Transform GetOptionSlot(GameObject Carta , bool Campo=false)
     {
         if (Campo)

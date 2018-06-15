@@ -10,5 +10,9 @@ public class Player : MonoBehaviour {
     public List<int> IDCartasMazo;
     public int PuntosDeVida;
 
+    public void moveCard(Transform Padre, CartaDigimon Card)
+    {
+        Card.transform.SetParent(Padre);
+    }
 }
 
