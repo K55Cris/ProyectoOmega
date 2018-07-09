@@ -19,6 +19,7 @@ public class StaticRules : MonoBehaviour
     public static EvolutionPhase NowEvolutionPhase;
     public static bool FaseFinalizada;
     public List<GameObject> CartasDescartadas = new List<GameObject>();
+    
 
     public enum Phases { GameSetup = 0,DiscardPhase=1, PreparationPhase = 2, EvolutionPhase = 3, EvolutionRequirements = 4, FusionRequirements = 5,
                            AppearanceRequirements = 6, BattlePhase = 7, PointCalculationPhase = 8, EndPhase = 9, };
@@ -30,6 +31,12 @@ public class StaticRules : MonoBehaviour
     {
         FirstRequeriment = 0, SecondRequerimient = 1
     };
+    public enum Efectos
+    {
+        SinRequerimientos = 0, NADA=1
+    };
+
+    public List<Efectos> EfectosDeTurno= new List<Efectos>();
 
     public void Start()
     {
@@ -600,19 +607,26 @@ public static void SaltoFase(Phases phase)
                 if (item == "O")
                 {
                     // quitar carta delos requisitos 
-                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().O.GetChild(contO).transform;
-                    contO++;
-                    RequestEvo++;
-                    SendDarkArea(_DigiCarta);
-
+                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().O;
+                    if (_DigiCarta.childCount>0)
+                    {
+                       _DigiCarta = _DigiCarta.transform.GetChild(contO).transform;
+                        contO++;
+                        RequestEvo++;
+                        SendDarkArea(_DigiCarta);
+                    }
                 }
                 else if (item == ("X"))
                 {
                     // quitar carta delos requisitos 
-                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().X.GetChild(contX).transform;
-                    contX++;
-                    RequestEvo++;
-                    SendDarkArea(_DigiCarta);
+                    Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().X;
+                    if (_DigiCarta.childCount>0)
+                    {
+                        _DigiCarta = _DigiCarta.transform.GetChild(contX).transform;
+                        contX++;
+                        RequestEvo++;
+                        SendDarkArea(_DigiCarta);
+                    }  
                 }
                 else
                 {
@@ -633,23 +647,29 @@ public static void SaltoFase(Phases phase)
                             Debug.Log(Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper() + ":" + item + ",XD");
                             string name = Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre;
                             string ShapeName = name.Substring(name.Length - 4, 3);
+                            Debug.Log(ShapeName);
                             if (ShapeName.Contains(item) )
                             {
                                 RequestEvo++;
                                 SendDarkArea(Requeriment);
                             }
                         }
-                        
-                            if (item == "60%")
-                            {
-                            // buscamos el plugin 
-                            DigiCarta digicard = new DigiCarta();
-                            digicard.id = 60;
-                            CartaDigimon OpCard = MesaManager.instance.GetOptionSlotForCard(digicard).GetComponent<OptionSlot>().OpCarta;
-                            OpCard.Volteo();
-                            MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(OpCard.transform);
-                            RequestEvo++;
-                        }
+                         if (RequestEvo != requerimientos.Count) {
+                             if (item == "60%")
+                             {
+                                 // buscamos el plugin 
+                                 DigiCarta digicard = new DigiCarta();
+                                 digicard.id = 60;
+                                Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
+                                if (slot)
+                                {
+                                    CartaDigimon OpCard = slot.GetComponent<OptionSlot>().OpCarta;
+                                    OpCard.Volteo();
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(OpCard.transform);
+                                    RequestEvo++;
+                                }
+                             }
+                         } 
                     }
                 }
             }
@@ -662,7 +682,7 @@ public static void SaltoFase(Phases phase)
             }
             else
             {
-                StaticRules.SecondEvolutionPhase();
+                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
             }
         }
     }
@@ -670,7 +690,7 @@ public static void SaltoFase(Phases phase)
     {
         if (ListEvos.Count == 0)
         {
-            StaticRules.SecondEvolutionPhase();
+            MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
         }
         else
         {
@@ -796,39 +816,28 @@ public static void SaltoFase(Phases phase)
     }
     private static void CheckEvolutionRequirements()
     {
-        /*
-        Un ciclo de evolución típica usa los niveles: Level III (Child) → Level IV
-        (Adult) → Perfect → Ultimate.
+        // revisa si la evolucion no se llevo adecuadamente ya sea por efectos especiales
+        if (MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count > 0)
+        {
+            // HAY EVO POSIBLE  
+            // Realizar segundo intento de Evolucion correspondiente 
+            foreach (var Evolucion in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
+            {
+                StaticRules.instance.Evol(Evolucion, MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count);
+            }
+            StaticRules.instance.EfectosDeTurno.Add(Efectos.SinRequerimientos);
+            foreach (var item in StaticRules.instance.EfectosDeTurno)
+            {
+                if (item == Efectos.SinRequerimientos)
+                {
+                    // evolucionar como si nada 
+                    MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.instance.SetEvolution);
 
-        
-        Level III → Level IV usualmente requiere “O” o “X” en su evolución.
+                }
+            }
+        }
 
-        Las evoluciones Perfect y Ultimate usualmente requieren el uso de
-        Winning Percentage Cards (40% | 60% | 80%) u otras que reemplacen
-        estás últimas.
-
-        Si una Evolution Requirements dice “Enviar una carta adicional de tu
-        mano al Dark Area” debes enviar una carta (o el número indicado) de tu
-        mano que no fuera a ser usada para tu Evolution Requirements regular al
-        Dark Area.17
-
-        Si eres incapaz de “Enviar una carta carta adicional de tu mano al Dark
-        Area” o similares requerimientos en medio del Warp Evolution, puedes
-        llevar a cabo cualquier otra evolución antes de esta.
-
-        Cuando usas un efecto o habilidad que dice “Ignora los requerimientos de
-        evolución”, puedes ignorar todo lo escrito en la parte de Evolution
-        Requirements, incluyendo el digimon del que debe evolucionar, el costo
-        de evolución, y cualquier requerimiento adicional marcado, como por
-        ejemplo “Enviar un carta de la mano al Dark Area” o “Solo puede
-        evolucionar de un digimon de atributo Virus”, a menos que las habilidades
-        del Digimon contengan “Los requerimientos de evolución no pueden ser
-        ignorados”.
-
-        No se puede evolucionar a un Digimon que evoluciona usando los Fusion
-        / Appearance Requirements cuando se usa un efecto o habilidad que diga
-        “ignora los Evolution Requirements”
-         */
+        SiguienteFase();
     }
     
     private static void CheckFusionRequirements()
@@ -851,6 +860,11 @@ public static void SaltoFase(Phases phase)
         Evolution / Appearance Requirements cuando se usa un efecto o habilidad
         que diga “Ignora los Fusion Requirements”
          */
+
+        // revisa si existe una carta en evolution box aun , y si existe , revisa si esta es una fusion
+        // realiza apartado de fusion
+
+        SiguienteFase();
     }
 
     private static void CheckAppearanceRequirements()
@@ -887,13 +901,19 @@ public static void SaltoFase(Phases phase)
         Fusion Requirements cuando se está usando un efecto o habilidad que
         indique “Ignora los Requerimientos de Aparición”
          */
+
+        // descarta las cartas usadas y pasamos al la evolucion del rival
+
+        StaticRules.SecondEvolutionPhase();
+        SiguienteFase();
     }
 
-	/// <summary>
+    /// <summary>
     /// Inicial la Battle phase
     /// </summary>
     private static void StartBattlePhase()
     {
+        Debug.Log("Hora de Pelear");
         /*
         
         1. Empezando con el segundo jugador en atacar, si cualquier jugador ha
@@ -933,6 +953,10 @@ public static void SaltoFase(Phases phase)
         aplicará. El jugador con mayor Attack Power gana la batalla; si ambos
         tienen el mismo Attack Power, la batalla termina en empate.
          */
+
+        // Activar habilidad de Digimon dem jugador 2
+
+
     }
 
 	/// <summary>

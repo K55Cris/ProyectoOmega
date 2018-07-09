@@ -7,6 +7,7 @@ public class OptionSlot : Slot
     public bool AddOrRemove = false;
     private bool Vacio=true;
     public CartaDigimon OpCarta;
+    public GameObject CanvasAction;
     public void SetCard(Transform Carta)
     {
     
@@ -26,9 +27,21 @@ public class OptionSlot : Slot
     {
         if (!Vacio)
         {
-      
-            if(StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.SetOptionCard)
-            StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ActivarOption;
+
+            if (StaticRules.NowPhase == StaticRules.Phases.EvolutionPhase)
+            {
+                CanvasAction.SetActive(true);
+            }
+               
         }
+    }
+
+    void OnMouseExit()
+    {
+        CanvasAction.SetActive(false);
+    }
+    public void ActivarOPtion()
+    {
+        OpCarta.Volteo();
     }
 }

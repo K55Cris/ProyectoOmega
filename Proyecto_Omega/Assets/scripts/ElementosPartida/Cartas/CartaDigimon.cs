@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DigiCartas;
 public class CartaDigimon : Carta {
-    
+
     //Es el nivel del digimon (Nvl III, IV, adulto, etc.).
 
     //Datos de la Carta
-    public DigiCarta DatosDigimon;
+    public DigiCarta DatosDigimon = new DigiCarta();
     public bool AddOrRemove;
     public GameObject Front;
     //Las habilidades de support del Digimon. Son las habilidades marcadas con un ■.

@@ -15,11 +15,13 @@ public class NetOcean : MonoBehaviour
     public void RobarInteligente()
     {
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
+      
         Cartas.RemoveAt(Cartas.Count - 1);
         PartidaManager.instance.SetMoveCard(PartidaManager.instance.GetHand(), Dcard.transform);
         Dcard.transform.localPosition = Vector3.zero;
         Dcard.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Dcard.transform.localScale = new Vector3(25, 40, 0.015f);
+        Dcard.Mostrar();
     }
 
 
@@ -30,6 +32,7 @@ public class NetOcean : MonoBehaviour
             if (item.GetComponent<CartaDigimon>().DatosDigimon.Nombre == NombreDigimon)
             {
                 Cartas.Remove(item);
+               
                 return item;
             }
         }

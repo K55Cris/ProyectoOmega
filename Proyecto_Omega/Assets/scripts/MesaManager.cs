@@ -87,11 +87,11 @@ public class MesaManager : MonoBehaviour {
     {
         if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
         {
-            if (Campo1.OptionSlot1.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+            if (Campo1.OptionSlot1.GetComponent<OptionSlot>().OpCarta && Campo1.OptionSlot1.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
                 return Campo1.OptionSlot1;
-            if (Campo1.OptionSlot2.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+            if (Campo1.OptionSlot2.GetComponent<OptionSlot>().OpCarta && Campo1.OptionSlot2.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
                 return Campo1.OptionSlot2;
-            if (Campo1.OptionSlot3.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
+            if (Campo1.OptionSlot3.GetComponent<OptionSlot>().OpCarta && Campo1.OptionSlot3.GetComponent<OptionSlot>().OpCarta.DatosDigimon.id == Dcarta.id)
                 return Campo1.OptionSlot3;
         }
         else
