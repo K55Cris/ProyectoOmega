@@ -13,8 +13,7 @@ public class OptionSlot : Slot
     
         if (Vacio)
         {
-            PartidaManager.instance.SetMoveCard(this.transform,Carta);
-            Carta.GetComponent<CartaDigimon>().AjustarSlot();
+            PartidaManager.instance.SetMoveCard(this.transform,Carta, StaticRules.Ajustar);
             Vacio = false;
             Cartas.Add(Carta);
             OpCarta = Carta.GetComponent<CartaDigimon>();

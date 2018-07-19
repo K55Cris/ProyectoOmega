@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Sound
 {
-    Evolucion, SetCard, Evolucion2
+    Evolucion, SetCard, Evolucion2 , AtaqueA,AtaqueB,AtaqueC
 }
 public class SoundManager : MonoBehaviour {
 
@@ -21,6 +21,11 @@ public class SoundManager : MonoBehaviour {
     public AudioClip SetCard2;
     public AudioClip SetCard3;
     public AudioClip SetCard4;
+
+    [Header("Ataques")]
+    public AudioClip ChoqueCristal;
+    public AudioClip DisparoDeFuego;
+    public AudioClip DisparoElectrico;
 
 
     void Awake()
@@ -83,6 +88,15 @@ public class SoundManager : MonoBehaviour {
                 break;
             case Sound.Evolucion2:
                 audioClip = EvolucionChampion;
+                break;
+            case Sound.AtaqueA:
+                audioClip = DisparoDeFuego;
+                break;
+            case Sound.AtaqueB:
+                audioClip = DisparoElectrico;
+                break;
+            case Sound.AtaqueC:
+                audioClip = ChoqueCristal;
                 break;
             case Sound.SetCard:
                 int ran = Random.Range(1, 4);

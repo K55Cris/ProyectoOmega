@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 public class MovimientoCartas : MonoBehaviour {
     public GameObject particle;
@@ -67,10 +68,44 @@ public class MovimientoCartas : MonoBehaviour {
             Layout.ignoreLayout = false;
             particle.SetActive(false);
         }
+        else
+        {
+            StaticRules.instance.WhosPlayer._Mano.JugarCarta(transform.parent.transform.GetComponent<CartaDigimon>());
+        }
     }
     public void OnMouseOver()
     {
         VentanaMoreInfo.instance.Show(transform.parent.GetComponent<CartaDigimon>().DatosDigimon);
     }
 
+    public void MoverCarta(Transform Destino , UnityAction<Transform, CartaDigimon> LoAction)
+    {
+        StartCoroutine(Transicion(Destino,LoAction));
+    }
+
+    public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon> LoAction)
+    {
+        yield return new WaitForEndOfFrame();
+        if (Destino)
+        {
+            while (transform.parent.position != Destino.position)
+            {
+
+                var heading = Destino.position - transform.parent.position;
+                var distance = heading.magnitude;
+                if (distance < 5)
+                {
+                    break;
+                }
+
+                //var direction = heading / distance; // This is now the normalized direction.
+                //transform.parent.transform.Translate(direction*Time.deltaTime*30);
+
+                transform.parent.position = Vector3.MoveTowards(transform.parent.position, Destino.position, 8);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>());
+
+    }
 }

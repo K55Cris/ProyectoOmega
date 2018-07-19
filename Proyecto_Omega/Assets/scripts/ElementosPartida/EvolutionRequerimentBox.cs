@@ -66,8 +66,10 @@ public class EvolutionRequerimentBox : Slot
         {
             foreach (var item in requerimientos)
             {
+               
                 if (item == "O")
                 {
+                    Debug.Log("Santi");
                     JalarCartaNetOcean(O);
                     Canvas.SetActive(false);
 
@@ -97,9 +99,8 @@ public class EvolutionRequerimentBox : Slot
         {
             if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.Contains(item))
             {
-                PartidaManager.instance.SetMoveCard(this.transform, Carta);
+                PartidaManager.instance.SetMoveCard(this.transform, Carta,StaticRules.Ajustar);
                 ListaRequerimientosAdicionales.Add(Carta);
-                Carta.GetComponent<CartaDigimon>().AjustarSlot();
                 StartCoroutine(QuitarDeListaRequerimientos(item));
                 SoundManager.instance.PlaySfx(Sound.SetCard);
             }
@@ -122,15 +123,20 @@ public class EvolutionRequerimentBox : Slot
     }
     public void JalarCartaNetOcean(Transform Slot)
     {
-        if (MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).childCount > 0)
+        if (MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().Cartas.Count>0)
         {
-            Transform _carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetChild(0);
-            ListaXO.Add(_carta);
-            PartidaManager.instance.SetMoveCard(Slot, _carta);
-            _carta.GetComponent<CartaDigimon>().AjustarSlot();
+  
+            CartaDigimon _carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().Robar();
+            ListaXO.Add(_carta.transform);
             SoundManager.instance.PlaySfx(Sound.SetCard);
+            PartidaManager.instance.SetMoveCard(Slot, _carta.transform, AjusteIntermedio);
         }
+    }
+    public void AjusteIntermedio(CartaDigimon _DCard)
+    {
+        _DCard.AjustarSlot();
 
     }
-   
+
+
 }

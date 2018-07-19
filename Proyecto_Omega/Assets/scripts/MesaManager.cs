@@ -5,6 +5,8 @@ using DigiCartas;
 public class MesaManager : MonoBehaviour {
     public Campos Campo1;
     public Campos Campo2;
+    public string TipoAtaquePlayer1="A";
+    public string TipoAtaquePlayer2="A";
     // Use this for initialization
     public static MesaManager instance;
 
@@ -127,4 +129,5 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
-}
+
+    }

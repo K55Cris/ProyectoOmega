@@ -64,9 +64,8 @@ public class SupportBox : Slot
             {
                 if (!Cambiado)
                 {
-                PartidaManager.instance.SetMoveCard(this.transform, Carta);
-                Carta.GetComponent<CartaDigimon>().AjustarSlot();
-                    Cambiado = true;
+                PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+                Cambiado = true;
                 }
             }
     }

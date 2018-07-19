@@ -15,11 +15,15 @@ public class NetOcean : MonoBehaviour
     public void RobarInteligente()
     {
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
-      
         Cartas.RemoveAt(Cartas.Count - 1);
-        PartidaManager.instance.SetMoveCard(PartidaManager.instance.GetHand(), Dcard.transform);
+        PartidaManager.instance.SetMoveCard(PartidaManager.instance.GetHand(), Dcard.transform, AjustarInterno);
+      
+    }
+
+    public void AjustarInterno(CartaDigimon Dcard)
+    {
         Dcard.transform.localPosition = Vector3.zero;
-        Dcard.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        Dcard.transform.localRotation = Quaternion.Euler(new Vector3(0, -180, 180));
         Dcard.transform.localScale = new Vector3(25, 40, 0.015f);
         Dcard.Mostrar();
     }
@@ -45,16 +49,15 @@ public class NetOcean : MonoBehaviour
         foreach (var item in ListDCards)
         {
             Cartas.Add(item);
-            PartidaManager.instance.SetMoveCard(this.transform, item.transform);
-            item.GetComponent<CartaDigimon>().AjustarSlot();
+            PartidaManager.instance.SetMoveCard(this.transform, item.transform,StaticRules.Ajustar);
         }
         
     }
     public void addNetocean(CartaDigimon Dcard)
     {
         Cartas.Add(Dcard);
-        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform);
-        Dcard.GetComponent<CartaDigimon>().AjustarSlot();
+        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform,StaticRules.Ajustar);
+   
     }
 
     private void Mezclar()

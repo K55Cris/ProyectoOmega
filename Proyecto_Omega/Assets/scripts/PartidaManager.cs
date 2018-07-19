@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DigiCartas;
+using UnityEngine.UI;
+using UnityEngine.Events;
 public class PartidaManager : MonoBehaviour {
 
     public Player Player1;
@@ -9,13 +11,26 @@ public class PartidaManager : MonoBehaviour {
     public GameObject CartaPrefap;
     public Transform ManoPlayer1;
     public Transform ManoPlayer2;
-
+    public Button Listo;
     public static PartidaManager instance;
 
     private void Awake()
     {
         instance = this;
     }
+
+    public string WhoAtackUse(Transform DigimonBoxSlot)
+    {
+        if (DigimonBoxSlot != MesaManager.instance.Campo1.DigimonSlot)
+        {
+            return MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla;
+        }
+        else
+        {
+            return MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla;
+        }
+    }
+
 
     private void Start()
     {
@@ -63,33 +78,38 @@ public class PartidaManager : MonoBehaviour {
             yield return new WaitForSecondsRealtime(0.3f);
 
             CartaDigimon Carta =  MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
-
+            PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
             if (jugador == Player1)
                 jugador._Mano.RecibirCarta(Carta, true);
             else
                 jugador._Mano.RecibirCarta(Carta);
 
-            PartidaManager.instance.SetMoveCard(Mano, Carta.transform);
-            Carta.transform.localPosition = Vector3.zero;
-            Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            Carta.transform.localScale = new Vector3(25, 40, 0.015f);
+            
+           // Carta.transform.localPosition = Vector3.zero;
+            //Carta.transform.localScale = new Vector3(25, 40, 0.015f);
         }
     }
 
     public void TomarCarta(Transform Mano, Player jugador, Transform Deck)
     {
-        GameObject Carta = Deck.transform.GetChild(0).gameObject;
+
+        CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
+
         if (jugador == Player1)
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
         else
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
 
-        PartidaManager.instance.SetMoveCard(Mano,Carta.transform);
-        Carta.transform.localPosition = Vector3.zero;
-        Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        Carta.transform.localScale = new Vector3(25, 40, 0.015f);
+        PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
+
     }
 
+    public void InterAjuste(CartaDigimon Carta)
+    {
+        Carta.transform.localPosition = Vector3.zero;
+        Debug.Log(Carta.DatosDigimon.Nombre);
+        Carta.transform.localScale = new Vector3(25, 40, 0.015f);
+    }
 
 
     public static void Barajear(Transform Deck)
@@ -122,20 +142,24 @@ public class PartidaManager : MonoBehaviour {
             return ManoPlayer2;
         }
     }
-    public void SetMoveCard(Transform Padre,Transform Carta)
+    public void SetMoveCard(Transform Padre,Transform Carta, UnityAction<CartaDigimon> Loaction)
     {
         if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
         {
-            Player1.moveCard(Padre, Carta.GetComponent<CartaDigimon>());
+            Player1.moveCard(Padre, Carta.GetComponent<CartaDigimon>(),Loaction);
         }
         else
         {
-            Player2.moveCard(Padre, Carta.GetComponent<CartaDigimon>());
+            Player2.moveCard(Padre, Carta.GetComponent<CartaDigimon>(), Loaction);
         }
     }
 
     public void TomarOtraCarta()
     {
         MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().RobarInteligente();
+    }
+    public void CambioDePhase(bool swi)
+    {
+        Listo.enabled = swi;
     }
 }
