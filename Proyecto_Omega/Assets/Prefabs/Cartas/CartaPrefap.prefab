@@ -376,6 +376,7 @@ MonoBehaviour:
   particle: {fileID: 1932882780141470}
   Maincam: {fileID: 0}
   Cambio: 0
+  Mover: 1
   Layout: {fileID: 114098053026165320}
   AddOrRemove: 0
   CanvasSeleted: {fileID: 1943381007329836}
@@ -6850,7 +6851,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742074199533164}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1.017336}
   m_Children:
   - {fileID: 224394652319138002}

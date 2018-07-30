@@ -14,6 +14,12 @@ public class ContadorOffencivo : MonoBehaviour
         AtaqueBase = Daño;
         StartCoroutine(EstablecerCantidad(Daño, LoAction));
     }
+    public void Endphase()
+    {
+        PoderDeAtaque = 0;
+        Ataque.color = Color.white;
+        this.gameObject.SetActive(false);
+    }
 
     public void EFECTOS(int cantidad, UnityAction<string> LoAction)
     {

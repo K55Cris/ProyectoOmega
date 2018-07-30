@@ -20,6 +20,7 @@ public class Mano : MonoBehaviour
 
     public void RecibirCarta(CartaDigimon carta, bool PlayerOrIA=false)
     {
+        Debug.Log("Lel");
         Cartas.Add(carta);
         if (PlayerOrIA)
         {

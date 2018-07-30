@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,26 @@ public class EvolutionRequerimentBox : Slot
     public List<Transform> ListaRequerimientosAdicionales = new List<Transform>();
     public List<Transform> ListaXO = new List<Transform>();
     public UnityEvent lol;
+
+    public void NowPhase()
+    {
+        switch (StaticRules.NowPhase)
+        {
+
+            case StaticRules.Phases.PreparationPhase:
+                PreparationPhase();
+                break;
+            default:
+                Debug.Log("Fase no recocida para este Slot");
+                break;
+
+        }
+    }
+
+    private void PreparationPhase()
+    {
+        Activado = false;
+    }
 
     public void GetX()
     {
@@ -69,7 +90,6 @@ public class EvolutionRequerimentBox : Slot
                
                 if (item == "O")
                 {
-                    Debug.Log("Santi");
                     JalarCartaNetOcean(O);
                     Canvas.SetActive(false);
 
@@ -114,6 +134,7 @@ public class EvolutionRequerimentBox : Slot
 
     void OnMouseDown()
     {
+        NowPhase();
         if(!Activado)
         Canvas.SetActive(true);
     }
@@ -128,6 +149,7 @@ public class EvolutionRequerimentBox : Slot
   
             CartaDigimon _carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().Robar();
             ListaXO.Add(_carta.transform);
+            _carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
             PartidaManager.instance.SetMoveCard(Slot, _carta.transform, AjusteIntermedio);
         }

@@ -16,11 +16,20 @@ public class Player : MonoBehaviour {
     {
         // Card.transform.SetParent(Padre);
         LoAction = Action;
+        _Mano.JugarCarta(Card);
+        Card.Front.GetComponent<MovimientoCartas>().MoverCarta(Padre, Ajustar);
+    }
+    public void moveHand(Transform Padre, CartaDigimon Card, UnityAction<CartaDigimon> Action)
+    {
+        // Card.transform.SetParent(Padre);
+        LoAction = Action;
+        _Mano.RecibirCarta(Card);
         Card.Front.GetComponent<MovimientoCartas>().MoverCarta(Padre, Ajustar);
     }
     public void Ajustar(Transform Padre, CartaDigimon LoCard)
     {
         // se llama cuando la carta a llegado a su destino :V
+        
         LoCard.transform.SetParent(Padre);
         if (LoAction != null)
             LoAction.Invoke(LoCard);

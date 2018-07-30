@@ -43,7 +43,7 @@ public class DarkArea : MonoBehaviour {
             moviendo = true;
             foreach (var item in DigiCartas)
             {
-                PartidaManager.instance.SetMoveCard(this.transform, item.transform, StaticRules.Ajustar);
+                PartidaManager.instance.SetMoveCard(this.transform, item.transform, InterAutoAjuste);
                 SoundManager.instance.PlaySfx(Sound.SetCard);
                 if (item.DatosDigimon.id!=7)
                 item.Mostrar();
@@ -51,6 +51,8 @@ public class DarkArea : MonoBehaviour {
                 item.transform.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
                 yield return new WaitForSeconds(segundos);
             }
+            yield return new WaitForSeconds(segundos);
+            yield return new WaitForEndOfFrame();
             if (TermineDescarte != null)
             {
                 TermineDescarte("Completado");
@@ -58,8 +60,23 @@ public class DarkArea : MonoBehaviour {
                 DigiCartas = new List<CartaDigimon>();
                 TermineDescarte = null;
             }
+            else
+            {
+                moviendo = false;
+                DigiCartas = new List<CartaDigimon>();
+                TermineDescarte = null;
+            }
         }
       
-    } 
+    }
+
+    public void InterAutoAjuste(CartaDigimon carta)
+    {
+        Vector3 Pos = new Vector3(0, 0, 0 - ((transform.childCount - 4) * 50));
+        carta.transform.localRotation = new Quaternion(0, 0, 0,0);
+        carta.transform.localPosition = Pos;
+        carta.transform.localScale= new Vector3(1, 1, 0.01f);
+        carta.Front.GetComponent<MovimientoCartas>().Mover = false;
+    }
  
 }

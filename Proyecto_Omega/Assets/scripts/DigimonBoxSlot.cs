@@ -12,6 +12,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public ParticleSystem AtaqueA;
     public ParticleSystem AtaqueB;
     public ContadorOffencivo CanvasContador;
+    public List<CartaDigimon> Evoluciones;
 
     public void NowPhase()
     {
@@ -29,8 +30,8 @@ public class DigimonBoxSlot : MonoBehaviour {
             case StaticRules.Phases.FusionRequirements:
                 FusionRequirements();
                 break;
-            case StaticRules.Phases.BattlePhase:
-
+            case StaticRules.Phases.EndPhase:
+                EndPhase();
                 break;
             default:
                 Debug.Log("Fase no recocida para este Slot");
@@ -62,6 +63,10 @@ public class DigimonBoxSlot : MonoBehaviour {
     {
         CanvasContador.gameObject.SetActive(true);
         CanvasContador.Empezar(Ataque, LoUnityAction);
+    }
+    public void EndPhase()
+    {
+        CanvasContador.Endphase();
     }
     public void IniciarAtaque()
     {
@@ -105,6 +110,7 @@ public class DigimonBoxSlot : MonoBehaviour {
                         StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Carta);
                         _DigiCarta = Carta.GetComponent<CartaDigimon>();
                         Cambiado = true;
+                        _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
                         SoundManager.instance.PlaySfx(Sound.SetCard);
                     }
                 }
@@ -112,8 +118,9 @@ public class DigimonBoxSlot : MonoBehaviour {
         }
         else
         {
-            PartidaManager.instance.SetMoveCard(this.transform, Carta,InterAutoAjuste);
+            PartidaManager.instance.SetMoveCard(this.transform, Carta,InterAutoAjuste2);
             _DigiCarta = Carta.GetComponent<CartaDigimon>();
+            _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
         }
      
@@ -123,8 +130,10 @@ public class DigimonBoxSlot : MonoBehaviour {
     {
         PartidaManager.instance.SetMoveCard(this.transform,Evolucion,InterAutoAjuste);
         _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
+       
         Evolucion.localPosition = new Vector3(0, 0, 0 + transform.childCount);
         Evolucion.GetComponent<CartaDigimon>().Volteo();
+        Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
     }
 
     public void Evolucionar(string Nivel)
@@ -156,10 +165,23 @@ public class DigimonBoxSlot : MonoBehaviour {
     {
         StartCoroutine(AutoAjustar(carta.transform));
     }
+    public void InterAutoAjuste2(CartaDigimon carta)
+    {
+        StartCoroutine(AutoAjustarRoquin(carta.transform));
+    }
 
     public IEnumerator AutoAjustar(Transform Carta)
-{
+    {
     yield return new WaitForEndOfFrame();
-    Carta.localPosition = new Vector3(0, 0, -100 + ((transform.childCount-4)*500));
-}
+    Carta.localPosition = new Vector3(0, 0, -100 + ((transform.childCount-6)*500));
+    Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
+    Carta.localScale = new Vector3(1, 1, 0.015f);
+    }
+    public IEnumerator AutoAjustarRoquin(Transform Carta)
+    {
+        yield return new WaitForEndOfFrame();
+        Carta.localPosition = new Vector3(0, 0, 400);
+        Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        Carta.localScale = new Vector3(1, 1, 0.015f);
+    }
 }

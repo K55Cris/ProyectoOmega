@@ -7,6 +7,7 @@ public class MovimientoCartas : MonoBehaviour {
     public GameObject particle;
     public Camera Maincam;
     public bool Cambio=false;
+    public bool Mover = true;
     public LayoutElement Layout;
     // Use this for initialization
     float distancia;
@@ -19,7 +20,7 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase)
+        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase&&Mover)
         { 
             Layout.ignoreLayout = true;
             particle.SetActive(true);
@@ -38,18 +39,20 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase )
+        if (Mover)
         {
-            Vector3 temp = Input.mousePosition;
-            temp.z = this.distancia;
-            transform.parent.position = Maincam.ScreenToWorldPoint(new Vector3(temp.x, temp.y, 90));
+            if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase)
+            {
+                Vector3 temp = Input.mousePosition;
+                temp.z = this.distancia;
+                transform.parent.position = Maincam.ScreenToWorldPoint(new Vector3(temp.x, temp.y, 90));
+            }
         }
-
     }
     private void OnMouseUp()
     {
 
-        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase)
+        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase&& Mover)
         {
             // Reralizar Cambio 
             // Obtener Slot de la Carta
@@ -67,9 +70,12 @@ public class MovimientoCartas : MonoBehaviour {
             transform.parent.localPosition = Vector3.zero;
             Layout.ignoreLayout = false;
             particle.SetActive(false);
+           
         }
         else
         {
+            Debug.LogError("Movido");
+            Mover = false;
             StaticRules.instance.WhosPlayer._Mano.JugarCarta(transform.parent.transform.GetComponent<CartaDigimon>());
         }
     }
@@ -102,7 +108,7 @@ public class MovimientoCartas : MonoBehaviour {
                 //transform.parent.transform.Translate(direction*Time.deltaTime*30);
 
                 transform.parent.position = Vector3.MoveTowards(transform.parent.position, Destino.position, 8);
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSecondsRealtime(0.01F);
             }
         }
         LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>());

@@ -17,6 +17,7 @@ public class OptionSlot : Slot
             Vacio = false;
             Cartas.Add(Carta);
             OpCarta = Carta.GetComponent<CartaDigimon>();
+            OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)
                StaticRules.NowPreparationPhase=StaticRules.PreparationPhase.SetOptionCard;

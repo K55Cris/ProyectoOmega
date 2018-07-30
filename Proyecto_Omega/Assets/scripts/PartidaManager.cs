@@ -12,6 +12,8 @@ public class PartidaManager : MonoBehaviour {
     public Transform ManoPlayer1;
     public Transform ManoPlayer2;
     public Button Listo;
+    public Image PhasesPanel;
+    public Text PhasesText;
     public static PartidaManager instance;
 
     private void Awake()
@@ -21,7 +23,7 @@ public class PartidaManager : MonoBehaviour {
 
     public string WhoAtackUse(Transform DigimonBoxSlot)
     {
-        if (DigimonBoxSlot != MesaManager.instance.Campo1.DigimonSlot)
+        if (DigimonBoxSlot == MesaManager.instance.Campo1.DigimonSlot)
         {
             return MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla;
         }
@@ -94,13 +96,13 @@ public class PartidaManager : MonoBehaviour {
     {
 
         CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
-
+        PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
         if (jugador == Player1)
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
         else
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
 
-        PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
+       
 
     }
 
@@ -153,6 +155,17 @@ public class PartidaManager : MonoBehaviour {
             Player2.moveCard(Padre, Carta.GetComponent<CartaDigimon>(), Loaction);
         }
     }
+    public void SetMoveHand(Transform Padre, Transform Carta, UnityAction<CartaDigimon> Loaction)
+    {
+        if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+        {
+            Player1.moveHand(Padre, Carta.GetComponent<CartaDigimon>(), Loaction);
+        }
+        else
+        {
+            Player2.moveHand(Padre, Carta.GetComponent<CartaDigimon>(), Loaction);
+        }
+    }
 
     public void TomarOtraCarta()
     {
@@ -160,6 +173,11 @@ public class PartidaManager : MonoBehaviour {
     }
     public void CambioDePhase(bool swi)
     {
-        Listo.enabled = swi;
+        Listo.interactable = swi;
+    }
+    public void Cambio(string PhaseName)
+    {
+        PhasesText.text = PhaseName;
+        PhasesPanel.transform.GetComponent<Animator>().Play("StartPhase");
     }
 }

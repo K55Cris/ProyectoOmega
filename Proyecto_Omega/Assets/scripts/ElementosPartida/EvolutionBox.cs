@@ -64,28 +64,34 @@ public class EvolutionBox : Slot
     }
     public void SetDigimon(Transform Carta)
     {
-            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III"&& StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>()))
+        Debug.Log(!Cambiado);
+        if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III"&& StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>()))
+        {
+            Debug.LogError("1");
+            if (!Cambiado)
             {
-                if (!Cambiado)
-                {
+                Debug.LogError("2");
                 if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                 {
+                    Debug.LogError("3");
                     StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
-
                     PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
-                    Cambiado = true;
                     Cartas.Add(Carta);
+                    Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                 }
-                }
             }
-            else if (Cartas.Count>0)
+            else
             {
+                Debug.LogError("ya Cambio el digimon Roquin");
+            }
+        }
+        else if (Cartas.Count>0)
+        {
             if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
             {
                 // obtener evolucion
                 CartaDigimon Evo = Cartas[Cartas.Count-1].GetComponent<CartaDigimon>();
-
                 foreach (string item in Carta.transform.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
                 {
                     string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
@@ -94,13 +100,12 @@ public class EvolutionBox : Slot
                         PartidaManager.instance.SetMoveCard(this.transform, Carta,StaticRules.Ajustar);
                         Cambiado = true;
                         Cartas.Add(Carta);
+                        Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                         SoundManager.instance.PlaySfx(Sound.SetCard);
-
                     }
                     Debug.Log(nameDigi);
                 }
             }
-            }
-                
+        }  
     }
 }

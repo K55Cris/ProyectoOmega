@@ -16,7 +16,7 @@ public class NetOcean : MonoBehaviour
     {
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
         Cartas.RemoveAt(Cartas.Count - 1);
-        PartidaManager.instance.SetMoveCard(PartidaManager.instance.GetHand(), Dcard.transform, AjustarInterno);
+        PartidaManager.instance.SetMoveHand(PartidaManager.instance.GetHand(), Dcard.transform, AjustarInterno);
       
     }
 
