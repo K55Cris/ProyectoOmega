@@ -12,7 +12,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public ParticleSystem AtaqueA;
     public ParticleSystem AtaqueB;
     public ContadorOffencivo CanvasContador;
-    public List<CartaDigimon> Evoluciones;
+    public List<CartaDigimon> Evoluciones= new List<CartaDigimon>();
 
     public void NowPhase()
     {
@@ -91,6 +91,10 @@ public class DigimonBoxSlot : MonoBehaviour {
       // avisar que el point calculation a terminado
 
     }
+    public void LostDigimon()
+    {
+
+    }
     
     public void SetDigimon(Transform Carta)
     {
@@ -114,6 +118,10 @@ public class DigimonBoxSlot : MonoBehaviour {
                         SoundManager.instance.PlaySfx(Sound.SetCard);
                     }
                 }
+            }
+            else
+            {
+                Debug.LogError("ya Cambio el digimon Roquin");
             }
         }
         else

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    public List<Transform> Cartas= new List<Transform>();
+    public List<CartaDigimon> Cartas= new List<CartaDigimon>();
 
 
 }

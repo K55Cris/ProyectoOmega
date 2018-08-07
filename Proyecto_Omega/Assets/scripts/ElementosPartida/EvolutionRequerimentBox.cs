@@ -64,7 +64,7 @@ public class EvolutionRequerimentBox : Slot
         {
             if (i == 0)
             {
-                CodeRequest(Cartas[i],MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.transform);
+                CodeRequest(Cartas[i],MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta);
                 Debug.Log(Cartas[i] + ""+i);
             }
             else
@@ -78,10 +78,9 @@ public class EvolutionRequerimentBox : Slot
 
     }
 
-    public void CodeRequest(Transform DEvo, Transform Base)
+    public void CodeRequest(CartaDigimon DEvo, CartaDigimon Base)
     {
-        List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(DEvo.GetComponent<CartaDigimon>().DatosDigimon,
-            Base.GetComponent<CartaDigimon>().DatosDigimon);
+        List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(DEvo.DatosDigimon,Base.DatosDigimon);
 
         if (requerimientos.Count > 0)
         {

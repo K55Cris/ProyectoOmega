@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EvolutionBox : Slot
 {
-    public bool Cambiado = false;
     public GameObject Canvas;
     public void NowPhase()
     {
@@ -64,27 +63,19 @@ public class EvolutionBox : Slot
     }
     public void SetDigimon(Transform Carta)
     {
-        Debug.Log(!Cambiado);
+
         if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III"&& StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>()))
         {
             Debug.LogError("1");
-            if (!Cambiado)
-            {
-                Debug.LogError("2");
                 if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                 {
                     Debug.LogError("3");
                     StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
                     PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
-                    Cartas.Add(Carta);
+                    Cartas.Add(Carta.GetComponent<CartaDigimon>());
                     Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
-                }
-            }
-            else
-            {
-                Debug.LogError("ya Cambio el digimon Roquin");
-            }
+                }   
         }
         else if (Cartas.Count>0)
         {
@@ -98,8 +89,7 @@ public class EvolutionBox : Slot
                     if (item.Contains(nameDigi))
                     {
                         PartidaManager.instance.SetMoveCard(this.transform, Carta,StaticRules.Ajustar);
-                        Cambiado = true;
-                        Cartas.Add(Carta);
+                        Cartas.Add(Carta.GetComponent<CartaDigimon>());
                         Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                         SoundManager.instance.PlaySfx(Sound.SetCard);
                     }

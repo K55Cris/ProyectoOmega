@@ -6,6 +6,7 @@ public class SupportBox : Slot
 {
     public bool Cambiado = false;
 
+
     public void NowPhase()
     {
         switch (StaticRules.NowPhase)
@@ -65,6 +66,7 @@ public class SupportBox : Slot
                 if (!Cambiado)
                 {
                 PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+                Cartas.Add(Carta.GetComponent<CartaDigimon>());
                 Cambiado = true;
                 }
             }

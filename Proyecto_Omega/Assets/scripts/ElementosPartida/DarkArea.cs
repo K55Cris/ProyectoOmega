@@ -7,6 +7,7 @@ using DigiCartas;
 public class DarkArea : MonoBehaviour {
 
     public List<CartaDigimon> DigiCartas = new List<CartaDigimon>();
+    public List<CartaDigimon> _Cartas = new List<CartaDigimon>();
     public bool moviendo = false;
     public UnityAction<string> TermineDescarte;
 
@@ -21,13 +22,11 @@ public class DarkArea : MonoBehaviour {
     }
     public void SetCard(Transform Carta)
     {
-        PartidaManager.instance.SetMoveCard(this.transform, Carta,Ajuste);
+        SoundManager.instance.PlaySfx(Sound.SetCard);
+        _Cartas.Add(Carta.GetComponent<CartaDigimon>());
+        PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
     }
-    public void Ajuste(CartaDigimon _carta)
-    {
-        _carta.transform.localScale = new Vector3(1, 1, 0.015f);
-        _carta.transform.localPosition = new Vector3(0, 0, (-100 + (transform.childCount)*10));
-    }
+
 
     public void AddListDescarte(CartaDigimon Dcarta, float segundos)
     {
@@ -38,20 +37,27 @@ public class DarkArea : MonoBehaviour {
     public IEnumerator MoviendiaDarkArea(float segundos)
     {
         yield return new WaitForEndOfFrame();
+      
         if (!moviendo)
         {
             moviendo = true;
             foreach (var item in DigiCartas)
             {
-                PartidaManager.instance.SetMoveCard(this.transform, item.transform, InterAutoAjuste);
-                SoundManager.instance.PlaySfx(Sound.SetCard);
-                if (item.DatosDigimon.id!=7)
-                item.Mostrar();
-
-                item.transform.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
-                yield return new WaitForSeconds(segundos);
+                if (!_Cartas.Contains(item))
+                {
+                    _Cartas.Add(item);
+                    PartidaManager.instance.SetMoveCard(this.transform, item.transform, InterAutoAjuste);
+                    SoundManager.instance.PlaySfx(Sound.SetCard);
+                    if (item.DatosDigimon.id != 7)
+                        item.Mostrar();
+                    item.transform.localPosition = new Vector3(0, 0, (-100 - transform.childCount));
+                    yield return new WaitForSeconds(segundos);
+                }
             }
             yield return new WaitForSeconds(segundos);
+            yield return new WaitForSeconds(segundos);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             if (TermineDescarte != null)
             {
