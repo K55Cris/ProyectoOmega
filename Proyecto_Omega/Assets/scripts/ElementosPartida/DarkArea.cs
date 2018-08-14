@@ -18,7 +18,8 @@ public class DarkArea : MonoBehaviour {
 
     public void Vaciar()
     {
-    DigiCartas = new List<CartaDigimon>();
+        DigiCartas = new List<CartaDigimon>();
+        _Cartas = new List<CartaDigimon>();
     }
     public void SetCard(Transform Carta)
     {
@@ -30,7 +31,9 @@ public class DarkArea : MonoBehaviour {
 
     public void AddListDescarte(CartaDigimon Dcarta, float segundos)
     {
+        if(Dcarta)
         DigiCartas.Add(Dcarta);
+
         StartCoroutine(MoviendiaDarkArea(segundos));
     }
 
@@ -83,6 +86,7 @@ public class DarkArea : MonoBehaviour {
         carta.transform.localPosition = Pos;
         carta.transform.localScale= new Vector3(1, 1, 0.01f);
         carta.Front.GetComponent<MovimientoCartas>().Mover = false;
+        carta.Front.GetComponent<MovimientoCartas>().AddOrRemove= false;
     }
  
 }

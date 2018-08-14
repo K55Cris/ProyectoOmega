@@ -20,12 +20,16 @@ public class Mano : MonoBehaviour
 
     public void RecibirCarta(CartaDigimon carta, bool PlayerOrIA=false)
     {
-        Debug.Log("Lel");
         Cartas.Add(carta);
+     
         if (PlayerOrIA)
         {
             carta.Mostrar();
-            carta.transform.localRotation = Quaternion.Euler(new Vector3(0, -180, 180));
+          //  carta.transform.localRotation = Quaternion.Euler(new Vector3(0, -180, 180));
+        }
+        else
+        {
+
         }
        
     }

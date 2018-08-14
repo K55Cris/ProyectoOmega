@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DigiCartas;
 public class NetOcean : MonoBehaviour
 {
     public List<CartaDigimon> Cartas;
-
+    public UnityAction<string> Loaction;
     public CartaDigimon Robar()
     {
+        if (Cartas.Count == 0)
+            return null;
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
         Cartas.RemoveAt(Cartas.Count - 1);
         return Dcard;
@@ -43,9 +46,9 @@ public class NetOcean : MonoBehaviour
         return null;
     }
 
-    public void Reiniciar()
+    public void Reiniciar(UnityAction<string> LoAction)
     {
-        
+        this.Loaction = LoAction;
         // Dark Arena ---
         List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas;
       //  Iteracion(ListDCardsDarkArea);
@@ -62,26 +65,34 @@ public class NetOcean : MonoBehaviour
         List<CartaDigimon> ListDCardSuport = MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<SupportBox>().Cartas;
         //  Iteracion(ListDCardsDarkArea);
         sendDarkarea(ListDCardSuport);
-        // Option slot 1
-        List<CartaDigimon> ListDCardOption = MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1).GetComponent<OptionSlot>().Cartas;
-       // Iteracion(ListDCardOption);
+
+        // Option slots 1,2,3
+        List<CartaDigimon> ListDCardOption= new List<CartaDigimon>();
+        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1));
+        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot2));
+        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot3));
         sendDarkarea(ListDCardOption);
-        // Option slot 2
-        List<CartaDigimon> ListDCardOption2 = MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot2).GetComponent<OptionSlot>().Cartas;
-       // Iteracion(ListDCardOption2);
-        sendDarkarea(ListDCardOption2);
-        // Option slot 3
-        List<CartaDigimon> ListDCardOption3 = MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot3).GetComponent<OptionSlot>().Cartas;
-      //  Iteracion(ListDCardOption3);
-        sendDarkarea(ListDCardOption3);
+
         // DigimonBox Slot
         List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
         sendDarkarea(ListDCardDigimon);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().LostDigimon(null);
         // Mano   --------------------------
         List<CartaDigimon> ListDCardMano = StaticRules.instance.WhosPlayer._Mano.Cartas;
         Debug.Log("MAno:"+ListDCardMano.Count);
         sendDarkarea(ListDCardMano);
     }
+
+    public void ListaCartasOptionSlots(List<CartaDigimon> ListDCards, Transform Slot)
+    {
+        CartaDigimon OpCard = Slot.GetComponent<OptionSlot>().GetOpCard();
+        if (OpCard)
+        {
+            ListDCards.Add(OpCard);
+            Slot.GetComponent<OptionSlot>().Vacio = true;
+        }
+    }
+
     public void Iteracion(List<CartaDigimon> ListaCartas)
     {
         Debug.Log(ListaCartas.Count);
@@ -113,11 +124,13 @@ public class NetOcean : MonoBehaviour
 
     public void addNetocean(CartaDigimon Dcard)
     {
+
         if (!Cartas.Contains(Dcard))
         {
             Cartas.Add(Dcard);
             StartCoroutine(WhaitFrame(Dcard));
         }
+
     }
     public void InterAutoAjuste(CartaDigimon carta)
     {
@@ -126,6 +139,12 @@ public class NetOcean : MonoBehaviour
         carta.transform.localRotation = new Quaternion(0, 0, 0, 0);
         carta.transform.localPosition = Pos;
         carta.Front.GetComponent<MovimientoCartas>().Mover = false;
+        if (Loaction != null)
+        {
+            Loaction("Seguir");
+            Loaction = null;
+        }
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().Vaciar();
     }
     private void Mezclar()
     {

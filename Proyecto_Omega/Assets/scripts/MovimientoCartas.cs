@@ -41,7 +41,9 @@ public class MovimientoCartas : MonoBehaviour {
     {
         if (Mover)
         {
-            if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase)
+            if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase &&
+                StaticRules.NowPhase != StaticRules.Phases.EndPhase && StaticRules.NowPhase
+                != StaticRules.Phases.GameSetup)
             {
                 Vector3 temp = Input.mousePosition;
                 temp.z = this.distancia;
@@ -106,8 +108,8 @@ public class MovimientoCartas : MonoBehaviour {
 
                 //var direction = heading / distance; // This is now the normalized direction.
                 //transform.parent.transform.Translate(direction*Time.deltaTime*30);
-
-                transform.parent.position = Vector3.MoveTowards(transform.parent.position, Destino.position, 8);
+                float step = 500 * Time.deltaTime;
+                transform.parent.position = Vector3.MoveTowards(transform.parent.position, Destino.position, step);
                 yield return new WaitForSecondsRealtime(0.01F);
             }
         }

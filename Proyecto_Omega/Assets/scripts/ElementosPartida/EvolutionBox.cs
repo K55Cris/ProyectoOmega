@@ -66,10 +66,8 @@ public class EvolutionBox : Slot
 
         if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III"&& StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>()))
         {
-            Debug.LogError("1");
                 if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                 {
-                    Debug.LogError("3");
                     StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
                     PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
                     Cartas.Add(Carta.GetComponent<CartaDigimon>());

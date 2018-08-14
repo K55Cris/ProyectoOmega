@@ -11,11 +11,16 @@ public class Player : MonoBehaviour {
     public List<int> IDCartasMazo;
     public int PuntosDeVida;
     private UnityAction<CartaDigimon> LoAction;
+    private UnityAction<CartaDigimon> LoActionHand;
 
     public void moveCard(Transform Padre, CartaDigimon Card, UnityAction<CartaDigimon> Action)
     {
         // Card.transform.SetParent(Padre);
+        if(Padre.name!="Espacio")
         LoAction = Action;
+        else
+        LoActionHand = Action;
+
         _Mano.JugarCarta(Card);
         Card.Front.GetComponent<MovimientoCartas>().MoverCarta(Padre, Ajustar);
     }
@@ -31,9 +36,20 @@ public class Player : MonoBehaviour {
         // se llama cuando la carta a llegado a su destino :V
         
         LoCard.transform.SetParent(Padre);
-        if (LoAction != null)
-            LoAction.Invoke(LoCard);
-
+        if (Padre.name != "Espacio")
+        {
+            if (LoAction != null)
+            {
+                LoAction.Invoke(LoCard);
+            }
+        }
+        else
+        {
+            if (LoActionHand != null)
+            {
+                LoActionHand.Invoke(LoCard);
+            }
+        }
     }
 
 }

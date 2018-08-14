@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DigimonBoxSlot : MonoBehaviour {
     public bool Cambiado = false;
     public CartaDigimon _DigiCarta;
+    public CartaDigimon DRoquin;
     public GameObject AuraEvolucion;
     public GameObject EnergiaEvolucion;
     public ParticleSystem DEbuff;
@@ -91,9 +92,22 @@ public class DigimonBoxSlot : MonoBehaviour {
       // avisar que el point calculation a terminado
 
     }
-    public void LostDigimon()
+    public void LostDigimon(UnityAction<string> Loaction)
     {
-
+        MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().setAction(Loaction);
+        if (Evoluciones.Count == 0)
+        {
+            if (Loaction != null)
+            {
+                Loaction("Solo esta el Roquin");
+            }
+        }  
+        foreach (var item in Evoluciones)
+        {
+            // mandamos a la dark area las evoluciones del jugador perdedor
+            MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+        }
+        _DigiCarta = DRoquin;
     }
     
     public void SetDigimon(Transform Carta)
@@ -115,6 +129,7 @@ public class DigimonBoxSlot : MonoBehaviour {
                         _DigiCarta = Carta.GetComponent<CartaDigimon>();
                         Cambiado = true;
                         _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
+                        DRoquin = Carta.GetComponent<CartaDigimon>();
                         SoundManager.instance.PlaySfx(Sound.SetCard);
                     }
                 }
@@ -128,6 +143,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         {
             PartidaManager.instance.SetMoveCard(this.transform, Carta,InterAutoAjuste2);
             _DigiCarta = Carta.GetComponent<CartaDigimon>();
+            DRoquin = Carta.GetComponent<CartaDigimon>();
             _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
         }

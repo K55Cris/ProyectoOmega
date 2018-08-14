@@ -38,7 +38,8 @@ public class ContadorOffencivo : MonoBehaviour
         {
             // Buffo
             Ataque.color = Color.green;
-            for (int i = PoderDeAtaque; i < cantidad; i+=5)
+            int DIVISOR = cantidad / 60;
+            for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {
                 Ataque.text = i.ToString();
                 yield return new WaitForSecondsRealtime(0.05f);

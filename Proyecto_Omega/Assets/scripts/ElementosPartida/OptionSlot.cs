@@ -17,7 +17,6 @@ public class OptionSlot : Slot
         {
             PartidaManager.instance.SetMoveCard(this.transform,Carta, StaticRules.Ajustar);
             Vacio = false;
-            Cartas.Add(Carta.GetComponent<CartaDigimon>());
             OpCarta = Carta.GetComponent<CartaDigimon>();
             OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
@@ -45,6 +44,10 @@ public class OptionSlot : Slot
         }
     }
 
+    public CartaDigimon GetOpCard()
+    {
+        return OpCarta;
+    }
     void OnMouseExit()
     {
         CanvasAction.SetActive(false);
@@ -52,5 +55,20 @@ public class OptionSlot : Slot
     public void ActivarOPtion()
     {
         OpCarta.Volteo();
+    }
+    public void Descartar()
+    {
+        CanvasAction.SetActive(false);
+        // Descartar carta 
+        if (OpCarta)
+        {
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(OpCarta.transform);
+            Vaciar();
+        }
+    }
+    public void Vaciar()
+    {
+        OpCarta = null;
+        Vacio = true;
     }
 }

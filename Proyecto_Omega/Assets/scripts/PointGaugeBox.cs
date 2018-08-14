@@ -43,6 +43,13 @@ public class PointGaugeBox : MonoBehaviour
                 Padre = PosPuntuacion[0];
                 break;
         }
-        PartidaManager.instance.SetMoveCard(Padre,Dcard.transform,StaticRules.Ajustar);
+
+        if (point <= 0)
+        {
+            StaticRules.Victori();
+        }
+        else {
+            PartidaManager.instance.SetMoveCard(Padre, Dcard.transform, StaticRules.Ajustar);
+        }
     }
 }

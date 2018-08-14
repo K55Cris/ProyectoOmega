@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour {
     public AudioClip DisparoDeFuego;
     public AudioClip DisparoElectrico;
 
-
+    public AudioClip recompesas;
     void Awake()
     {
         if (instance == null)

@@ -4,6 +4,7 @@ using UnityEngine;
 using DigiCartas;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 public class PartidaManager : MonoBehaviour {
 
     public Player Player1;
@@ -15,6 +16,7 @@ public class PartidaManager : MonoBehaviour {
     public Image PhasesPanel;
     public Text PhasesText;
     public static PartidaManager instance;
+    
 
     private void Awake()
     {
@@ -96,21 +98,24 @@ public class PartidaManager : MonoBehaviour {
     {
 
         CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
+        if (Carta)
+        { 
         PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
         if (jugador == Player1)
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
         else
             jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
-
-       
-
+        }
     }
 
     public void InterAjuste(CartaDigimon Carta)
     {
         Carta.transform.localPosition = Vector3.zero;
+        Carta.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Carta.Mostrar();
         Debug.Log(Carta.DatosDigimon.Nombre);
         Carta.transform.localScale = new Vector3(25, 40, 0.015f);
+        Carta.Front.GetComponent<MovimientoCartas>().Mover = true;
     }
 
 
@@ -179,5 +184,13 @@ public class PartidaManager : MonoBehaviour {
     {
         PhasesText.text = PhaseName;
         PhasesPanel.transform.GetComponent<Animator>().Play("StartPhase");
+    }
+    public void cambioEcena()
+    {
+        Invoke("change", 4f);
+    }
+    public void change()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

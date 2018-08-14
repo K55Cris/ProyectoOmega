@@ -120,7 +120,6 @@ public class MesaManager : MonoBehaviour {
             {
                 Vector3 PosCampo = item.position;
                 float dist = Vector3.Distance(LocalPos, PosCampo);
-                Debug.Log(dist + " " + item.name);
                 if (dist < 25)
                 {
                     return item;

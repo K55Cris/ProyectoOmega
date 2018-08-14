@@ -33,7 +33,12 @@ public class EvolutionRequerimentBox : Slot
     {
         Activado = false;
     }
-
+    public void EndEvolution()
+    {
+        ListaRequerimientos = new List<string>();
+        ListaXO = new List<Transform>();
+        ListaRequerimientosAdicionales = new List<Transform>();
+    }
     public void GetX()
     {
         Debug.Log(StaticRules.NowPhase);
