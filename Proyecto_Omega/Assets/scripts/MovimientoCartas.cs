@@ -7,7 +7,7 @@ public class MovimientoCartas : MonoBehaviour {
     public GameObject particle;
     public Camera Maincam;
     public bool Cambio=false;
-    public bool Mover = true;
+    public bool Mover = false;
     public LayoutElement Layout;
     // Use this for initialization
     float distancia;
@@ -20,15 +20,15 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase&&Mover)
+       if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase && Mover)
         { 
             Layout.ignoreLayout = true;
-            particle.SetActive(true);
+           
             this.distancia = Vector3.Distance(Maincam.transform.position, this.transform.position);
         }
         else
         {
-            if (transform.parent.transform.parent.name.Contains("Option Slot") | transform.parent.transform.parent.name.Contains("Espacio"))
+            if (transform.parent.transform.parent.name.Contains("Espacio")&& StaticRules.NowPhase == StaticRules.Phases.DiscardPhase)
             {
                 AddOrRemove = !AddOrRemove;
                 StaticRules.instance.AddListDiscard(transform.parent.gameObject, AddOrRemove);
@@ -41,12 +41,11 @@ public class MovimientoCartas : MonoBehaviour {
     {
         if (Mover)
         {
-            if (StaticRules.NowPhase != StaticRules.Phases.DiscardPhase &&
-                StaticRules.NowPhase != StaticRules.Phases.EndPhase && StaticRules.NowPhase
-                != StaticRules.Phases.GameSetup)
+            if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase )
             {
                 Vector3 temp = Input.mousePosition;
                 temp.z = this.distancia;
+                particle.SetActive(true);
                 transform.parent.position = Maincam.ScreenToWorldPoint(new Vector3(temp.x, temp.y, 90));
             }
         }
@@ -115,5 +114,12 @@ public class MovimientoCartas : MonoBehaviour {
         }
         LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>());
 
+    }
+    public void disebleCard()
+    {
+        Mover = false;
+        particle.SetActive(false);
+        AddOrRemove = false;
+        CanvasSeleted.SetActive(false);
     }
 }

@@ -115,7 +115,6 @@ public class PartidaManager : MonoBehaviour {
         Carta.Mostrar();
         Debug.Log(Carta.DatosDigimon.Nombre);
         Carta.transform.localScale = new Vector3(25, 40, 0.015f);
-        Carta.Front.GetComponent<MovimientoCartas>().Mover = true;
     }
 
 
@@ -192,5 +191,12 @@ public class PartidaManager : MonoBehaviour {
     public void change()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+    public void ActivateHand(bool sw)
+    {
+        foreach (CartaDigimon item in StaticRules.instance.WhosPlayer._Mano.Cartas)
+        {
+            item.Front.GetComponent<MovimientoCartas>().Mover = sw;
+        }
     }
 }

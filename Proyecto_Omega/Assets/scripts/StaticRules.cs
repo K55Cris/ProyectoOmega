@@ -342,10 +342,10 @@ public class StaticRules : MonoBehaviour
 
                     case "SupportBox":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == StaticRules.Phases.BattlePhase)
+                        if (StaticRules.NowPhase == StaticRules.Phases.PreparationPhase)
                         {
                             if (!isDigimonOrChip(_Carta))
-                                MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
+                                MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<SupportBox>().SetDigimon(_Digicarta.transform);
                         }
                         break;
                     case "DarkArea":
@@ -470,6 +470,7 @@ public class StaticRules : MonoBehaviour
                 break;
             case Phases.EvolutionPhase:
                 PartidaManager.instance.CambioDePhase(false);
+                PartidaManager.instance.ActivateHand(false);
                 PartidaManager.instance.Cambio("Evolution Phase");
                 StartEvolutionPhase();
                 break;
@@ -633,7 +634,8 @@ public class StaticRules : MonoBehaviour
         // DESCARTAMOS LAS CARTAS
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.StartPreparationPhaseDiscard);
-
+        if (loRule.CartasDescartadas.Count == 0)
+            StartPreparationPhaseDiscard("SAlto la Fase sin Descartar");
         foreach (var item in loRule.CartasDescartadas)
         {
             CartaDigimon _CARD = item.GetComponent<CartaDigimon>();
@@ -645,9 +647,7 @@ public class StaticRules : MonoBehaviour
     }
     private static void StartPreparationPhaseDiscard(string result)
     {
-        Debug.Log(result);
         //agregamos a la mano las cartas descartadas
-        Debug.Log(StaticRules.instance.WhosPlayer._Mano.Cartas.Count);
         for (int i = StaticRules.instance.WhosPlayer._Mano.Cartas.Count; i < 6; i++)
         {
             PartidaManager.instance.TomarCarta(PartidaManager.instance.GetHand(), StaticRules.instance.WhosPlayer, MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean));
@@ -656,6 +656,8 @@ public class StaticRules : MonoBehaviour
         //Vaciamos lista de Cartas 
         StaticRules loRule = FailSafeInstance();
         loRule.CartasDescartadas = new List<GameObject>();
+        // Habilitamos la Mano
+        PartidaManager.instance.ActivateHand(true);
     }
 
     public List<Transform> ListEvos = new List<Transform>();
@@ -933,11 +935,10 @@ public class StaticRules : MonoBehaviour
     }
     private static void CheckEvolutionRequirements()
     {
-        Debug.Log("1");
+
         // revisa si la evolucion no se llevo adecuadamente ya sea por efectos especiales
         if (MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count > 0)
         {
-            Debug.Log("2");
             // HAY EVO POSIBLE  
             // Realizar segundo intento de Evolucion correspondiente 
             foreach (var Evolucion in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
@@ -959,7 +960,6 @@ public class StaticRules : MonoBehaviour
         }
         else
         {
-            Debug.Log("3");
             SiguienteFase();
         }
     }

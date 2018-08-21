@@ -85,8 +85,7 @@ public class DarkArea : MonoBehaviour {
         carta.transform.localRotation = new Quaternion(0, 0, 0,0);
         carta.transform.localPosition = Pos;
         carta.transform.localScale= new Vector3(1, 1, 0.01f);
-        carta.Front.GetComponent<MovimientoCartas>().Mover = false;
-        carta.Front.GetComponent<MovimientoCartas>().AddOrRemove= false;
+        carta.Front.GetComponent<MovimientoCartas>().disebleCard();
     }
  
 }

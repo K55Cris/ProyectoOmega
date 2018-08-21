@@ -53,34 +53,12 @@ public class NetOcean : MonoBehaviour
         List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas;
       //  Iteracion(ListDCardsDarkArea);
         sendDarkarea(ListDCardsDarkArea);
-        // EvolutionBox
-        List<CartaDigimon> ListDCardsEvolutionBox = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas;
-       // Iteracion(ListDCardsEvolutionBox);
-        sendDarkarea(ListDCardsEvolutionBox);
-        // Requeriments Evolution
-        List<CartaDigimon> ListDCardsRequerimientos= MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().Cartas;
-       // Iteracion(ListDCardsRequerimientos);
-        sendDarkarea(ListDCardsRequerimientos);
-        // Support Box
-        List<CartaDigimon> ListDCardSuport = MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<SupportBox>().Cartas;
-        //  Iteracion(ListDCardsDarkArea);
-        sendDarkarea(ListDCardSuport);
-
-        // Option slots 1,2,3
-        List<CartaDigimon> ListDCardOption= new List<CartaDigimon>();
-        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot1));
-        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot2));
-        ListaCartasOptionSlots(ListDCardOption, MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot3));
-        sendDarkarea(ListDCardOption);
-
+     
         // DigimonBox Slot
         List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
         sendDarkarea(ListDCardDigimon);
         MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().LostDigimon(null);
-        // Mano   --------------------------
-        List<CartaDigimon> ListDCardMano = StaticRules.instance.WhosPlayer._Mano.Cartas;
-        Debug.Log("MAno:"+ListDCardMano.Count);
-        sendDarkarea(ListDCardMano);
+
     }
 
     public void ListaCartasOptionSlots(List<CartaDigimon> ListDCards, Transform Slot)

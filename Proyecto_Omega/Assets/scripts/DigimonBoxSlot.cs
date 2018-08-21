@@ -116,28 +116,33 @@ public class DigimonBoxSlot : MonoBehaviour {
         // Verificamos si hay Otro Digimon en el slot
         if (_DigiCarta)
         {
-            DigiCarta Roquin= Carta.GetComponent<CartaDigimon>().DatosDigimon;
-            if (Roquin.Nivel== "III")
+            if (_DigiCarta.DatosDigimon.Nivel== "III")
             {
                 if (!Cambiado)
                 {
                     if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                     {
                         StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ChangeDigimon;
-                        PartidaManager.instance.SetMoveCard(this.transform,Carta,InterAutoAjuste);
-                      
-                        StaticRules.CheckSetDigiCardSlot(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), Carta);
+                        PartidaManager.instance.SetMoveCard(this.transform,Carta,InterAutoAjuste2);
+                        // Quitar Roquin Antiguo
+                        PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea),DRoquin.transform,StaticRules.Ajustar);
                         _DigiCarta = Carta.GetComponent<CartaDigimon>();
                         Cambiado = true;
                         _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
                         DRoquin = Carta.GetComponent<CartaDigimon>();
                         SoundManager.instance.PlaySfx(Sound.SetCard);
+
+                        
                     }
+                }
+                else
+                {
+                    Debug.LogWarning(" El digimon ya fue cambiado");
                 }
             }
             else
             {
-                Debug.LogError("ya Cambio el digimon Roquin");
+                Debug.LogWarning(" El digimon No es Roquin");
             }
         }
         else
@@ -218,7 +223,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public IEnumerator AutoAjustarRoquin(Transform Carta)
     {
         yield return new WaitForEndOfFrame();
-        Carta.localPosition = new Vector3(0, 0, 400);
+        Carta.localPosition = new Vector3(0, 0, 0);
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Carta.localScale = new Vector3(1, 1, 0.015f);
     }

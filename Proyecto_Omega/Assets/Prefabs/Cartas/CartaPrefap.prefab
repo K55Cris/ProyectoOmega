@@ -376,7 +376,7 @@ MonoBehaviour:
   particle: {fileID: 1932882780141470}
   Maincam: {fileID: 0}
   Cambio: 0
-  Mover: 1
+  Mover: 0
   Layout: {fileID: 114098053026165320}
   AddOrRemove: 0
   CanvasSeleted: {fileID: 1943381007329836}

@@ -67,6 +67,7 @@ namespace DigiCartas
         public List<string> ListaRequerimientos;
         public List<string> ListaEfectos;
         public string Limite;
+        public bool IsSupport;
 
     }
 

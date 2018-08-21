@@ -107,6 +107,7 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
+
     public static Transform SetOptionSlot(GameObject Carta , bool Campo=false)
     {
         if (Campo)
@@ -119,14 +120,17 @@ public class MesaManager : MonoBehaviour {
             foreach (Transform item in MesaManager.instance.Campo1.Campo)
             {
                 Vector3 PosCampo = item.position;
+                
                 float dist = Vector3.Distance(LocalPos, PosCampo);
                 if (dist < 25)
                 {
+                    Debug.Log(item);
                     return item;
+          
                 }
             }
         }
         return null;
     }
-
-    }
+ 
+}

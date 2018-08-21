@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SupportBox : Slot
 {
-    public bool Cambiado = false;
-
+    public bool Ocupado = false;
+    public CartaDigimon DCard;
 
     public void NowPhase()
     {
@@ -58,17 +58,16 @@ public class SupportBox : Slot
     }
     public void SetDigimon(Transform Carta)
     {
-        if (Carta.GetComponent<CartaDigimon>().DatosDigimon.ListaEfectos.Count > 0
+        if (Carta.GetComponent<CartaDigimon>().DatosDigimon.IsSupport
         && MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.codigo == 
         Carta.GetComponent<CartaDigimon>().DatosDigimon.codigo)
-
+        {
+            if (!Ocupado)
             {
-                if (!Cambiado)
-                {
                 PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
-                Cartas.Add(Carta.GetComponent<CartaDigimon>());
-                Cambiado = true;
-                }
+                DCard= Carta.GetComponent<CartaDigimon>();
+                Ocupado = true;
             }
+        }
     }
 }
