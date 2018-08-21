@@ -9,9 +9,10 @@ public class VentanaMoreInfo : MonoBehaviour {
     public Image DigimonImage, Type;
     public DigiCarta Datos;
     public Text NombreAtaqueA, NombreAtaqueB, NombreAtaqueC, Habilidad, Evolucion, TypeText, NombreDigimon, Capacidad;
-    public Text DañoA, DañoB, DañoC;
+    public Text DañoA, DañoB, DañoC , Efecto, Phase;
     public CanvasGroup Panel;
     public GameObject DigimonCard, OptionCard;
+    public ListaEvolucionesItem[] ItemEvoText;
     private void Awake()
     {
         instance = this;
@@ -55,10 +56,26 @@ public class VentanaMoreInfo : MonoBehaviour {
             {
                 DigimonCard.SetActive(false);
                 OptionCard.SetActive(true);
+                Efecto.text ="";
+                foreach (var item in DatosDigimon.ListaEfectos)
+                {
+                    Efecto.text += item + " \n";
+                }
+                Phase.text = DatosDigimon.Limite;
                 Capacidad.text = Datos.Capasidad.ToString();
             }
             NombreDigimon.text = Datos.Nombre;
             Invoke("Cerrando", 5f);
+            foreach (var item in ItemEvoText)
+            {
+                item.gameObject.SetActive(false);
+            }
+            for (int i = 0; i < DatosDigimon.ListaRequerimientos.Count; i++)
+            {
+                ItemEvoText[i].gameObject.SetActive(true);
+                ItemEvoText[i].Crear(DatosDigimon.ListaRequerimientos[i]);
+            }
+            
         }
      }
     public void Cerrando()

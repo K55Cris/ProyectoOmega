@@ -58,7 +58,7 @@ public class MovimientoCartas : MonoBehaviour {
         {
             // Reralizar Cambio 
             // Obtener Slot de la Carta
-            Transform Slot= MesaManager.GetOptionSlot(transform.parent.gameObject);
+            Transform Slot= MesaManager.SetOptionSlot(transform.parent.gameObject);
             // Mandar a Revisar si la carta se puede colocar en el Slot
             StaticRules.CheckSetDigiCardSlot(Slot, transform.parent);
             StartCoroutine(TerminarDesicion());

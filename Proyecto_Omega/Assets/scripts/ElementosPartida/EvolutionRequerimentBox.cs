@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,7 +86,10 @@ public class EvolutionRequerimentBox : Slot
     public void CodeRequest(CartaDigimon DEvo, CartaDigimon Base)
     {
         List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(DEvo.DatosDigimon,Base.DatosDigimon);
-
+        foreach (var item in requerimientos)
+        {
+            Debug.Log(item);
+        }
         if (requerimientos.Count > 0)
         {
             foreach (var item in requerimientos)
@@ -106,7 +109,6 @@ public class EvolutionRequerimentBox : Slot
                 else
                 {
                     ListaRequerimientos.Add(item);
-
                 }
             }
             Activado = true;
@@ -121,7 +123,8 @@ public class EvolutionRequerimentBox : Slot
     {
         foreach (var item in ListaRequerimientos)
         {
-            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.Contains(item))
+            Debug.Log(item);
+            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper().Contains(item.ToUpper()))
             {
                 PartidaManager.instance.SetMoveCard(this.transform, Carta,StaticRules.Ajustar);
                 ListaRequerimientosAdicionales.Add(Carta);

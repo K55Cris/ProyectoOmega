@@ -12,6 +12,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public ParticleSystem DEbuff;
     public ParticleSystem AtaqueA;
     public ParticleSystem AtaqueB;
+    public ParticleSystem Joggres;
     public ContadorOffencivo CanvasContador;
     public List<CartaDigimon> Evoluciones= new List<CartaDigimon>();
 
@@ -152,32 +153,45 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void Evolution(Transform Evolucion)
     {
-        PartidaManager.instance.SetMoveCard(this.transform,Evolucion,InterAutoAjuste);
-        _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
-       
-        Evolucion.localPosition = new Vector3(0, 0, 0 + transform.childCount);
-        Evolucion.GetComponent<CartaDigimon>().Volteo();
-        Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
+        Debug.Log(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nombre);
+        if (Evolucion)
+        {
+            PartidaManager.instance.SetMoveCard(this.transform, Evolucion, InterAutoAjuste);
+            _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
+            MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Remove(Evolucion.GetComponent<CartaDigimon>());
+            Evolucion.GetComponent<CartaDigimon>().Volteo();
+            Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
+            Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
+        }
     }
 
-    public void Evolucionar(string Nivel)
+    public void Evolucionar(string Nivel, bool _joggres=false)
     {
         SoundManager.instance.sfxSource.Stop();
         SoundManager.instance.sfxSource.Play();
-        switch (Nivel)
+        if (!_joggres)
         {
-            case "IV":
-                SoundManager.instance.PlaySfx(Sound.Evolucion);
-                break;
-            case "Perfect":
-                SoundManager.instance.PlaySfx(Sound.Evolucion2);
-                break;
-            case "Ultimate":
-                SoundManager.instance.PlaySfx(Sound.Evolucion2);
-                break;
+            switch (Nivel)
+            {
+                case "IV":
+                    SoundManager.instance.PlaySfx(Sound.Evolucion);
+                    break;
+                case "Perfect":
+                    SoundManager.instance.PlaySfx(Sound.Evolucion2);
+                    break;
+                case "Ultimate":
+                    SoundManager.instance.PlaySfx(Sound.Evolucion2);
+                    break;
+            }
+            AuraEvolucion.SetActive(true);
+            EnergiaEvolucion.SetActive(true);
         }
-        AuraEvolucion.SetActive(true);
-        EnergiaEvolucion.SetActive(true);
+        else
+        {
+            // es joggres
+            SoundManager.instance.PlaySfx(Sound.Evolucion2);
+            Joggres.Play();
+        }
     }
     public void TerminarEvolucionar()
     {
@@ -197,7 +211,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public IEnumerator AutoAjustar(Transform Carta)
     {
     yield return new WaitForEndOfFrame();
-    Carta.localPosition = new Vector3(0, 0, -100 + ((transform.childCount-6)*500));
+    Carta.localPosition = new Vector3(0, 0, -100 + ((transform.childCount)*500));
     Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
     Carta.localScale = new Vector3(1, 1, 0.015f);
     }

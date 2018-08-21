@@ -46,8 +46,8 @@ public class EvolutionBox : Slot
     }
     public void EvolutionPhase()
     {
-        Canvas.SetActive(true);
-        Cartas.Remove(Cartas[0]);
+     //   Canvas.SetActive(true);
+     //   Cartas.Remove(Cartas[0]);
     }
     public void EvolutionRequirements()
     {

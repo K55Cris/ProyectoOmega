@@ -107,7 +107,7 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
-    public static Transform GetOptionSlot(GameObject Carta , bool Campo=false)
+    public static Transform SetOptionSlot(GameObject Carta , bool Campo=false)
     {
         if (Campo)
         {

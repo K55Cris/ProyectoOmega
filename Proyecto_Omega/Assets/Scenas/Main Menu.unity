@@ -407,7 +407,7 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[1]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
@@ -437,22 +437,22 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[7]
-      value: 33
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[8]
-      value: 33
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[9]
-      value: 25
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[10]
-      value: 25
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
@@ -537,17 +537,17 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[27]
-      value: 32
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[28]
-      value: 32
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[29]
-      value: 32
+      value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
@@ -1128,6 +1128,7 @@ MonoBehaviour:
   ChoqueCristal: {fileID: 8300000, guid: 6906ab7ffb2c4e8478bd8c4fdae03078, type: 3}
   DisparoDeFuego: {fileID: 8300000, guid: 4ca48ca2cbe1a35469c7acadb5e8f8fb, type: 3}
   DisparoElectrico: {fileID: 8300000, guid: 91b3c22ad156163468047b8f313b2deb, type: 3}
+  recompesas: {fileID: 0}
 --- !u!4 &517768599
 Transform:
   m_ObjectHideFlags: 0

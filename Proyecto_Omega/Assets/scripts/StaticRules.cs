@@ -61,7 +61,7 @@ public class StaticRules : MonoBehaviour
     public static void SelectDigimonChild()
     {
         StaticRules loRule = FailSafeInstance();
-   
+
         //Cargamos Mazos de Ambos Jugadores 
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player1.IDCartasMazo, MesaManager.instance.Campo1.NetOcean, PartidaManager.instance.Player1);
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player2.IDCartasMazo, MesaManager.instance.Campo2.NetOcean, PartidaManager.instance.Player2);
@@ -449,18 +449,18 @@ public class StaticRules : MonoBehaviour
 
     public static void SiguienteFase()
     {
-     
+
         Debug.Log(NowPhase);
         NowPhase++;
         switch (NowPhase)
         {
             case Phases.GameSetup:
-                
+
                 StartGameSetup();
                 break;
             case Phases.DiscardPhase:
                 PartidaManager.instance.CambioDePhase(true);
-                
+
                 PartidaManager.instance.Cambio("Discard Phase");
                 StartDiscardPhase();
                 break;
@@ -505,7 +505,7 @@ public class StaticRules : MonoBehaviour
                 Console.WriteLine("Error en el cambio de fase");
                 break;
         }
-     
+
 
     }
 
@@ -516,23 +516,23 @@ public class StaticRules : MonoBehaviour
     /// </summary>
     public static void StartGameSetup()
     {
-            // jalar carta para ambos 
-            for (int i = PartidaManager.instance.Player1._Mano.Cartas.Count; i < 6; i++)
-            {
-                PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, MesaManager.instance.Campo1.NetOcean);
-            }
-            // jalar carta para ambos 
-            for (int i = PartidaManager.instance.Player2._Mano.Cartas.Count; i < 6; i++)
-            {
-                PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, MesaManager.instance.Campo2.NetOcean);
-            }
-            StaticRules.instance.InterTimePhase(2F);
+        // jalar carta para ambos 
+        for (int i = PartidaManager.instance.Player1._Mano.Cartas.Count; i < 6; i++)
+        {
+            PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, MesaManager.instance.Campo1.NetOcean);
+        }
+        // jalar carta para ambos 
+        for (int i = PartidaManager.instance.Player2._Mano.Cartas.Count; i < 6; i++)
+        {
+            PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, MesaManager.instance.Campo2.NetOcean);
+        }
+        StaticRules.instance.InterTimePhase(2F);
     }
 
     private static void StartDiscardPhase()
     {
         StaticRules loRule = FailSafeInstance();
-      
+
     }
     public void AddListDiscard(GameObject Carta, bool addOrRemove)
     {
@@ -552,12 +552,12 @@ public class StaticRules : MonoBehaviour
         string nombreDigimon;
 
         nombreDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper();
-        nombreDigimon= nombreDigimon.Replace(" ", "");
+        nombreDigimon = nombreDigimon.Replace(" ", "");
 
         foreach (string requerimiento in evolucion.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
         {
-            Debug.Log(nombreDigimon + ":" + requerimiento.Split(' ')[0].Replace(" ",""));
-            if (nombreDigimon.Equals(requerimiento.Split(' ')[0].Replace(" ","")))
+            Debug.Log(nombreDigimon + ":" + requerimiento.Split(' ')[0].Replace(" ", ""));
+            if (nombreDigimon.Equals(requerimiento.Split(' ')[0].Replace(" ", "")))
             {
                 return true;
             }
@@ -633,7 +633,7 @@ public class StaticRules : MonoBehaviour
         // DESCARTAMOS LAS CARTAS
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.StartPreparationPhaseDiscard);
-    
+
         foreach (var item in loRule.CartasDescartadas)
         {
             CartaDigimon _CARD = item.GetComponent<CartaDigimon>();
@@ -641,7 +641,7 @@ public class StaticRules : MonoBehaviour
             StaticRules.instance.WhosPlayer._Mano.DescartarCarta(_CARD);
             SendDarkArea(item.transform);
         }
-        
+
     }
     private static void StartPreparationPhaseDiscard(string result)
     {
@@ -658,19 +658,19 @@ public class StaticRules : MonoBehaviour
         loRule.CartasDescartadas = new List<GameObject>();
     }
 
-    public List<Transform> ListEvos= new List<Transform>();
-    public void Evol(Transform Evolucion, int CantEvos)
+    public List<Transform> ListEvos = new List<Transform>();
+    public void Evol(Transform Evolucion, int CantEvos,bool joggres = false)
     {
         Debug.Log(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nombre);
         ListEvos.Add(Evolucion);
         if (ListEvos.Count == CantEvos)
         {
-            RecursivoEvo(ListEvos[0]);
+            RecursivoEvo(ListEvos[0],joggres);
         }
     }
-    public void RecursivoEvo(Transform Evolucion)
+    public void RecursivoEvo(Transform Evolucion, bool joggres = false)
     {
-        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolucionar(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nivel);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolucionar(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nivel,joggres);
         //foreach (var Request in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().ListaRequerimientos)
         //{);
         Debug.Log(Evolucion.GetComponent<CartaDigimon>().name);
@@ -683,7 +683,7 @@ public class StaticRules : MonoBehaviour
         int RequestEvo = 0;
         if (requerimientos.Count > 0)
         {
-
+            List<Transform> Dcards = new List<Transform>();
             foreach (var item in requerimientos)
             {
                 if (item == "O")
@@ -702,7 +702,7 @@ public class StaticRules : MonoBehaviour
                 {
                     // quitar carta delos requisitos 
                     Transform _DigiCarta = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().X;
-                    if (_DigiCarta.childCount>0)
+                    if (_DigiCarta.childCount>0 && _DigiCarta)
                     {
                         _DigiCarta = _DigiCarta.transform.GetChild(contX).transform;
                         contX++;
@@ -723,25 +723,34 @@ public class StaticRules : MonoBehaviour
                     {
                         // fusion o digimons extra o cartas de plugin
                         // revisar si la carta esta en los requisitos
+                        
                         Transform ReEvo = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox);
                         foreach (var Requeriment in ReEvo.GetComponent<EvolutionRequerimentBox>().ListaRequerimientosAdicionales)
                         {
-                            Debug.Log(Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper() + ":" + item + ",XD");
-                            string name = Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre;
-                            string ShapeName = name.Substring(name.Length - 4, 3);
-                            Debug.Log(ShapeName);
-                            if (ShapeName.Contains(item) )
+                            if (Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper() == item)
                             {
                                 RequestEvo++;
-                                SendDarkArea(Requeriment);
+                                Dcards.Add(Requeriment);
                             }
+                            else
+                            {
+                                Debug.Log(Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper() + ":" + item + ",XD");
+                                string name = Requeriment.GetComponent<CartaDigimon>().DatosDigimon.Nombre;
+                                string ShapeName = name.Substring(name.Length - 4, 3);
+                                
+                                if (ShapeName.Contains(item))
+                                {
+                                    RequestEvo++;
+                                    Dcards.Add(Requeriment);
+                                }
+                            }   
                         }
                          if (RequestEvo != requerimientos.Count) {
                              if (item == "60%")
                              {
-                                 // buscamos el plugin 
-                                 DigiCarta digicard = new DigiCarta();
-                                 digicard.id = 60;
+                                // buscamos el plugin 
+                                DigiCarta digicard = new DigiCarta();
+                                digicard.id = 60;
                                 Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
                                 if (slot)
                                 {
@@ -749,8 +758,17 @@ public class StaticRules : MonoBehaviour
                                     OpCard.Volteo();
                                     MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(OpCard.transform);
                                     RequestEvo++;
+                                    Dcards.Add(OpCard.transform);
+
                                 }
                              }
+                            if (joggres)
+                            {
+                                if (item.Contains("+"))
+                                {
+                                    RequestEvo++;
+                                }
+                            }
                          } 
                     }
                 }
@@ -758,6 +776,10 @@ public class StaticRules : MonoBehaviour
             Debug.Log(RequestEvo + ":" + requerimientos.Count);
             if (RequestEvo == requerimientos.Count)
             {
+                foreach (var item in Dcards)
+                {
+                    SendDarkArea(item);
+                }
                 MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
                 MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.instance.SetEvolution);
                 ListEvos.Remove(Evolucion);
@@ -766,8 +788,12 @@ public class StaticRules : MonoBehaviour
             else
             {
                 PartidaManager.instance.CambioDePhase(true);
-                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().EndEvolution();
+                ListEvos.Remove(Evolucion);
                 MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+                if (joggres)
+                {
+                    SiguienteFase();
+                }
             }
         }
     }
@@ -776,19 +802,19 @@ public class StaticRules : MonoBehaviour
         if (ListEvos.Count == 0)
         {
             PartidaManager.instance.CambioDePhase(true);
-            MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().EndEvolution();
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
         }
         else
         {
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
-            RecursivoEvo(ListEvos[0]);
+            RecursivoEvo(ListEvos[0],false);
         }
     }
     public static void SecondEvolutionPhase()
     {
         MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
         // Tirar las cartas sobrantes a la dark area
+        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().EndEvolution();
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
         //> primero Requisitos
         foreach (var item in MesaManager.instance.GetSlot(MesaManager.
@@ -897,11 +923,9 @@ public class StaticRules : MonoBehaviour
         MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolution(
         MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas[0].transform);
         MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().NowPhase();
-    }
-    public void ProcederAEvolucionar()
-    {
 
     }
+
 
     public static void SendDarkArea(Transform Dcard)
     {
@@ -909,14 +933,16 @@ public class StaticRules : MonoBehaviour
     }
     private static void CheckEvolutionRequirements()
     {
+        Debug.Log("1");
         // revisa si la evolucion no se llevo adecuadamente ya sea por efectos especiales
         if (MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count > 0)
         {
+            Debug.Log("2");
             // HAY EVO POSIBLE  
             // Realizar segundo intento de Evolucion correspondiente 
             foreach (var Evolucion in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
             {
-                StaticRules.instance.Evol(Evolucion.transform, MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Count);
+                StaticRules.instance.Evol(Evolucion.transform, 1,true);
             }
 
           // StaticRules.instance.EfectosDeTurno.Add(Efectos.SinRequerimientos);
@@ -931,8 +957,11 @@ public class StaticRules : MonoBehaviour
                 }
             }
         }
-
-        SiguienteFase();
+        else
+        {
+            Debug.Log("3");
+            SiguienteFase();
+        }
     }
     
     private static void CheckFusionRequirements()
