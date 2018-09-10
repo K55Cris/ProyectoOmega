@@ -8,6 +8,7 @@ public class MovimientoCartas : MonoBehaviour {
     public Camera Maincam;
     public bool Cambio=false;
     public bool Mover = false;
+    public int IdMove = 0;
     public LayoutElement Layout;
     // Use this for initialization
     float distancia;
@@ -65,7 +66,7 @@ public class MovimientoCartas : MonoBehaviour {
     }
     IEnumerator TerminarDesicion()
     {
-        yield return new WaitForEndOfFrame();
+       yield return new WaitForEndOfFrame();
         if (!Cambio)
         {
             transform.parent.localPosition = Vector3.zero;
@@ -79,32 +80,33 @@ public class MovimientoCartas : MonoBehaviour {
             Mover = false;
             StaticRules.instance.WhosPlayer._Mano.JugarCarta(transform.parent.transform.GetComponent<CartaDigimon>());
         }
+  
     }
     public void OnMouseOver()
     {
         VentanaMoreInfo.instance.Show(transform.parent.GetComponent<CartaDigimon>().DatosDigimon);
     }
 
-    public void MoverCarta(Transform Destino , UnityAction<Transform, CartaDigimon> LoAction)
+    public void MoverCarta(Transform Destino , UnityAction<Transform, CartaDigimon,int> LoAction, int ID)
     {
+        Debug.Log(Destino.name);
+        IdMove = ID;
         StartCoroutine(Transicion(Destino,LoAction));
     }
 
-    public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon> LoAction)
+    public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon,int> LoAction)
     {
+        Debug.Log(Destino.name+"t");
         yield return new WaitForEndOfFrame();
         if (Destino)
         {
-            while (transform.parent.position != Destino.position)
+            var heading = Destino.position - transform.parent.position;
+            var distance = heading.magnitude;
+            Debug.Log(distance);
+            while (distance > 5)
             {
-
-                var heading = Destino.position - transform.parent.position;
-                var distance = heading.magnitude;
-                if (distance < 5)
-                {
-                    break;
-                }
-
+                heading = Destino.position - transform.parent.position;
+                distance = heading.magnitude;
                 //var direction = heading / distance; // This is now the normalized direction.
                 //transform.parent.transform.Translate(direction*Time.deltaTime*30);
                 float step = 500 * Time.deltaTime;
@@ -112,7 +114,8 @@ public class MovimientoCartas : MonoBehaviour {
                 yield return new WaitForSecondsRealtime(0.01F);
             }
         }
-        LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>());
+        Debug.Log(Destino.name + ":" + LoAction.Method.Name);
+        LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>(),IdMove);
 
     }
     public void disebleCard()

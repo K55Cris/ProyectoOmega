@@ -8,10 +8,7 @@ public class TESTpUREBAMOVIMIENTOSLOTS : MonoBehaviour {
     public CartaDigimon Carta;
     public Transform Slot;
 
-    public void Testmove()
-    {
-        Carta.Front.GetComponent<MovimientoCartas>().MoverCarta(Slot, Ajustar);
-    }
+
     public void Ajustar(Transform Padre, CartaDigimon LoCard)
     { 
 

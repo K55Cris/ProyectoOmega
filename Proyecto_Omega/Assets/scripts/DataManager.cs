@@ -48,6 +48,10 @@ public class DataManager : MonoBehaviour {
    
     public void LoadCartas()
     {
+
+        Debug.Log(Mathf.Pow(3, 2) - Mathf.Pow(3, 2));
+
+
         ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text);
         TodasLasCartas = ColeccionDeCartas.DigiCartas;
         foreach (var item in ColeccionDeCartas.CartaOption)

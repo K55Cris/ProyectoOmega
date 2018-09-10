@@ -15,9 +15,10 @@ public class OptionSlot : Slot
     
         if (Vacio)
         {
-            PartidaManager.instance.SetMoveCard(this.transform,Carta, StaticRules.Ajustar);
+          
             Vacio = false;
             OpCarta = Carta.GetComponent<CartaDigimon>();
+            PartidaManager.instance.SetMoveCard(this.transform, OpCarta.transform, StaticRules.Ajustar);
             OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (StaticRules.NowPhase==StaticRules.Phases.PreparationPhase)

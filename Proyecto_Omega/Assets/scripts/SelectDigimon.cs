@@ -20,8 +20,12 @@ public class SelectDigimon : MonoBehaviour {
 
     public void SelectedDigimon()
     {
-        SelectedDigimons.instance.Terminar();
-        Localfase(IDCarta.ToString());
+        if (Localfase != null)
+        {
+            SelectedDigimons.instance.Terminar();
+            Localfase(IDCarta.ToString());
+            Localfase = null;
+        }
     }
 
 

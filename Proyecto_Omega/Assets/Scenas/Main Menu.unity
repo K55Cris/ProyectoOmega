@@ -527,12 +527,12 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[25]
-      value: 58
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[26]
-      value: 58
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}

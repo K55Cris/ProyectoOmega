@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace DigiCartas
 {
@@ -81,6 +81,14 @@ namespace DigiCartas
         public List<DigiCarta> CartaOption;
     }
 
+    [Serializable]
+    public class ListaCartasMove
+    {
+        public int ID;
+        public UnityAction<CartaDigimon> LoAction;
+        public Transform Padre;
+        public CartaDigimon CartaOption;
+    }
 
     [Serializable]
     public class Campos

@@ -672,7 +672,7 @@ public class StaticRules : MonoBehaviour
     }
     public void RecursivoEvo(Transform Evolucion, bool joggres = false)
     {
-        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolucionar(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nivel,joggres);
+       
         //foreach (var Request in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().ListaRequerimientos)
         //{);
         Debug.Log(Evolucion.GetComponent<CartaDigimon>().name);
@@ -786,6 +786,7 @@ public class StaticRules : MonoBehaviour
                 MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(StaticRules.instance.SetEvolution);
                 ListEvos.Remove(Evolucion);
                 Invoke("ReEvent",3.5f);
+                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evolucionar(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nivel, joggres);
             }
             else
             {
@@ -931,7 +932,7 @@ public class StaticRules : MonoBehaviour
 
     public static void SendDarkArea(Transform Dcard)
     {
-        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(Dcard.GetComponent<CartaDigimon>(), 0.3f);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(Dcard.GetComponent<CartaDigimon>(), 0.5f);
     }
     private static void CheckEvolutionRequirements()
     {

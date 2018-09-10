@@ -40,7 +40,7 @@ public class DarkArea : MonoBehaviour {
     public IEnumerator MoviendiaDarkArea(float segundos)
     {
         yield return new WaitForEndOfFrame();
-      
+        yield return new WaitForSeconds(segundos);
         if (!moviendo)
         {
             moviendo = true;
@@ -58,9 +58,6 @@ public class DarkArea : MonoBehaviour {
                 }
             }
             yield return new WaitForSeconds(segundos);
-            yield return new WaitForSeconds(segundos);
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             if (TermineDescarte != null)
             {
