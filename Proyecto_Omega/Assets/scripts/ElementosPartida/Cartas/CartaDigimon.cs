@@ -10,6 +10,7 @@ public class CartaDigimon : Carta {
     public DigiCarta DatosDigimon = new DigiCarta();
     public bool AddOrRemove;
     public GameObject Front;
+    public bool mostrar = false;
     //Las habilidades de support del Digimon. Son las habilidades marcadas con un ■.
     private string abilitieSupport;
 
@@ -31,9 +32,9 @@ public class CartaDigimon : Carta {
    
     public void Mostrar()
     {
-      // 
-      //  Front.GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
-
+        // 
+        //  Front.GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
+        
         Front.GetComponent<Renderer>().material.mainTexture=DataManager.instance.GetTextureDigimon(DatosDigimon.id);
     }
     void OnMouseDown()
@@ -48,6 +49,7 @@ public class CartaDigimon : Carta {
     }
     public void Volteo()
     {
+        mostrar = true;
         transform.localRotation = Quaternion.Euler(180, 0, 0);
     }
 

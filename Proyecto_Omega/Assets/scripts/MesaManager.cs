@@ -5,8 +5,6 @@ using DigiCartas;
 public class MesaManager : MonoBehaviour {
     public Campos Campo1;
     public Campos Campo2;
-    public string TipoAtaquePlayer1="A";
-    public string TipoAtaquePlayer2="A";
     // Use this for initialization
     public static MesaManager instance;
 
@@ -17,7 +15,7 @@ public class MesaManager : MonoBehaviour {
     public enum Slots
     {
         OptionSlot1 = 0, OptionSlot2 = 1, OptionSlot3 = 2, DigimonSlot = 3, NetOcean = 4, DarkArea = 5,
-        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10,
+        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10, frontSlot=11,
     }
    
     public Transform GetSlot(Slots slot,Player player= null)
@@ -53,6 +51,8 @@ public class MesaManager : MonoBehaviour {
                     return Campo1.PointGauge;
                 case Slots.EvolutionRequerimentBox:
                     return Campo1.EvolutionRequerimentBox;
+                case Slots.frontSlot:
+                    return Campo1.FronDigimon;
             }
         }
         else
@@ -81,6 +81,8 @@ public class MesaManager : MonoBehaviour {
                     return Campo2.PointGauge;
                 case Slots.EvolutionRequerimentBox:
                     return Campo2.EvolutionRequerimentBox;
+                case Slots.frontSlot:
+                    return Campo2.FronDigimon;
             }
         }
         return null;
@@ -123,7 +125,7 @@ public class MesaManager : MonoBehaviour {
                 
                 float dist = Vector3.Distance(LocalPos, PosCampo);
                 Debug.Log(dist+":"+item);
-                if (dist < 30)
+                if (dist < 32)
                 {
                     Debug.Log(item);
                     return item;

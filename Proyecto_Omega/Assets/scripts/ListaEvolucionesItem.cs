@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class ListaEvolucionesItem : MonoBehaviour {
-    public Text Texto;
+    public TextMeshProUGUI Texto;
 	// Use this for initialization
 	public void Crear(string Request)
     {

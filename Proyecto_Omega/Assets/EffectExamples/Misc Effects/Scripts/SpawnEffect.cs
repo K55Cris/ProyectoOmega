@@ -8,7 +8,7 @@ public class SpawnEffect : MonoBehaviour {
     public float pause = 1;
     public AnimationCurve fadeIn;
 
-    ParticleSystem ps;
+
     float timer = 0;
     Renderer _renderer;
 
@@ -18,13 +18,17 @@ public class SpawnEffect : MonoBehaviour {
     {
         shaderProperty = Shader.PropertyToID("_cutoff");
         _renderer = GetComponent<Renderer>();
-        ps = GetComponentInChildren <ParticleSystem>();
 
-        var main = ps.main;
-        main.duration = spawnEffectTime;
+      /*  ps = GetComponentInChildren <ParticleSystem>();
+        if(ps)
+        {
+            var main = ps.main;
+            main.duration = spawnEffectTime;
 
-        ps.Play();
-
+            ps.Play();
+        }
+        
+    */
     }
 	
 	void Update ()
@@ -35,7 +39,7 @@ public class SpawnEffect : MonoBehaviour {
         }
         else
         {
-            ps.Play();
+      //      ps.Play();
             timer = 0;
         }
 

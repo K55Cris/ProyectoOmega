@@ -73,7 +73,7 @@ public class EvolutionBox : Slot
                     Cartas.Add(Carta.GetComponent<CartaDigimon>());
                     Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
-                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(true);
+                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null,true);
                 }   
         }
         else if (Cartas.Count>0)
@@ -91,12 +91,22 @@ public class EvolutionBox : Slot
                         Cartas.Add(Carta.GetComponent<CartaDigimon>());
                         Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                         SoundManager.instance.PlaySfx(Sound.SetCard);
-                        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(true);
-
+                        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null,true);
                     }
                     Debug.Log(nameDigi);
                 }
             }
         }  
+    }
+    public bool IsNameCardOver(CartaDigimon DCarta)
+    {
+        foreach (var item in Cartas)
+        {
+            if (item.DatosDigimon.Nombre==DCarta.DatosDigimon.Nombre)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

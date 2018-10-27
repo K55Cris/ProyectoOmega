@@ -18,19 +18,15 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
     public static PreparationPhase NowPreparationPhase;
-    public static EvolutionPhase NowEvolutionPhase;
+    public List<Efecto> EfectosRonda = new List<Efecto>();
     public List<GameObject> CartasDescartadas = new List<GameObject>();
-
 
 
     public enum PreparationPhase
     {
         DiscardPhase = 0, ChangeDigimon = 1, SetEvolition = 2, ActivarOption = 3, SetOptionCard = 4
     };
-    public enum EvolutionPhase
-    {
-        FirstRequeriment = 0, SecondRequerimient = 1
-    };
+
     public enum Efectos
     {
         SinRequerimientos = 0, NADA = 1
@@ -43,7 +39,6 @@ public class StaticRules : MonoBehaviour
     public void Start()
     {
         NowPhase = Phases.GameSetup;
-        NowEvolutionPhase = 0;
         //Referenciar los puntos de vida con cada jugador o
         //Codificar clase jugador con sus atributos publicos
         PointGaugePlayer1 = 100;
@@ -62,7 +57,7 @@ public class StaticRules : MonoBehaviour
 
     public static void SelectDigimonChild()
     {
-        StaticRules loRule = FailSafeInstance();
+         FailSafeInstance();
 
         //Cargamos Mazos de Ambos Jugadores 
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player1.IDCartasMazo, MesaManager.instance.Campo1.NetOcean, PartidaManager.instance.Player1);
@@ -283,7 +278,7 @@ public class StaticRules : MonoBehaviour
         }
     }
 
-    public static void CheckSetDigiCardSlot(Transform Slot, Transform _Digicarta = null)
+    public static void CheckSetDigiCardSlot(Transform Slot, Transform _Digicarta = null, bool Condicional=false)
     {
         if (Slot != null)
         {
@@ -364,14 +359,7 @@ public class StaticRules : MonoBehaviour
                         {
                             if (StaticRules.NowPreparationPhase == StaticRules.PreparationPhase.SetEvolition)
                             {
-                                if (StaticRules.NowEvolutionPhase == StaticRules.EvolutionPhase.FirstRequeriment)
-                                {
-                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos();
-                                }
-                                else
-                                {
-                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(_Digicarta.transform);
-                                }
+                             MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(_Digicarta.GetComponent<CartaDigimon>());
                             }
 
                         }
@@ -454,8 +442,9 @@ public class StaticRules : MonoBehaviour
     public static void SiguienteFase()
     {
 
-        Debug.Log(NowPhase);
+       
         NowPhase++;
+        Debug.Log(NowPhase);
         switch (NowPhase)
         {
             case Phases.GameSetup:
@@ -645,7 +634,7 @@ public class StaticRules : MonoBehaviour
             CartaDigimon _CARD = item.GetComponent<CartaDigimon>();
             _CARD.Front.GetComponent<MovimientoCartas>().CanvasSeleted.SetActive(false);
             StaticRules.instance.WhosPlayer._Mano.DescartarCarta(_CARD);
-            SendDarkArea(item.transform,0.52f);
+            SendDarkArea(item.transform,0.38f);
         }
         foreach (var item in StaticRules.instance.WhosPlayer._Mano.Cartas)
         {
@@ -784,7 +773,7 @@ public class StaticRules : MonoBehaviour
                 }
             }
             Debug.Log(RequestEvo + ":" + requerimientos.Count);
-            if (RequestEvo == requerimientos.Count)
+            if (RequestEvo >= requerimientos.Count)
             {
                 foreach (var item in Dcards)
                 {
@@ -825,7 +814,7 @@ public class StaticRules : MonoBehaviour
     {
         MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
         // Tirar las cartas sobrantes a la dark area
-        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().EndEvolution();
+        
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
         //> primero Requisitos
         foreach (var item in MesaManager.instance.GetSlot(MesaManager.
@@ -845,6 +834,7 @@ public class StaticRules : MonoBehaviour
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item3.GetComponent<CartaDigimon>(), 0.5f);
         }
         MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas = new List<CartaDigimon>();
+        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().EndEvolution();
     }
 
     /// <summary>
@@ -1038,10 +1028,9 @@ public class StaticRules : MonoBehaviour
         // descarta las cartas usadas y pasamos al la evolucion del rival
         StaticRules.instance.ListEvos = new List<Transform>();
         StaticRules.SecondEvolutionPhase();
-        MesaManager.instance.Campo1.FronDigimon.GetComponent<FrontDigimon>().RevelarDigimon(MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.id,
+        MesaManager.instance.Campo1.FronDigimon.GetComponent<FrontDigimon>().RevelarDigimon(MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta,
             MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla);
-        MesaManager.instance.Campo2.FronDigimon.GetComponent<FrontDigimon>().RevelarDigimon(MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.id,
-            MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla);
+
         SiguienteFase();
     }
 
@@ -1106,6 +1095,9 @@ public class StaticRules : MonoBehaviour
         /// </summary>
         private static void StartBattlePhase()
     {
+        // Revelamos al Rival
+        MesaManager.instance.Campo2.FronDigimon.GetComponent<FrontDigimon>().RevelarDigimon(MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta,
+            MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.TipoBatalla);
         Debug.Log("Hora de Pelear");
         DigimonBoxSlot DigimonBox1 = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>();
         DigimonBoxSlot DigimonBox2 = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>();
@@ -1298,11 +1290,15 @@ public class StaticRules : MonoBehaviour
     private static void StartEndPhase(string result)
     {
         Debug.Log("TurnoAcabado");
+        //activamos los efectos de la ronda
+        StaticRules.instance.EfectosEstaticos(StartEndPhase2);
         
+    }
+    private static void StartEndPhase2(string result)
+    {
         NowPhase = 0;
-        NowEvolutionPhase = 0;
         NowPreparationPhase = 0;
-        
+
         MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().EndPhase();
         MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().EndPhase();
 
@@ -1315,15 +1311,17 @@ public class StaticRules : MonoBehaviour
         if (MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().Cartas.Count == 0)
         {
             MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().Reiniciar(StaticRules.instance.WhaitReinicio);
-          
-           // StaticRules.instance.InterTimePhase(2F);
+
+            // StaticRules.instance.InterTimePhase(2F);
         }
         else
         {
             SaltoFase(Phases.GameSetup);
-           // StaticRules.instance.InterTimePhase(0.5F);
-        }  
+            // StaticRules.instance.InterTimePhase(0.5F);
+        }
     }
+
+
 
     public void WhaitReinicio(string resul)
     {
@@ -1380,6 +1378,7 @@ public class StaticRules : MonoBehaviour
         if (Digimon1 > Digimon2)
         {
             //Gano Digimon 1
+            PartidaManager.instance.WinTurno = PartidaManager.instance.Player1;
             // nivel de tu digimon
             string nivel = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel;
             // Obtenemos puntos que vamos a reducir al jugador 2
@@ -1393,6 +1392,7 @@ public class StaticRules : MonoBehaviour
         else if(Digimon2> Digimon1)
         {
             //Gano Digimon 2
+            PartidaManager.instance.WinTurno = PartidaManager.instance.Player2;
             // nivel de tu digimon
             string nivel = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel;
             // Obtenemos puntos que vamos a reducir al jugador 2
@@ -1450,13 +1450,17 @@ public class StaticRules : MonoBehaviour
         Debug.Log("End Phase");
         if (LostPlayerRound == PartidaManager.instance.Player1)
         {
-            MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(StaticRules.StartEndPhase);
+            MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(BeforePointFase);
         }
         else
         {
-            MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(StaticRules.StartEndPhase);
+            MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(BeforePointFase);
         }
-        //StaticRules.instance.InterTimePhase(1);
+       
+    }
+    public void BeforePointFase(string result)
+    {
+        StaticRules.instance.InterTimePhase(1);
     }
 
     public static int PerdidaPuntos(CartaDigimon DCarta, string nivel)
@@ -1486,6 +1490,7 @@ public class StaticRules : MonoBehaviour
         if (StaticRules.instance.PointGaugePlayer1 <= 0&& StaticRules.instance.PointGaugePlayer2 > 0)
         {
             PartidaManager.instance.Cambio(PartidaManager.instance.Player2.Nombre+" a Ganado");
+          
             CartaDigimon Digimon = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea,Digimon.transform, Ajustar);
         }
@@ -1506,7 +1511,7 @@ public class StaticRules : MonoBehaviour
         List<string> Efectos = OpCard.DatosDigimon.ListaEfectos;
         foreach (var item in Efectos)
         {
-            
+            StaticRules.instance.WhatEfect(item, OpCard);
         }
     }
     public void WhatEfect(string efecto, CartaDigimon Opcard)
@@ -1519,30 +1524,38 @@ public class StaticRules : MonoBehaviour
                 Efecto _ef = new Efecto();
                 _ef.NameEfecto = EfectosActivos.allyChageAtack;
                 _ef.Ataque = "A";
+                _ef.OptionCard = Opcard;
                 _ef.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
                 _ef.CartaAfecta = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
+                _ef.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef);
                 break;
             case "allyChageAtack to C":
                 Efecto _ef1 = new Efecto();
                 _ef1.NameEfecto = EfectosActivos.allyChageAtack;
                 _ef1.Ataque = "C";
+                _ef1.OptionCard = Opcard;
                 _ef1.CartaAfecta = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
                 _ef1.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
+                _ef1.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef1);
                 break;
             case "allyChageAtack to B":
                 Efecto _ef2 = new Efecto();
                 _ef2.NameEfecto = EfectosActivos.allyChageAtack;
                 _ef2.Ataque = "B";
+                _ef2.OptionCard = Opcard;
                 _ef2.CartaAfecta = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
                 _ef2.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
+                _ef2.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef2);
                 break;
+                  
             case "enemy drop 3 anycards from netocean in darkarea where lostbattle":
                 Efecto _ef3 = new Efecto();
                 _ef3.NameEfecto = EfectosActivos.dropCards;
                 _ef3.cantidadCartas = 3;
+                _ef3.OptionCard = Opcard;
                 _ef3.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
                 if (WhosPlayer == PartidaManager.instance.Player1)
                 {
@@ -1556,13 +1569,16 @@ public class StaticRules : MonoBehaviour
                 }
 
                 _ef3.where = "lostbattle";
+                _ef3.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef3);
                 break;
             case "allyAttackPoints + 50":
                 Efecto _ef4 = new Efecto();
                 _ef4.NameEfecto = EfectosActivos.BuffAtack;
                 _ef4.buffo = 50;
+                _ef4.OptionCard = Opcard;
                 _ef4.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
+                _ef4.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef4);
                 break;
             case "battlePhase enemyBigDigimon allyAttackPoin":
@@ -1570,14 +1586,24 @@ public class StaticRules : MonoBehaviour
                 DigimonBoxSlot midigi = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>();
                 DigimonBoxSlot digienemigo = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot,PartidaManager.instance.GetEnemy()).GetComponent<DigimonBoxSlot>();
 
-                _ef5.NameEfecto = EfectosActivos.BuffAtack;
-                _ef5.buffo = midigi.CanvasContador.PoderDeAtaque; ;
+                _ef5.NameEfecto = EfectosActivos.doblePower;
+                _ef5.OptionCard = Opcard;
+                _ef5.buffo = 2;
+                _ef5.CartaAfecta = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
                 _ef5.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
                 if(WhatNivelMayor(digienemigo._DigiCarta.DatosDigimon.Nivel,midigi._DigiCarta.DatosDigimon.Nivel))
+                _ef5.Jugador = StaticRules.instance.WhosPlayer;
                 EF.Add(_ef5);
                 break;
             case "QuitDigimonBox":
-
+                Efecto _ef7 = new Efecto();
+                CartaDigimon midigi2 = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
+                _ef7.NameEfecto = EfectosActivos.QuitDigimonBox;
+                _ef7.OptionCard = Opcard;
+                _ef7.CartaAfecta = midigi2;
+                _ef7.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
+                _ef7.Jugador = StaticRules.instance.WhosPlayer;
+                EF.Add(_ef7);
                 break;
             case "doublelostpoint":
 
@@ -1591,20 +1617,120 @@ public class StaticRules : MonoBehaviour
             case "setRequeriment":
 
                 break;
+          
+            case "drop in allyDarkArea":
+                Efecto _ef6 = new Efecto();
+                _ef6.CartaAfecta = Opcard;
+                _ef6.OptionCard = Opcard;
+                _ef6.NameEfecto = EfectosActivos.SetDarkArea;
+                _ef6.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
+                _ef6.Jugador = StaticRules.instance.WhosPlayer;
+                EF.Add(_ef6);
+                break;
             default:
                 break;
         }
+
+        MultipleEfect(EF);
         
     }
     
-    public void allyChageAtack(string ataque)
-    {
 
+    public void MultipleEfect(List<Efecto> EF)
+    {
+        foreach (Efecto item in EF)
+        {
+            ActivarEfecto(item);
+        }
     }
-
-    public void MultipleEfect(List<EfectosActivos> EF)
+    public void ActivarEfecto(Efecto efect)
     {
-
+        ActivarCarta.instance.Activar(efect.OptionCard);
+        switch (efect.NameEfecto)
+        {
+            case EfectosActivos.allyChageAtack:
+                MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().RevelarDigimon(efect.CartaAfecta, efect.Ataque);
+                break;
+            case EfectosActivos.BuffAtack:
+                MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().BuffAtack(efect.buffo,efect.CartaAfecta);
+                break;
+            case EfectosActivos.checknivel:
+                break;
+            case EfectosActivos.doblePower:
+                MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().BuffAtack(efect.buffo, efect.CartaAfecta);
+                break;
+            case EfectosActivos.doublelostpoint:
+                break;
+            case EfectosActivos.dropCards:
+                EfectosRonda.Add(efect);
+                break;
+            case EfectosActivos.lostcardgame:
+                break;
+            case EfectosActivos.QuitDigimonBox:
+                EfectosRonda.Add(efect);
+                break;
+            case EfectosActivos.SetDarkArea:
+                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(efect.CartaAfecta.transform);
+                break;
+            case EfectosActivos.setRequeriment:
+                break;
+        }
+    }
+    UnityAction<string> LoAction;
+    public int EfectosRond , TurnoEfect = 0;
+    public void EfectosEstaticos(UnityAction<string> Loaction)
+    {
+        // Revisa si hay un efecto 
+        LoAction = Loaction;
+        TurnoEfect = 0;
+        EfectosRond = 0;
+        if (EfectosRonda.Count != 0)
+        {
+            foreach (var item in EfectosRonda)
+            {
+                if (item.Limite == NowPhase)
+                {
+                    // activar Efecto
+                    ActivarEfectoStatico(item, EsperaEfectos);
+                }
+            }
+        }
+        else
+        {
+            EsperaEfectos("No hay efectos");
+        }
+    }
+    public void ActivarEfectoStatico(Efecto efect,UnityAction<string> Loaction)
+    {
+        switch (efect.NameEfecto)
+        {
+            case EfectosActivos.QuitDigimonBox:
+                efect.CartaAfecta.transform.parent.GetComponent<DigimonBoxSlot>().LostDigimon(Loaction);
+                EfectosRond++;
+                break;
+            case EfectosActivos.dropCards:
+                EfectosRond++;
+                ActivarCarta.instance.Activar(efect.OptionCard);
+                if (efect.Jugador != PartidaManager.instance.WinTurno)
+                {
+                    // Si el Jugador que activo la carta perdio la batalla
+                    List<CartaDigimon> Pcartas = new List<CartaDigimon>();
+                    efect.Destino.GetComponent<DarkArea>().setAction(Loaction);
+                    for (int i = 0; i < efect.cantidadCartas; i++)
+                    {
+                        Pcartas.Add(efect.Origen.GetComponent<NetOcean>().Robar());
+                        efect.Destino.GetComponent<DarkArea>().AddListDescarte(Pcartas[i], 0.5f);
+                    }
+                    // Descartamos esta carta  
+                    MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, efect.Jugador).GetComponent<DarkArea>().AddListDescarte(efect.OptionCard, 0.4f);
+                }
+                else
+                {
+                    // si la gano el efecto no se aplica
+                    Loaction.Invoke("Pasamos turno");
+                }
+                break;
+        }
     }
 
     public Phases ConvertPhases(string fase)
@@ -1618,11 +1744,24 @@ public class StaticRules : MonoBehaviour
             case "Evolution Phase":
                 conver = Phases.EvolutionPhase;
                 break;
+            case "End Phase":
+                conver = Phases.EndPhase;
+                break;
             default:
                 break;
         }
         return conver;
     }
+
+    public void EsperaEfectos(string activos)
+    {
+        TurnoEfect++;
+        if (TurnoEfect >= EfectosRond)
+        {
+            LoAction.Invoke("Acabo Los efectos");
+        }
+    }
+   
     
 }
 

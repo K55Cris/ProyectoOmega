@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,15 @@ public class PointGaugeBox : MonoBehaviour
             case 10:
                 Padre = PosPuntuacion[0];
                 break;
+        }
+
+        foreach (var item in CanvasPuntuacion)
+        {
+            int k = Convert.ToInt32(item.name);
+            if (k > point)
+            {
+                item.Apagar(Apagado);
+            }
         }
 
         if (point <= 0)

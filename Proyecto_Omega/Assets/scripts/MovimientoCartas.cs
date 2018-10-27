@@ -17,6 +17,8 @@ public class MovimientoCartas : MonoBehaviour {
     public GameObject CanvasSeleted;
     public Image BotonDiscardPhase;
     public Sprite Descar, Cancelar;
+    private int shaderProperty;
+
     private void Start()
     {
         Maincam = Camera.main;
@@ -66,7 +68,7 @@ public class MovimientoCartas : MonoBehaviour {
             // Obtener Slot de la Carta
             Transform Slot= MesaManager.SetOptionSlot(transform.parent.gameObject);
             // Mandar a Revisar si la carta se puede colocar en el Slot
-            StaticRules.CheckSetDigiCardSlot(Slot, transform.parent);
+            StaticRules.CheckSetDigiCardSlot(Slot, transform.parent, true);
             StartCoroutine(TerminarDesicion());
         }
     }
@@ -95,20 +97,17 @@ public class MovimientoCartas : MonoBehaviour {
 
     public void MoverCarta(Transform Destino , UnityAction<Transform, CartaDigimon,int> LoAction, int ID)
     {
-        Debug.Log(Destino.name);
         IdMove = ID;
         StartCoroutine(Transicion(Destino,LoAction));
     }
 
     public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon,int> LoAction)
     {
-        Debug.Log(Destino.name+"t");
         yield return new WaitForEndOfFrame();
         if (Destino)
         {
             var heading = Destino.position - transform.parent.position;
             var distance = heading.magnitude;
-            Debug.Log(distance);
             while (distance > 5)
             {
                 heading = Destino.position - transform.parent.position;
@@ -120,7 +119,6 @@ public class MovimientoCartas : MonoBehaviour {
                 yield return new WaitForSecondsRealtime(0.01F);
             }
         }
-        Debug.Log(Destino.name + ":" + LoAction.Method.Name);
         LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>(),IdMove);
 
     }
@@ -133,11 +131,17 @@ public class MovimientoCartas : MonoBehaviour {
     }
     public void DestruirCarta()
     {
+        Muerte.SetActive(false);
         Muerte.SetActive(true);
         MeshRenderer Padre = transform.parent.GetComponent<MeshRenderer>();
         Padre.enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
-        Invoke("Regreso",1.1f);
+        MeshRenderer MuerteM = Muerte.GetComponent<MeshRenderer>();
+        
+        shaderProperty = Shader.PropertyToID("_Normal");
+        MuerteM.material.SetTexture(shaderProperty, DataManager.instance.GetTextureDigimon(transform.parent.GetComponent<CartaDigimon>().DatosDigimon.id));
+
+        Invoke("Regreso",1.2f);
     }
     public void Regreso()
     {

@@ -16,7 +16,9 @@ public class PartidaManager : MonoBehaviour {
     public Image PhasesPanel;
     public Text PhasesText;
     public static PartidaManager instance;
-
+    public string Player1Atack = "A";
+    public string Player2Atack = "A";
+    public Player WinTurno;
     private void Awake()
     {
         instance = this;
@@ -119,7 +121,6 @@ public class PartidaManager : MonoBehaviour {
         Carta.transform.localPosition = Vector3.zero;
         Carta.transform.localRotation = Quaternion.Euler(0, 0, 0);
         Carta.Mostrar();
-        Debug.Log(Carta.DatosDigimon.Nombre);
         Carta.transform.localScale = new Vector3(25, 40, 0.015f);
     }
 

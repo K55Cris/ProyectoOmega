@@ -49,15 +49,10 @@ public class NetOcean : MonoBehaviour
     public void Reiniciar(UnityAction<string> LoAction)
     {
         this.Loaction = LoAction;
-        // Dark Arena ---
-        List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas;
-      //  Iteracion(ListDCardsDarkArea);
-        sendDarkarea(ListDCardsDarkArea);
-     
         // DigimonBox Slot
-        List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
-        sendDarkarea(ListDCardDigimon);
-        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().LostDigimon(null);
+    //    List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
+    //    sendDarkarea(ListDCardDigimon);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().LostDigimon(addDarkArea);
 
     }
 
@@ -71,9 +66,10 @@ public class NetOcean : MonoBehaviour
         }
     }
 
-    public void Iteracion(List<CartaDigimon> ListaCartas)
+    public IEnumerator  Iteracion(List<CartaDigimon> ListaCartas)
     {
-        Debug.Log(ListaCartas.Count);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
         foreach (var item in ListaCartas)
         {
             Debug.Log(item.DatosDigimon.Nombre);
@@ -90,14 +86,15 @@ public class NetOcean : MonoBehaviour
         foreach (var item3 in ListaCartas)
         {
             Debug.Log(item3.GetComponent<CartaDigimon>().DatosDigimon.Nombre);
-            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item3.GetComponent<CartaDigimon>(), 0.4f);
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item3, 0.4f);
         }
         ListaCartas = new List<CartaDigimon>();
     }
     public void addDarkArea(string RESULT)
     {
+        Debug.Log(RESULT);
         List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas;
-        Iteracion(ListDCardsDarkArea);
+       StartCoroutine(Iteracion(ListDCardsDarkArea));
     }
 
     public void addNetocean(CartaDigimon Dcard)
@@ -112,26 +109,37 @@ public class NetOcean : MonoBehaviour
     }
     public void InterAutoAjuste(CartaDigimon carta)
     {
-        Vector3 Pos = new Vector3(0, 0, 0 + ((transform.childCount) * 0.030f));
+        Vector3 Pos = new Vector3(0, 0, 0 + ((transform.childCount) * 0.06f));
         carta.transform.localScale = new Vector3(1, 1, 0.01f);
         carta.transform.localRotation = new Quaternion(0, 0, 0, 0);
         carta.transform.localPosition = Pos;
         carta.Front.GetComponent<MovimientoCartas>().Mover = false;
-        if (Loaction != null)
+        if (Esperar)
         {
-            Loaction("Seguir");
-            Loaction = null;
+            Esperar = false;
+            StartCoroutine(WhaitReinicio());
         }
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().Vaciar();
     }
+    private bool Esperar = true;
     private void Mezclar()
     {
-
+        
     }
     public IEnumerator WhaitFrame(CartaDigimon Dcard)
     {
         yield return new WaitForEndOfFrame();
-        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform, InterAutoAjuste);
         yield return new WaitForEndOfFrame();
+        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform, InterAutoAjuste); 
+    }
+    public IEnumerator WhaitReinicio()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if(Loaction!=null)
+        Loaction("Seguir");
+
+        Loaction = null;
+        Esperar = true;
     }
 }

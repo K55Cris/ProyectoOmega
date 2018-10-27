@@ -12,11 +12,8 @@ public class Player : MonoBehaviour {
     public int PuntosDeVida;
     public List<ListaCartasMove> LoActions= new List<ListaCartasMove>();
 
-
-
     public void moveCard(Transform Padre, CartaDigimon Card, UnityAction<CartaDigimon> Action)
     {
-        Debug.Log(Card.DatosDigimon.Nombre);
         ListaCartasMove At = new ListaCartasMove();
             At.LoAction = Action;
             At.CartaOption = Card;
@@ -48,7 +45,6 @@ public class Player : MonoBehaviour {
         At.CartaOption.transform.SetParent(At.Padre);
         if (At.LoAction != null)
         {
-            Debug.Log(At.CartaOption.DatosDigimon.Nombre+":"+ At.Padre.name+":"+At.LoAction.Method.Name);
             At.LoAction.Invoke(At.CartaOption);
         }
         else

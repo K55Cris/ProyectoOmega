@@ -26,6 +26,11 @@ public class ContadorOffencivo : MonoBehaviour
         StartCoroutine(EstablecerCantidad(cantidad,LoAction));
     }
 
+    public void OpEfectCard(int cantidad)
+    {
+        PoderDeAtaque = cantidad;
+    }
+
     public void EsperarEfectos()
     {
       
@@ -37,12 +42,11 @@ public class ContadorOffencivo : MonoBehaviour
         if (cantidad>PoderDeAtaque)
         {
             // Buffo
-            Ataque.color = Color.green;
             int DIVISOR = cantidad / 60;
             for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {
                 Ataque.text = i.ToString();
-                yield return new WaitForSecondsRealtime(0.05f);
+                yield return new WaitForSecondsRealtime(0.02f);
             }
             PoderDeAtaque = cantidad;
             Ataque.text = cantidad.ToString();
@@ -55,14 +59,12 @@ public class ContadorOffencivo : MonoBehaviour
         else
         {
             // De-duff
-            Ataque.color = Color.red;
-         
             Debug.Log(PoderDeAtaque+":"+transform.parent.transform.parent.transform.parent.name);
             int DIVISOR = PoderDeAtaque / 60;
             for (int i = PoderDeAtaque; i > cantidad; i-=DIVISOR)
             {
                 Ataque.text = i.ToString();
-                yield return new WaitForSecondsRealtime(0.05f);
+                yield return new WaitForSecondsRealtime(0.02f);
             }
             PoderDeAtaque = cantidad;
             Ataque.text = cantidad.ToString();

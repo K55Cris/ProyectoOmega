@@ -60,10 +60,7 @@ public class SoundManager : MonoBehaviour {
     {
         musicSource.clip = GetClip(audioName);
 
-        switch (audioName)
-        {
 
-        }
 
         StartCoroutine(DelayMusic(musicDelay));
     }

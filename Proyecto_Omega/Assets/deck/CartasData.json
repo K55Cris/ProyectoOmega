@@ -1193,10 +1193,9 @@
       "ListaCosto": [ "drop in allyOptionSlot faceUp" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "enemy drop 3 anycards from netocean in darkarea where lostbattle",
-        "drop in allyDarkArea"
+        "enemy drop 3 anycards from netocean in darkarea where lostbattle"
       ],
-      "Limite": "Battle Phase"
+      "Limite": "End Phase"
     },
     {
       "id": 53,
@@ -1212,7 +1211,7 @@
         "allyAttackPoints + 50",
         "drop in allyDarkArea"
       ],
-      "Limite": "Battle Phase"
+      "Limite": "End Phase"
     },
     {
       "id": 54,

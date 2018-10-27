@@ -150,6 +150,7 @@ namespace DigiCartas
     {
         public EfectosActivos NameEfecto;
         public CartaDigimon CartaAfecta;
+        public CartaDigimon OptionCard;
         public Transform Origen;
         public Transform Destino;
         public string Ataque;
@@ -157,5 +158,6 @@ namespace DigiCartas
         public int buffo;
         public string where;
         public Phases Limite;
+        public Player Jugador;
     }
 }

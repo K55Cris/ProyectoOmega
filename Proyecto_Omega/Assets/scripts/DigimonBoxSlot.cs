@@ -42,9 +42,13 @@ public class DigimonBoxSlot : MonoBehaviour {
 
         }
     }
+
     void OnMouseDown()
     {
-        Debug.Log("Digimon Slot");
+        if (_DigiCarta.mostrar)
+        {
+            VentanaMoreInfo.instance.Show(_DigiCarta.DatosDigimon);
+        }
     }
     public void PreparationPhase()
     {
@@ -154,8 +158,9 @@ public class DigimonBoxSlot : MonoBehaviour {
             DRoquin = Carta.GetComponent<CartaDigimon>();
             _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
+          
         }
-     
+    
 
     }
     public void Evolution(Transform Evolucion)
@@ -169,6 +174,7 @@ public class DigimonBoxSlot : MonoBehaviour {
             Evolucion.GetComponent<CartaDigimon>().Volteo();
             Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
             Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
+            MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().SetAtackNames(_DigiCarta);
         }
     }
 
@@ -218,7 +224,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public IEnumerator AutoAjustar(Transform Carta)
     {
     yield return new WaitForEndOfFrame();
-    Carta.localPosition = new Vector3(0, 0, -1+ transform.childCount);
+    Carta.localPosition = new Vector3(0, 0, -3+ transform.childCount);
     Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
     Carta.localScale = new Vector3(1, 1, 0.015f);
     }

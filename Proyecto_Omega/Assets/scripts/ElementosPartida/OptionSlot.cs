@@ -29,8 +29,7 @@ public class OptionSlot : Slot
     {
         if (!Vacio)
         {
-            Debug.Log("lel");
-            if (StaticRules.NowPhase == DigiCartas.Phases.EvolutionPhase)
+            if (StaticRules.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.NowPhase == DigiCartas.Phases.BattlePhase)
             {
                 CanvasAction.SetActive(true);
                 ActivarCarta.SetActive(true);
@@ -56,7 +55,12 @@ public class OptionSlot : Slot
     }
     public void ActivarOPtion()
     {
-        OpCarta.Volteo();
+        if (OpCarta)
+        {
+            CanvasAction.SetActive(false);
+            OpCarta.Volteo();
+            StaticRules.ActivateOptionCard(OpCarta);
+        }
     }
     public void Descartar()
     {
