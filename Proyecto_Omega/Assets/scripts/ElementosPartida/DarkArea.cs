@@ -30,11 +30,15 @@ public class DarkArea : MonoBehaviour {
     }
 
 
-    public void AddListDescarte(CartaDigimon Dcarta, float segundos)
+    public void AddListDescarte(CartaDigimon Dcarta, float segundos,bool SinAction=false)
     {
         if(Dcarta)
         DigiCartas.Add(Dcarta);
 
+        if (SinAction)
+        {
+            TermineDescarte = null;
+        }
         StartCoroutine(MoviendiaDarkArea(segundos));
     }
 
@@ -65,9 +69,9 @@ public class DarkArea : MonoBehaviour {
             yield return new WaitForSeconds(segundos);
             if (TermineDescarte != null)
             {
-                TermineDescarte("Completado");
                 moviendo = false;
                 DigiCartas = new List<CartaDigimon>();
+                TermineDescarte("Completado");
                 TermineDescarte = null;
             }
             else

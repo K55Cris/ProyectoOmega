@@ -68,6 +68,7 @@ namespace DigiCartas
         public List<string> ListaEfectos;
         public string Limite;
         public bool IsSupport;
+        public bool IsActivateHand;
 
     }
 
@@ -82,6 +83,15 @@ namespace DigiCartas
     }
 
     [Serializable]
+    public class DigiEvoluciones
+    {
+        public Transform DigiCarta;
+        public bool isJoggres;
+        public bool IsIgnore;
+    }
+
+
+    [Serializable]
     public class ListaCartasMove
     {
         public int ID;
@@ -92,8 +102,8 @@ namespace DigiCartas
     [Serializable]
     public class CartasBloqueadas
     {
-        public Player jugador;
-        public List<CartaDigimon> Cartasbloqueadas;
+        public Player jugador= new Player();
+        public List<CartaDigimon> Cartasbloqueadas= new List<CartaDigimon>();
     }
     [Serializable]
     public class bLOCKCARDS
@@ -136,7 +146,7 @@ namespace DigiCartas
 
     public enum EfectosActivos
     {
-        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel, setRequeriment
+        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel, setRequeriment, Ignor4, IgnorAll , EnemyDesDigivolucionar
     };
 
     public enum Phases
@@ -149,7 +159,7 @@ namespace DigiCartas
     public class Efecto
     {
         public EfectosActivos NameEfecto;
-        public CartaDigimon CartaAfecta;
+        public List<CartaDigimon> CartaAfecta= new List<CartaDigimon>();
         public CartaDigimon OptionCard;
         public Transform Origen;
         public Transform Destino;

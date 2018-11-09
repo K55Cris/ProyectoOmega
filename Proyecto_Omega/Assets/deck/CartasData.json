@@ -1224,11 +1224,11 @@
       "ListaCosto": [ null ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "battlePhase enemyBigDigimon allyAttackPoints * 2",
-        "allyL3 not use",
+        "battlePhase enemyBigDigimon allyAttackPoints * 2 where allyL3 not use",
         "drop in allyDarkArea"
       ],
       "Limite": "End Phase"
+	 
     },
     {
       "id": 55,
@@ -1241,11 +1241,12 @@
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "! allyEvolutionRequierimets allyDigivolution to Lv4",
+        "allyEvolutionRequierimets allyDigivolution to Lv4",
         "allyL3 not use",
         "drop in allyDarkArea"
       ],
-      "Limite": "Evolution Phase"
+      "Limite": "Evolution Phase" ,
+	  "IsActivateHand": true
     },
     {
       "id": 56,
@@ -1258,10 +1259,12 @@
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "! allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea",
+        "allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea",
+		"drop allHand allyDarkArea",
         "drop in allyDarkArea"
       ],
-      "Limite": "Evolution Phase"
+      "Limite": "Evolution Phase",
+	  "IsActivateHand": true
     },
     {
       "id": 57,
@@ -1290,11 +1293,9 @@
       "ListaCosto": [ "onlyOne (allyNetOcean top drop in allyDarkArea)3" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "winBattle enemyLostPoints * 2",
-        "allyL3 not use",
-        "drop in allyDarkArea"
+        "winBattle enemyLostPoints * 2"
       ],
-      "Limite": "Battle Phase"
+      "Limite": "End Phase"
     },
     {
       "id": 59,

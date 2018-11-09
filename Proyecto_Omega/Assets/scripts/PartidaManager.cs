@@ -31,6 +31,14 @@ public class PartidaManager : MonoBehaviour {
             return Player1;
     }
 
+    public string GetAtackUse(Player Jugador)
+    {
+        if (Player1 == Jugador)
+            return Player1Atack;
+        else
+            return Player2Atack;
+    }
+
     public string WhoAtackUse(Transform DigimonBoxSlot)
     {
         if (DigimonBoxSlot == MesaManager.instance.Campo1.DigimonSlot)

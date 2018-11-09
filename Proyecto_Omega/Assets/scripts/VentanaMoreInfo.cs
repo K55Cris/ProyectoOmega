@@ -28,6 +28,7 @@ public class VentanaMoreInfo : MonoBehaviour {
     public void ShowDatos(DigiCarta DatosDigimon)
     {
         CancelInvoke("Cerrando");
+        StopCoroutine(WhoIsPlayer1.ReduceAlpha(Panel));
         Panel.alpha = 1;
         DigimonImage.sprite = DataManager.instance.GetSprite(DatosDigimon.id);
         Datos = DatosDigimon;
@@ -165,7 +166,7 @@ public class VentanaMoreInfo : MonoBehaviour {
             }
         }
         NombreDigimon.text = Datos.Nombre;
-        Invoke("Cerrando", 5f);
+        Invoke("Cerrando", 4f);
         foreach (var item in ItemEvoText)
         {
             item.gameObject.SetActive(false);

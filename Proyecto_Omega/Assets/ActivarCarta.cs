@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ActivarCarta : MonoBehaviour {
     public Image DCarta;
+    public CartaDigimon CartaUsada;
     public Animator Am;
     public static ActivarCarta instance;
 
@@ -19,7 +20,10 @@ public class ActivarCarta : MonoBehaviour {
     // Use this for initialization
     public void Activar(CartaDigimon Carta)
     {
-        DCarta.overrideSprite = DataManager.instance.GetSprite(Carta.DatosDigimon.id);
+        if (CartaUsada != Carta) {
+            DCarta.overrideSprite= DataManager.instance.GetSprite(Carta.DatosDigimon.id);
+        }
+     
         Am.Play("Efectos");
     }
 }

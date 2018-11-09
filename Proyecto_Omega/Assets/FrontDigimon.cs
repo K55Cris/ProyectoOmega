@@ -80,11 +80,11 @@ public class FrontDigimon : MonoBehaviour {
         PoderAtaques[2].text = (poderC + cantidad).ToString();
         if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
         {
-            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard), null);
+            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard) + cantidad, null);
         }
         else
         {
-            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player2Atack, Dcard), null);
+            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player2Atack, Dcard) + cantidad, null);
         }
     }
     public void DuplicatePower(int multiplicador, CartaDigimon Dcard)
@@ -97,11 +97,11 @@ public class FrontDigimon : MonoBehaviour {
         PoderAtaques[2].text = (poderC * multiplicador).ToString();
         if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
         {
-            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard), null);
+            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard)*multiplicador, null);
         }
         else
         {
-            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player2Atack, Dcard), null);
+            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player2Atack, Dcard) * multiplicador, null);
         }
     }
 }

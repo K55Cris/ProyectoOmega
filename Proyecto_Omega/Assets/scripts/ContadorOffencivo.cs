@@ -23,6 +23,7 @@ public class ContadorOffencivo : MonoBehaviour
 
     public void EFECTOS(int cantidad, UnityAction<string> LoAction)
     {
+        Debug.Log(cantidad + ":" + PoderDeAtaque);
         StartCoroutine(EstablecerCantidad(cantidad,LoAction));
     }
 
@@ -42,6 +43,7 @@ public class ContadorOffencivo : MonoBehaviour
         if (cantidad>PoderDeAtaque)
         {
             // Buffo
+            Debug.Log("bUFFO");
             int DIVISOR = cantidad / 60;
             for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {

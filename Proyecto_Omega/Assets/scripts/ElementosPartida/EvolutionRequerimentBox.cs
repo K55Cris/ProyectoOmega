@@ -43,6 +43,7 @@ public class EvolutionRequerimentBox : Slot
 
     public void Requerimientos()
     {
+        PartidaManager.instance.CambioDePhase(false);
         SetRequerimientos(null);
     }
 
@@ -160,6 +161,7 @@ public class EvolutionRequerimentBox : Slot
                 }
             }
             Activado = true;
+            
         }
     }
     public void CheckRequeriment(CartaDigimon RCard, string item)
@@ -292,7 +294,7 @@ public class EvolutionRequerimentBox : Slot
     public void AjusteIntermedio(CartaDigimon _DCard)
     {
         _DCard.AjustarSlot();
-
+        PartidaManager.instance.CambioDePhase(true);
     }
 
 

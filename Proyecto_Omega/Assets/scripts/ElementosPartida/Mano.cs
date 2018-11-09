@@ -5,7 +5,7 @@ using System;
 
 public class Mano : MonoBehaviour
 {
-    public List<CartaDigimon> Cartas;
+    public List<CartaDigimon> Cartas= new List<CartaDigimon>();
     public int Limite;
 
     public void JugarCarta(CartaDigimon carta)

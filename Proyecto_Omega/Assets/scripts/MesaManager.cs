@@ -87,6 +87,12 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
+    public CartaDigimon GetDigimonSlot()
+    {
+        CartaDigimon DigimonCombatiente = GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta;
+        return DigimonCombatiente;
+    }
+
     public Transform GetOptionSlotForCard(DigiCarta Dcarta)
     {
         if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
@@ -134,6 +140,24 @@ public class MesaManager : MonoBehaviour {
             }
         }
         return null;
+    }
+    public Player WhatSlotPlayer(Transform Slot) 
+    {
+        Player jugador1 = PartidaManager.instance.Player1;
+        Player jugador2 = PartidaManager.instance.Player2;
+
+        if (Campo1.DigimonSlot == Slot)
+        {
+            return jugador1;
+        }
+        else if (Campo2.DigimonSlot == Slot)
+        {
+            return jugador2;
+        }
+        else
+        {
+            return null;
+        }
     }
  
 }

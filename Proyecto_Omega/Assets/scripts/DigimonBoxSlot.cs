@@ -45,10 +45,15 @@ public class DigimonBoxSlot : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (_DigiCarta.mostrar)
+        if (_DigiCarta)
         {
-            VentanaMoreInfo.instance.Show(_DigiCarta.DatosDigimon);
+            if (_DigiCarta.mostrar)
+            {
+                VentanaMoreInfo.instance.Show(_DigiCarta.DatosDigimon);
+            }
+
         }
+       
     }
     public void PreparationPhase()
     {
@@ -116,7 +121,64 @@ public class DigimonBoxSlot : MonoBehaviour {
         }
         _DigiCarta = DRoquin;
     }
-    
+    public void DeEvolution(UnityAction<string> Loaction, string Condicion)
+    {
+        MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().setAction(Loaction);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform)
+            ).GetComponent<DarkArea>().setAction(Loaction);
+        if (Evoluciones.Count == 0)
+        {
+            if (Loaction != null)
+            {
+                Loaction("Solo esta el Roquin");
+            }
+            else
+            {
+                return;
+            }
+          
+        }
+        // aplicamos condicion
+        string[] sub = Condicion.Split(' ');
+        string NivelRequerido="";
+        string NivelObjetivo="";
+
+        if (sub[1] == "to")
+        {
+            NivelRequerido = sub[0];
+            NivelObjetivo = sub[2];
+        }
+
+        CartaDigimon NewDigimon= new CartaDigimon();
+
+        if (_DigiCarta.DatosDigimon.Nivel == NivelRequerido)
+        {
+            // EL DIGIMON en posicion si es del nivel requerido
+            foreach (var item in Evoluciones)
+            {
+                if (item.DatosDigimon.Nivel != NivelObjetivo)
+                {
+                    if (StaticRules.instance.WhatNivelMayor(item.DatosDigimon.Nivel, NivelObjetivo))
+                    {
+                        // mandamos a la dark area las cartas con nivel superior 
+                        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform)
+                            ).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+                    }
+                }
+                else
+                {
+                    _DigiCarta = item;
+                }
+            }
+            _DigiCarta.Volteo();
+            // revelamos la carta
+            MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.
+            WhatSlotPlayer(this.transform)).GetComponent<FrontDigimon>().RevelarDigimon(_DigiCarta, PartidaManager.
+            instance.GetAtackUse(MesaManager.instance.WhatSlotPlayer(this.transform)));
+            }
+    }
+
+
     public void SetDigimon(Transform Carta)
     {
         // Verificamos si hay Otro Digimon en el slot
@@ -165,16 +227,14 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void Evolution(Transform Evolucion)
     {
-        Debug.Log(Evolucion.GetComponent<CartaDigimon>().DatosDigimon.Nombre);
         if (Evolucion)
         {
             PartidaManager.instance.SetMoveCard(this.transform, Evolucion, InterAutoAjuste);
             _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
-            MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Remove(Evolucion.GetComponent<CartaDigimon>());
             Evolucion.GetComponent<CartaDigimon>().Volteo();
             Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
-            Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
             MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().SetAtackNames(_DigiCarta);
+            StartCoroutine(Quitar(Evolucion));
         }
     }
 
@@ -219,6 +279,13 @@ public class DigimonBoxSlot : MonoBehaviour {
     public void InterAutoAjuste2(CartaDigimon carta)
     {
         StartCoroutine(AutoAjustarRoquin(carta.transform));
+    }
+    public IEnumerator Quitar(Transform Carta)
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas.Remove(Carta.GetComponent<CartaDigimon>());
     }
 
     public IEnumerator AutoAjustar(Transform Carta)

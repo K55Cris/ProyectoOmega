@@ -323,27 +323,27 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[13]
-      value: 52
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[14]
-      value: 52
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[15]
-      value: 52
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[16]
-      value: 50
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[17]
-      value: 50
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
@@ -363,17 +363,17 @@ Prefab:
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[21]
-      value: 54
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[22]
-      value: 54
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
       propertyPath: Default.IDCartasMazo.Array.data[23]
-      value: 54
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 114983039978706082, guid: 2430403b5b09483468a37c3c3fb462b9,
         type: 2}
@@ -681,7 +681,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504338896
 GameObject:
@@ -2270,7 +2270,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4513381750173572, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}

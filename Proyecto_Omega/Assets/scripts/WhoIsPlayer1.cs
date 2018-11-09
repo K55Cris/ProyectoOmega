@@ -81,7 +81,7 @@ public class WhoIsPlayer1 : MonoBehaviour {
         while (cv.alpha > 0)
         {
             yield return new WaitForSeconds(0.1f);
-            cv.alpha -= 0.1f;
+            cv.alpha -= 0.25f;
         }
         cv.blocksRaycasts = false;
         cv.interactable = false;
