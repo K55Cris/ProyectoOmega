@@ -149,7 +149,6 @@ public class DigimonBoxSlot : MonoBehaviour {
             NivelObjetivo = sub[2];
         }
 
-        CartaDigimon NewDigimon= new CartaDigimon();
 
         if (_DigiCarta.DatosDigimon.Nivel == NivelRequerido)
         {

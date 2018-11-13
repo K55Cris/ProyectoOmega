@@ -1130,6 +1130,29 @@
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
       "ListaRequerimientos": [ "MERAMON 40%", "WIZARMON 40%", "ANGEMON 40%" ]
+    },
+    {
+      "id": 61,
+      "codigo": "St-61",
+      "Nombre": "Guilmon",
+      "descripcion": "¡Eres el Amo!",
+      "TipoBatalla": "A",
+      "Familia": "K55",
+      "Atributo": "Virus",
+      "Tipo": "Reptile",
+      "Nivel": "III",
+      "Borde": "Azul",
+      "NombreAtaqueA": "Fireball",
+      "DanoAtaqueA": 999,
+      "NombreAtaqueB": "Rock Breaker",
+      "DanoAtaqueB": 999,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 999,
+      "PerdidaVidaIII": 80,
+      "PerdidaVidaIV": 70,
+      "PerdidaVidaPerfect": 60,
+      "PerdidaVidaUltimate": 50,
+      "ListaRequerimientos": [ null ]
     }
   ],
   "CartaOption": [

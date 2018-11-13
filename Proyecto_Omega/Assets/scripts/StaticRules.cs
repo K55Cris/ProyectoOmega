@@ -68,6 +68,9 @@ public class StaticRules : MonoBehaviour
     {
         FailSafeInstance();
 
+        // Musica de Duelo
+        SoundManager.instance.PlayMusic(Sound.Duelo);
+
         //Cargamos Mazos de Ambos Jugadores 
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player1.IDCartasMazo, MesaManager.instance.Campo1.NetOcean, PartidaManager.instance.Player1);
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player2.IDCartasMazo, MesaManager.instance.Campo2.NetOcean, PartidaManager.instance.Player2);
@@ -235,10 +238,6 @@ public class StaticRules : MonoBehaviour
         return instance;
     }
 
-    public static void InvocarDigimon(int player)
-    {
-        StaticRules loRule = FailSafeInstance();
-    }
 
     public static string Habilidades(DigiCarta digimon)
     {
@@ -1435,21 +1434,32 @@ public class StaticRules : MonoBehaviour
         if (StaticRules.instance.PointGaugePlayer1 <= 0&& StaticRules.instance.PointGaugePlayer2 > 0)
         {
             PartidaManager.instance.Cambio(PartidaManager.instance.Player2.Nombre+" a Ganado");
-          
             CartaDigimon Digimon = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea,Digimon.transform, Ajustar);
+            PartidaManager.instance.cambioEcena();
+            return;
         }
-        else if(StaticRules.instance.PointGaugePlayer2 > 0 && StaticRules.instance.PointGaugePlayer1 >= 0)
+        else if(StaticRules.instance.PointGaugePlayer2 <= 0 && StaticRules.instance.PointGaugePlayer1 >= 0)
         {
             PartidaManager.instance.Cambio(PartidaManager.instance.Player1.Nombre + " a Ganado");
             CartaDigimon Digimon = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo2.DarkArea, Digimon.transform, Ajustar);
+            StaticRules.instance.Invoke("ChangeRecompensa", 4f);
         }
         else
         {
             PartidaManager.instance.Cambio("Empate");
+            PartidaManager.instance.cambioEcena();
         }
-        PartidaManager.instance.cambioEcena();
+        
+    }
+    public void ChangeRecompensa()
+    {
+        LevelLoader.instance.CargarEscena("Recompensa");
+    }
+    public void MoveDigimonSlot()
+    {
+        LevelLoader.instance.CargarEscena("Recompensa");
     }
 
     public static void ActivateOptionCard(CartaDigimon OpCard)

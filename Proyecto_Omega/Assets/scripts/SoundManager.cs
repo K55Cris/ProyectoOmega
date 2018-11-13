@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Sound
 {
-    Evolucion, SetCard, Evolucion2 , AtaqueA,AtaqueB,AtaqueC
+    Evolucion, SetCard, Evolucion2 , AtaqueA,AtaqueB,AtaqueC , MainMenu, Duelo, Recompensa
 }
 public class SoundManager : MonoBehaviour {
 
@@ -15,6 +15,11 @@ public class SoundManager : MonoBehaviour {
     [Header("Evolucion")]
     public AudioClip EvolucionRoquin;
     public AudioClip EvolucionChampion;
+
+    [Header("Musica de Fondo")]
+    public AudioClip MainMenu;
+    public AudioClip Recompensas;
+    public AudioClip Duelo;
 
     [Header("Colocar Cartas")]
     public AudioClip SetCard1;
@@ -27,7 +32,6 @@ public class SoundManager : MonoBehaviour {
     public AudioClip DisparoDeFuego;
     public AudioClip DisparoElectrico;
 
-    public AudioClip recompesas;
     void Awake()
     {
         if (instance == null)
@@ -58,11 +62,11 @@ public class SoundManager : MonoBehaviour {
 
     public void PlayMusic(Sound audioName, float musicDelay = 0)
     {
-        musicSource.clip = GetClip(audioName);
-
-
-
-        StartCoroutine(DelayMusic(musicDelay));
+        if (musicSource.clip != GetClip(audioName))
+        {
+            musicSource.clip = GetClip(audioName);
+            StartCoroutine(DelayMusic(musicDelay));
+        }
     }
     IEnumerator DelayMusic(float musicDelay)
     {
@@ -94,6 +98,15 @@ public class SoundManager : MonoBehaviour {
                 break;
             case Sound.AtaqueC:
                 audioClip = ChoqueCristal;
+                break;
+            case Sound.MainMenu:
+                audioClip = MainMenu;
+                break;
+            case Sound.Recompensa:
+                audioClip = Recompensas;
+                break;
+            case Sound.Duelo:
+                audioClip = Duelo;
                 break;
             case Sound.SetCard:
                 int ran = Random.Range(1, 4);

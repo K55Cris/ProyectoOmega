@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenas/DeckEditor.unity
     guid: 9f5ae78c86e3a234eb8148d0e2f0f5ff
+  - enabled: 1
+    path: Assets/Scenas/Recompensa.unity
+    guid: ff7ac5f1941de1844b5b609665e38017
   m_configObjects: {}

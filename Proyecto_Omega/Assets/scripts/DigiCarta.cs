@@ -124,6 +124,7 @@ namespace DigiCartas
         public string Nombre;
         public List<int> IDCartasMazo;
         public List<DIDCarta> IDCartasDisponibles;
+        public bool ALLCards;
     }
 
     [Serializable]

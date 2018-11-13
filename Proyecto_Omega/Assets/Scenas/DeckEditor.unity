@@ -420,6 +420,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &28901231
 MonoBehaviour:
@@ -614,6 +615,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &33549872
 MonoBehaviour:
@@ -1124,6 +1126,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &54341669
 MonoBehaviour:
@@ -3005,6 +3008,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &213449323
 MonoBehaviour:
@@ -3274,6 +3278,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &286150038
 MonoBehaviour:
@@ -5043,6 +5048,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &533243313
 MonoBehaviour:
@@ -5334,6 +5340,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &594508340
 MonoBehaviour:
@@ -5793,6 +5800,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &603992616
 MonoBehaviour:
@@ -6633,6 +6641,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &713404775
 MonoBehaviour:
@@ -6848,7 +6857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 62.80005, y: -31.100006}
+  m_AnchoredPosition: {x: 62.80005, y: -31.099976}
   m_SizeDelta: {x: 239.79999, y: 52}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &731927611
@@ -7286,6 +7295,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &740471523
 MonoBehaviour:
@@ -7903,6 +7913,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &789061002
 MonoBehaviour:
@@ -9197,6 +9208,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &946293243
 MonoBehaviour:
@@ -9754,6 +9766,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &988804152
 MonoBehaviour:
@@ -10911,7 +10924,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1168036098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22f9cbc280f04040b97e63160f389af, type: 3}
+  m_Script: {fileID: 11500000, guid: be79e86eabd4c7548ae33328be00f51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1168036101
@@ -10954,8 +10967,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1168036100}
-        m_MethodName: CargarEscena
-        m_Mode: 5
+        m_MethodName: Back
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11088,6 +11101,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1171568340
 MonoBehaviour:
@@ -11351,6 +11365,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1179038197
 MonoBehaviour:
@@ -11642,6 +11657,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1210470041
 MonoBehaviour:
@@ -11862,6 +11878,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1211288473
 MonoBehaviour:
@@ -12378,6 +12395,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1230899860
 MonoBehaviour:
@@ -12648,6 +12666,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1235518914
 MonoBehaviour:
@@ -13008,6 +13027,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1246253392
 MonoBehaviour:
@@ -13532,7 +13552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 61.099976, y: -50.200012}
+  m_AnchoredPosition: {x: 61.099976, y: -50.200073}
   m_SizeDelta: {x: 632, y: 52}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1313691217
@@ -14878,6 +14898,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1432483408
 MonoBehaviour:
@@ -15477,6 +15498,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1528080719
 MonoBehaviour:
@@ -16135,6 +16157,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1566054114
 MonoBehaviour:
@@ -17031,6 +17054,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1671458036
 MonoBehaviour:
@@ -17444,6 +17468,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1691459658
 MonoBehaviour:
@@ -18154,6 +18179,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1788339876
 MonoBehaviour:
@@ -19120,6 +19146,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1951020530
 MonoBehaviour:
@@ -19646,6 +19673,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &1974241270
 MonoBehaviour:
@@ -20289,6 +20317,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &2042929342
 MonoBehaviour:
@@ -20999,6 +21028,7 @@ MonoBehaviour:
     ListaEfectos: []
     Limite: 
     IsSupport: 0
+    IsActivateHand: 0
   lleno: 0
 --- !u!114 &2107376445
 MonoBehaviour:

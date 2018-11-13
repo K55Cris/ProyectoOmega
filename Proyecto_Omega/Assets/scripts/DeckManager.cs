@@ -11,9 +11,6 @@ public class DeckManager : MonoBehaviour {
    
     public List<DigiCarta> Deck;
     public List<DigiCarta> TemporalDeckEdition;
-
-
-
     public List<int> DeckInt;
     public GameObject CartaBase;
     public CanvasGroup CGViewDeck;
@@ -176,14 +173,14 @@ public class DeckManager : MonoBehaviour {
         ViewDeck();
     }
 
-        public void GuardarDeck()
+    public void GuardarDeck()
     {
-        Deck = new List<DigiCarta>();
+        List<int> TemDeck = new List<int>();
         foreach (var item in SlotsDeck)
         {
-            Deck.Add(item._Datos);
+            TemDeck.Add(item._Datos.id);
         }
-        SaveDeck();
+        PlayerManager.instance.SaveDeck(TemDeck);
     }
     public void BackViewDeck()
     {
@@ -223,7 +220,11 @@ public class DeckManager : MonoBehaviour {
 
         if (Deck.Count == 0)
         {
-            GetDeck();
+            DeckInt = PlayerManager.instance.GetDeck();
+            foreach (var item in DeckInt)
+            {
+                Deck.Add(DataManager.instance.GetDigicarta(item));
+            }
         }
         else
         {
@@ -297,8 +298,7 @@ public class DeckManager : MonoBehaviour {
     }
     public void EditDeck()
     {
-        GetCardsAvaible();
-        foreach (var item in PlayerManager.instance.IDCartasDisponibles)
+        foreach (var item in PlayerManager.instance.Jugador.IDCartasDisponibles)
         {
             GameObject NewCarta = Instantiate(CartaBase, DeckEditorContent);
             NewCarta.GetComponent<EditorCardBase>().RecibirDatosDeck(DataManager.instance.GetDigicarta(item.ID));
@@ -407,47 +407,11 @@ public class DeckManager : MonoBehaviour {
         puntosPaginas(puntosBiblioteca, nowPageB);
     }
 	
-	public void SaveDeck()
-    {
-        // guardar deck
-        // revisar si el deck es valido para guardarse
-        List<int> IdCartas= new List<int>();
-        foreach (var item in Deck)
-        {
-            IdCartas.Add(item.id);
-        }
-        ListCard lD = new ListCard();
-        lD.cards = IdCartas;
-        string JSON = JsonUtility.ToJson(lD);
-        Debug.Log(JSON);
-        PlayerPrefs.SetString("MainDeck", JSON);
-        PlayerManager.instance.Jugador.IDCartasMazo = IdCartas;
-    }
 
 
 
-    public void GetDeck()
-    { 
-        // cargar Deck
-        string cartas = PlayerPrefs.GetString("MainDeck");
-        if (!string.IsNullOrEmpty(cartas))
-        {
-            ListCard DeckT = JsonUtility.FromJson<ListCard>(cartas);
-            DeckInt = DeckT.cards;
-            foreach (var item in DeckT.cards)
-            {
-                Deck.Add(DataManager.instance.GetDigicarta(item));
-            }
-        }
-        else
-        {
-            DeckInt = PlayerDefault.instance.Default.IDCartasMazo;
-            foreach (var item in DeckInt)
-            {
-                Deck.Add(DataManager.instance.GetDigicarta(item));
-            }
-        }
-    }
+
+    
 
     public void puntosPaginas(Image [] puntos, int nowPage)
     {
@@ -466,24 +430,5 @@ public class DeckManager : MonoBehaviour {
         }
     }
 
-    public void GetCardsAvaible()
-    {
-        if (PlayerPrefs.HasKey("Player"))
-        {
-
-        }
-        else
-        {
-            // no existe un datos de jugador 
-            Debug.Log("NO EXISTE JUGADOR");
-            // cargar datos por defecto
-            PlayerManager.instance.IDCartasDisponibles = PlayerDefault.instance.Default.IDCartasDisponibles;
-            PlayerManager.instance.Jugador = PlayerDefault.instance.Default;
-            DeckInt = PlayerManager.instance.Jugador.IDCartasMazo;
-            foreach (var item in DeckInt)
-            {
-                Deck.Add(DataManager.instance.GetDigicarta(item));
-            }
-        }
-    }
+  
 }

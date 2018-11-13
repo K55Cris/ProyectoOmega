@@ -11,4 +11,17 @@ public class MainMenu : MonoBehaviour {
     {
         Application.Quit();
     }
+    public void vSTamer()
+    {
+        LevelLoader.instance.CargarEscena("Recompensa");
+    }
+    public void VsIA()
+    {
+        LevelLoader.instance.CargarEscena("vsIA");
+    }
+    public void DeckEditor()
+    {
+
+        LevelLoader.instance.CargarEscena("DeckEditor");
+    }
 }

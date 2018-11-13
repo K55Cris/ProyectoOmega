@@ -61,7 +61,7 @@ public class PartidaManager : MonoBehaviour {
         }
         else
         {
-            Player1.IDCartasMazo = PlayerDefault.instance.Default.IDCartasMazo;
+            Player1.IDCartasMazo = PlayerManager.instance.Default.IDCartasMazo;
         }
         StaticRules.SelectDigimonChild();
     }
@@ -205,7 +205,7 @@ public class PartidaManager : MonoBehaviour {
     }
     public void change()
     {
-        SceneManager.LoadScene("Main Menu");
+        LevelLoader.instance.CargarEscena("Main Menu");
     }
     public void ActivateHand(bool sw)
     {

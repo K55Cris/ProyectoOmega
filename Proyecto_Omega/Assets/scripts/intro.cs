@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.Video;
 public class intro : MonoBehaviour {
     public VideoPlayer Video;
+
 	// Use this for initialization
 	void Start () {
-       
+        if (DataManager.instance.IntroVisto)
+        {
+            Continuar();
+        }else
         Invoke("Continuar", (float)Video.clip.length);
 	}
     private void Awake()
@@ -22,11 +26,14 @@ public class intro : MonoBehaviour {
     {
         if (gameObject)
         {
+            DataManager.instance.IntroVisto = true;
             gameObject.SetActive(false);
         }
+        SoundManager.instance.PlayMusic(Sound.MainMenu);
     }
     public void OnMouseDown()
     {
         Continuar();
+       
     }
 }
