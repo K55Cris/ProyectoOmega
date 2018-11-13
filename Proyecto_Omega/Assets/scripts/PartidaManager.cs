@@ -54,15 +54,10 @@ public class PartidaManager : MonoBehaviour {
 
     private void Start()
     {
-        if (Player1.IDCartasMazo.Count > 0)
-        {
-            Player1.Nombre = PlayerManager.instance.Jugador.Nombre;
-            Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
-        }
-        else
-        {
-            Player1.IDCartasMazo = PlayerManager.instance.Default.IDCartasMazo;
-        }
+ 
+        Player1.Nombre = PlayerManager.instance.Jugador.Nombre;
+        Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
+       
         StaticRules.SelectDigimonChild();
     }
 

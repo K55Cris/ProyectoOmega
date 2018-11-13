@@ -13,9 +13,8 @@ public class DataManager : MonoBehaviour {
     public Cartas ColeccionDeCartas;
     public List<DigiCarta> TodasLasCartas;
     private UnityAction<int> _Loaction;
-
+    public List<Sprite> ImagesType;
     public Texture[] arrayImage;
-    public Sprite[] arraySprites8;
 
     void Awake()
     {
@@ -186,5 +185,36 @@ public class DataManager : MonoBehaviour {
         _Loaction.Invoke(61);
     }
 
-   
+    public Sprite GetSpriteForType(DigiCarta Datos)
+    {
+        Sprite Tipo=null;
+        if (Datos.IsSupport)
+        {
+            switch (Datos.ListaCatrgoria[0])
+            {
+                case "Item":
+                    Tipo = ImagesType[3];
+                    break;
+                case "Program":
+                    Tipo = ImagesType[4];
+                    break;
+            }
+        }
+        else
+        {
+            switch (Datos.TipoBatalla)
+            {
+                case "A":
+                    Tipo = ImagesType[0];
+                    break;
+                case "B":
+                    Tipo = ImagesType[1];
+                    break;
+                case "C":
+                    Tipo= ImagesType[2];
+                    break;
+            }
+        }
+        return Tipo;
+    }
 }

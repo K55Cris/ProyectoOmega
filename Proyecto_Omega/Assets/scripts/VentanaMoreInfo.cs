@@ -10,7 +10,6 @@ public class VentanaMoreInfo : MonoBehaviour {
 
     public static VentanaMoreInfo instance;
     public Image DigimonImage, Type;
-    public List<Sprite> ImagesType;
     public DigiCarta Datos;
     public TextMeshProUGUI NombreAtaqueA, NombreAtaqueB, NombreAtaqueC, Habilidad, Evolucion1, Evolucion2, Evolucion3, NombreDigimon, Capacidad;
     public TextMeshProUGUI DañoA, DañoB, DañoC , Phase, atributo, Familia, Tipo,PerdidaVida1, PerdidaVida2,PerdidaVida3, PerdidaVida4, Coste;
@@ -36,18 +35,7 @@ public class VentanaMoreInfo : MonoBehaviour {
         {
             DigimonCard.SetActive(true);
             OptionCard.SetActive(false);
-            switch (Datos.TipoBatalla)
-            {
-                case "A":
-                    Type.overrideSprite = ImagesType[0];
-                    break;
-                case "B":
-                    Type.overrideSprite = ImagesType[1];
-                    break;
-                case "C":
-                    Type.overrideSprite = ImagesType[2];
-                    break;
-            }
+            Type.overrideSprite = DataManager.instance.GetSpriteForType(DatosDigimon);
             NombreAtaqueA.text = Datos.NombreAtaqueA;
             NombreAtaqueB.text = Datos.NombreAtaqueB;
             NombreAtaqueC.text = Datos.NombreAtaqueC;
@@ -117,18 +105,9 @@ public class VentanaMoreInfo : MonoBehaviour {
             Phase.text = DatosDigimon.Limite;
             Capacidad.text = Datos.Capasidad.ToString();
             //ListaCategoria
-            switch (Datos.ListaCatrgoria[0])
-            {
-                case "Item":
-                    Type.overrideSprite = ImagesType[3];
-                    break;
-                case "Program":
-                    Type.overrideSprite = ImagesType[4];
-                    break;
-                default:
-                    Type.overrideSprite = ImagesType[5];
-                    break;
-            }
+
+            Type.overrideSprite = DataManager.instance.GetSpriteForType(DatosDigimon);
+           
             Coste.text= string.Empty;
             foreach (var item in Datos.ListaCosto)
             {

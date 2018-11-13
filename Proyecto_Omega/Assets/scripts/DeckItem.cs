@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DigiCartas;
+using TMPro;
 public class DeckItem : MonoBehaviour {
-    public Text Nombre;
-    public Text Nivel;
-    public Text TipoBatalla;
+    public TextMeshProUGUI Nombre;
+    public Image Tipo;
     public DigiCarta _Datos;
     public bool lleno = false;
-
+    private Color32 Trasparente = new Color32(255, 225, 255, 0);
 
     public void Llenar(DigiCarta Datos)
     {
         Nombre.text = Datos.Nombre;
-        Nivel.text = Datos.Nivel;
-        TipoBatalla.text = Datos.TipoBatalla;
-        if(Datos.TipoBatalla == "A")
-        {
-            TipoBatalla.color = Color.red;
-        }
-        else if (Datos.TipoBatalla == "B")
-        {
-            TipoBatalla.color = Color.green;
-        }
-        else if (Datos.TipoBatalla == "C")
-        {
-            TipoBatalla.color = Color.yellow;
-        }
+        Tipo.overrideSprite = DataManager.instance.GetSpriteForType(Datos);
+        Tipo.color = Color.white;
         lleno = true;
         _Datos = Datos;
     }
@@ -36,9 +24,7 @@ public class DeckItem : MonoBehaviour {
         if (lleno)
         { 
         Nombre.text = "Empty Slot";
-        Nivel.text = "-";
-        TipoBatalla.color = Color.white;
-        TipoBatalla.text = "-";
+        Tipo.color = Trasparente;
         lleno = false;
         DeckManager.instance.QuitDeck(_Datos);
         }

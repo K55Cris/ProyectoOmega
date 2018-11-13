@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 public class DeckManager : MonoBehaviour {
 
@@ -18,7 +19,7 @@ public class DeckManager : MonoBehaviour {
     private float MaxCartas=0;
     public int Paginas = 0;
     public int nowPageB = 1;
-    public Text TextPaginasBiblioteca, TextPaginasDeck;
+    public TextMeshProUGUI TextPaginasBiblioteca, TextPaginasDeck;
     public Image[] puntosBiblioteca;
     public Image[] puntosDeck;
     public Color PuntoSelect;
@@ -202,9 +203,12 @@ public class DeckManager : MonoBehaviour {
      
         foreach (var item in DataManager.instance.TodasLasCartas)
         {
-            GameObject NewCarta = Instantiate(CartaBase, BibliotecaContent);
-            NewCarta.GetComponent<EditorCardBase>().RecibirDatos(item);
-            MaxCartas++;
+            if (item.id != 61)
+            {
+                GameObject NewCarta = Instantiate(CartaBase, BibliotecaContent);
+                NewCarta.GetComponent<EditorCardBase>().RecibirDatos(item);
+                MaxCartas++;
+            }
         }
         EntreHojas();
     }

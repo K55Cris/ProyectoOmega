@@ -376,6 +376,7 @@ public class StaticRules : MonoBehaviour
             }
         }
     }
+    
     public static void SaltoFase(Phases phase)
     {
         NowPhase = phase;

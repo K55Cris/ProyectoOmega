@@ -39668,7 +39668,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: b31da7fda4bd1f44492d63caa11bf71b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -44958,13 +44958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DigimonImage: {fileID: 709547754}
   Type: {fileID: 820274414}
-  ImagesType:
-  - {fileID: 21300000, guid: 5f20614fe5aac5d45996f7d5d997e72e, type: 3}
-  - {fileID: 21300000, guid: 8a641ed4207523c42a1e6cc036c9cf08, type: 3}
-  - {fileID: 21300000, guid: d5123a01b595c8c44ad1fea170623273, type: 3}
-  - {fileID: 21300000, guid: a943ab8c50037f348a276d3956cd1cf5, type: 3}
-  - {fileID: 21300000, guid: 2ff0c93a7a7412044b15c8d4798445f3, type: 3}
-  - {fileID: 21300000, guid: 3dabe010d67e1ab4f98853a10d891731, type: 3}
   Datos:
     id: 0
     Nombre: 
@@ -69934,7 +69927,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: b31da7fda4bd1f44492d63caa11bf71b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -80870,12 +80863,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonData: {fileID: 4900000, guid: 498b99878f179814da63402e507e0e48, type: 3}
+  IntroVisto: 0
   ColeccionDeCartas:
     DigiCartas: []
     CartaOption: []
   TodasLasCartas: []
+  ImagesType: []
   arrayImage: []
-  arraySprites8: []
+  bandera: 1
 --- !u!4 &1573372142
 Transform:
   m_ObjectHideFlags: 0
