@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Sound
 {
-    Evolucion, SetCard, Evolucion2 , AtaqueA,AtaqueB,AtaqueC , MainMenu, Duelo, Recompensa
+    Evolucion, SetCard, Evolucion2 ,AtaqueA,AtaqueB,AtaqueC , MainMenu, Duelo, Recompensa , Enter, Out
 }
 public class SoundManager : MonoBehaviour {
 
@@ -32,6 +32,9 @@ public class SoundManager : MonoBehaviour {
     public AudioClip DisparoDeFuego;
     public AudioClip DisparoElectrico;
 
+    [Header("Main Menu")]
+    public AudioClip EnterButton;
+    public AudioClip OutButton;
     void Awake()
     {
         if (instance == null)
@@ -126,6 +129,14 @@ public class SoundManager : MonoBehaviour {
                         break;
                 }
                 break;
+            case Sound.Enter:
+                audioClip = EnterButton;
+                break;
+            case Sound.Out:
+                audioClip = OutButton;
+                break;
+
+              
         }
         return audioClip;
     }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class EvolutionRequerimentBox : Slot
 {
-    public bool Activado = false;
+    public bool Activado = true;
     public GameObject Canvas;
     public Transform X, O;
     public List<string> ListaRequerimientos;

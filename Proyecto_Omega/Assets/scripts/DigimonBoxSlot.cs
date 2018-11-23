@@ -119,6 +119,7 @@ public class DigimonBoxSlot : MonoBehaviour {
            // item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
             MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
         }
+        Evoluciones.Clear();
         _DigiCarta = DRoquin;
     }
     public void DeEvolution(UnityAction<string> Loaction, string Condicion)
@@ -152,6 +153,7 @@ public class DigimonBoxSlot : MonoBehaviour {
 
         if (_DigiCarta.DatosDigimon.Nivel == NivelRequerido)
         {
+            List<CartaDigimon> ReturnEvo = new List<CartaDigimon>();
             // EL DIGIMON en posicion si es del nivel requerido
             foreach (var item in Evoluciones)
             {
@@ -162,6 +164,7 @@ public class DigimonBoxSlot : MonoBehaviour {
                         // mandamos a la dark area las cartas con nivel superior 
                         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform)
                             ).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+                        ReturnEvo.Add(item);
                     }
                 }
                 else
@@ -169,6 +172,12 @@ public class DigimonBoxSlot : MonoBehaviour {
                     _DigiCarta = item;
                 }
             }
+            foreach (var item in ReturnEvo)
+            {
+                if (Evoluciones.Contains(item))
+                    Evoluciones.Remove(item);
+            }
+            ReturnEvo.Clear();
             _DigiCarta.Volteo();
             // revelamos la carta
             MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.

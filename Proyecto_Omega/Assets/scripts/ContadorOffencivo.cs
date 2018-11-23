@@ -8,10 +8,12 @@ public class ContadorOffencivo : MonoBehaviour
     public Text Ataque;
     public int AtaqueBase = 0;
     public int PoderDeAtaque=0;
+
     // Use this for initialization
     public void Empezar(int Daño,UnityAction<string> LoAction=null)
     {
         AtaqueBase = Daño;
+        PartidaManager.instance.CambioDePhase(false);
         StartCoroutine(EstablecerCantidad(Daño, LoAction));
     }
     public void Endphase()
@@ -48,7 +50,7 @@ public class ContadorOffencivo : MonoBehaviour
             for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {
                 Ataque.text = i.ToString();
-                yield return new WaitForSecondsRealtime(0.02f);
+                yield return new WaitForSecondsRealtime(0.01f);
             }
             PoderDeAtaque = cantidad;
             Ataque.text = cantidad.ToString();
@@ -66,7 +68,7 @@ public class ContadorOffencivo : MonoBehaviour
             for (int i = PoderDeAtaque; i > cantidad; i-=DIVISOR)
             {
                 Ataque.text = i.ToString();
-                yield return new WaitForSecondsRealtime(0.02f);
+                yield return new WaitForSecondsRealtime(0.01f);
             }
             PoderDeAtaque = cantidad;
             Ataque.text = cantidad.ToString();

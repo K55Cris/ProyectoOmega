@@ -12,6 +12,7 @@ public class PartidaManager : MonoBehaviour {
     public GameObject CartaPrefap;
     public Transform ManoPlayer1;
     public Transform ManoPlayer2;
+    public UIPhases MenuPhases;
     public Button Listo;
     public Image PhasesPanel;
     public Text PhasesText;
@@ -19,6 +20,8 @@ public class PartidaManager : MonoBehaviour {
     public string Player1Atack = "A";
     public string Player2Atack = "A";
     public Player WinTurno;
+    public int EfectosCadena = 0;
+    public bool CambioFase = true;
     private void Awake()
     {
         instance = this;
@@ -51,7 +54,7 @@ public class PartidaManager : MonoBehaviour {
         }
     }
 
-
+    
     private void Start()
     {
  
@@ -188,10 +191,18 @@ public class PartidaManager : MonoBehaviour {
     public void CambioDePhase(bool swi)
     {
         Listo.interactable = swi;
+        CambioFase = false;
+        TiempoEsperaCambioPhase();
+    }
+
+    public void TiempoEsperaCambioPhase()
+    {
+        StartCoroutine(WhaitChangeFase());
     }
     public void Cambio(string PhaseName)
     {
         PhasesText.text = PhaseName;
+        MenuPhases.ChangePhase();
         PhasesPanel.transform.GetComponent<Animator>().Play("StartPhase");
     }
     public void cambioEcena()
@@ -208,5 +219,24 @@ public class PartidaManager : MonoBehaviour {
         {
             item.Front.GetComponent<MovimientoCartas>().Mover = sw;
         }
+    }
+
+
+    public void RecurisvoEfecto(UnityAction<string> loAction)
+    {
+        StartCoroutine(CadenaEfectos(loAction));
+    }
+
+    public IEnumerator CadenaEfectos(UnityAction<string> loAction)
+    {
+ 
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1f);
+        loAction.Invoke("Siguiente cadena");
+    }
+    public IEnumerator WhaitChangeFase()
+    {
+        yield return new WaitForEndOfFrame();
+        CambioFase = true;
     }
 }

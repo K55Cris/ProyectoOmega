@@ -28,6 +28,8 @@ public class DataManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
+
+
     }
 
     private void Start()
@@ -216,5 +218,10 @@ public class DataManager : MonoBehaviour {
             }
         }
         return Tipo;
+    }
+    public static int GetRandom(int inicio , int final)
+    {
+        int ran = Random.Range(inicio,final);
+        return ran;
     }
 }

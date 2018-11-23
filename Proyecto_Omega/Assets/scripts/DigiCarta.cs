@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 namespace DigiCartas
 {
     [Serializable]
@@ -87,6 +88,7 @@ namespace DigiCartas
     {
         public Transform DigiCarta;
         public bool isJoggres;
+        public Efectos Namefecto;
         public bool IsIgnore;
     }
 
@@ -139,11 +141,21 @@ namespace DigiCartas
         public List<int> cards;
     }
     [Serializable]
+    public class DecksIA
+    {
+        public List<int> mazo;
+        public Dificultad DificultadMazo;
+    }
+    [Serializable]
     public class ListEfectos
     {
         public List<int> cards;
     }
 
+    public enum Dificultad
+    {
+        Facil, Normal, Dificil, Experto
+    };
 
     public enum EfectosActivos
     {
@@ -152,8 +164,12 @@ namespace DigiCartas
 
     public enum Phases
     {
-        GameSetup = 0, DiscardPhase = 1, PreparationPhase = 2, EvolutionPhase = 3, EvolutionRequirements = 4, FusionRequirements = 5,
-        AppearanceRequirements = 6, BattlePhase = 7, OptionBattlePhase = 8, PointCalculationPhase = 9, EndPhase = 10
+        GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3, EvolutionPhase = 4, EvolutionRequirements = 5, FusionRequirements = 6,
+        AppearanceRequirements = 7, BattlePhase = 8, OptionBattlePhase = 9, PointCalculationPhase = 10, EndPhase = 11
+    };
+    public enum Efectos
+    {
+        SinRequerimientosAll = 0, SinRequerimientos4 = 1
     };
 
     [Serializable]

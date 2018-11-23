@@ -152,8 +152,11 @@ public class VentanaMoreInfo : MonoBehaviour {
         }
         for (int i = 0; i < DatosDigimon.ListaRequerimientos.Count; i++)
         {
-            ItemEvoText[i].gameObject.SetActive(true);
-            ItemEvoText[i].Crear(DatosDigimon.ListaRequerimientos[i]);
+            if (i <= 2)
+            {
+                    ItemEvoText[i].gameObject.SetActive(true);
+                    ItemEvoText[i].Crear(DatosDigimon.ListaRequerimientos[i]);
+            }
         }
 
     }

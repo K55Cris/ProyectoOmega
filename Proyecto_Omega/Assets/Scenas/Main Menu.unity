@@ -6383,6 +6383,8 @@ MonoBehaviour:
   ChoqueCristal: {fileID: 8300000, guid: 6906ab7ffb2c4e8478bd8c4fdae03078, type: 3}
   DisparoDeFuego: {fileID: 8300000, guid: 4ca48ca2cbe1a35469c7acadb5e8f8fb, type: 3}
   DisparoElectrico: {fileID: 8300000, guid: 91b3c22ad156163468047b8f313b2deb, type: 3}
+  EnterButton: {fileID: 8300000, guid: 0902867b5990bf547a22dabfec94af55, type: 3}
+  OutButton: {fileID: 8300000, guid: bd8215a2c9fd9a2418b3bb0a300d2a2e, type: 3}
 --- !u!4 &517768599
 Transform:
   m_ObjectHideFlags: 0
@@ -8085,6 +8087,11 @@ Prefab:
     - target: {fileID: 4513381750173572, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Nivel
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}

@@ -20,6 +20,7 @@ public class ActivarCarta : MonoBehaviour {
     // Use this for initialization
     public void Activar(CartaDigimon Carta)
     {
+        Debug.Log(Carta.DatosDigimon.Nombre);
         if (CartaUsada != Carta) {
             DCarta.overrideSprite= DataManager.instance.GetSprite(Carta.DatosDigimon.id);
         }

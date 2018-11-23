@@ -23,6 +23,7 @@ public class DarkArea : MonoBehaviour {
     }
     public void SetCard(Transform Carta)
     {
+        TermineDescarte = null;
         Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
         SoundManager.instance.PlaySfx(Sound.SetCard);
         _Cartas.Add(Carta.GetComponent<CartaDigimon>());
@@ -71,7 +72,7 @@ public class DarkArea : MonoBehaviour {
             {
                 moviendo = false;
                 DigiCartas = new List<CartaDigimon>();
-                TermineDescarte("Completado");
+                TermineDescarte("Completado Dark area");
                 TermineDescarte = null;
             }
             else

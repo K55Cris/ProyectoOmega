@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour {
     public static PlayerManager instance;
     public SavePlayer Default;
     public SavePlayer Jugador;
+    public int Nivel = 0;
 
     void Awake()
     {
