@@ -73,7 +73,8 @@ public class EvolutionBox : Slot
         }
         else
         {
-            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III" && StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>()))
+            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel != "III" && StaticRules.CheckEvolutionList(Carta.GetComponent<CartaDigimon>(),
+                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta))
             {
                 if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                 {

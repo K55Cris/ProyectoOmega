@@ -18,11 +18,11 @@ public class UIPhases : MonoBehaviour {
         }
     }
 
-    public void ChangePhase()
+    public void ChangePhase(bool player)
     {
         Particulas[0].Play();
         Particulas[1].Play();
-        bool Play = StaticRules.instance.WhosPlayPlayer();
+        bool Play = player;
         switch (StaticRules.NowPhase)
         {
             case DigiCartas.Phases.GameSetup:
@@ -31,6 +31,9 @@ public class UIPhases : MonoBehaviour {
                 ChangeMaterial(0, Play);
                 break;
             case DigiCartas.Phases.PreparationPhase:
+                ChangeMaterial(1, Play);
+                break;
+            case DigiCartas.Phases.PreparationPhase2:
                 ChangeMaterial(1, Play);
                 break;
             case DigiCartas.Phases.EvolutionPhase:
@@ -48,16 +51,21 @@ public class UIPhases : MonoBehaviour {
     
     public void ChangeMaterial(int material, bool player)
     {
+        Particulas[0].Stop();
+        
         Phase.material = MaterialPhases[material];
         if (player)
         {
             var main = Particulas[0].main;
             main.startColor = Color.cyan;
+            Debug.LogWarning("Cyan");
         }
         else
         {
             var main = Particulas[0].main;
             main.startColor = Color.red;
+            Debug.LogWarning("RED");
         }
+        Particulas[0].Play();
     }
 }

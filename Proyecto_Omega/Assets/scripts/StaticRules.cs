@@ -19,6 +19,7 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer2 = 100;
     public static Phases NowPhase;
     public static PreparationPhase NowPreparationPhase;
+    public static IAPhase NowIAPhase;
     public List<Efecto> EfectosRonda = new List<Efecto>();
     public List<GameObject> CartasDescartadas = new List<GameObject>();
     public List<GameObject> CartasDescartadasIA = new List<GameObject>();
@@ -27,7 +28,10 @@ public class StaticRules : MonoBehaviour
     {
         DiscardPhase = 0, ChangeDigimon = 1, SetEvolition = 2, ActivarOption = 3, SetOptionCard = 4
     };
-
+    public enum IAPhase
+    {
+        DiscardPhase = 0, PreparationPhase = 1, EvolitionPhase = 2, BattlePhase = 3
+    };
 
     public bLOCKCARDS FueraJuego = new bLOCKCARDS();
 
@@ -45,6 +49,7 @@ public class StaticRules : MonoBehaviour
     public void Start()
     {
         NowPhase = Phases.GameSetup;
+        NowIAPhase = 0;
         //Referenciar los puntos de vida con cada jugador o
         //Codificar clase jugador con sus atributos publicos
         
@@ -460,31 +465,59 @@ public class StaticRules : MonoBehaviour
 
     public static void SiguienteFase()
     {
-        
+
             NowPhase++;
             Debug.Log(NowPhase);
             switch (NowPhase)
             {
-                case Phases.GameSetup:
+            case Phases.GameSetup:
 
                     StartGameSetup();
                     break;
-                case Phases.DiscardPhase:
+            case Phases.DiscardPhase:
                     PartidaManager.instance.CambioDePhase(true);
+                    PartidaManager.instance.MenuPhases.ChangePhase(true);
                     PartidaManager.instance.Cambio("Discard Phase");
                     StartDiscardPhase();
                     break;
-                case Phases.WhaitDiscardPhase:
+            case Phases.WhaitDiscardPhase:
                     // se espera a cambiar de phase
                     PartidaManager.instance.CambioDePhase(false);
                     StaticRules.instance.DiscardCards(PartidaManager.instance.Player1);
                     break;
-                case Phases.PreparationPhase:
+            case Phases.PreparationPhase:
+                
+                // Revisamos quien juega primero
+                if (StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1)
+                {
+                    StartPreparationPhase();
                     PartidaManager.instance.CambioDePhase(true);
                     PartidaManager.instance.Cambio("Preparation Phase");
+                    
+                }
+                else
+                {
                     StartPreparationPhase();
-                    break;
-                case Phases.EvolutionPhase:
+                    PartidaManager.instance.CambioDePhase(false);
+                    PartidaManager.instance.Cambio("Preparation Phase");
+                    IA.instance.TurnoIA(true);
+                }
+                break;
+            case Phases.PreparationPhase2:
+                if (StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1)
+                {
+                    PartidaManager.instance.CambioDePhase(false);
+                    IA.instance.TurnoIA(false);  
+                }
+                else
+                {
+                    PartidaManager.instance.CambioDePhase(true);
+                    PartidaManager.instance.MenuPhases.ChangePhase(true);
+                    PartidaManager.instance.ActivateHand(true);
+                }
+                break;
+            case Phases.EvolutionPhase:
+                    PartidaManager.instance.MenuPhases.ChangePhase(true);
                     PartidaManager.instance.CambioDePhase(false);
                     PartidaManager.instance.ActivateHand(false);
                     PartidaManager.instance.Cambio("Evolution Phase");
@@ -503,6 +536,7 @@ public class StaticRules : MonoBehaviour
                     CheckAppearanceRequirements();
                     break;
                 case Phases.BattlePhase:
+                    PartidaManager.instance.MenuPhases.ChangePhase(true);
                     PartidaManager.instance.CambioDePhase(false);
                     PartidaManager.instance.Cambio("Battle Phase");
                     StartBattlePhase();
@@ -657,11 +691,11 @@ public class StaticRules : MonoBehaviour
         }
     }
 
-    public static bool CheckEvolutionList(CartaDigimon evolucion)
+    public static bool CheckEvolutionList(CartaDigimon evolucion,CartaDigimon Digimon )
     {
         string nombreDigimon;
 
-        nombreDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper();
+        nombreDigimon = Digimon.DatosDigimon.Nombre.ToUpper();
         nombreDigimon = nombreDigimon.Replace(" ", "");
 
         foreach (string requerimiento in evolucion.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
@@ -669,6 +703,7 @@ public class StaticRules : MonoBehaviour
             Debug.Log(nombreDigimon + ":" + requerimiento.Split(' ')[0].Replace(" ", ""));
             if (nombreDigimon.Equals(requerimiento.Split(' ')[0].Replace(" ", "")))
             {
+                Debug.Log(nombreDigimon+"=="+ requerimiento.Split(' ')[0].Replace(" ", ""));
                 return true;
             }
             else if (requerimiento.Split(' ').Length>=1)
@@ -680,7 +715,8 @@ public class StaticRules : MonoBehaviour
                 {
                     if (nombreDigimon.Equals(requerimiento.Split(' ')[2]))
                     {
-                        return true;
+                            Debug.Log(nombreDigimon + "==" + requerimiento.Split(' ')[0].Replace(" ", ""));
+                            return true;
                     }
                 }
                 }
@@ -694,12 +730,10 @@ public class StaticRules : MonoBehaviour
     }
     public static List<string> GetListRequerimentsDigimon(DigiCarta DatosDigimon, DigiCarta BaseDigimon)
     {
-        Debug.Log(DatosDigimon.Nombre + ":" + BaseDigimon.Nombre);
         foreach (var item in DatosDigimon.ListaRequerimientos)
         {
             string Requerimiento = item.ToUpper();
             string FiltroNombre = BaseDigimon.Nombre.ToUpper().Replace(" ", "");
-            Debug.Log(Requerimiento + ":" + FiltroNombre);
             if (Requerimiento.Contains(FiltroNombre))
             {
                 List<string> RequerimientosFinales = new List<string>();
@@ -714,33 +748,7 @@ public class StaticRules : MonoBehaviour
         }
         return new List<string>();
     }
-    public void Evolucionar()
-    {
-        int X = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).childCount, j = 0;
-        for (int i = 0; i < X; i++)
-        {
-            if (CheckEvolutionList(MesaManager.instance.Campo1.EvolutionBox.GetChild(j).GetComponent<CartaDigimon>()))
-            {
-                j = 0;
-                i = 0;
-                X--;
-            }
-            else
-            {
-                j++;
-            }
-        }
-        X = MesaManager.instance.Campo1.EvolutionBox.childCount;
-        if (MesaManager.instance.Campo1.EvolutionBox.childCount > 0)
-        {
-            for (int i = 0; i < X; i++)
-            {
-                Transform carta = MesaManager.instance.Campo1.EvolutionBox.GetChild(0).GetComponent<Transform>();
-                PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea, carta, Ajustar);
-            }
-        }
-
-    }
+    
     /// <summary>
     /// Inicial la Preparation phase
     /// </summary>

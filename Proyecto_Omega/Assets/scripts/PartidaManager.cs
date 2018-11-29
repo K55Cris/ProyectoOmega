@@ -202,7 +202,6 @@ public class PartidaManager : MonoBehaviour {
     public void Cambio(string PhaseName)
     {
         PhasesText.text = PhaseName;
-        MenuPhases.ChangePhase();
         PhasesPanel.transform.GetComponent<Animator>().Play("StartPhase");
     }
     public void cambioEcena()
@@ -239,4 +238,5 @@ public class PartidaManager : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         CambioFase = true;
     }
+ 
 }

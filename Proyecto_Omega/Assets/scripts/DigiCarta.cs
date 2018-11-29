@@ -54,11 +54,6 @@ namespace DigiCartas
         public int PerdidaVidaUltimate;
         //Las habilidades especiales del Digimon. Son las habilidades marcadas con un ◎.
         public string Habilidad;
-        public string keyREvolucion;
-        public string keyREvolucion2;
-        public string keyREvolucion3;
-        public string keyREvolucion4;
-
         public string codigo;
         public int Capasidad;
         public List<string> ListaActivacion;
@@ -70,7 +65,6 @@ namespace DigiCartas
         public string Limite;
         public bool IsSupport;
         public bool IsActivateHand;
-
     }
 
 
@@ -164,8 +158,16 @@ namespace DigiCartas
 
     public enum Phases
     {
-        GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3, EvolutionPhase = 4, EvolutionRequirements = 5, FusionRequirements = 6,
-        AppearanceRequirements = 7, BattlePhase = 8, OptionBattlePhase = 9, PointCalculationPhase = 10, EndPhase = 11
+        GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3,PreparationPhase2 = 4, EvolutionPhase = 5,
+        EvolutionRequirements = 6, FusionRequirements =7, AppearanceRequirements = 8,
+        BattlePhase = 9, OptionBattlePhase = 10, PointCalculationPhase = 11, EndPhase = 12
+    };
+
+    public enum Campo
+    {
+        DigimonBox = 0, OptionSlot = 1, EvolutionSlot = 2, Requeriment = 3, Deck = 4,
+        Netocean = 5, Support = 6,
+        
     };
     public enum Efectos
     {
