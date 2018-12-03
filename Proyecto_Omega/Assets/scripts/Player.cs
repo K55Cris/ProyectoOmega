@@ -22,7 +22,6 @@ public class Player : MonoBehaviour {
             LoActions.Add(At);
 
         _Mano.JugarCarta(Card);
-
         Card.Front.GetComponent<MovimientoCartas>().MoverCarta(Padre, Ajustar,At.ID);
     }
     public void moveHand(Transform Padre, CartaDigimon Card, UnityAction<CartaDigimon> Action)

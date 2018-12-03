@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Carta : MonoBehaviour {
     //Id o nro de la carta.
-    public int cardNumber;
+    
     
     //Es el icono en la parte superior derecha, para CartaDigimon (battle type) puede ser A, B o C y para CartaOption (icon) Program, Item y Field.
     private string icon;
@@ -20,18 +20,7 @@ public class Carta : MonoBehaviour {
     }
 
     //GaS
-    public int CardNumber
-    {
-        get
-        {
-            return cardNumber;
-        }
 
-        set
-        {
-            cardNumber = value;
-        }
-    }
 
 
 

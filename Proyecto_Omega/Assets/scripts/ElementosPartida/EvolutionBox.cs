@@ -66,7 +66,7 @@ public class EvolutionBox : Slot
     {
         if (IsIgnore)
         {
-            PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
             Cartas.Add(Carta.GetComponent<CartaDigimon>());
             Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
@@ -79,7 +79,7 @@ public class EvolutionBox : Slot
                 if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                 {
                     StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
-                    PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+                    PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
                     Cartas.Add(Carta.GetComponent<CartaDigimon>());
                     Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
@@ -97,7 +97,7 @@ public class EvolutionBox : Slot
                         string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
                         if (item.Contains(nameDigi))
                         {
-                            PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+                            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
                             Cartas.Add(Carta.GetComponent<CartaDigimon>());
                             Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                             SoundManager.instance.PlaySfx(Sound.SetCard);
@@ -119,5 +119,20 @@ public class EvolutionBox : Slot
             }
         }
         return false;
+    }
+    public void InterAutoAjuste(CartaDigimon carta)
+    {
+        StartCoroutine(AutoAjustar(carta.transform));
+    }
+    public IEnumerator AutoAjustar(Transform Carta)
+    {
+        yield return new WaitForEndOfFrame();
+        Carta.localPosition = new Vector3(0, 0, -1 + Cartas.Count/2);
+        Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        Carta.localScale = new Vector3(1, 1, 0.015f);
+    }
+    public void OnBeforeTransformParentChanged()
+    {
+        
     }
 }

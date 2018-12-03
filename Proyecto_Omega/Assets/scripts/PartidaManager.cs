@@ -214,7 +214,7 @@ public class PartidaManager : MonoBehaviour {
     }
     public void ActivateHand(bool sw)
     {
-        foreach (CartaDigimon item in StaticRules.instance.WhosPlayer._Mano.Cartas)
+        foreach (CartaDigimon item in PartidaManager.instance.Player1._Mano.Cartas)
         {
             item.Front.GetComponent<MovimientoCartas>().Mover = sw;
         }

@@ -5,7 +5,19 @@ using DigiCartas;
 public class CartaDigimon : Carta {
 
     //Es el nivel del digimon (Nvl III, IV, adulto, etc.).
+    public int cardNumber;
+    public int CardNumber
+    {
+        get
+        {
+            return cardNumber;
+        }
 
+        set
+        {
+            cardNumber = value;
+        }
+    }
     //Datos de la Carta
     public DigiCarta DatosDigimon = new DigiCarta();
     public bool AddOrRemove;

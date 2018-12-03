@@ -159,8 +159,8 @@ namespace DigiCartas
     public enum Phases
     {
         GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3,PreparationPhase2 = 4, EvolutionPhase = 5,
-        EvolutionRequirements = 6, FusionRequirements =7, AppearanceRequirements = 8,
-        BattlePhase = 9, OptionBattlePhase = 10, PointCalculationPhase = 11, EndPhase = 12
+        EvolutionPhase2 = 6,EvolutionRequirements = 7, FusionRequirements =8, AppearanceRequirements = 9,
+        BattlePhase = 10, OptionBattlePhase = 11, PointCalculationPhase = 12, EndPhase = 13
     };
 
     public enum Campo

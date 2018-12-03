@@ -22,6 +22,7 @@ public class UIPhases : MonoBehaviour {
     {
         Particulas[0].Play();
         Particulas[1].Play();
+        Particulas[2].Play();
         bool Play = player;
         switch (StaticRules.NowPhase)
         {
@@ -51,21 +52,15 @@ public class UIPhases : MonoBehaviour {
     
     public void ChangeMaterial(int material, bool player)
     {
-        Particulas[0].Stop();
-        
         Phase.material = MaterialPhases[material];
+
         if (player)
         {
-            var main = Particulas[0].main;
-            main.startColor = Color.cyan;
-            Debug.LogWarning("Cyan");
+            Particulas[1].Stop();
         }
         else
         {
-            var main = Particulas[0].main;
-            main.startColor = Color.red;
-            Debug.LogWarning("RED");
+            Particulas[0].Stop();
         }
-        Particulas[0].Play();
     }
 }

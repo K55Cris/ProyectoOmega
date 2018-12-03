@@ -12,13 +12,12 @@ public class OptionSlot : Slot
     public GameObject DescartarCarta;
     public void SetCard(Transform Carta)
     {
-    
         if (Vacio)
         {
           
             Vacio = false;
             OpCarta = Carta.GetComponent<CartaDigimon>();
-            PartidaManager.instance.SetMoveCard(this.transform, OpCarta.transform, StaticRules.Ajustar);
+            PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
             OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (StaticRules.NowPhase== DigiCartas.Phases.PreparationPhase)
@@ -27,7 +26,7 @@ public class OptionSlot : Slot
     }
     private void OnMouseDown()
     {
-        if (!Vacio)
+        if (!Vacio && StaticRules.instance.WhosPlayer==PartidaManager.instance.Player1)
         {
             VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
 
@@ -53,6 +52,7 @@ public class OptionSlot : Slot
     }
     void OnMouseExit()
     {
+        if (CanvasAction)
         CanvasAction.SetActive(false);
     }
     public void ActivarOPtion()

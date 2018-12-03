@@ -26,7 +26,7 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDown()
     {
-       if (StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+       if ((StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase | StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase2) && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
         { 
             Layout.ignoreLayout = true;
            
@@ -59,7 +59,7 @@ public class MovimientoCartas : MonoBehaviour {
     {
         if (Mover)
         {
-            if (StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand )
+            if (StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase2 && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand )
             {
                 Vector3 temp = Input.mousePosition;
                 temp.z = this.distancia;
