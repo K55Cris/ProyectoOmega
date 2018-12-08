@@ -9,7 +9,7 @@ public class SupportBox : Slot
 
     public void NowPhase()
     {
-        switch (StaticRules.NowPhase)
+        switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.PreparationPhase:
                 PreparationPhase();

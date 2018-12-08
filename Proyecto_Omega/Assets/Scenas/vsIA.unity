@@ -5533,6 +5533,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1c02facd51d87458dcaa3a761e2c03, type: 2}
   m_IsPrefabAsset: 0
+--- !u!198 &52779811 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198433943929519872, guid: 1a1c02facd51d87458dcaa3a761e2c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 52779810}
 --- !u!1 &54729495
 GameObject:
   m_ObjectHideFlags: 0
@@ -5882,7 +5887,7 @@ GameObject:
   - component: {fileID: 77604225}
   - component: {fileID: 77604224}
   - component: {fileID: 77604223}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5963,7 +5968,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &81207457
 GameObject:
@@ -12257,7 +12262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Decks:
-  - mazo: 07000000050000000100000008000000080000000600000006000000020000000200000020000000200000001c0000001c0000003b0000003b000000310000003100000032000000320000003300000033000000350000003500000036000000360000001900000019000000160000001600000008000000
+  - mazo: 0700000026000000010000001d000000380000000600000006000000020000000200000020000000200000001c0000001c0000003700000037000000310000003100000032000000320000003300000033000000350000003500000036000000360000001900000019000000160000001600000008000000
     DificultadMazo: 0
   Nivel: 0
   ChoseDeck:
@@ -45483,7 +45488,7 @@ MonoBehaviour:
   EnergiaEvolucion: {fileID: 162725435}
   DEbuff: {fileID: 430218873}
   AtaqueA: {fileID: 658363707}
-  AtaqueB: {fileID: 1676104875}
+  AtaqueB: {fileID: 52779811}
   Joggres: {fileID: 1058264097}
   CanvasContador: {fileID: 157005045}
   Camera: {fileID: 326042137}
@@ -78528,6 +78533,7 @@ MonoBehaviour:
   Evolucion3: {fileID: 251013697}
   NombreDigimon: {fileID: 553046860}
   Capacidad: {fileID: 2109340844}
+  valorE: {fileID: 718180963}
   "Da\xF1oA": {fileID: 1318802959}
   "Da\xF1oB": {fileID: 89466959}
   "Da\xF1oC": {fileID: 1227156104}
@@ -89369,7 +89375,7 @@ GameObject:
   - component: {fileID: 1078582101}
   - component: {fileID: 1078582100}
   - component: {fileID: 1078582099}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89450,7 +89456,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1080373899
 GameObject:
@@ -90472,7 +90478,7 @@ GameObject:
   - component: {fileID: 1121947867}
   - component: {fileID: 1121947866}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: NivelEvolutivo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

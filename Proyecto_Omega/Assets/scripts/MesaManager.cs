@@ -141,23 +141,67 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
-    public Player WhatSlotPlayer(Transform Slot) 
+    public Player WhatSlotPlayer(Transform Slot, Slots slot) 
     {
         Player jugador1 = PartidaManager.instance.Player1;
         Player jugador2 = PartidaManager.instance.Player2;
 
-        if (Campo1.DigimonSlot == Slot)
+        switch (slot)
         {
-            return jugador1;
+            case Slots.DigimonSlot:
+                if (Campo1.DigimonSlot == Slot)
+                {
+                    return jugador1;
+                }
+                else if (Campo2.DigimonSlot == Slot)
+                {
+                    return jugador2;
+                }
+                else
+                {
+                    return null;
+                }
+            case Slots.DarkArea:
+                if (Campo1.DarkArea== Slot)
+                {
+                    return jugador1;
+                }
+                else if (Campo2.DarkArea == Slot)
+                {
+                    return jugador2;
+                }
+                else
+                {
+                    return null;
+                }
+            case Slots.EvolutionRequerimentBox:
+                if (Campo1.EvolutionRequerimentBox == Slot)
+                {
+                    return jugador1;
+                }
+                else if (Campo2.EvolutionRequerimentBox == Slot)
+                {
+                    return jugador2;
+                }
+                else
+                {
+                    return null;
+                }
+            case Slots.NetOcean:
+                if (Campo1.NetOcean == Slot)
+                {
+                    return jugador1;
+                }
+                else if (Campo2.NetOcean == Slot)
+                {
+                    return jugador2;
+                }
+                else
+                {
+                    return null;
+                }
         }
-        else if (Campo2.DigimonSlot == Slot)
-        {
-            return jugador2;
-        }
-        else
-        {
-            return null;
-        }
+        return null;
     }
  
 }

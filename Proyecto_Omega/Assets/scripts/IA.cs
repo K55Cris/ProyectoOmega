@@ -37,7 +37,7 @@ public class IA : MonoBehaviour {
         PartidaManager.instance.MenuPhases.ChangePhase(false);
         StaticRules.instance.WhosPlayer = IAPlayer;
         if(espera)
-        StartCoroutine(Whaiting(NowPhase,5f));
+        StartCoroutine(Whaiting(NowPhase,3f));
         else
         StartCoroutine(Whaiting(NowPhase,1f));
     }
@@ -45,7 +45,7 @@ public class IA : MonoBehaviour {
 
     public void NowPhase(string Result)
     {
-        switch (StaticRules.NowPhase)
+        switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.PreparationPhase:
                 PreparationPhase();
@@ -480,7 +480,7 @@ public class IA : MonoBehaviour {
 
     public bool CheckPriorityOptionCard(CartaDigimon OpCard, bool BatallaSimulada)
     {
-        if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
+        if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 56 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
             return true;
         else if (!BatallaSimulada && (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51))
             return true;
@@ -594,9 +594,25 @@ public class IA : MonoBehaviour {
         }
         else
         {
+            // revisar si se cuenta con la carta 56 
+            CheckOptionEvolution(WaithOptionEvolution);
+        }
+    }
+    public void WaithOptionEvolution(bool Result)
+    {
+        Debug.Log("10");
+        if (Result)
+        {
+            Debug.Log("11");
+            StartCoroutine(Whaiting(TerminarTurno, 2f));
+        }
+        else
+        {
+            Debug.Log("12");
             FinishTurnoIA();
         }
     }
+   
 
     public bool CheckUso(CartaDigimon Dcard)
     {
@@ -646,12 +662,53 @@ public class IA : MonoBehaviour {
         return false;
     }
 
-    public void FinishTurnoIA()
+    public void CheckOptionEvolution(UnityAction<bool> LoAction)
     {
-        StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
-        StaticRules.SiguienteFase();
-        // QUITAR BLOQUEO A PLAYER 1
+        Debug.Log("1");
+        // Revisamos si se cuenta con una carta en la Mano 
+        CartaDigimon Chip56 = IAPlayer._Mano.Cartas.Find(K => K.DatosDigimon.id == 56);
+        EvolutionBox ESlot = MesaManager.instance.Campo2.EvolutionBox.GetComponent<EvolutionBox>();
+        if (Chip56)
+        {
+            Debug.Log("2");
+            // TENEMOS LA CARTA EN LA MANO
+            if (ESlot.Cartas.Count == 0)
+            {
+                Debug.Log("3");
+                // revisamos que no haya evoluciones
+                // revisamos si tenemos evolucion de la evolucion seteada
+                string Nivel = StaticRules.ConvertToNivel(StaticRules.ConvertNivel(MesaManager.instance.Campo2.
+                    DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel) + 1);
+
+                foreach (var item in IAPlayer._Mano.Cartas)
+                {
+                    if (Nivel == item.DatosDigimon.Nivel)
+                    {
+                        Debug.Log("4");
+                        // Activamos el efecto
+                        StaticRules.ActivateOptionCard(Chip56);
+                        LoAction(true);
+                        return;
+                    }
+                }
+                LoAction(false);
+            }
+            else
+            {
+                Debug.Log("5");
+                // por ahóra la Ia no usara este chip 
+                LoAction(false);
+            }
+        }
+        else
+        {
+            Debug.Log("6");
+            // buscamos el chip 
+            LoAction(false);
+        }
     }
+
+
 
     public void JugarCarta(CartaDigimon Dcard, Campo Destino)
     {
@@ -756,10 +813,15 @@ public class IA : MonoBehaviour {
         Loaction.Invoke("");
     }
 
-    public void TerminarTurno()
+    public void TerminarTurno(string result)
+    {
+        StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
+    }
+
+    public void FinishTurnoIA()
     {
         StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
         StaticRules.SiguienteFase();
+        // QUITAR BLOQUEO A PLAYER 1
     }
-
 }

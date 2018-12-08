@@ -17,8 +17,8 @@ public class StaticRules : MonoBehaviour
     public int PointGaugePlayer1 = 100;
     public static bool ProcesoDebuff = false;
     public int PointGaugePlayer2 = 100;
-    public static Phases NowPhase;
-    public static PreparationPhase NowPreparationPhase;
+    public Phases NowPhase;
+    public PreparationPhase NowPreparationPhase;
     public static IAPhase NowIAPhase;
     public List<Efecto> EfectosRonda = new List<Efecto>();
     public List<GameObject> CartasDescartadas = new List<GameObject>();
@@ -55,7 +55,6 @@ public class StaticRules : MonoBehaviour
         
         PointGaugePlayer1 = 100;
         PointGaugePlayer2 = 100;
-        WhosPlayer = PartidaManager.instance.Player1;
 
         CartasBloqueadas BlockCards1 = new CartasBloqueadas();
         BlockCards1.jugador = PartidaManager.instance.Player1;
@@ -214,6 +213,7 @@ public class StaticRules : MonoBehaviour
         StaticRules loRule = FailSafeInstance();
         Debug.Log(jugador.name);
         loRule.PlayerFirstAtack = jugador;
+        StaticRules.instance.WhosPlayer = jugador;
 
         //cargar Manos player1
         PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, MesaManager.instance.Campo1.NetOcean);
@@ -252,7 +252,6 @@ public class StaticRules : MonoBehaviour
 
     public static string Habilidades(DigiCarta digimon)
     {
-        StaticRules loRule = FailSafeInstance();
         // aqui se verifican que es lo que hacen las habilidades 
         string Habilidad = "";
         switch (digimon.Habilidad)
@@ -315,7 +314,7 @@ public class StaticRules : MonoBehaviour
                 {
                     case "DigimonSlot":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
                             if (_Carta.Nivel == "III")
                             {
@@ -325,7 +324,7 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "Option Slot 1":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
                             if (isDigimonOrChip(_Carta))
                             {
@@ -335,7 +334,7 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "Option Slot 2":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
                             if (isDigimonOrChip(_Carta))
                                 MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot2).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
@@ -343,7 +342,7 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "Option Slot 3":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2 )
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2 )
                         {
                             if (isDigimonOrChip(_Carta))
                                 MesaManager.instance.GetSlot(MesaManager.Slots.OptionSlot3).GetComponent<OptionSlot>().SetCard(_Digicarta.transform);
@@ -351,7 +350,7 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "EvolutionBox":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
                             if (!isDigimonOrChip(_Carta))
                                 MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
@@ -360,7 +359,7 @@ public class StaticRules : MonoBehaviour
 
                     case "SupportBox":
                         // Verificar Si se puede colocar la Carta 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase)
                         {
                             if (!isDigimonOrChip(_Carta))
                                 MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox).GetComponent<SupportBox>().SetDigimon(_Digicarta.transform);
@@ -368,13 +367,19 @@ public class StaticRules : MonoBehaviour
                         break;
                     case "EvolutionRequerimentBox":
 
-                        if (StaticRules.NowPhase == Phases.PreparationPhase | StaticRules.NowPhase == Phases.PreparationPhase2)
+                        if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
-                            if (StaticRules.NowPreparationPhase == StaticRules.PreparationPhase.SetEvolition)
+                            if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
                             {
-                                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(_Digicarta.GetComponent<CartaDigimon>());
+                                if (StaticRules.instance.NowPreparationPhase == StaticRules.PreparationPhase.SetEvolition)
+                                {
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(_Digicarta.GetComponent<CartaDigimon>());
+                                }
                             }
-
+                            else
+                            {
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(_Digicarta.GetComponent<CartaDigimon>());
+                            }
                         }
                         break;
                 }
@@ -384,11 +389,11 @@ public class StaticRules : MonoBehaviour
     
     public static void SaltoFase(Phases phase)
     {
-   
-            NowPhase = phase;
-            Debug.Log(NowPhase);
 
-            switch (NowPhase)
+        StaticRules.instance.NowPhase = phase;
+            Debug.Log(StaticRules.instance.NowPhase);
+
+            switch (StaticRules.instance.NowPhase)
             {
                 case Phases.GameSetup:
                     StartGameSetup();
@@ -459,9 +464,9 @@ public class StaticRules : MonoBehaviour
     public static void SiguienteFase()
     {
 
-            NowPhase++;
-            Debug.Log(NowPhase);
-            switch (NowPhase)
+        StaticRules.instance.NowPhase++;
+            Debug.Log(StaticRules.instance.NowPhase);
+            switch (StaticRules.instance.NowPhase)
             {
             case Phases.GameSetup:
 
@@ -544,7 +549,7 @@ public class StaticRules : MonoBehaviour
                     PartidaManager.instance.CambioDePhase(false);
                     PartidaManager.instance.ActivateHand(false);
                     PartidaManager.instance.Cambio("Evolution Phase");
-                    IA.instance.TurnoIA(true);
+                    IA.instance.TurnoIA(false);
 
                 }
                 else
@@ -602,7 +607,8 @@ public class StaticRules : MonoBehaviour
     public static void StartGameSetup()
     {
         StaticRules.instance.LostPlayerRound = null;
-
+        if (StaticRules.instance.PlayerFirstAtack != StaticRules.instance.WhosPlayer)
+            StaticRules.instance.WhosPlayer = StaticRules.instance.PlayerFirstAtack;
         // jalar carta para ambos 
         for (int i = PartidaManager.instance.Player1._Mano.Cartas.Count; i < 6; i++)
         {
@@ -790,7 +796,7 @@ public class StaticRules : MonoBehaviour
 
         StaticRules loRule = FailSafeInstance();
         Debug.Log("preparationPhase" + loRule.PlayerFirstAtack.Nombre);
-        NowPreparationPhase++;
+        StaticRules.instance.NowPreparationPhase++;
 
         // AGREGAMOS LAS CARTAS A LA MANO DE LOS JUGADORES
 
@@ -961,7 +967,9 @@ public class StaticRules : MonoBehaviour
             }
             else
             {
-                PartidaManager.instance.CambioDePhase(true);
+                if (WhosPlayer == PartidaManager.instance.Player1)
+                    PartidaManager.instance.CambioDePhase(true);
+
                 ListEvos.RemoveAll(x => x.DigiCarta == Evolucion);
                 MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
                 if (joggres)
@@ -982,7 +990,9 @@ public class StaticRules : MonoBehaviour
         }
         else
         {
-            PartidaManager.instance.CambioDePhase(true);
+            if (WhosPlayer == PartidaManager.instance.Player1)
+                PartidaManager.instance.CambioDePhase(true);
+
             ListEvos.RemoveAll(x => x.DigiCarta == Evolucion);
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
             if (joggres)
@@ -998,10 +1008,17 @@ public class StaticRules : MonoBehaviour
     {
         if (ListEvos.Count == 0)
         {
-            PartidaManager.instance.CambioDePhase(true);
             if (WhosPlayer == PartidaManager.instance.Player2)
-                SiguienteFase();
-            MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+            {
+                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+                IA.instance.FinishTurnoIA();
+            }
+            else
+            {
+                PartidaManager.instance.CambioDePhase(true);
+
+                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+            }
         }
         else
         {
@@ -1057,6 +1074,7 @@ public class StaticRules : MonoBehaviour
         }
         else
         {
+            if(StaticRules.instance.WhosPlayer== PartidaManager.instance.Player1)
             PartidaManager.instance.CambioDePhase(true);
         }
     }
@@ -1390,8 +1408,8 @@ public class StaticRules : MonoBehaviour
     private static void StartEndPhase2(string result)
     {
         Debug.Log(result);
-        NowPhase = 0;
-        NowPreparationPhase = 0;
+        StaticRules.instance.NowPhase = 0;
+        StaticRules.instance.NowPreparationPhase = 0;
         StaticRules.instance.EfectosRonda = new List<Efecto>();
 
         MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().EndPhase();
@@ -1406,20 +1424,36 @@ public class StaticRules : MonoBehaviour
         if (MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().Cartas.Count == 0)
         {
             MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().Reiniciar(StaticRules.instance.WhaitReinicio);
-
-            // StaticRules.instance.InterTimePhase(2F);
         }
         else
         {
+            // revisamos el deck de la IA 
+            if (MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Cartas.Count == 0)
+            {
+                StaticRules.instance.WhosPlayer = PartidaManager.instance.Player2;
+                MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Reiniciar(StaticRules.instance.WhaitReinicioIA);
+            }
+            else
             SaltoFase(Phases.GameSetup);
-            // StaticRules.instance.InterTimePhase(0.5F);
         }
     }
 
 
 
     public void WhaitReinicio(string resul)
+    {  
+        // revisamos el deck de la IA 
+        if (MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Cartas.Count == 0)
+        {
+            StaticRules.instance.WhosPlayer = PartidaManager.instance.Player2;
+            MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Reiniciar(WhaitReinicioIA);
+        }
+        else
+            SaltoFase(Phases.GameSetup);
+    }
+    public void WhaitReinicioIA(string resul)
     {
+        IA.instance.TerminarTurno("");
         SaltoFase(Phases.GameSetup);
     }
     //FIN metodos para cada fase
@@ -1619,7 +1653,7 @@ public class StaticRules : MonoBehaviour
     {
         foreach (var item in OpCard.DatosDigimon.ListaActivacion)
         {
-            if (StaticRules.instance.ConvertPhases(item)==NowPhase)
+            if (StaticRules.instance.ConvertPhases(item)== StaticRules.instance.NowPhase || StaticRules.instance.ConvertPhases2(item) == StaticRules.instance.NowPhase)
             {
                 OpCard.Volteo();
                 List<string> Efectos = OpCard.DatosDigimon.ListaEfectos;
@@ -1824,8 +1858,8 @@ public class StaticRules : MonoBehaviour
             case EfectosActivos.BuffAtack:
                 // Envia una carta de tu mano al dark area 
                 //lanzamos seleccion de carta 
-            
-                if (WhosPlayer._Mano.Cartas.Count>0)
+
+                if (WhosPlayer._Mano.Cartas.Count > 0)
                 {
                     EfectoEnEspera = efect;
                     SelectedDigimons.instance.Activar(WhaitBuffAtack, StaticRules.instance.WhosPlayer._Mano.Cartas);
@@ -1835,7 +1869,7 @@ public class StaticRules : MonoBehaviour
                     // no hay cartas en la mano se descarta 
 
                 }
-               
+
                 break;
             case EfectosActivos.EnemyDesDigivolucionar:
                 // Envia una carta de tu mano al dark area 
@@ -1854,7 +1888,7 @@ public class StaticRules : MonoBehaviour
                 break;
             case EfectosActivos.doblePower:
                 // No se puede usar si tu digimon es nivel 3
-                if(WhatNivelMayor(MesaManager.instance.GetDigimonSlot().DatosDigimon.Nivel, "III"))
+                if (WhatNivelMayor(MesaManager.instance.GetDigimonSlot().DatosDigimon.Nivel, "III"))
                 {
                     MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().DuplicatePower(efect.buffo, efect.CartaAfecta[0]);
                 }
@@ -1867,15 +1901,15 @@ public class StaticRules : MonoBehaviour
                 if (WhatNivelMayor(MesaManager.instance.GetDigimonSlot().DatosDigimon.Nivel, "III"))
                 {
                     // descartamos 3 cartas de net ocean del juagador
-                   
+
                     for (int i = 0; i < 3; i++)
                     {
-                      CartaDigimon DCard=MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, efect.Jugador).GetComponent<NetOcean>().Robar();
-                      //Mandamos a la dark area
-                      if (DCard)
-                      {
-                        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, efect.Jugador).GetComponent<DarkArea>().AddListDescarte(DCard,0.4f,true);
-                      }
+                        CartaDigimon DCard = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, efect.Jugador).GetComponent<NetOcean>().Robar();
+                        //Mandamos a la dark area
+                        if (DCard)
+                        {
+                            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, efect.Jugador).GetComponent<DarkArea>().AddListDescarte(DCard, 0.4f, true);
+                        }
                     }
                     EfectosRonda.Add(efect);
                 }
@@ -1895,9 +1929,9 @@ public class StaticRules : MonoBehaviour
             case EfectosActivos.SetDarkArea:
                 foreach (var item in efect.CartaAfecta)
                 {
-                    MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item,0.3F,true);
+                    MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item, 0.3F, true);
                     Transform slot = MesaManager.instance.GetOptionSlotForCard(item.DatosDigimon);
-                    if (slot!=null)
+                    if (slot != null)
                     {
                         slot.GetComponent<OptionSlot>().Vaciar();
                     }
@@ -1906,13 +1940,90 @@ public class StaticRules : MonoBehaviour
             case EfectosActivos.setRequeriment:
                 break;
             case EfectosActivos.IgnorAll:
-                Efectos _efec = Efectos.SinRequerimientosAll;
-                if (MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent
-                    <EvolutionBox>().Cartas.Count > 0)
+                // Check card in EvolutionBox Player
+                EvolutionBox EB = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>();
+                if (EB.Cartas.Count > 0)
                 {
+                    Efectos _efec = Efectos.SinRequerimientosAll;
                     EfectosDeTurno.Add(_efec);
+                    break;
                 }
-                break;
+                else
+                {
+                /// Invocacion especial
+                if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
+                    {
+                        CartaDigimon DigimonCambatiente = MesaManager.instance.GetDigimonSlot();
+                        string NivelRequerido = "";
+                        if (DigimonCambatiente.DatosDigimon.Nivel == "III")
+                        {
+                            NivelRequerido = "IV";
+                        }else if (DigimonCambatiente.DatosDigimon.Nivel == "IV")
+                        {
+                            NivelRequerido = "Perfect";
+                        }
+                        else if (DigimonCambatiente.DatosDigimon.Nivel == "Perfect")
+                        {
+                            NivelRequerido = "Ultimate";
+                        }
+                        List<CartaDigimon> Evoluciones = new List<CartaDigimon>();
+                        foreach (var item in PartidaManager.instance.Player1._Mano.Cartas)
+                        {
+                            if (item.DatosDigimon.Nivel==NivelRequerido)
+                                Evoluciones.Add(item);
+                        }
+
+                        if (Evoluciones.Count > 0)
+                        {
+                            // Madamos el panel de seleccion
+                            SelectedDigimons.instance.Activar(WhaitCardSt56, Evoluciones);
+                            break;
+                        }
+                        else
+                        {
+                            // salimos
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        // deside que carta vas a colocar la IA
+                        CartaDigimon DigimonCambatiente = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
+                        string NivelRequerido = "";
+                        if (DigimonCambatiente.DatosDigimon.Nivel == "III")
+                        {
+                            NivelRequerido = "IV";
+                        }
+                        else if (DigimonCambatiente.DatosDigimon.Nivel == "IV")
+                        {
+                            NivelRequerido = "Perfect";
+                        }
+                        else if (DigimonCambatiente.DatosDigimon.Nivel == "Perfect")
+                        {
+                            NivelRequerido = "Ultimate";
+                        }
+                        List<CartaDigimon> Evoluciones = new List<CartaDigimon>();
+                        foreach (var item in PartidaManager.instance.Player2._Mano.Cartas)
+                        {
+                            if (item.DatosDigimon.Nivel==NivelRequerido)
+                                Evoluciones.Add(item);
+                        }
+
+                        if (Evoluciones.Count > 0)
+                        {
+                            // Madamos el panel de seleccion
+                            foreach (var item in Evoluciones)
+                            {
+                                if (IA.instance.SimularBatalla(item))
+                                {
+                                    WhaitCardSt56(item.cardNumber.ToString());
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
             case EfectosActivos.Ignor4:
                 EfectoEnEspera = efect;
                 List<CartaDigimon> ListaCampeones = new List<CartaDigimon>();
@@ -1975,6 +2086,41 @@ public class StaticRules : MonoBehaviour
             }
         }
     }
+    public void WhaitCardSt56(string ID)
+    {
+        //descartamos carta 
+        Debug.Log(StaticRules.instance.WhosPlayer);
+        CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas.Find(K => K.cardNumber.ToString() == ID);
+        if (Carta)
+        {
+            Debug.Log(Carta.transform.parent);
+            // Revisamos si ya es hijo de la dark area
+            if (Carta.transform.parent == MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea))
+            {
+                // LO MANDAMOS AL  Evolution Box
+                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().
+                SetDigimon(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas.Find(K => K.cardNumber == Convert.ToInt32(ID)).transform, true);
+                // si logramos descartar la carta procedemos con el efecto
+                EfectosDeTurno.Add(Efectos.SinRequerimientosAll);
+                EfectoEnEspera = null;
+
+                if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player2)
+                    IA.instance.FinishTurnoIA();
+            }
+            else
+            {
+                PartidaManager.instance.RecurisvoEfectoID(WhaitCardSt56,ID);
+            }
+        }
+        else
+        {
+            //ESPERAR UN SEGUNDO
+            PartidaManager.instance.RecurisvoEfectoID(WhaitCardSt56, ID);
+        }
+    }
+
+
+
     public void WhaitEvolutionFour(string ID)
     {
         //descartamos carta 
@@ -2005,7 +2151,7 @@ public class StaticRules : MonoBehaviour
                 SendDarkArea(StaticRules.instance.WhosPlayer._Mano.Cartas[Random.Range(0,
                     StaticRules.instance.WhosPlayer._Mano.Cartas.Count - 1)].transform, 0.4f);
             }
-                // no se descarta las cartas que no se tienen 
+             // no se descarta las cartas que no se tienen 
         }
     }
 
@@ -2123,8 +2269,52 @@ public class StaticRules : MonoBehaviour
         }
         return conver;
     }
+    public Phases ConvertPhases2(string fase)
+    {
+        Phases conver = Phases.PreparationPhase;
+        switch (fase)
+        {
+            case "Evolution Phase":
+                conver = Phases.EvolutionPhase2;
+                break;
+            default:
+                break;
+        }
+        return conver;
+    }
+    public static int ConvertNivel(string Nivel)
+    {
+        switch (Nivel)
+        {
+            case "III":
+                return 1;
+            case "IV":
+                return 2;
+            case "Perfect":
+                return 3;
+            case "Ultimate":
+                return 4;
+        }
+        return 0;
+    }
+    public static string ConvertToNivel(int Nivel)
+    {
+        switch (Nivel)
+        {
+            case 1:
+                return "III";
+            case 2:
+                return "IV";
+            case 3:
+                return "Perfect";
+            case 4:
+                return "Ultimate";
+            default:
+                return "Ultimate";
+        }
+    }
 
-    public void EsperaEfectos(string activos)
+        public void EsperaEfectos(string activos)
     {
         TurnoEfect++;
         Debug.Log(activos);

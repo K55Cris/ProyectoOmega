@@ -19,7 +19,7 @@ public class DigimonBoxSlot : MonoBehaviour {
 
     public void NowPhase()
     {
-        switch (StaticRules.NowPhase)
+        switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.PreparationPhase:
                 PreparationPhase();
@@ -116,8 +116,11 @@ public class DigimonBoxSlot : MonoBehaviour {
         foreach (var item in Evoluciones)
         {
             // mandamos a la dark area las evoluciones del jugador perdedor
-           // item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
-            MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+            // item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
+
+
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea,MesaManager.instance.
+                WhatSlotPlayer(this.transform,MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
         }
         Evoluciones.Clear();
         _DigiCarta = DRoquin;
@@ -125,7 +128,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public void DeEvolution(UnityAction<string> Loaction, string Condicion)
     {
         MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().setAction(Loaction);
-        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform)
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)
             ).GetComponent<DarkArea>().setAction(Loaction);
         if (Evoluciones.Count == 0)
         {
@@ -162,7 +165,7 @@ public class DigimonBoxSlot : MonoBehaviour {
                     if (StaticRules.instance.WhatNivelMayor(item.DatosDigimon.Nivel, NivelObjetivo))
                     {
                         // mandamos a la dark area las cartas con nivel superior 
-                        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform)
+                        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)
                             ).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
                         ReturnEvo.Add(item);
                     }
@@ -181,8 +184,8 @@ public class DigimonBoxSlot : MonoBehaviour {
             _DigiCarta.Volteo();
             // revelamos la carta
             MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.
-            WhatSlotPlayer(this.transform)).GetComponent<FrontDigimon>().RevelarDigimon(_DigiCarta, PartidaManager.
-            instance.GetAtackUse(MesaManager.instance.WhatSlotPlayer(this.transform)));
+            WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<FrontDigimon>().RevelarDigimon(_DigiCarta, PartidaManager.
+            instance.GetAtackUse(MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)));
             }
     }
 
@@ -196,19 +199,31 @@ public class DigimonBoxSlot : MonoBehaviour {
             {
                 if (!Cambiado)
                 {
-                    if (StaticRules.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+                    if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
                     {
-                        StaticRules.NowPreparationPhase = StaticRules.PreparationPhase.ChangeDigimon;
-                        PartidaManager.instance.SetMoveCard(this.transform,Carta,InterAutoAjuste2);
+                        if (StaticRules.instance.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+                        {
+                            StaticRules.instance.NowPreparationPhase = StaticRules.PreparationPhase.ChangeDigimon;
+                            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste2);
+                            // Quitar Roquin Antiguo
+                            PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), DRoquin.transform, StaticRules.Ajustar);
+                            _DigiCarta = Carta.GetComponent<CartaDigimon>();
+                            Cambiado = true;
+                            _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
+                            DRoquin = Carta.GetComponent<CartaDigimon>();
+                            SoundManager.instance.PlaySfx(Sound.SetCard);
+                        }
+                    }
+                    else
+                    {
+                        PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste2);
                         // Quitar Roquin Antiguo
-                        PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea),DRoquin.transform,StaticRules.Ajustar);
+                        PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), DRoquin.transform, StaticRules.Ajustar);
                         _DigiCarta = Carta.GetComponent<CartaDigimon>();
                         Cambiado = true;
                         _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
                         DRoquin = Carta.GetComponent<CartaDigimon>();
                         SoundManager.instance.PlaySfx(Sound.SetCard);
-
-                        
                     }
                 }
                 else

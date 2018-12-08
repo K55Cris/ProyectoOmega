@@ -225,7 +225,10 @@ public class PartidaManager : MonoBehaviour {
     {
         StartCoroutine(CadenaEfectos(loAction));
     }
-
+    public void RecurisvoEfectoID(UnityAction<string> loAction,string ID)
+    {
+        StartCoroutine(CadenaEfectosID(loAction,ID));
+    }
     public IEnumerator CadenaEfectos(UnityAction<string> loAction)
     {
  
@@ -233,6 +236,14 @@ public class PartidaManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         loAction.Invoke("Siguiente cadena");
     }
+    public IEnumerator CadenaEfectosID(UnityAction<string> loAction,string ID)
+    {
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
+        loAction.Invoke(ID);
+    }
+
     public IEnumerator WhaitChangeFase()
     {
         yield return new WaitForEndOfFrame();

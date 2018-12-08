@@ -16,7 +16,7 @@ public class EvolutionRequerimentBox : Slot
 
     public void NowPhase()
     {
-        switch (StaticRules.NowPhase)
+        switch (StaticRules.instance.NowPhase)
         {
 
             case DigiCartas.Phases.PreparationPhase:
@@ -204,7 +204,7 @@ public class EvolutionRequerimentBox : Slot
             if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nombre.ToUpper().Contains(item.ToUpper()))
             {
 
-                foreach (var item2 in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
+                foreach (var item2 in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox, StaticRules.instance.WhosPlayer).GetComponent<EvolutionBox>().Cartas)
                 {
                     if (item2.DatosDigimon.Nombre == item)
                         saltar = true;
@@ -273,11 +273,14 @@ public class EvolutionRequerimentBox : Slot
                 {
                     _carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean).GetComponent<NetOcean>().Robar();
                 }
-                ListaXO.Add(_carta.transform);
-                _carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
-                SoundManager.instance.PlaySfx(Sound.SetCard);
-                PartidaManager.instance.SetMoveCard(Slot, _carta.transform, AjusteIntermedio);
-                StartCoroutine(QuitarDeListaRequerimientos(Slot.name));
+                if (_carta)
+                {
+                    ListaXO.Add(_carta.transform);
+                    _carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
+                    SoundManager.instance.PlaySfx(Sound.SetCard);
+                    PartidaManager.instance.SetMoveCard(Slot, _carta.transform, AjusteIntermedio);
+                    StartCoroutine(QuitarDeListaRequerimientos(Slot.name));
+                }
             }
             else
             {

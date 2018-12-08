@@ -51,7 +51,7 @@ public class CartaDigimon : Carta {
     }
     void OnMouseDown()
     {
-        if (StaticRules.NowPhase == DigiCartas.Phases.DiscardPhase && transform.parent.name.Contains("Option Slot"))
+        if (StaticRules.instance.NowPhase == DigiCartas.Phases.DiscardPhase && transform.parent.name.Contains("Option Slot"))
         {
             AddOrRemove = !AddOrRemove;
             StaticRules.instance.AddListDiscard(gameObject, AddOrRemove);

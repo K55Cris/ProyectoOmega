@@ -52,7 +52,7 @@ public class NetOcean : MonoBehaviour
         // DigimonBox Slot
     //    List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
     //    sendDarkarea(ListDCardDigimon);
-        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().LostDigimon(addDarkArea);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot,MesaManager.instance.WhatSlotPlayer(this.transform,MesaManager.Slots.NetOcean)).GetComponent<DigimonBoxSlot>().LostDigimon(addDarkArea);
 
     }
 

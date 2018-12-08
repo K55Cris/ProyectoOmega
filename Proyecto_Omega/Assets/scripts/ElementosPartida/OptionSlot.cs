@@ -20,8 +20,13 @@ public class OptionSlot : Slot
             PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
             OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
-            if (StaticRules.NowPhase== DigiCartas.Phases.PreparationPhase)
-               StaticRules.NowPreparationPhase=StaticRules.PreparationPhase.SetOptionCard;
+            if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
+            {
+                if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase)
+                {
+                    StaticRules.instance.NowPreparationPhase = StaticRules.PreparationPhase.SetOptionCard;
+                }
+            }
         }
     }
     private void OnMouseDown()
@@ -30,13 +35,13 @@ public class OptionSlot : Slot
         {
             VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
 
-            if (StaticRules.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.NowPhase == DigiCartas.Phases.BattlePhase)
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase)
             {
                 CanvasAction.SetActive(true);
                 ActivarCarta.SetActive(true);
                 DescartarCarta.SetActive(false);
             }
-            if (StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase)
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase)
             {
                 CanvasAction.SetActive(true);
                 DescartarCarta.SetActive(true);

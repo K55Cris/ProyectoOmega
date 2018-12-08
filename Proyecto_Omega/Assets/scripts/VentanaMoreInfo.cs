@@ -12,7 +12,7 @@ public class VentanaMoreInfo : MonoBehaviour {
     public Image DigimonImage, Type;
     public DigiCarta Datos;
     public TextMeshProUGUI NombreAtaqueA, NombreAtaqueB, NombreAtaqueC, Habilidad, Evolucion1, Evolucion2, Evolucion3, NombreDigimon, Capacidad;
-    public TextMeshProUGUI DañoA, DañoB, DañoC , Phase, atributo, Familia, Tipo,PerdidaVida1, PerdidaVida2,PerdidaVida3, PerdidaVida4, Coste;
+    public TextMeshProUGUI valorE,DañoA, DañoB, DañoC , Phase, atributo, Familia, Tipo,PerdidaVida1, PerdidaVida2,PerdidaVida3, PerdidaVida4, Coste;
     public CanvasGroup Panel;
     public GameObject DigimonCard, OptionCard;
     public ListaEvolucionesItem[] ItemEvoText;
@@ -37,6 +37,7 @@ public class VentanaMoreInfo : MonoBehaviour {
             OptionCard.SetActive(false);
             Type.overrideSprite = DataManager.instance.GetSpriteForType(DatosDigimon);
             NombreAtaqueA.text = Datos.NombreAtaqueA;
+            valorE.text = Datos.Nivel;
             NombreAtaqueB.text = Datos.NombreAtaqueB;
             NombreAtaqueC.text = Datos.NombreAtaqueC;
             DañoA.text = Datos.DanoAtaqueA.ToString();

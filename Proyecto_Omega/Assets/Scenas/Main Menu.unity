@@ -8093,6 +8093,11 @@ Prefab:
       propertyPath: Nivel
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Nombre
+      value: K
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}
   m_IsPrefabAsset: 0

@@ -24,7 +24,7 @@ public class UIPhases : MonoBehaviour {
         Particulas[1].Play();
         Particulas[2].Play();
         bool Play = player;
-        switch (StaticRules.NowPhase)
+        switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.GameSetup:
                 break;

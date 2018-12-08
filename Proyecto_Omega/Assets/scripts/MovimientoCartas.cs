@@ -26,7 +26,11 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDown()
     {
-       if ((StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase | StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase2) && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+       if (((StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase && 
+            StaticRules.instance.PlayerFirstAtack==PartidaManager.instance.Player1) | 
+            (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 &&
+            StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1) 
+            && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand))
         { 
             Layout.ignoreLayout = true;
            
@@ -34,7 +38,7 @@ public class MovimientoCartas : MonoBehaviour {
         }
         else
         {
-            if (transform.parent.transform.parent.name.Contains("Espacio")&& StaticRules.NowPhase == DigiCartas.Phases.DiscardPhase)
+            if (transform.parent.transform.parent.name.Contains("Espacio")&& StaticRules.instance.NowPhase == DigiCartas.Phases.DiscardPhase)
             {
                 BotonActivate.gameObject.SetActive(false);
                 BotonDiscardPhase.gameObject.SetActive(true);
@@ -43,7 +47,11 @@ public class MovimientoCartas : MonoBehaviour {
                     BotonDiscardPhase.sprite = Descar;
                 else
                     BotonDiscardPhase.sprite = Cancelar;
-            }else if (StaticRules.NowPhase == DigiCartas.Phases.EvolutionPhase && transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+            }else if ((StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase &&
+                StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1) |
+                (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase2 &&
+                StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1) && 
+                transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
             {
                 // se puede activar la carta de la mano 
                 BotonActivate.gameObject.SetActive(true);
@@ -59,7 +67,7 @@ public class MovimientoCartas : MonoBehaviour {
     {
         if (Mover)
         {
-            if (StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.NowPhase == DigiCartas.Phases.PreparationPhase2 && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand )
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase | StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand )
             {
                 Vector3 temp = Input.mousePosition;
                 temp.z = this.distancia;
@@ -71,7 +79,7 @@ public class MovimientoCartas : MonoBehaviour {
     private void OnMouseUp()
     {
 
-        if (StaticRules.NowPhase != DigiCartas.Phases.DiscardPhase&& Mover &&!transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+        if (StaticRules.instance.NowPhase != DigiCartas.Phases.DiscardPhase&& Mover &&!transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
         {
             // Reralizar Cambio 
             // Obtener Slot de la Carta
