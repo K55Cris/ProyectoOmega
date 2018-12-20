@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour {
     public void vSTamer()
     {
         SoundManager.instance.PlaySfx(Sound.Enter);
-        LevelLoader.instance.CargarEscena("Recompensa");
+        LevelLoader.instance.CargarEscena("MapaDuelos");
     }
     public void VsIA()
     {

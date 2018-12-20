@@ -8056,6 +8056,21 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progreso.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4513381750173572, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 205.9
@@ -8097,6 +8112,86 @@ Prefab:
         type: 2}
       propertyPath: Default.Nombre
       value: K
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progreso.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[0].ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[1].ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[2].ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[0].Completo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[1].Cerca
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[2].Cerca
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Jugador.Progresos.Array.data[0].Cerca
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[0].ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[1].ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[2].ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[0].Completo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[0].Cerca
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[0].Victorias
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[1].Cerca
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114535921568867854, guid: 98b502c0cf67b3d43b91d55f21eb14c4,
+        type: 2}
+      propertyPath: Default.Progresos.Array.data[2].Cerca
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98b502c0cf67b3d43b91d55f21eb14c4, type: 2}
@@ -8143,7 +8238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da91d501e58bb7b4db60eb8890fe6fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.4
+  Speed: 0.3
   toUp: 0
   toLeft: 0
 --- !u!23 &1729049744

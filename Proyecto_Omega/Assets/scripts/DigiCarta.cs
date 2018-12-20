@@ -121,9 +121,19 @@ namespace DigiCartas
         public List<int> IDCartasMazo;
         public List<DIDCarta> IDCartasDisponibles;
         public bool ALLCards;
+        public List<Progreso> Progresos;
     }
 
     [Serializable]
+    public class Progreso
+    {
+        public int ID;
+        public bool Completo;
+        public bool Cerca;
+        public int Victorias;
+        public int Derrotas;
+    }
+        [Serializable]
     public class DIDCarta
     {
         public int ID;
@@ -153,7 +163,7 @@ namespace DigiCartas
 
     public enum EfectosActivos
     {
-        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel, setRequeriment, Ignor4, IgnorAll , EnemyDesDigivolucionar
+        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel,DiscardHand, Ignor4, IgnorAll , EnemyDesDigivolucionar
     };
 
     public enum Phases

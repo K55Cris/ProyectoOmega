@@ -13,6 +13,7 @@ public class IA : MonoBehaviour {
     public Dificultad IALevel;
     private Player IAPlayer;
     private Transform ManoEspacio;
+    public GameObject PanelClosePlayer;
     public void Start()
     {
         IAPlayer = PartidaManager.instance.Player2;
@@ -34,6 +35,7 @@ public class IA : MonoBehaviour {
 
     public void TurnoIA(bool espera=false)
     {
+        PanelClosePlayer.gameObject.SetActive(true);
         PartidaManager.instance.MenuPhases.ChangePhase(false);
         StaticRules.instance.WhosPlayer = IAPlayer;
         if(espera)
@@ -45,6 +47,7 @@ public class IA : MonoBehaviour {
 
     public void NowPhase(string Result)
     {
+       
         switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.PreparationPhase:
@@ -59,11 +62,9 @@ public class IA : MonoBehaviour {
             case DigiCartas.Phases.EvolutionPhase2:
                 EvolutionPhase();
                 break;
-            case DigiCartas.Phases.EvolutionRequirements:
-                EvolutionRequirements();
-                break;
-            case DigiCartas.Phases.FusionRequirements:
-                FusionRequirements();
+
+            case DigiCartas.Phases.OptionBattlePhase:
+                BattlelPhases();
                 break;
             case DigiCartas.Phases.EndPhase:
                 EndPhase();
@@ -79,12 +80,162 @@ public class IA : MonoBehaviour {
     {
     }
 
-    private void FusionRequirements()
+    public bool CanSetCardOptionBattlet()
     {
+        if (MesaManager.instance.Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta != null ||
+        MesaManager.instance.Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta != null ||
+        MesaManager.instance.Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta != null)
+            return true;
+        else
+            return false;
+    }
+    private void BattlelPhases()
+    {
+        CartaDigimon Digimon = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
+        // Revisamos si ganamos la Batalla
+        if (SimularBatalla(Digimon))
+        {
+            DigiCarta wins = new DigiCarta();
+            wins.id = 58;
+            // si seguimos ganando la Ronda revisamos si temaos esta carta para activarla
+            if (MesaManager.instance.GetOptionSlotForCard(wins))
+            {
+                // revisamos si non es child
+                if (Digimon.DatosDigimon.Nivel!= "III")
+                {
+                    // Activamos la carta
+                    StaticRules.ActivateOptionCard(MesaManager.instance.
+                    GetOptionSlotForCard(wins).GetComponent<OptionSlot>().OpCarta);
+                    TurnoJugador(true);
+                }
+            }
+            else
+            {
+                // si no tenemos nada que activar termiamos
+                TurnoJugador(true);
+            }
+        }
+        else
+        {
+            // si perdemos revisamos si tenemos option en el campo
+            if(MesaManager.instance.Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta ||
+                MesaManager.instance.Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta ||
+                MesaManager.instance.Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta)
+            {
+                // si contamos con alguno revisamos si nos sirven para ganar 
+                // Buscar algun chip que cambie el ataque para ganar 
+                DigiCarta A = new DigiCarta();
+                A.id = 49;
+                DigiCarta C = new DigiCarta();
+                C.id = 50;
+                DigiCarta B = new DigiCarta();
+                B.id = 51;
+                DigiCarta Lost = new DigiCarta();
+                Lost.id = 52;
+                DigiCarta Metal = new DigiCarta();
+                Metal.id = 53;
+                DigiCarta Conter = new DigiCarta();
+                Conter.id = 54;
+                DigiCarta DeEvolution = new DigiCarta();
+                DeEvolution.id = 57;
+
+                if (MesaManager.instance.GetOptionSlotForCard(A))
+                {
+                    // revisamos si El cambio de Batalla hace que ganes 
+                    if (SimularBatallaAtaque(Digimon, "A",0))
+                    {
+                        // Activamos la carta de lo contrario revisamos la siguiente 
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                            GetOptionSlotForCard(A).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }
+                if (MesaManager.instance.GetOptionSlotForCard(B))
+                {
+                    // revisamos si El cambio de Batalla hace que ganes 
+                    if (SimularBatallaAtaque(Digimon, "B",0))
+                    {
+                        // Activamos la carta de lo contrario revisamos la siguiente 
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                           GetOptionSlotForCard(B).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }
+                if (MesaManager.instance.GetOptionSlotForCard(C))
+                {
+                    // revisamos si El cambio de Batalla hace que ganes 
+                    if (SimularBatallaAtaque(Digimon, "C",0))
+                    {
+                        // Activamos la carta de lo contrario revisamos la siguiente 
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                        GetOptionSlotForCard(B).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }          
+                
+                // buscamos alguna carta de Conter para poder Ganar aun 
+                if (MesaManager.instance.GetOptionSlotForCard(Metal))
+                {
+                    if (SimularBatallaAtaque(Digimon,"",50))
+                    {
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                        GetOptionSlotForCard(Metal).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }
+                if (MesaManager.instance.GetOptionSlotForCard(Conter))
+                {
+                    DigimonBoxSlot midigi = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>();
+                    DigimonBoxSlot digienemigo = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>();
+
+                    if (StaticRules.instance.WhatNivelMayor(digienemigo._DigiCarta.DatosDigimon.Nivel, midigi._DigiCarta.DatosDigimon.Nivel))
+                    {
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                        GetOptionSlotForCard(Conter).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }
+                if (MesaManager.instance.GetOptionSlotForCard(DeEvolution))
+                {
+                    // revisamos si cuenta el enemigo con un champeon
+                    DigimonBoxSlot digienemigo = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>();
+
+                    if (digienemigo._DigiCarta.DatosDigimon.Nivel== "IV")
+                    {
+                        // Activamos la carta de lo contrario revisamos la siguiente 
+                        StaticRules.ActivateOptionCard(MesaManager.instance.
+                        GetOptionSlotForCard(DeEvolution).GetComponent<OptionSlot>().OpCarta);
+                        TurnoJugador(false);
+                        return;
+                    }
+                }
+                TurnoJugador(true);
+            }
+            else
+            {
+                // Pasamos el turno dando pie a que el jugador juegue
+                TurnoJugador(true);
+            }
+        }
+
     }
 
-    private void EvolutionRequirements()
+    public void TurnoJugador(bool action)
     {
+        StaticRules.instance.WhaitPlayersReadyBattlet(action);
+        PartidaManager.instance.CambioDePhase(true);
+        StartCoroutine(Whaiting(TerminarTurno, 0.5f));
+        PartidaManager.instance.MenuPhases.ChangePhase(true);
+    }
+
+    public void EndBattlePhases()
+    {
+
     }
 
     private void EvolutionPhase()
@@ -600,15 +751,12 @@ public class IA : MonoBehaviour {
     }
     public void WaithOptionEvolution(bool Result)
     {
-        Debug.Log("10");
         if (Result)
         {
-            Debug.Log("11");
             StartCoroutine(Whaiting(TerminarTurno, 2f));
         }
         else
         {
-            Debug.Log("12");
             FinishTurnoIA();
         }
     }
@@ -664,17 +812,14 @@ public class IA : MonoBehaviour {
 
     public void CheckOptionEvolution(UnityAction<bool> LoAction)
     {
-        Debug.Log("1");
         // Revisamos si se cuenta con una carta en la Mano 
         CartaDigimon Chip56 = IAPlayer._Mano.Cartas.Find(K => K.DatosDigimon.id == 56);
         EvolutionBox ESlot = MesaManager.instance.Campo2.EvolutionBox.GetComponent<EvolutionBox>();
         if (Chip56)
         {
-            Debug.Log("2");
             // TENEMOS LA CARTA EN LA MANO
             if (ESlot.Cartas.Count == 0)
             {
-                Debug.Log("3");
                 // revisamos que no haya evoluciones
                 // revisamos si tenemos evolucion de la evolucion seteada
                 string Nivel = StaticRules.ConvertToNivel(StaticRules.ConvertNivel(MesaManager.instance.Campo2.
@@ -684,7 +829,6 @@ public class IA : MonoBehaviour {
                 {
                     if (Nivel == item.DatosDigimon.Nivel)
                     {
-                        Debug.Log("4");
                         // Activamos el efecto
                         StaticRules.ActivateOptionCard(Chip56);
                         LoAction(true);
@@ -695,14 +839,12 @@ public class IA : MonoBehaviour {
             }
             else
             {
-                Debug.Log("5");
                 // por ahóra la Ia no usara este chip 
                 LoAction(false);
             }
         }
         else
         {
-            Debug.Log("6");
             // buscamos el chip 
             LoAction(false);
         }
@@ -774,9 +916,16 @@ public class IA : MonoBehaviour {
         // Obtenemos ataques
         string Digimon1 = D1.DatosDigimon.TipoBatalla;
         string Digimon2 = TCard.DatosDigimon.TipoBatalla;
+        
+
         // obtenemos Fuerza de los ataques
         int OffD1 = StaticRules.instance.WhatAtackUse(Digimon2,D1);
         int OffD2 = StaticRules.instance.WhatAtackUse(Digimon1,TCard);
+
+        if (Digimon1 == "C" && Digimon2 == "A")
+            OffD2 = 0;
+        if (Digimon2 == "C" && Digimon1 == "A")
+            OffD1 = 0;
 
         Debug.Log(D1.DatosDigimon.Nombre + ":" + OffD1 +"|"+ TCard.DatosDigimon.Nombre + ":" + OffD2);
         // Verificamos si ganamos
@@ -786,6 +935,30 @@ public class IA : MonoBehaviour {
             return false;
     }
 
+    public bool SimularBatallaAtaque(CartaDigimon TCard,string ataque, int BUFFO)
+    {
+        CartaDigimon D1 = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
+        // Obtenemos ataques
+        string Digimon1 = D1.DatosDigimon.TipoBatalla;
+        string Digimon2 = TCard.DatosDigimon.TipoBatalla;
+        if (TCard.DatosDigimon.TipoBatalla == ataque)
+            return false;
+
+        if (ataque != "")
+            Digimon2 = ataque;
+
+        // obtenemos Fuerza de los ataques
+        int OffD1 = StaticRules.instance.WhatAtackUse(Digimon2, D1);
+        int OffD2 = StaticRules.instance.WhatAtackUse(Digimon1, TCard);
+
+        OffD2 +=BUFFO;
+        Debug.Log(D1.DatosDigimon.Nombre + ":" + OffD1 + "|" + TCard.DatosDigimon.Nombre + ":" + OffD2);
+        // Verificamos si ganamos
+        if (OffD2 >= OffD1)
+            return true;
+        else
+            return false;
+    }
     public bool CompararAtaques(CartaDigimon Digimon1, CartaDigimon Digimon2)
     {
         string AtaqueOponente = MesaManager.instance.Campo1.DigimonSlot.GetComponent
@@ -815,11 +988,13 @@ public class IA : MonoBehaviour {
 
     public void TerminarTurno(string result)
     {
+        PanelClosePlayer.SetActive(false);
         StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
     }
 
     public void FinishTurnoIA()
     {
+        PanelClosePlayer.SetActive(false);
         StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
         StaticRules.SiguienteFase();
         // QUITAR BLOQUEO A PLAYER 1

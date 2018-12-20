@@ -47,6 +47,10 @@ public class PlayerManager : MonoBehaviour {
     {
         return Jugador.IDCartasMazo;
     }
+    public List<Progreso> GetProgress()
+    {
+        return Jugador.Progresos;
+    }
     public List<DIDCarta> GetCards()
     {
         return Jugador.IDCartasDisponibles;

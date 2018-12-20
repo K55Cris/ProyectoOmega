@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenas/Recompensa.unity
     guid: ff7ac5f1941de1844b5b609665e38017
+  - enabled: 1
+    path: Assets/Scenas/MapaDuelos.unity
+    guid: df5e647cca11f374da179a7cfd25b1d0
   m_configObjects: {}

@@ -64,6 +64,8 @@ public class OptionSlot : Slot
     {
         if (OpCarta)
         {
+           
+
             CanvasAction.SetActive(false);
             StaticRules.ActivateOptionCard(OpCarta);
         }

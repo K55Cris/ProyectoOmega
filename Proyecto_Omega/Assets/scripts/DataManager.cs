@@ -115,15 +115,16 @@ public class DataManager : MonoBehaviour {
         _Canvas.blocksRaycasts = false;
     }
 
-    public void EndFrame(UnityAction<string> funcion)
+    public void EndFrame(UnityAction<string> funcion, float segundos)
     {
-        StartCoroutine(_EndFrame(funcion));
+        StartCoroutine(_EndFrame(funcion,segundos));
     }
-    public IEnumerator _EndFrame(UnityAction<string> funcion)
+    public IEnumerator _EndFrame(UnityAction<string> funcion, float segundos)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(segundos);
         funcion("");
     }
     public bool bandera = true;

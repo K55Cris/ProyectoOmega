@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 public class ContadorOffencivo : MonoBehaviour
 {
-    public Text Ataque;
+    public TextMeshProUGUI Ataque;
     public int AtaqueBase = 0;
     public int PoderDeAtaque=0;
 
