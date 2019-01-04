@@ -22,6 +22,9 @@ public class EvolutionRequerimentBox : Slot
             case DigiCartas.Phases.PreparationPhase:
                 PreparationPhase();
                 break;
+            case DigiCartas.Phases.PreparationPhase2:
+                PreparationPhase();
+                break;
             default:
                 Debug.Log("Fase no recocida para este Slot");
                 break;
@@ -212,7 +215,7 @@ public class EvolutionRequerimentBox : Slot
                 }
                 if (!saltar)
                 {
-                    PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
+                    PartidaManager.instance.SetMoveCard(O, Carta, StaticRules.Ajustar);
                     ListaRequerimientosAdicionales.Add(Carta);
                     StartCoroutine(QuitarDeListaRequerimientos(item));
                     SoundManager.instance.PlaySfx(Sound.SetCard);
@@ -297,8 +300,8 @@ public class EvolutionRequerimentBox : Slot
     public void AjusteIntermedio(CartaDigimon _DCard)
     {
         _DCard.AjustarSlot();
+        if(StaticRules.instance.WhosPlayer!=IA.instance.IAPlayer)
         PartidaManager.instance.CambioDePhase(true);
     }
-
 
 }

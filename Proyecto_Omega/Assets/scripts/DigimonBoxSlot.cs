@@ -13,6 +13,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public ParticleSystem AtaqueA;
     public ParticleSystem AtaqueB;
     public ParticleSystem Joggres;
+    public TornadoAtaque Tornado;
     public ContadorOffencivo CanvasContador;
     public Animator Camera;
     public List<CartaDigimon> Evoluciones= new List<CartaDigimon>();
@@ -85,8 +86,18 @@ public class DigimonBoxSlot : MonoBehaviour {
         switch (PartidaManager.instance.WhoAtackUse(this.transform))
         {
             case "A":
-                AtaqueA.Play();
-                SoundManager.instance.PlaySfx(Sound.AtaqueA);
+                if (DataManager.GetDesicion())
+                {
+                  AtaqueA.Play();
+                  SoundManager.instance.PlaySfx(Sound.AtaqueA);
+                  
+                }
+                else
+                {
+                    Tornado.Atacar(_DigiCarta.DatosDigimon.Familia);
+                    SoundManager.instance.PlaySfx(Sound.Tornado);
+                }
+               
                 break;
 
             case "B":
@@ -105,7 +116,8 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void LostDigimon(UnityAction<string> Loaction)
     {
-        MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().setAction(Loaction);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
+              WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().GetComponent<DarkArea>().setAction(Loaction);
         if (Evoluciones.Count == 0)
         {
             if (Loaction != null)
@@ -116,7 +128,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         foreach (var item in Evoluciones)
         {
             // mandamos a la dark area las evoluciones del jugador perdedor
-            // item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
+             item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
 
 
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea,MesaManager.instance.

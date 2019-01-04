@@ -69,7 +69,7 @@ public class VentanaMoreInfo : MonoBehaviour {
                 Contador++;
             }
             // Lista Efectos
-            for (int i = 0; i < DatosDigimon.ListaEfectos.Count; i++)
+            for (int i = 0; i < DatosDigimon.ListaEfectosMostrar.Count; i++)
             {
                 if (Contenido1.GetChild(i))
                 {
@@ -85,9 +85,9 @@ public class VentanaMoreInfo : MonoBehaviour {
             {
                 if (item)
                 {
-                    if (DatosDigimon.ListaEfectos.Count > bandera)
+                    if (DatosDigimon.ListaEfectosMostrar.Count > bandera)
                     {
-                        item.GetComponent<ListaEvolucionesItem>().Crear(DatosDigimon.ListaEfectos[bandera]);
+                        item.GetComponent<ListaEvolucionesItem>().Crear(DatosDigimon.ListaEfectosMostrar[bandera]);
                     }
                     else
                     {
@@ -116,7 +116,7 @@ public class VentanaMoreInfo : MonoBehaviour {
                 Coste.text += item;
             }
             // Lista Efectos
-            for (int i = 0; i < DatosDigimon.ListaEfectos.Count; i++)
+            for (int i = 0; i < DatosDigimon.ListaEfectosMostrar.Count; i++)
             {
                 if (Contenido2.GetChild(i))
                 {
@@ -133,9 +133,9 @@ public class VentanaMoreInfo : MonoBehaviour {
             {
                 if (item)
                 {
-                    if (DatosDigimon.ListaEfectos.Count > bandera)
+                    if (DatosDigimon.ListaEfectosMostrar.Count > bandera)
                     {
-                        item.GetComponent<ListaEvolucionesItem>().Crear(DatosDigimon.ListaEfectos[bandera]);
+                        item.GetComponent<ListaEvolucionesItem>().Crear(DatosDigimon.ListaEfectosMostrar[bandera]);
                     }
                     else
                     {

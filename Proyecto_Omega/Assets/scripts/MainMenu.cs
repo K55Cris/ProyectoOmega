@@ -15,12 +15,12 @@ public class MainMenu : MonoBehaviour {
     public void vSTamer()
     {
         SoundManager.instance.PlaySfx(Sound.Enter);
-        LevelLoader.instance.CargarEscena("MapaDuelos");
+        LevelLoader.instance.CargarEscena("Recompensa");
     }
     public void VsIA()
     {
         SoundManager.instance.PlaySfx(Sound.Enter);
-        LevelLoader.instance.CargarEscena("vsIA");
+        LevelLoader.instance.CargarEscena("MapaDuelos");
     }
     public void DeckEditor()
     {

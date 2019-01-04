@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 public class intro : MonoBehaviour {
     public VideoPlayer Video;
-
+    public GameObject Panel;
 	// Use this for initialization
 	void Start () {
         if (DataManager.instance.IntroVisto)
@@ -24,11 +24,20 @@ public class intro : MonoBehaviour {
 	}
     public void Continuar()
     {
+        if (DataManager.instance.IntroVisto)
+        {
+             Panel.SetActive(false);
+        }else
+            Panel.SetActive(true);
+
         if (gameObject)
         {
             DataManager.instance.IntroVisto = true;
             gameObject.SetActive(false);
+
         }
+
+       
         SoundManager.instance.PlayMusic(Sound.MainMenu);
     }
     public void OnMouseDown()

@@ -35,7 +35,7 @@ public class OptionSlot : Slot
         {
             VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
 
-            if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase)
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase || StaticRules.instance.NowPhase == DigiCartas.Phases.OptionBattlePhase)
             {
                 CanvasAction.SetActive(true);
                 ActivarCarta.SetActive(true);

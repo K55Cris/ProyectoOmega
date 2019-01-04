@@ -47,11 +47,11 @@ public class ContadorOffencivo : MonoBehaviour
         {
             // Buffo
             Debug.Log("bUFFO");
-            int DIVISOR = cantidad / 60;
+            int DIVISOR = cantidad / 50;
             for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {
                 Ataque.text = i.ToString();
-                yield return new WaitForSecondsRealtime(0.01f);
+                yield return new WaitForSecondsRealtime(0.008f);
             }
             PoderDeAtaque = cantidad;
             Ataque.text = cantidad.ToString();

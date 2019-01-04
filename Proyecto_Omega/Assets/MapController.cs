@@ -42,4 +42,8 @@ public class MapController : MonoBehaviour {
     {
         this.transform.localPosition = Vector3.zero;
     }
+    public void Jugar()
+    {
+        LevelLoader.instance.CargarEscena("VsIA");
+    }
 }

@@ -144,7 +144,6 @@ public class PartidaManager : MonoBehaviour {
             NDeck.Cartas.Add(_Carta);
             k++;
         }
-
     }
     public void BotonListo()
     {

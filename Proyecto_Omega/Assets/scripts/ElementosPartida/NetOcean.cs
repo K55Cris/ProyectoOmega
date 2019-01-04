@@ -7,6 +7,7 @@ public class NetOcean : MonoBehaviour
 {
     public List<CartaDigimon> Cartas;
     public UnityAction<string> Loaction;
+    private Player _jugador= new Player();
     public CartaDigimon Robar()
     {
         if (Cartas.Count == 0)
@@ -46,13 +47,14 @@ public class NetOcean : MonoBehaviour
         return null;
     }
 
-    public void Reiniciar(UnityAction<string> LoAction)
+    public void Reiniciar(UnityAction<string> LoAction,Player Jugador )
     {
         this.Loaction = LoAction;
         // DigimonBox Slot
-    //    List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
-    //    sendDarkarea(ListDCardDigimon);
-        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot,MesaManager.instance.WhatSlotPlayer(this.transform,MesaManager.Slots.NetOcean)).GetComponent<DigimonBoxSlot>().LostDigimon(addDarkArea);
+        //    List<CartaDigimon> ListDCardDigimon = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().Evoluciones;
+        //    sendDarkarea(ListDCardDigimon);
+        _jugador = Jugador;
+        MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, Jugador).GetComponent<DigimonBoxSlot>().LostDigimon(addDarkArea);
 
     }
 
@@ -93,7 +95,7 @@ public class NetOcean : MonoBehaviour
     public void addDarkArea(string RESULT)
     {
         Debug.Log(RESULT);
-        List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>()._Cartas;
+        List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, _jugador).GetComponent<DarkArea>()._Cartas;
        StartCoroutine(Iteracion(ListDCardsDarkArea));
     }
 
@@ -135,9 +137,26 @@ public class NetOcean : MonoBehaviour
     public IEnumerator WhaitReinicio()
     {
         yield return new WaitForSeconds(0.5f);
+        // Mezclamos Mazo
 
-        if(Loaction!=null)
-        Loaction("Seguir");
+
+        if (Loaction != null)
+        {
+            // barajear mazo 
+            SoundManager.instance.PlaySfx(Sound.Barajear);
+            int k = 0;
+            while (k < 45)
+            {
+                int val = Random.Range(0, Cartas.Count);
+                CartaDigimon _Carta = Cartas[val];
+                Cartas.Remove(_Carta);
+                Cartas.Add(_Carta);
+                k++;
+            }
+            yield return new WaitForSeconds(1f);
+            Loaction("Seguir");
+        }
+       
 
         Loaction = null;
         Esperar = true;

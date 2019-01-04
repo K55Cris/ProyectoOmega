@@ -158,7 +158,7 @@ public class MovimientoCartas : MonoBehaviour {
         shaderProperty = Shader.PropertyToID("_Normal");
         MuerteM.material.SetTexture(shaderProperty, DataManager.instance.GetTextureDigimon(transform.parent.GetComponent<CartaDigimon>().DatosDigimon.id));
 
-        Invoke("Regreso",1.2f);
+        Invoke("Regreso",2.2f);
     }
     public void Regreso()
     {

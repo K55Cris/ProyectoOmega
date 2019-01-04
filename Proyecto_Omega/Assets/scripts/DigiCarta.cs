@@ -65,6 +65,7 @@ namespace DigiCartas
         public string Limite;
         public bool IsSupport;
         public bool IsActivateHand;
+        public List<string> ListaEfectosMostrar;
     }
 
 
@@ -183,6 +184,13 @@ namespace DigiCartas
     {
         SinRequerimientosAll = 0, SinRequerimientos4 = 1
     };
+
+    [Serializable]
+    public class TurnEfect
+    {
+        public Efectos Efecto;
+        public Player Jugador;
+    }
 
     [Serializable]
     public class Efecto

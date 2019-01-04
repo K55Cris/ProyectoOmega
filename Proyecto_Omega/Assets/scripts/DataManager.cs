@@ -225,4 +225,12 @@ public class DataManager : MonoBehaviour {
         int ran = Random.Range(inicio,final);
         return ran;
     }
+    public static bool GetDesicion()
+    {
+        int ran = Random.Range(0, 2);
+        if (ran == 0)
+            return true;
+        else
+            return false;
+     }
 }

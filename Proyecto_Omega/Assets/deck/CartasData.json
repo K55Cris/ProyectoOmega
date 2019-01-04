@@ -1171,7 +1171,11 @@
         "allyChageAtack to A",
         "drop in allyDarkArea"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Durante el combate usas el ataque A indiferente del tipo de ataque oponente.",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 50,
@@ -1188,7 +1192,11 @@
         "allyChageAtack to C",
         "drop in allyDarkArea"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Durante el combate usas el ataque C indiferente del tipo de ataque oponente.",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 51,
@@ -1206,7 +1214,11 @@
         "allyChageAtack to B",
         "drop in allyDarkArea"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Durante el combate usas el ataque B indiferente del tipo de ataque oponente.",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 52,
@@ -1222,7 +1234,11 @@
       "ListaEfectos": [
         "enemy drop 3 anycards from netocean in darkarea where lostbattle"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Cuando pierdes una batalla envia 3 cartas del net ocean oponente al dark area",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 53,
@@ -1239,7 +1255,12 @@
         "allyAttackPoints + 50",
         "drop in allyDarkArea"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+		"◎ Descarta una Carta",
+        "◎ Añade 50 a tu poder de ataque",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 54,
@@ -1256,7 +1277,12 @@
         "battlePhase enemyBigDigimon allyAttackPoints * 2 where allyL3 not use",
         "drop in allyDarkArea"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Cuando batallas con un digimon de un nivel superior al tuyo, duplica tu poder de ataque",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
+		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
+      ]
 	 
     },
     {
@@ -1276,7 +1302,11 @@
         "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase" ,
-	  "IsActivateHand": true
+	  "IsActivateHand": true,
+      "ListaEfectosMostrar": [
+        "◎ Ignora todos lo requisitos de evolucion y transforma tu digimon en el digimon nivel IV de tu mano o Evolution box",
+		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
+      ]
     },
     {
       "id": 56,
@@ -1294,7 +1324,11 @@
         "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase",
-	  "IsActivateHand": true
+	  "IsActivateHand": true,
+      "ListaEfectosMostrar": [
+        "◎ ignora todos los requisitos de evolucion y evoluciona tu digimon en el digimon de siguiente nivel colocado en tu evolution box",
+		"◎ luego de eso envia tu mano entera a la dark area"
+      ]
     },
     {
       "id": 57,
@@ -1311,7 +1345,11 @@
         "return to Lv3 allyLv4 or enemyLv4",
         "drop in allyDarkArea"
       ],
-      "Limite": "Battle Phase"
+      "Limite": "Battle Phase",
+      "ListaEfectosMostrar": [
+        "◎ Regresa los digimons nivel IV del adversario al digimon nivel III que eran antes de evolucionar, sin ninguna condicion",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+      ]
     },
     {
       "id": 58,
@@ -1327,7 +1365,13 @@
       "ListaEfectos": [
         "winBattle enemyLostPoints * 2"
       ],
-      "Limite": "End Phase"
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ cuando ganas la batalla en el  turno en que esta carta fue jugada, duplica los puntos de daño realizados",
+		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
+		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III",
+		"◎ Esta carta solo puede ser usada una vez por juego"
+      ]
     },
     {
       "id": 59,
@@ -1344,7 +1388,10 @@
         "Digivolution to nextLevel 40%",
         "drop in allyDarkArea"
       ],
-      "Limite": "Evolution Phase"
+      "Limite": "Evolution Phase",
+      "ListaEfectosMostrar": [
+        "◎ evoluciona tu digimon a un digimon del siguiente nivel que tenga esta carta como requisito"
+      ]
     },
     {
       "id": 60,
@@ -1361,7 +1408,11 @@
         "Digivolution to nextLevel 60%",
         "drop in allyDarkArea"
       ],
-      "Limite": "Evolution Phase"
+      "Limite": "Evolution Phase",
+      "ListaEfectosMostrar": [
+        "◎ evoluciona tu digimon a un digimon del siguiente nivel que tenga esta carta como requisito",
+		"◎ luego de evolucionar selecciona una carta de tu mano y enviala a la dark area"
+      ]
     }
   ]
 }

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Default:
-    Nombre: Tai
+    Nombre: K
     IDCartasMazo: 070000000800000008000000080000003c0000003c0000003c0000003b0000003b0000003b00000019000000190000002100000021000000210000001c0000001c0000001c00000031000000320000003300000034000000360000003700000038000000390000003a000000200000001900000020000000
     IDCartasDisponibles:
     - ID: 7
@@ -91,7 +91,27 @@ MonoBehaviour:
       Cantidad: 3
     - ID: 60
       Cantidad: 3
+    ALLCards: 0
+    Progresos:
+    - ID: 1
+      Completo: 1
+      Cerca: 1
+      Victorias: 1
+      Derrotas: 0
+    - ID: 2
+      Completo: 0
+      Cerca: 1
+      Victorias: 0
+      Derrotas: 0
+    - ID: 3
+      Completo: 0
+      Cerca: 1
+      Victorias: 0
+      Derrotas: 0
   Jugador:
-    Nombre: 
+    Nombre: K
     IDCartasMazo: 
     IDCartasDisponibles: []
+    ALLCards: 0
+    Progresos: []
+  Nivel: 0
