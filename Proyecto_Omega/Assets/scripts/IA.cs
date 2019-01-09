@@ -294,7 +294,7 @@ public class IA : MonoBehaviour {
 
     public void CargarDificultad()
     {
-       int Cant = PlayerManager.instance.Nivel;
+       int Cant = PlayerManager.instance.Jugador.Nivel;
         if (Cant<25)
             IALevel = Dificultad.Facil;
         else if(Cant < 50)

@@ -12,6 +12,7 @@ public class ItemMenuMap : MonoBehaviour {
     public int wins;
     public int Loses;
     public List<ParticleSystem> Conexiones;
+    public List<ItemMenuMap> NodosVecinos= new List<ItemMenuMap>();
     public bool Completado=false;
 	// Use this for initialization
 	void Awake ()
@@ -39,6 +40,10 @@ public class ItemMenuMap : MonoBehaviour {
                 {
                     item.Play();
                 }
+                foreach (var item in NodosVecinos)
+                {
+                    PlayerManager.instance.NodoCerca(item.ID);
+                }
             }
         }
     }
@@ -48,5 +53,4 @@ public class ItemMenuMap : MonoBehaviour {
         Camera.main.transform.position = NewPos;
         MapDuelManager.instance.ShowInfo(this);
     }
-
 }

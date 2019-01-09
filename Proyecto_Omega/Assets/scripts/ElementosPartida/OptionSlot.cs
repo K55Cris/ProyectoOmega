@@ -41,7 +41,7 @@ public class OptionSlot : Slot
                 ActivarCarta.SetActive(true);
                 DescartarCarta.SetActive(false);
             }
-            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase)
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2)
             {
                 CanvasAction.SetActive(true);
                 DescartarCarta.SetActive(true);

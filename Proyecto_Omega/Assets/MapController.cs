@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapController : MonoBehaviour {
     public Vector3 mouse;
     public Camera Camara;
-  
+    public int ID = 0;
      
     public void Move()
     {
@@ -44,6 +44,7 @@ public class MapController : MonoBehaviour {
     }
     public void Jugar()
     {
+        PlayerManager.instance.IaPlaying = ID;
         LevelLoader.instance.CargarEscena("VsIA");
     }
 }

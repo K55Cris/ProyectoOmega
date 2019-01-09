@@ -123,6 +123,7 @@ namespace DigiCartas
         public List<DIDCarta> IDCartasDisponibles;
         public bool ALLCards;
         public List<Progreso> Progresos;
+        public int Nivel = 0;
     }
 
     [Serializable]

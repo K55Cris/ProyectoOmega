@@ -571,6 +571,10 @@ public class StaticRules : MonoBehaviour
                 break;
             case Phases.EvolutionRequirements:
                     PartidaManager.instance.CambioDePhase(false);
+                    foreach (var item in PartidaManager.instance.Player1._Mano.Cartas)
+                    {
+                    item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().CanvasSeleted.SetActive(false);
+                    }
                     CheckEvolutionRequirements();
                     break;
                 case Phases.FusionRequirements:
@@ -1410,7 +1414,7 @@ public class StaticRules : MonoBehaviour
     }
     private static void StartBattlePhase5(string result)
     {
-
+        Debug.Log(result + " 65");
         if (StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player2)
         {
             // salto de phase por parte de la IA
@@ -1489,6 +1493,7 @@ public class StaticRules : MonoBehaviour
     private static void StartEndPhase(string result)
     {
         Debug.Log("TurnoAcabado");
+        StaticRules.instance.Listos = false;
         //activamos los efectos de la ronda
         try
         {
@@ -1496,7 +1501,7 @@ public class StaticRules : MonoBehaviour
         }
         catch (Exception)
         {
-           
+            StartEndPhase2("");
         }
        
     }
@@ -1727,24 +1732,27 @@ public class StaticRules : MonoBehaviour
 
     public static void Victori()
     {
-        if (StaticRules.instance.PointGaugePlayer1 <= 0&& StaticRules.instance.PointGaugePlayer2 > 0)
+        if (StaticRules.instance.PointGaugePlayer1 <= 0 && StaticRules.instance.PointGaugePlayer2 > 0)
         {
-            PartidaManager.instance.Cambio(PartidaManager.instance.Player2.Nombre+" a Ganado");
+            PartidaManager.instance.Cambio(PartidaManager.instance.Player2.Nombre + " a Ganado");
             CartaDigimon Digimon = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
-            PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea,Digimon.transform, Ajustar);
+            PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea, Digimon.transform, Ajustar);
+            PlayerManager.instance.LosePlayer(StaticRules.instance.PointGaugePlayer2/10);
             PartidaManager.instance.cambioEcena();
             return;
         }
-        else if(StaticRules.instance.PointGaugePlayer2 <= 0 && StaticRules.instance.PointGaugePlayer1 >= 0)
+        else if (StaticRules.instance.PointGaugePlayer2 <= 0 && StaticRules.instance.PointGaugePlayer1 >= 0)
         {
             PartidaManager.instance.Cambio(PartidaManager.instance.Player1.Nombre + " a Ganado");
             CartaDigimon Digimon = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo2.DarkArea, Digimon.transform, Ajustar);
+            PlayerManager.instance.WinPlayer(StaticRules.instance.PointGaugePlayer1/10);
             StaticRules.instance.Invoke("ChangeRecompensa", 4f);
         }
         else
         {
             PartidaManager.instance.Cambio("Empate");
+            PlayerManager.instance.WinPlayer(-5);
             PartidaManager.instance.cambioEcena();
         }
         

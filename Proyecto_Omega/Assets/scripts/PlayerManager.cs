@@ -7,7 +7,8 @@ public class PlayerManager : MonoBehaviour {
     public static PlayerManager instance;
     public SavePlayer Default;
     public SavePlayer Jugador;
-    public int Nivel = 0;
+    public int IaPlaying;
+    
 
     void Awake()
     {
@@ -99,5 +100,57 @@ public class PlayerManager : MonoBehaviour {
             Jugador.IDCartasDisponibles.Add(NewID);
         }
         SavePlayer();
+    }
+    public void WinPlayer(int Puntos)
+    {
+        if (IaPlaying != 0)
+        {
+            foreach (var item in Jugador.Progresos)
+            {
+                if (item.ID == IaPlaying)
+                {
+                    item.Completo = true;
+                    item.Victorias++;
+                } 
+            }
+        }
+        IaPlaying = 0;
+        AddNivel(Puntos);
+    }
+    public void LosePlayer(int Puntos)
+    {
+        if (IaPlaying != 0)
+        {
+            foreach (var item in Jugador.Progresos)
+            {
+                if (item.ID == IaPlaying)
+                {
+                    item.Derrotas++;
+                }
+            }
+        }
+        IaPlaying = 0;
+        AddNivel(Puntos*-1);
+    }
+
+    public void NodoCerca(int ID)
+    {
+        foreach (var item in Jugador.Progresos)
+        {
+            if (item.ID == ID)
+            {
+                item.Cerca = true;
+            }
+        }
+        SavePlayer();
+    }
+    public void AddNivel(int Cantidad)
+    {
+        Jugador.Nivel += Cantidad;
+        if (Jugador.Nivel > 200)
+            Jugador.Nivel = 200;
+        if (Jugador.Nivel < 0)
+            Jugador.Nivel = 0;
+            SavePlayer();
     }
 }
