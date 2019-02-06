@@ -153,6 +153,11 @@ namespace DigiCartas
         public Dificultad DificultadMazo;
     }
     [Serializable]
+    public class IADecks
+    {
+       public List<DecksIA> Decks;
+    }
+    [Serializable]
     public class ListEfectos
     {
         public List<int> cards;
@@ -208,4 +213,7 @@ namespace DigiCartas
         public Phases Limite;
         public Player Jugador;
     }
+  
+
+
 }

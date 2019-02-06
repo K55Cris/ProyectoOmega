@@ -116,15 +116,18 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void LostDigimon(UnityAction<string> Loaction)
     {
-        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
-              WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().GetComponent<DarkArea>().setAction(Loaction);
+
         if (Evoluciones.Count == 0)
         {
             if (Loaction != null)
             {
                 Loaction("Solo esta el Roquin");
+                return;
             }
-        }  
+        }
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
+        WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().GetComponent<DarkArea>().setAction(Loaction);
+
         foreach (var item in Evoluciones)
         {
             // mandamos a la dark area las evoluciones del jugador perdedor
@@ -139,9 +142,9 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void DeEvolution(UnityAction<string> Loaction, string Condicion)
     {
-        MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>().setAction(Loaction);
-        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)
-            ).GetComponent<DarkArea>().setAction(Loaction);
+        MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
+        WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().setAction(Loaction);
+
         if (Evoluciones.Count == 0)
         {
             if (Loaction != null)

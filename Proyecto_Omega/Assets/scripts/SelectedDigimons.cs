@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DigiCartas;
+using TMPro;
 public class SelectedDigimons : MonoBehaviour {
 
 
-
+    public TextMeshProUGUI TITLE;
     public Image FondoNegro;
     public Transform Content;
     public GameObject DigiCarta;
@@ -19,11 +20,12 @@ public class SelectedDigimons : MonoBehaviour {
         Terminar();
     }
 
-    public void Activar(UnityAction<string> fase, List<CartaDigimon> cartas)
+    public void Activar(UnityAction<string> fase, List<CartaDigimon> cartas, string Titulo)
     {
         vaciar();
         FondoNegro.enabled = true;
         ScrollPanel.SetActive(true);
+        TITLE.text = Titulo;
         foreach (var item in cartas)
         {
             GameObject Carta = Instantiate(DigiCarta, Content);

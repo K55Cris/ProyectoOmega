@@ -1,16 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DigiCartas;
 using UnityEngine.Events;
+using TMPro;
 public class Player : MonoBehaviour {
 
     public string Nombre;
     public Mano _Mano;
     public Mazo Deck;
+    public Image Photo;
+    public TextMeshProUGUI NombreCuenta;
     public List<int> IDCartasMazo;
     public int PuntosDeVida;
     public List<ListaCartasMove> LoActions= new List<ListaCartasMove>();
+
+
 
     public void moveCard(Transform Padre, CartaDigimon Card, UnityAction<CartaDigimon> Action)
     {

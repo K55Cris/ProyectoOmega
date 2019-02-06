@@ -103,9 +103,11 @@ public class DataManager : MonoBehaviour {
             _Canvas.alpha-=0.08f;
         }
         _Canvas.blocksRaycasts = false;
+        _Canvas.gameObject.SetActive(false);
     }
     public IEnumerator InFadeCanvas(CanvasGroup _Canvas)
     {
+        _Canvas.gameObject.SetActive(true);
         _Canvas.blocksRaycasts = true;
         while (_Canvas.alpha < 1)
         {

@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using DigiCartas;
 
-public class DarkArea : MonoBehaviour {
+public class DarkArea : MonoBehaviour
+{
 
     public List<CartaDigimon> DigiCartas = new List<CartaDigimon>();
     public List<CartaDigimon> _Cartas = new List<CartaDigimon>();
     public bool moviendo = false;
     public UnityAction<string> TermineDescarte;
+    public ViewCards VistaDarkArea;
 
     public void setAction(UnityAction<string> funcion)
     {
@@ -31,10 +33,10 @@ public class DarkArea : MonoBehaviour {
     }
 
 
-    public void AddListDescarte(CartaDigimon Dcarta, float segundos,bool SinAction=false)
+    public void AddListDescarte(CartaDigimon Dcarta, float segundos, bool SinAction = false)
     {
-        if(Dcarta)
-        DigiCartas.Add(Dcarta);
+        if (Dcarta)
+            DigiCartas.Add(Dcarta);
 
         if (SinAction)
         {
@@ -82,15 +84,15 @@ public class DarkArea : MonoBehaviour {
                 TermineDescarte = null;
             }
         }
-      
+
     }
 
     public void InterAutoAjuste(CartaDigimon carta)
     {
-        Vector3 Pos = new Vector3(-transform.childCount*.007F, 0, -((transform.childCount) * 0.06f));
-        carta.transform.localRotation = new Quaternion(0, 0, 0,0);
+        Vector3 Pos = new Vector3(-transform.childCount * .007F, 0, -((transform.childCount) * 0.06f));
+        carta.transform.localRotation = new Quaternion(0, 0, 0, 0);
         carta.transform.localPosition = Pos;
-        carta.transform.localScale= new Vector3(1, 1, 0.15f);
+        carta.transform.localScale = new Vector3(1, 1, 0.15f);
         carta.Front.GetComponent<MovimientoCartas>().disebleCard();
         carta.Front.GetComponent<MovimientoCartas>().preparationPhase();
     }
@@ -101,5 +103,8 @@ public class DarkArea : MonoBehaviour {
         PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform, InterAutoAjuste);
         yield return new WaitForEndOfFrame();
     }
-
+    private void OnMouseDown()
+    {
+        VistaDarkArea.Activar(_Cartas);
+    }
 }

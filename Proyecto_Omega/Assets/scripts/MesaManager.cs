@@ -213,7 +213,7 @@ public class MesaManager : MonoBehaviour {
                     return null;
                 }
             case Slots.DarkArea:
-                if (Campo1.DarkArea== Slot)
+                if (Campo1.DarkArea == Slot)
                 {
                     return jugador1;
                 }
@@ -244,6 +244,19 @@ public class MesaManager : MonoBehaviour {
                     return jugador1;
                 }
                 else if (Campo2.NetOcean == Slot)
+                {
+                    return jugador2;
+                }
+                else
+                {
+                    return null;
+                }
+            case Slots.OptionSlot1:
+                if (Campo1.OptionSlot1 == Slot || Campo1.OptionSlot2 == Slot || Campo1.OptionSlot3==Slot)
+                {
+                    return jugador1;
+                }
+                else if (Campo2.OptionSlot1 == Slot || Campo2.OptionSlot2 == Slot || Campo2.OptionSlot3 == Slot)
                 {
                     return jugador2;
                 }

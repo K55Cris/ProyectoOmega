@@ -31,7 +31,7 @@ public class OptionSlot : Slot
     }
     private void OnMouseDown()
     {
-        if (!Vacio && StaticRules.instance.WhosPlayer==PartidaManager.instance.Player1)
+        if (!Vacio && PartidaManager.instance.Player1 == MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.OptionSlot1))
         {
             VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
 
@@ -64,7 +64,6 @@ public class OptionSlot : Slot
     {
         if (OpCarta)
         {
-           
 
             CanvasAction.SetActive(false);
             StaticRules.ActivateOptionCard(OpCarta);

@@ -616,10 +616,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -630,6 +626,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &74161595
 GameObject:
@@ -1122,10 +1119,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -1136,6 +1129,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &99572073
 GameObject:
@@ -1315,10 +1309,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -1329,6 +1319,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &99808955
 GameObject:
@@ -2224,10 +2215,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -2238,6 +2225,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &206222054
 GameObject:
@@ -2417,10 +2405,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -2431,6 +2415,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &206430147
 GameObject:
@@ -3216,10 +3201,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -3230,6 +3211,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &287360316
 GameObject:
@@ -4409,10 +4391,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -4423,6 +4401,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &371081422
 GameObject:
@@ -5141,10 +5120,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -5155,6 +5130,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &437809151
 GameObject:
@@ -5601,10 +5577,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -5615,6 +5587,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &464931915
 GameObject:
@@ -5960,10 +5933,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -5974,6 +5943,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &484406746
 GameObject:
@@ -6744,10 +6714,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -6758,6 +6724,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &513661172
 GameObject:
@@ -7416,10 +7383,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -7430,6 +7393,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &581348948
 GameObject:
@@ -7965,10 +7929,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -7979,6 +7939,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &648986833
 GameObject:
@@ -8313,10 +8274,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -8327,6 +8284,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &706199052
 GameObject:
@@ -11762,10 +11720,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -11776,6 +11730,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &994791283
 GameObject:
@@ -12200,10 +12155,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -12214,6 +12165,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1025079184
 GameObject:
@@ -13239,10 +13191,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -13253,6 +13201,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1120407658
 GameObject:
@@ -14339,10 +14288,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -14353,6 +14298,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!114 &1211288473
 MonoBehaviour:
@@ -14734,10 +14680,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -14748,6 +14690,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1239212822
 GameObject:
@@ -14927,10 +14870,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -14941,6 +14880,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1264054799
 GameObject:
@@ -15107,10 +15047,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -15121,6 +15057,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!114 &1298496934
 MonoBehaviour:
@@ -16830,10 +16767,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -16844,6 +16777,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1512392995
 GameObject:
@@ -17728,7 +17662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2.5, y: -0.00003066752}
+  m_AnchoredPosition: {x: -2.5, y: -0.0000040386294}
   m_SizeDelta: {x: 1137, y: 77}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1555915584
@@ -19096,10 +19030,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -19110,6 +19040,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1681811402
 GameObject:
@@ -19881,10 +19812,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -19895,6 +19822,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1720997656
 GameObject:
@@ -20074,10 +20002,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -20088,6 +20012,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1723621251
 GameObject:
@@ -20560,10 +20485,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -20574,6 +20495,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1767408244
 GameObject:
@@ -21100,10 +21022,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -21114,6 +21032,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1869182458
 GameObject:
@@ -21741,10 +21660,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -21755,6 +21670,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &1956621806
 GameObject:
@@ -22291,10 +22207,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -22305,6 +22217,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &2028384448
 GameObject:
@@ -22798,7 +22711,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 942683504}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23017,10 +22930,6 @@ MonoBehaviour:
     PerdidaVidaPerfect: 0
     PerdidaVidaUltimate: 0
     Habilidad: 
-    keyREvolucion: 
-    keyREvolucion2: 
-    keyREvolucion3: 
-    keyREvolucion4: 
     codigo: 
     Capasidad: 0
     ListaActivacion: []
@@ -23031,6 +22940,7 @@ MonoBehaviour:
     Limite: 
     IsSupport: 0
     IsActivateHand: 0
+    ListaEfectosMostrar: []
   lleno: 0
 --- !u!1 &2081937734
 GameObject:

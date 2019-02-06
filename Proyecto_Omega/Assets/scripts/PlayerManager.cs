@@ -8,7 +8,8 @@ public class PlayerManager : MonoBehaviour {
     public SavePlayer Default;
     public SavePlayer Jugador;
     public int IaPlaying;
-    
+    public IADecks DeckIA;
+    public bool bienvenida = true;
 
     void Awake()
     {
@@ -22,11 +23,12 @@ public class PlayerManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
+        GetData();
     }
     public void Start()
     {
         // conseguimos los datos
-        GetData();
+      
     }
 
     public void GetData()
@@ -37,12 +39,14 @@ public class PlayerManager : MonoBehaviour {
         {
             Jugador = JsonUtility.FromJson<SavePlayer>(cartas);
             // Datos cargados
+            bienvenida = false;
         }
         else
         {
             Jugador = Default;
             // menu de nuevo jugador 
-        }
+            bienvenida = true;
+}
     }
     public List<int> GetDeck()
     {
@@ -105,14 +109,8 @@ public class PlayerManager : MonoBehaviour {
     {
         if (IaPlaying != 0)
         {
-            foreach (var item in Jugador.Progresos)
-            {
-                if (item.ID == IaPlaying)
-                {
-                    item.Completo = true;
-                    item.Victorias++;
-                } 
-            }
+            Jugador.Progresos.Find(x => x.ID == IaPlaying).Victorias++;
+            Jugador.Progresos.Find(x => x.ID == IaPlaying).Completo=true;
         }
         IaPlaying = 0;
         AddNivel(Puntos);
@@ -121,13 +119,7 @@ public class PlayerManager : MonoBehaviour {
     {
         if (IaPlaying != 0)
         {
-            foreach (var item in Jugador.Progresos)
-            {
-                if (item.ID == IaPlaying)
-                {
-                    item.Derrotas++;
-                }
-            }
+            Jugador.Progresos.Find(x => x.ID == IaPlaying).Derrotas++;
         }
         IaPlaying = 0;
         AddNivel(Puntos*-1);

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Default:
-    Nombre: K
+    Nombre: 
     IDCartasMazo: 070000000800000008000000080000003c0000003c0000003c0000003b0000003b0000003b00000019000000190000002100000021000000210000001c0000001c0000001c00000031000000320000003300000034000000360000003700000038000000390000003a000000200000001900000020000000
     IDCartasDisponibles:
     - ID: 7
@@ -94,24 +94,89 @@ MonoBehaviour:
     ALLCards: 0
     Progresos:
     - ID: 1
-      Completo: 1
+      Completo: 0
       Cerca: 1
       Victorias: 1
       Derrotas: 0
     - ID: 2
       Completo: 0
-      Cerca: 1
+      Cerca: 0
       Victorias: 0
       Derrotas: 0
     - ID: 3
       Completo: 0
-      Cerca: 1
+      Cerca: 0
       Victorias: 0
       Derrotas: 0
+    - ID: 4
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 5
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 6
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 7
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 8
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 9
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 10
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 11
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 12
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 13
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 14
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    - ID: 15
+      Completo: 0
+      Cerca: 0
+      Victorias: 0
+      Derrotas: 0
+    Nivel: 0
   Jugador:
-    Nombre: K
+    Nombre: 
     IDCartasMazo: 
     IDCartasDisponibles: []
     ALLCards: 0
     Progresos: []
-  Nivel: 0
+    Nivel: 0
+  IaPlaying: 0
+  DeckIA:
+    Decks: []
+  bienvenida: 1

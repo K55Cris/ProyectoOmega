@@ -45,6 +45,9 @@ public class LevelLoader : MonoBehaviour {
     {
 
         // Abrimos pantalla de carga 
+        Fondo.gameObject.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         DataManager.instance.FadeCanvas(Fondo, true);
 
         yield return new WaitForSeconds(0.5f);
@@ -61,13 +64,13 @@ public class LevelLoader : MonoBehaviour {
                 Carga.text = "100%";
                 ps.Pause();
                 async.allowSceneActivation = true;
+                yield return new WaitForSeconds(0.5f);
+                Guilmon.gameObject.SetActive(false);
+                DataManager.instance.FadeCanvas(Fondo, false);
+                yield return new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(1f);
-            DataManager.instance.FadeCanvas(Fondo, false);
-            Guilmon.gameObject.SetActive(false);
-
         }
-      
+        yield return new WaitForEndOfFrame();
 
     }
 

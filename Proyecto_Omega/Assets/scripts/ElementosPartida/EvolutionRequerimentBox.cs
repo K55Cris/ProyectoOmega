@@ -10,8 +10,8 @@ public class EvolutionRequerimentBox : Slot
     public GameObject Canvas;
     public Transform X, O;
     public List<string> ListaRequerimientos;
-    public List<Transform> ListaRequerimientosAdicionales = new List<Transform>();
-    public List<Transform> ListaXO = new List<Transform>();
+    public List<CartaDigimon> ListaRequerimientosAdicionales = new List<CartaDigimon>();
+    public List<CartaDigimon> ListaXO = new List<CartaDigimon>();
     public bool Colocar = false;
 
     public void NowPhase()
@@ -38,9 +38,9 @@ public class EvolutionRequerimentBox : Slot
     }
     public void EndEvolution()
     {
-        ListaRequerimientos = new List<string>();
-        ListaXO = new List<Transform>();
-        ListaRequerimientosAdicionales = new List<Transform>();
+        ListaRequerimientos.Clear();
+        ListaXO.Clear();
+        ListaRequerimientosAdicionales.Clear();
     }
 
 
@@ -178,7 +178,7 @@ public class EvolutionRequerimentBox : Slot
                 if (item.Contains(ShapeName))
                 {
                     PartidaManager.instance.SetMoveCard(this.transform, RCard.transform, StaticRules.Ajustar);
-                    ListaRequerimientosAdicionales.Add(RCard.transform);
+                    ListaRequerimientosAdicionales.Add(RCard);
                     StartCoroutine(QuitarDeListaRequerimientos(item));
                     SoundManager.instance.PlaySfx(Sound.SetCard);
 
@@ -190,7 +190,7 @@ public class EvolutionRequerimentBox : Slot
                 if (item == name.ToUpper())
                 {
                     PartidaManager.instance.SetMoveCard(this.transform, RCard.transform, StaticRules.Ajustar);
-                    ListaRequerimientosAdicionales.Add(RCard.transform);
+                    ListaRequerimientosAdicionales.Add(RCard);
                     StartCoroutine(QuitarDeListaRequerimientos(item));
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                 }
@@ -216,7 +216,7 @@ public class EvolutionRequerimentBox : Slot
                 if (!saltar)
                 {
                     PartidaManager.instance.SetMoveCard(O, Carta, StaticRules.Ajustar);
-                    ListaRequerimientosAdicionales.Add(Carta);
+                    ListaRequerimientosAdicionales.Add(Carta.GetComponent<CartaDigimon>());
                     StartCoroutine(QuitarDeListaRequerimientos(item));
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                     break;
@@ -278,7 +278,7 @@ public class EvolutionRequerimentBox : Slot
                 }
                 if (_carta)
                 {
-                    ListaXO.Add(_carta.transform);
+                    ListaXO.Add(_carta);
                     _carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                     PartidaManager.instance.SetMoveCard(Slot, _carta.transform, AjusteIntermedio);
@@ -289,7 +289,7 @@ public class EvolutionRequerimentBox : Slot
             {
                 CartaDigimon _carta = new CartaDigimon();
                 _carta = DCard;
-                ListaXO.Add(_carta.transform);
+                ListaXO.Add(_carta);
                 _carta.Front.GetComponent<MovimientoCartas>().Mover = false;
                 SoundManager.instance.PlaySfx(Sound.SetCard);
                 PartidaManager.instance.SetMoveCard(Slot, DCard.transform, AjusteIntermedio);

@@ -22,6 +22,7 @@ public class PartidaManager : MonoBehaviour {
     public Player WinTurno;
     public int EfectosCadena = 0;
     public bool CambioFase = true;
+    public Sprite ListoOff, ListoON;
     private void Awake()
     {
         instance = this;
@@ -59,6 +60,7 @@ public class PartidaManager : MonoBehaviour {
     {
  
         Player1.Nombre = PlayerManager.instance.Jugador.Nombre;
+        Player1.NombreCuenta.text= PlayerManager.instance.Jugador.Nombre;
         Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
        
         StaticRules.SelectDigimonChild();
@@ -190,6 +192,10 @@ public class PartidaManager : MonoBehaviour {
     public void CambioDePhase(bool swi)
     {
         Listo.interactable = swi;
+        if (swi)
+            Listo.GetComponent<Image>().sprite = ListoON;
+        else
+            Listo.GetComponent<Image>().sprite = ListoOff;
         CambioFase = false;
         TiempoEsperaCambioPhase();
     }

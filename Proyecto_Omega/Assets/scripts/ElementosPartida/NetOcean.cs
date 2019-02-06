@@ -96,7 +96,7 @@ public class NetOcean : MonoBehaviour
     {
         Debug.Log(RESULT);
         List<CartaDigimon> ListDCardsDarkArea = MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, _jugador).GetComponent<DarkArea>()._Cartas;
-       StartCoroutine(Iteracion(ListDCardsDarkArea));
+        StartCoroutine(Iteracion(ListDCardsDarkArea));
     }
 
     public void addNetocean(CartaDigimon Dcard)
@@ -105,6 +105,7 @@ public class NetOcean : MonoBehaviour
         if (!Cartas.Contains(Dcard))
         {
             Cartas.Add(Dcard);
+            Dcard.mostrar = false;
             StartCoroutine(WhaitFrame(Dcard));
         }
 

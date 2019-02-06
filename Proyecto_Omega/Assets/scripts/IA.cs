@@ -82,9 +82,10 @@ public class IA : MonoBehaviour {
 
     private void AppearanceRequirements()
     {
-        StaticRules.instance.NowPhase = DigiCartas.Phases.EvolutionPhase2;
         PanelClosePlayer.SetActive(false);
-        StaticRules.SiguienteFase();
+        StaticRules.instance.ListEvos = new List<DigiEvoluciones>();
+        StaticRules.SecondEvolutionPhase();
+        FinishTurnoIA();
     }
 
     public bool CanSetCardOptionBattlet()
@@ -308,8 +309,9 @@ public class IA : MonoBehaviour {
     }
     public void ChoiseDeck()
     {
-        List<DecksIA> DecksWhitDificult=new List<DecksIA>();
-        foreach (var item in Decks)
+        List<DecksIA> DecksWhitDificult = new List<DecksIA>();
+
+        foreach (var item in PlayerManager.instance.DeckIA.Decks)
         {
             if (item.DificultadMazo == IALevel)
                 DecksWhitDificult.Add(item);

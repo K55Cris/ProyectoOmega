@@ -44,7 +44,10 @@ public class MapController : MonoBehaviour {
     }
     public void Jugar()
     {
-        PlayerManager.instance.IaPlaying = ID;
         LevelLoader.instance.CargarEscena("VsIA");
+    }
+    public void BACK()
+    {
+        LevelLoader.instance.CargarEscena("Main Menu");
     }
 }
