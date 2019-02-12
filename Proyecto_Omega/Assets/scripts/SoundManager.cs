@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Sound
 {
     Evolucion, SetCard, Evolucion2 ,AtaqueA,AtaqueB,AtaqueC,Tornado , MainMenu, Duelo, Recompensa ,
-    Enter, Out,Barajear
+    Enter, Out,Barajear, tutorial
 }
 public class SoundManager : MonoBehaviour {
 
@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour {
     public AudioClip MainMenu;
     public AudioClip Recompensas;
     public AudioClip Duelo;
+    public AudioClip Tutorial;
 
     [Header("Colocar Cartas")]
     public AudioClip SetCard1;
@@ -46,6 +47,10 @@ public class SoundManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+    public void Start()
+    {
+        GetSettings();
     }
     public void PlaySfx(Sound audioName, bool playOneShot = true, bool loops = false, float startTime = 0f)
     {
@@ -117,6 +122,9 @@ public class SoundManager : MonoBehaviour {
             case Sound.Duelo:
                 audioClip = Duelo;
                 break;
+            case Sound.tutorial:
+                audioClip = Tutorial;
+                break;
             case Sound.SetCard:
                 int ran = Random.Range(1, 4);
                 switch (ran)
@@ -158,4 +166,31 @@ public class SoundManager : MonoBehaviour {
         musicSource.volume = newVol;
     }
 
+    public void SaveSettings() 
+    {
+        PlayerPrefs.SetFloat("SaveMusic", musicSource.volume);
+        PlayerPrefs.SetFloat("EfectMusic", sfxSource.volume);
+    }
+    public void GetSettings()
+    {
+        if (PlayerPrefs.HasKey("SaveMusic"))
+        {
+            musicSource.volume = PlayerPrefs.GetFloat("SaveMusic");
+        }
+        if (PlayerPrefs.HasKey("EfectMusic"))
+        {
+            sfxSource.volume = PlayerPrefs.GetFloat("EfectMusic");
+        }
+    }
+    public float GetSliderVolume(int slider)
+    {
+        if (slider==0)
+        {
+            return musicSource.volume; 
+        }
+        else
+        {
+            return sfxSource.volume;
+        }
+    }
 }

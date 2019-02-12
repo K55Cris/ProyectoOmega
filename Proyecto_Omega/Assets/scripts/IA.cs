@@ -16,10 +16,10 @@ public class IA : MonoBehaviour {
     public GameObject PanelClosePlayer;
     public void Start()
     {
-        IAPlayer = PartidaManager.instance.Player2;
-        ManoEspacio = PartidaManager.instance.ManoPlayer2;
-        CargarDificultad();
-        ChoiseDeck();
+            IAPlayer = PartidaManager.instance.Player2;
+            ManoEspacio = PartidaManager.instance.ManoPlayer2;
+            CargarDificultad();
+            ChoiseDeck();
     }
     void Awake()
     {

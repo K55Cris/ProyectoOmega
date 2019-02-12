@@ -11,8 +11,10 @@ public class MainMenu : MonoBehaviour {
     public TextMeshProUGUI NombreCuenta;
     public Button Aceptar;
     public static MainMenu instance;
-    public GameObject PanelNewUser, Opciones, Tutorial;
+    public GameObject PanelNewUser, Opciones, Tutorial, PanelCloseOpcion;
     public RectTransform Contendor;
+    public Dropdown Dropdown; 
+
     void Awake()
     {
         if (instance == null)
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour {
     private void Start()
     {
         LoadName();
+   
     }
 
     public void Quit()
@@ -51,12 +54,14 @@ public class MainMenu : MonoBehaviour {
         LevelLoader.instance.CargarEscena("DeckEditor");
     }
 
-    public void test()
+    public void OpenTutorial()
     {
         SoundManager.instance.PlaySfx(Sound.Enter);
+        LevelLoader.instance.CargarEscena("Tutorial");
     }
     public void OpenOpciones()
     {
+        
         SoundManager.instance.PlaySfx(Sound.Enter);
         StartCoroutine(MovePanel(Contendor, 1));
     }
@@ -64,6 +69,7 @@ public class MainMenu : MonoBehaviour {
     {
         SoundManager.instance.PlaySfx(Sound.Enter);
         StartCoroutine(MovePanel(Contendor, -1));
+        SoundManager.instance.SaveSettings();
     }
 
     public void ChooseName()
@@ -121,6 +127,7 @@ public class MainMenu : MonoBehaviour {
 
                 Panel.transform.localPosition = NewPos;
             }
+            PanelCloseOpcion.SetActive(true);
         }
         else
         {
@@ -152,6 +159,13 @@ public class MainMenu : MonoBehaviour {
 
                 Panel.transform.localPosition = NewPos;
             }
+            PanelCloseOpcion.SetActive(false);
+
         }
+
+    }
+    public void ChangeGraficos()
+    {
+        QualitySettings.SetQualityLevel(Dropdown.value);
     }
 }

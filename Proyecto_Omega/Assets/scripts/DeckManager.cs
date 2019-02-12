@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class DeckManager : MonoBehaviour {
 
     public static DeckManager instance;
-   
+    public Image PerfilPhoto;
     public List<DigiCarta> Deck;
     public List<DigiCarta> TemporalDeckEdition;
     public List<int> DeckInt;
@@ -29,6 +29,7 @@ public class DeckManager : MonoBehaviour {
     public EditorCardBase CartaSeleccionada;
     public DeckItem[] SlotsDeck;
     public GameObject PanelAlertaBackDeck;
+
     private void Awake()
     {
         instance = this;
@@ -38,6 +39,12 @@ public class DeckManager : MonoBehaviour {
         // Cargar datos del Player
         Biblioteca.SetActive(false);
         ViewDeck();
+
+        LoadPhoto();
+    }
+    public void LoadPhoto()
+    {
+        PerfilPhoto.sprite = PlayerManager.instance.ImagePhoto;
     }
 
     public void BorarDatos()
@@ -412,10 +419,11 @@ public class DeckManager : MonoBehaviour {
     }
 	
 
+    public void ChangePhoto(int Photo)
+    {
+        PlayerManager.instance.ChangePhoto(Photo);
+    }
 
-
-
-    
 
     public void puntosPaginas(Image [] puntos, int nowPage)
     {

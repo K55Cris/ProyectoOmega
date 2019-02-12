@@ -28,9 +28,6 @@ public class WhoIsPlayer1 : MonoBehaviour {
         Evento = WhoIs;
         Player1 = player1;
         Player2 = player2;
-
-
-        
     }
 
 

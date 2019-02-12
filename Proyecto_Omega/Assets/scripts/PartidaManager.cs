@@ -62,8 +62,20 @@ public class PartidaManager : MonoBehaviour {
         Player1.Nombre = PlayerManager.instance.Jugador.Nombre;
         Player1.NombreCuenta.text= PlayerManager.instance.Jugador.Nombre;
         Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
+        Player1.Photo.sprite = PlayerManager.instance.ImagePhoto;
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!= "Tutorial")
+        {
+
+            // Musica de Duelo
+            SoundManager.instance.PlayMusic(Sound.Duelo);
+
+            StaticRules.SelectDigimonChild();
+        }
+        else
+        {
+           // tutorial
+        }
        
-        StaticRules.SelectDigimonChild();
     }
 
 

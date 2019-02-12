@@ -64,5 +64,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2ff0c93a7a7412044b15c8d4798445f3, type: 3}
   - {fileID: 21300000, guid: 3dabe010d67e1ab4f98853a10d891731, type: 3}
   arrayImage: []
-  arraySprites8: []
+  PerfilPhotos:
+  - {fileID: 21300000, guid: d6898ffbc3d96934090d0972be34f7ca, type: 3}
+  - {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
+  - {fileID: 21300000, guid: 74862f8739e1e7d41abc873c74c51128, type: 3}
   bandera: 1

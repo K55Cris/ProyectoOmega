@@ -78,8 +78,6 @@ public class StaticRules : MonoBehaviour
     {
         FailSafeInstance();
 
-        // Musica de Duelo
-        SoundManager.instance.PlayMusic(Sound.Duelo);
 
         //Cargamos Mazos de Ambos Jugadores 
         PartidaManager.instance.CargarMazos(PartidaManager.instance.Player1.IDCartasMazo, MesaManager.instance.Campo1.NetOcean, PartidaManager.instance.Player1);
@@ -177,8 +175,16 @@ public class StaticRules : MonoBehaviour
         }
 
 
-        // Elegir Primer Jugador
-        WhoIsPlayer1.instance.Activar(PartidaManager.instance.Player1, PartidaManager.instance.Player2, StaticRules.instance.WhoFirstPlayer);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            // Elegir Primer Jugador
+            WhoIsPlayer1.instance.Activar(PartidaManager.instance.Player1, PartidaManager.instance.Player2, StaticRules.instance.WhoFirstPlayer);
+        }
+        else
+        {
+            // Espacio para nuevos dialogos
+            Tutorial.instance.Iniciar();
+        }
     }
 
 
@@ -231,7 +237,17 @@ public class StaticRules : MonoBehaviour
             CardsBlock2.jugador = PartidaManager.instance.Player2;
 
         CardsBlock2.Cartasbloqueadas = new List<CartaDigimon>();
-        SiguienteFase();
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            SiguienteFase();
+        }
+        else
+        {
+            Tutorial.instance.Iniciar();
+        }
+
+           
     }
 
     /// <summary>
@@ -702,6 +718,11 @@ public class StaticRules : MonoBehaviour
         if (addOrRemove)
         {
             loRule.CartasDescartadas.Add(Carta);
+
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                Tutorial.instance.Iniciar();
+            }
         }
         else
         {

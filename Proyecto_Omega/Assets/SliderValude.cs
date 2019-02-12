@@ -6,6 +6,7 @@ public class SliderValude : MonoBehaviour {
     public Image Handler;
     public List<Sprite> Digis;
     public Slider Barra;
+    public int Slider;
     // Use this for initialization
 
     public void Cambio()
@@ -27,4 +28,17 @@ public class SliderValude : MonoBehaviour {
             Handler.sprite = Digis[0];
         }
     }
+    public void ChangeMusic()
+    {
+        SoundManager.instance.musicSource.volume = Barra.value;
+    }
+    public void ChangeEfects()
+    {
+        SoundManager.instance.sfxSource.volume = Barra.value;
+    }
+    public void Open()
+    {
+        Barra.value = SoundManager.instance.GetSliderVolume(Slider);
+    }
+
 }

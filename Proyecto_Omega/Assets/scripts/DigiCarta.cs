@@ -124,9 +124,17 @@ namespace DigiCartas
         public bool ALLCards;
         public List<Progreso> Progresos;
         public int Nivel = 0;
+        public int Photo;
     }
 
     [Serializable]
+    public struct AudioSettings
+    {
+        public float Music;
+        public float efects;
+    }
+
+        [Serializable]
     public class Progreso
     {
         public int ID;
@@ -190,12 +198,35 @@ namespace DigiCartas
     {
         SinRequerimientosAll = 0, SinRequerimientos4 = 1
     };
-
+    public enum TypeTutorial
+    {
+        Dialogo= 0, Action = 1
+    };
     [Serializable]
     public class TurnEfect
     {
         public Efectos Efecto;
         public Player Jugador;
+    }
+    [Serializable]
+    public class ListaTutorialText
+    {
+        public List<TextosTutorial> ListaCompleta;
+        public List<GameObject> LPos;
+
+    }
+    [Serializable]
+    public class TextosTutorial
+    {
+        public List<TextosItem> Dialogos;
+        public string Subtitulo;
+    }
+
+    [Serializable]
+    public class TextosItem
+    {
+        public TypeTutorial Tipo;
+        public string Dialogo;
     }
 
     [Serializable]

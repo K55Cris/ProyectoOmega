@@ -15,7 +15,6 @@ public class ActivarCarta : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
     }
     // Use this for initialization
     public void Activar(CartaDigimon Carta)

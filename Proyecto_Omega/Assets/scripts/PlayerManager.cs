@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
     public int IaPlaying;
     public IADecks DeckIA;
     public bool bienvenida = true;
+    public Sprite ImagePhoto;
 
     void Awake()
     {
@@ -46,7 +47,9 @@ public class PlayerManager : MonoBehaviour {
             Jugador = Default;
             // menu de nuevo jugador 
             bienvenida = true;
-}
+        }
+        // Cargar Photo
+        ImagePhoto = DataManager.instance.PerfilPhotos[Jugador.Photo];
     }
     public List<int> GetDeck()
     {
@@ -144,5 +147,12 @@ public class PlayerManager : MonoBehaviour {
         if (Jugador.Nivel < 0)
             Jugador.Nivel = 0;
             SavePlayer();
+    }
+    public void ChangePhoto(int Idex)
+    {
+        Jugador.Photo = Idex;
+        ImagePhoto = DataManager.instance.PerfilPhotos[Jugador.Photo];
+        DeckManager.instance.LoadPhoto();
+        SavePlayer();
     }
 }

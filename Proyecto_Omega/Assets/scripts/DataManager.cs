@@ -15,6 +15,7 @@ public class DataManager : MonoBehaviour {
     private UnityAction<int> _Loaction;
     public List<Sprite> ImagesType;
     public Texture[] arrayImage;
+    public List<Sprite> PerfilPhotos;
 
     void Awake()
     {
@@ -96,7 +97,7 @@ public class DataManager : MonoBehaviour {
     }
     public IEnumerator _FadeCanvas(CanvasGroup _Canvas)
     {
-        _Canvas.blocksRaycasts = true;
+        _Canvas.blocksRaycasts = false;
         while (_Canvas.alpha>0)
         {
             yield return new WaitForSeconds(0.01f);
@@ -114,7 +115,7 @@ public class DataManager : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
             _Canvas.alpha += 0.08f;
         }
-        _Canvas.blocksRaycasts = false;
+        _Canvas.blocksRaycasts = true;
     }
 
     public void EndFrame(UnityAction<string> funcion, float segundos)
