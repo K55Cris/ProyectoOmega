@@ -210,7 +210,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         // Verificamos si hay Otro Digimon en el slot
         if (_DigiCarta)
         {
-            if (_DigiCarta.DatosDigimon.Nivel== "III")
+            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel== "III")
             {
                 if (!Cambiado)
                 {
@@ -227,10 +227,32 @@ public class DigimonBoxSlot : MonoBehaviour {
                             _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
                             DRoquin = Carta.GetComponent<CartaDigimon>();
                             SoundManager.instance.PlaySfx(Sound.SetCard);
+                            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+                            {
+                                Tutorial.instance.Iniciar();
+                            }
+                        }
+
+                        else
+                        {
+                            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste2);
+                            // Quitar Roquin Antiguo
+                            PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), DRoquin.transform, StaticRules.Ajustar);
+                            _DigiCarta = Carta.GetComponent<CartaDigimon>();
+                            Cambiado = true;
+                            _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
+                            DRoquin = Carta.GetComponent<CartaDigimon>();
+                            SoundManager.instance.PlaySfx(Sound.SetCard);
+
+                            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+                            {
+                                Tutorial.instance.Iniciar();
+                            }
                         }
                     }
                     else
                     {
+                        // jugador 2
                         PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste2);
                         // Quitar Roquin Antiguo
                         PartidaManager.instance.SetMoveCard(MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea), DRoquin.transform, StaticRules.Ajustar);

@@ -52,6 +52,7 @@ public class intro : MonoBehaviour {
     }
     public void CloseNewUser()
     {
+        PlayerManager.instance.bienvenida = false;
         MainMenu.instance.Opciones.SetActive(true);
         MainMenu.instance.Tutorial.SetActive(true);
     }

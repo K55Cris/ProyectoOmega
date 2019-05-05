@@ -68,8 +68,8 @@ public class PartidaManager : MonoBehaviour {
 
             // Musica de Duelo
             SoundManager.instance.PlayMusic(Sound.Duelo);
-
             StaticRules.SelectDigimonChild();
+
         }
         else
         {
@@ -161,7 +161,28 @@ public class PartidaManager : MonoBehaviour {
     }
     public void BotonListo()
     {
+        // Tutorial
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if (StaticRules.instance.NowPhase == Phases.DiscardPhase)
+            {
+                Tutorial.instance.CanvasListo.SetActive(false);
+                Tutorial.instance.Iniciar();
+                StaticRules.SiguienteFase();
+                return;
+            }
+            else
+            {
+                Tutorial.instance.Iniciar();
+                StaticRules.SiguienteFase();
+                return;
+            }
+        }
+
         StaticRules.SiguienteFase();
+
+       
     }
     public Transform GetHand()
     {

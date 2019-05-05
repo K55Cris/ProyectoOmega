@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: becc1dd693431d048ba50e07958aad96
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CharacterCenterTarget
+    100004: CharacterFaceCenterTarget
+    100006: chr087 1
+    100008: GRP_joint
+    100010: GRP_mesh
+    100012: HUDTarget
+    100014: J_ancon_l
+    100016: J_ancon_r
+    100018: J_arm_l
+    100020: J_arm_r
+    100022: J_center
+    100024: J_foot_l
+    100026: J_foot_r
+    100028: J_hair_1
+    100030: J_hair_2
+    100032: J_hair_3
+    100034: J_hand_l
+    100036: J_item_f01
+    100038: J_item_f01_1
+    100040: J_item_f01_2
+    100042: J_item_f08
+    100044: J_item_f08_1
+    100046: J_item_f08_2
+    100048: J_kata
+    100050: J_knee_l
+    100052: J_knee_r
+    100054: J_leg_l
+    100056: J_leg_r
+    100058: J_neck
+    100060: J_nuno01
+    100062: J_nuno02
+    100064: J_root
+    100066: J_spine
+    100068: J_toe_l
+    100070: J_toe_l_1
+    100072: J_toe_r
+    100074: J_toe_r_1
+    100076: j_wing1_l
+    100078: j_wing1_r
+    100080: j_wing2_l
+    100082: j_wing2_r
+    100084: j_wing3_l
+    100086: j_wing3_r
+    100088: j_wing4_l
+    100090: j_wing4_r
+    100092: j_wing5_l
+    100094: j_wing5_r
+    100096: j_wing6_l
+    100098: j_wing6_r
+    100100: j_wing7_l
+    100102: j_wing7_r
+    100104: j_wing8_l
+    100106: j_wing8_r
+    100108: j_wing9_l
+    100110: j_wing9_r
+    100112: J_wrist_l
+    100114: J_wrist_r
+    400000: //RootNode
+    400002: CharacterCenterTarget
+    400004: CharacterFaceCenterTarget
+    400006: chr087 1
+    400008: GRP_joint
+    400010: GRP_mesh
+    400012: HUDTarget
+    400014: J_ancon_l
+    400016: J_ancon_r
+    400018: J_arm_l
+    400020: J_arm_r
+    400022: J_center
+    400024: J_foot_l
+    400026: J_foot_r
+    400028: J_hair_1
+    400030: J_hair_2
+    400032: J_hair_3
+    400034: J_hand_l
+    400036: J_item_f01
+    400038: J_item_f01_1
+    400040: J_item_f01_2
+    400042: J_item_f08
+    400044: J_item_f08_1
+    400046: J_item_f08_2
+    400048: J_kata
+    400050: J_knee_l
+    400052: J_knee_r
+    400054: J_leg_l
+    400056: J_leg_r
+    400058: J_neck
+    400060: J_nuno01
+    400062: J_nuno02
+    400064: J_root
+    400066: J_spine
+    400068: J_toe_l
+    400070: J_toe_l_1
+    400072: J_toe_r
+    400074: J_toe_r_1
+    400076: j_wing1_l
+    400078: j_wing1_r
+    400080: j_wing2_l
+    400082: j_wing2_r
+    400084: j_wing3_l
+    400086: j_wing3_r
+    400088: j_wing4_l
+    400090: j_wing4_r
+    400092: j_wing5_l
+    400094: j_wing5_r
+    400096: j_wing6_l
+    400098: j_wing6_r
+    400100: j_wing7_l
+    400102: j_wing7_r
+    400104: j_wing8_l
+    400106: j_wing8_r
+    400108: j_wing9_l
+    400110: j_wing9_r
+    400112: J_wrist_l
+    400114: J_wrist_r
+    2100000: chr087a01
+    4300000: chr087
+    9500000: //RootNode
+    13700000: chr087 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

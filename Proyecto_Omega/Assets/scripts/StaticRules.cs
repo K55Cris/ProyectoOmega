@@ -218,9 +218,17 @@ public class StaticRules : MonoBehaviour
     {
         StaticRules loRule = FailSafeInstance();
         Debug.Log(jugador.name);
-        loRule.PlayerFirstAtack = jugador;
-        StaticRules.instance.WhosPlayer = jugador;
 
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            loRule.PlayerFirstAtack = PartidaManager.instance.Player1; ;
+            StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
+        }
+        else
+        {
+            loRule.PlayerFirstAtack = jugador;
+            StaticRules.instance.WhosPlayer = jugador;
+        }
         //cargar Manos player1
         PartidaManager.instance.cargarManos(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, MesaManager.instance.Campo1.NetOcean);
         //cargar Manos player 2
@@ -659,7 +667,17 @@ public class StaticRules : MonoBehaviour
         {
             PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer2, PartidaManager.instance.Player2, MesaManager.instance.Campo2.NetOcean);
         }
-        StaticRules.instance.InterTimePhase(2F);
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            StaticRules.instance.InterTimePhase(2F);
+        }
+        else
+        {
+            Tutorial.instance.TargetID = 26;
+            Tutorial.instance.Iniciar();
+        }
+
     }
 
     private static void StartDiscardPhase()
@@ -1802,7 +1820,14 @@ public class StaticRules : MonoBehaviour
     }
     public void BeforePointFase(string result)
     {
-        StaticRules.instance.InterTimePhase(1);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            StaticRules.instance.InterTimePhase(1);
+        }
+        else
+        {
+            Tutorial.instance.Iniciar();
+        }
     }
 
     public static int PerdidaPuntos(CartaDigimon DCarta, string nivel)

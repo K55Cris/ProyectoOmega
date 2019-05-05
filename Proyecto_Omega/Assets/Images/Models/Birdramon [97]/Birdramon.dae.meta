@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 97a993fb7fa268842a14661f3655bfab
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CharacterCenterTarget
+    100004: CharacterFaceCenterTarget
+    100006: chr308 1
+    100008: GRP_joint
+    100010: GRP_mesh
+    100012: HUDTarget
+    100014: J_ago
+    100016: J_body
+    100018: J_center
+    100020: J_foot_L
+    100022: J_foot_R
+    100024: J_head
+    100026: J_kata_L
+    100028: J_kata_R
+    100030: J_knee_L
+    100032: J_knee_R
+    100034: J_kubiA
+    100036: J_kubiB
+    100038: J_legA_L
+    100040: J_legA_R
+    100042: J_legB_L
+    100044: J_legB_R
+    100046: J_root
+    100048: J_tailA
+    100050: J_tailB
+    100052: J_tumasaki_L
+    100054: J_tumasaki_R
+    100056: J_tunoA_L
+    100058: J_tunoA_R
+    100060: J_tunoB_L
+    100062: J_tunoB_R
+    100064: J_ude_L
+    100066: J_ude_R
+    100068: J_wingA_L
+    100070: J_wingA_R
+    100072: J_wingB_L
+    100074: J_wingB_R
+    100076: J_wingC_L
+    100078: J_wingC_R
+    100080: J_wingD_L
+    100082: J_wingD_R
+    100084: loc_020
+    100086: loc_021
+    100088: loc_022
+    100090: loc_025
+    400000: //RootNode
+    400002: CharacterCenterTarget
+    400004: CharacterFaceCenterTarget
+    400006: chr308 1
+    400008: GRP_joint
+    400010: GRP_mesh
+    400012: HUDTarget
+    400014: J_ago
+    400016: J_body
+    400018: J_center
+    400020: J_foot_L
+    400022: J_foot_R
+    400024: J_head
+    400026: J_kata_L
+    400028: J_kata_R
+    400030: J_knee_L
+    400032: J_knee_R
+    400034: J_kubiA
+    400036: J_kubiB
+    400038: J_legA_L
+    400040: J_legA_R
+    400042: J_legB_L
+    400044: J_legB_R
+    400046: J_root
+    400048: J_tailA
+    400050: J_tailB
+    400052: J_tumasaki_L
+    400054: J_tumasaki_R
+    400056: J_tunoA_L
+    400058: J_tunoA_R
+    400060: J_tunoB_L
+    400062: J_tunoB_R
+    400064: J_ude_L
+    400066: J_ude_R
+    400068: J_wingA_L
+    400070: J_wingA_R
+    400072: J_wingB_L
+    400074: J_wingB_R
+    400076: J_wingC_L
+    400078: J_wingC_R
+    400080: J_wingD_L
+    400082: J_wingD_R
+    400084: loc_020
+    400086: loc_021
+    400088: loc_022
+    400090: loc_025
+    2100000: chr308a01
+    4300000: chr308
+    9500000: //RootNode
+    13700000: chr308 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 3
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,6 +16,7 @@ public class FrontDigimon : MonoBehaviour {
     public void Start()
     {
         QuitarDigimon();
+
     }
     public void RevelarDigimon(CartaDigimon Dcard, string ataque)
     {

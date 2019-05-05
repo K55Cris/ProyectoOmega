@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: 5212ef3dd8fa7a244abac9bc8bbbbc09
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: CharacterCenterTarget
+    100002: CharacterFaceCenterTarget
+    100004: chr404 1
+    100006: GRP_joint
+    100008: GRP_mesh
+    100010: HUDTarget
+    100012: J_ago
+    100014: J_atama
+    100016: J_center
+    100018: J_end6
+    100020: J_hara
+    100022: J_hiji_L
+    100024: J_hiji_R
+    100026: J_hiza_L
+    100028: J_hiza_R
+    100030: J_kakato_L
+    100032: J_kakato_R
+    100034: J_kubi1
+    100036: J_kubi2
+    100038: J_momo_L
+    100040: J_momo_R
+    100042: J_mune
+    100044: J_rocket
+    100046: J_root
+    100048: J_shippo01
+    100050: J_shippo02
+    100052: J_shippo03
+    100054: J_shippo04
+    100056: J_te_L
+    100058: J_te_R
+    100060: J_tsuno1_L
+    100062: J_tsuno1_R
+    100064: J_tsuno2_L
+    100066: J_tsuno2_R
+    100068: J_tsuno3_L
+    100070: J_tsuno3_R
+    100072: J_tsuno4_L
+    100074: J_tsuno4_R
+    100076: J_tsuno5_L
+    100078: J_tsuno5_R
+    100080: J_tsuno6_L
+    100082: J_tsuno6_R
+    100084: J_tuma1_L
+    100086: J_tuma1_R
+    100088: J_tuma2_L
+    100090: J_tuma2_R
+    100092: J_ude_L
+    100094: J_ude_R
+    100096: J_yubi1_L
+    100098: J_yubi1_R
+    100100: J_yubi2_L
+    100102: J_yubi2_R
+    100104: //RootNode
+    400000: CharacterCenterTarget
+    400002: CharacterFaceCenterTarget
+    400004: chr404 1
+    400006: GRP_joint
+    400008: GRP_mesh
+    400010: HUDTarget
+    400012: J_ago
+    400014: J_atama
+    400016: J_center
+    400018: J_end6
+    400020: J_hara
+    400022: J_hiji_L
+    400024: J_hiji_R
+    400026: J_hiza_L
+    400028: J_hiza_R
+    400030: J_kakato_L
+    400032: J_kakato_R
+    400034: J_kubi1
+    400036: J_kubi2
+    400038: J_momo_L
+    400040: J_momo_R
+    400042: J_mune
+    400044: J_rocket
+    400046: J_root
+    400048: J_shippo01
+    400050: J_shippo02
+    400052: J_shippo03
+    400054: J_shippo04
+    400056: J_te_L
+    400058: J_te_R
+    400060: J_tsuno1_L
+    400062: J_tsuno1_R
+    400064: J_tsuno2_L
+    400066: J_tsuno2_R
+    400068: J_tsuno3_L
+    400070: J_tsuno3_R
+    400072: J_tsuno4_L
+    400074: J_tsuno4_R
+    400076: J_tsuno5_L
+    400078: J_tsuno5_R
+    400080: J_tsuno6_L
+    400082: J_tsuno6_R
+    400084: J_tuma1_L
+    400086: J_tuma1_R
+    400088: J_tuma2_L
+    400090: J_tuma2_R
+    400092: J_ude_L
+    400094: J_ude_R
+    400096: J_yubi1_L
+    400098: J_yubi1_R
+    400100: J_yubi2_L
+    400102: J_yubi2_R
+    400104: //RootNode
+    2100000: chr404a01
+    4300000: chr404
+    9500000: //RootNode
+    13700000: chr404 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

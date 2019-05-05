@@ -33,13 +33,12 @@ public class DeckManager : MonoBehaviour {
     private void Awake()
     {
         instance = this;
+        Biblioteca.SetActive(false);
+        ViewDeck();
     }
     // Use this for initialization
     void Start () {
         // Cargar datos del Player
-        Biblioteca.SetActive(false);
-        ViewDeck();
-
         LoadPhoto();
     }
     public void LoadPhoto()

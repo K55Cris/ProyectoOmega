@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: ab4471f4c47d03c42b3b6f69ab72cae2
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: CharacterCenterTarget
+    100002: CharacterFaceCenterTarget
+    100004: chr303 1
+    100006: CP01
+    100008: FP01
+    100010: GP01
+    100012: GRP_joint
+    100014: GRP_mesh
+    100016: HUDTarget
+    100018: J_antenna2_L
+    100020: J_antenna2_R
+    100022: J_antenna_L
+    100024: J_antenna_R
+    100026: J_atama
+    100028: J_center
+    100030: J_hane_L
+    100032: J_hane_R
+    100034: J_haneU_L
+    100036: J_haneU_R
+    100038: J_hara
+    100040: J_hiji_L
+    100042: J_hiji_R
+    100044: J_hijiU_L
+    100046: J_hijiU_R
+    100048: J_hiza_L
+    100050: J_hiza_R
+    100052: J_kakato_L
+    100054: J_kakato_R
+    100056: J_kata_L
+    100058: J_kata_R
+    100060: J_kubi
+    100062: J_momo_L
+    100064: J_momo_R
+    100066: J_mune
+    100068: J_root
+    100070: J_te_L
+    100072: J_te_R
+    100074: J_teU_L
+    100076: J_teU_R
+    100078: J_ude_L
+    100080: J_ude_R
+    100082: J_udeU_L
+    100084: J_udeU_R
+    100086: //RootNode
+    100088: TP01
+    400000: CharacterCenterTarget
+    400002: CharacterFaceCenterTarget
+    400004: chr303 1
+    400006: CP01
+    400008: FP01
+    400010: GP01
+    400012: GRP_joint
+    400014: GRP_mesh
+    400016: HUDTarget
+    400018: J_antenna2_L
+    400020: J_antenna2_R
+    400022: J_antenna_L
+    400024: J_antenna_R
+    400026: J_atama
+    400028: J_center
+    400030: J_hane_L
+    400032: J_hane_R
+    400034: J_haneU_L
+    400036: J_haneU_R
+    400038: J_hara
+    400040: J_hiji_L
+    400042: J_hiji_R
+    400044: J_hijiU_L
+    400046: J_hijiU_R
+    400048: J_hiza_L
+    400050: J_hiza_R
+    400052: J_kakato_L
+    400054: J_kakato_R
+    400056: J_kata_L
+    400058: J_kata_R
+    400060: J_kubi
+    400062: J_momo_L
+    400064: J_momo_R
+    400066: J_mune
+    400068: J_root
+    400070: J_te_L
+    400072: J_te_R
+    400074: J_teU_L
+    400076: J_teU_R
+    400078: J_ude_L
+    400080: J_ude_R
+    400082: J_udeU_L
+    400084: J_udeU_R
+    400086: //RootNode
+    400088: TP01
+    2100000: chr303a01
+    4300000: chr303
+    9500000: //RootNode
+    13700000: chr303 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.3
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.5
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,6 +14,7 @@ public class IA : MonoBehaviour {
     public Player IAPlayer;
     private Transform ManoEspacio;
     public GameObject PanelClosePlayer;
+    public DecksIA Defaul;
     public void Start()
     {
             IAPlayer = PartidaManager.instance.Player2;
@@ -309,16 +310,23 @@ public class IA : MonoBehaviour {
     }
     public void ChoiseDeck()
     {
-        List<DecksIA> DecksWhitDificult = new List<DecksIA>();
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        {  
+            List<DecksIA> DecksWhitDificult = new List<DecksIA>();
 
-        foreach (var item in PlayerManager.instance.DeckIA.Decks)
-        {
-            if (item.DificultadMazo == IALevel)
-                DecksWhitDificult.Add(item);
+            foreach (var item in PlayerManager.instance.DeckIA.Decks)
+            {
+                if (item.DificultadMazo == IALevel)
+                    DecksWhitDificult.Add(item);
+            }
+            // CARGAMOS UN MAZO aleatorio dependiendo la dificultad
+            int Rand = DataManager.GetRandom(0, DecksWhitDificult.Count);
+            ChoseDeck = DecksWhitDificult[Rand];
         }
-        // CARGAMOS UN MAZO aleatorio dependiendo la dificultad
-        int Rand = DataManager.GetRandom(0, DecksWhitDificult.Count);
-        ChoseDeck = DecksWhitDificult[Rand];
+        else
+        {
+            ChoseDeck = Defaul;
+        }
         IAPlayer.IDCartasMazo = ChoseDeck.mazo;
     }
 

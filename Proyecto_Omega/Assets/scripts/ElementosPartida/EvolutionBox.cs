@@ -86,7 +86,8 @@ public class EvolutionBox : Slot
                     Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                     MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
-                }
+                    return;
+                    }
                 }
                 else
                 {
@@ -95,6 +96,7 @@ public class EvolutionBox : Slot
                     Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                     MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
+                    return;
                 }
 
             }
@@ -116,6 +118,7 @@ public class EvolutionBox : Slot
                             Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                             SoundManager.instance.PlaySfx(Sound.SetCard);
                             MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
+                            return;
                         }
                     }
                     }
@@ -134,9 +137,20 @@ public class EvolutionBox : Slot
                             Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
                             SoundManager.instance.PlaySfx(Sound.SetCard);
                             MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
+                            return;
                         }
                     }
                 }
+            }
+        }
+
+        // El digimon no entro al tuto 
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+            {
+                Tutorial.instance.Iniciar();
             }
         }
     }
@@ -161,6 +175,14 @@ public class EvolutionBox : Slot
         Carta.localPosition = new Vector3(0, 0, -1 + Cartas.Count/2);
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Carta.localScale = new Vector3(1, 1, 0.015f);
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+            {
+                Tutorial.instance.Iniciar();
+            }
+        }
     }
     public void OnBeforeTransformParentChanged()
     {

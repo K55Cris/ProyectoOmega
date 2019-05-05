@@ -20,10 +20,19 @@ public class OptionSlot : Slot
             PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
             OpCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+                {
+                    Tutorial.instance.Iniciar();
+                }
+            }
+
             if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
             {
                 if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase)
                 {
+
                     StaticRules.instance.NowPreparationPhase = StaticRules.PreparationPhase.SetOptionCard;
                 }
             }
@@ -31,24 +40,28 @@ public class OptionSlot : Slot
     }
     private void OnMouseDown()
     {
+     
         if (!Vacio && PartidaManager.instance.Player1 == MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.OptionSlot1))
         {
-            VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
-
-            if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase || StaticRules.instance.NowPhase == DigiCartas.Phases.OptionBattlePhase)
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
             {
-                CanvasAction.SetActive(true);
-                ActivarCarta.SetActive(true);
-                DescartarCarta.SetActive(false);
+                VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
             }
-            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2)
-            {
-                CanvasAction.SetActive(true);
-                DescartarCarta.SetActive(true);
-                ActivarCarta.SetActive(false);
-            }
+                if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase || StaticRules.instance.NowPhase == DigiCartas.Phases.OptionBattlePhase)
+                {
+                    CanvasAction.SetActive(true);
+                    ActivarCarta.SetActive(true);
+                    DescartarCarta.SetActive(false);
+                }
+                if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2)
+                {
+                    CanvasAction.SetActive(true);
+                    DescartarCarta.SetActive(true);
+                    ActivarCarta.SetActive(false);
+                }
 
         }
+        
     }
 
     public CartaDigimon GetOpCard()
@@ -64,7 +77,13 @@ public class OptionSlot : Slot
     {
         if (OpCarta)
         {
-
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+                {
+                    Tutorial.instance.Iniciar();
+                }
+            }
             CanvasAction.SetActive(false);
             StaticRules.ActivateOptionCard(OpCarta);
         }
@@ -75,7 +94,15 @@ public class OptionSlot : Slot
         // Descartar carta 
         if (OpCarta)
         {
+          
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(OpCarta.transform);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+                {
+                    Tutorial.instance.Iniciar();
+                }
+            }
             Vaciar();
         }
     }
@@ -83,5 +110,6 @@ public class OptionSlot : Slot
     {
         OpCarta = null;
         Vacio = true;
+      
     }
 }

@@ -58,5 +58,12 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void DeleteAllHand()
+    {
+        foreach (var item in _Mano.Cartas)
+        {
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, this).GetComponent<DarkArea>().AddListDescarte(item,0.3f);
+        }
+    }
 }
 

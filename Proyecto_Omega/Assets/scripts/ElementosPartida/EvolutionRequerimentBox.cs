@@ -26,7 +26,7 @@ public class EvolutionRequerimentBox : Slot
                 PreparationPhase();
                 break;
             default:
-                Debug.Log("Fase no recocida para este Slot");
+                Activado = true;
                 break;
 
         }
@@ -46,8 +46,18 @@ public class EvolutionRequerimentBox : Slot
 
     public void Requerimientos()
     {
-        PartidaManager.instance.CambioDePhase(false);
-        SetRequerimientos(null);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+            {
+                Tutorial.instance.Iniciar();
+            }
+        }
+        else
+        {
+            PartidaManager.instance.CambioDePhase(false);
+            SetRequerimientos(null);
+        }
     }
 
     public void SetRequerimientos(CartaDigimon Carta,bool condicion=false )
@@ -258,6 +268,7 @@ public class EvolutionRequerimentBox : Slot
     void OnMouseDown()
     {
         NowPhase();
+
         if(!Activado)
         Canvas.SetActive(true);
     }
