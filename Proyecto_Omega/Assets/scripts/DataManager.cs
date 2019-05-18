@@ -76,6 +76,19 @@ public class DataManager : MonoBehaviour {
 
         return arraySprite;
     }
+    public int GetIDWithName(string Name)
+    {
+        foreach (var item in TodasLasCartas)
+        {
+            if (item.Nombre.ToUpper()==Name)
+            {
+                return item.id;
+            }
+          
+        }
+        return 0;
+        
+    }
     public Sprite GetSprite8(int id)
     {
         Sprite arraySprite = Resources.Load<Sprite>("Digimon8/" + id.ToString());
