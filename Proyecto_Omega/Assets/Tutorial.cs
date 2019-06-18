@@ -37,10 +37,15 @@ public class Tutorial : MonoBehaviour {
     {
         Campos = 0, Fases = 1, Evolucion, Efectos
     };
+    public enum DigiEfectos
+    {
+        None = 0, CartasCompletas=1
+    };
 
     public bool WhaitAction;
 
     public TutoStates NowSelectTuto;
+    public DigiEfectos NowDigiEfectos;
 
     public void Start()
     {
@@ -432,13 +437,14 @@ public class Tutorial : MonoBehaviour {
                 DChild.cardNumber = 32;
                 DChild.DatosDigimon = DataManager.instance.GetDigicarta(1);
                 DChild.Front.GetComponent<MovimientoCartas>().Mover = true;
-
+                DChild.Front.GetComponent<MovimientoCartas>().Mover = true;
+                DChild.Mostrar();
                 PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DigimonSlot, DChild.transform, StaticRules.Ajustar);
                 MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta = DChild;
                 MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin = DChild;
 
                 GameObject CartaAdult = Instantiate(CartaPrefab, PartidaManager.instance.ManoPlayer1);
-                CartaAdult.GetComponent<CartaDigimon>().cardNumber = 33;
+                CartaAdult.GetComponent<CartaDigimon>().cardNumber = 32;
                 CartaAdult.GetComponent<CartaDigimon>().DatosDigimon = DataManager.instance.GetDigicarta(6);
                 PartidaManager.instance.Player1._Mano.RecibirCarta(CartaAdult.GetComponent<CartaDigimon>(), true);
                 CartaAdult.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = true;
@@ -463,11 +469,57 @@ public class Tutorial : MonoBehaviour {
             case 4:
                 //
                 // ACTIVAR  panel de colocar SIGUIENTE FASE
-                CanvasListo.SetActive(true);
+                MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Tutorial");
+     
+
+
+
+
                 break;
             case 5:
                 //
-                
+                StaticRules.instance.NowPhase = Phases.PreparationPhase2;
+                CanvasListo.SetActive(true);
+                StaticRules.instance.PlayerFirstAtack = PartidaManager.instance.Player1;
+                break;
+            case 6:
+                // Des digivol
+                CanvasListo.SetActive(false);
+                MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(ResetNetOcean);
+                break;
+            case 7:
+                // agregar a mi mano
+                MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().RobarInteligente();
+                MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().RobarInteligente();
+                MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().RobarInteligente();
+                //Agregamos al 40%
+
+                GameObject Porcentage = Instantiate(CartaPrefab, PartidaManager.instance.ManoPlayer1);
+                Porcentage.GetComponent<CartaDigimon>().cardNumber = 34;
+                Porcentage.GetComponent<CartaDigimon>().DatosDigimon = DataManager.instance.GetDigicarta(59);
+                PartidaManager.instance.Player1._Mano.RecibirCarta(Porcentage.GetComponent<CartaDigimon>(), true);
+                Porcentage.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = true;
+                StartCoroutine(WhaitFrame(Porcentage));
+
+                //Agregamos al SCULLGREYMOPN
+
+                GameObject Skull = Instantiate(CartaPrefab, PartidaManager.instance.ManoPlayer1);
+                Skull.GetComponent<CartaDigimon>().cardNumber = 35;
+                Skull.GetComponent<CartaDigimon>().DatosDigimon = DataManager.instance.GetDigicarta(32);
+                PartidaManager.instance.Player1._Mano.RecibirCarta(Skull.GetComponent<CartaDigimon>(), true);
+                Skull.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = true;
+                StartCoroutine(WhaitFrame(Skull));
+
+                // salto de Face
+                StaticRules.instance.NowPhase = Phases.PreparationPhase;
+                StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
+                StaticRules.instance.NowPreparationPhase = 0;
+                PartidaManager.instance.ActivateHand(true);
+
+                NowDigiEfectos = DigiEfectos.CartasCompletas;
+               // Invoke("waithCardEfec", 1.1f);
+
+               
                 break;
         }
         FasesID++;
@@ -476,6 +528,39 @@ public class Tutorial : MonoBehaviour {
 
     }
 
+    public void ResetNetOcean(string result)
+    {
+        MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Evoluciones");
+        Invoke("Iniciar",1F);
+    }
+
+    public void ResetNet2(string result)
+    {
+        MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Evoluciones2");
+    }
+
+    public void CheckSkullGreymon(string result)
+    {
+        if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.id == 32)
+        {
+            Iniciar();
+        }else
+        {
+            // salto de Face
+            StaticRules.instance.NowPhase = Phases.PreparationPhase;
+            StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
+            StaticRules.instance.NowPreparationPhase = 0;
+            MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(ResetNet2);
+        }
+    }
+
+    public void waithCardEfect()
+    {
+        StaticRules.instance.NowPhase = Phases.PreparationPhase;
+        StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
+        StaticRules.instance.NowPreparationPhase = 0;
+        PartidaManager.instance.ActivateHand(true);
+    }
 
     public void endPhases()
     {

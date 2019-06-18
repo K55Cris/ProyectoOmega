@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour {
     public List<Sprite> ImagesType;
     public Texture[] arrayImage;
     public List<Sprite> PerfilPhotos;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -29,7 +29,7 @@ public class DataManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
-
+        Application.targetFrameRate = 30;
 
     }
 

@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour {
     public static LevelLoader instance;
     public ParticleSystem ps;
     public CanvasGroup Fondo;
-    public GameObject Guilmon;
+    public Image Guilmon;
     public TextMeshProUGUI Carga;
     void Awake()
     {

@@ -27,9 +27,9 @@ public class NetOcean : MonoBehaviour
     public void AjustarInterno(CartaDigimon Dcard)
     {
         Dcard.transform.localPosition = Vector3.zero;
-        Dcard.transform.localRotation = Quaternion.Euler(new Vector3(0, -180, 180));
-        Dcard.transform.localScale = new Vector3(25, 40, 0.015f);
+        Dcard.transform.localRotation = Quaternion.Euler(0, 0, 0);
         Dcard.Mostrar();
+        Dcard.transform.localScale = new Vector3(25, 40, 0.015f);
     }
 
 

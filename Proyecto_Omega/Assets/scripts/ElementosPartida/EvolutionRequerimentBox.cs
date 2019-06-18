@@ -50,7 +50,20 @@ public class EvolutionRequerimentBox : Slot
         {
             if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
             {
-                Tutorial.instance.Iniciar();
+
+                if (Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Efectos) {
+                    Tutorial.instance.Iniciar();
+                }
+                if (Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Evolucion)
+                {
+                    SetRequerimientos(null);
+                    if (Tutorial.instance.NowDigiEfectos==Tutorial.DigiEfectos.None)
+                    {
+                        Tutorial.instance.Iniciar();
+                    }
+                    
+                }
+
             }
         }
         else

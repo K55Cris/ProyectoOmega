@@ -23,6 +23,7 @@ public class StaticRules : MonoBehaviour
     public List<Efecto> EfectosRonda = new List<Efecto>();
     public List<GameObject> CartasDescartadas = new List<GameObject>();
     public List<GameObject> CartasDescartadasIA = new List<GameObject>();
+    public UnityAction<string> FinishEvolution;
 
     public enum PreparationPhase
     {
@@ -377,7 +378,22 @@ public class StaticRules : MonoBehaviour
                         if (StaticRules.instance.NowPhase == Phases.PreparationPhase || StaticRules.instance.NowPhase == Phases.PreparationPhase2)
                         {
                             if (!isDigimonOrChip(_Carta))
-                                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta.transform);
+                            {
+                                bool pase = true
+;                                foreach (var item in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
+                                {
+                                    if(item.DatosDigimon.id== _Carta.id)
+                                    {
+                                        pase = false;
+                                        break;
+                                    }
+                                }
+                                if (pase)
+                                {
+                                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().SetDigimon(_Digicarta);
+                                }
+                               
+                            }
                         }
                         break;
 
@@ -1089,6 +1105,10 @@ public class StaticRules : MonoBehaviour
             }
             else
             {
+                if (FinishEvolution!=null)
+                {
+                    FinishEvolution.Invoke("Termino");
+                }
                 PartidaManager.instance.CambioDePhase(true);
 
                 MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();

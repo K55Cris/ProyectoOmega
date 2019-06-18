@@ -25,6 +25,7 @@ public class WhoIsPlayer1 : MonoBehaviour {
     {
         _CGroup.alpha = 1;
         _CGroup.interactable = true;
+        _CGroup.blocksRaycasts = true;
         Evento = WhoIs;
         Player1 = player1;
         Player2 = player2;

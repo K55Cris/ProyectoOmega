@@ -10,7 +10,19 @@ public class Mano : MonoBehaviour
 
     public void JugarCarta(CartaDigimon carta)
     {
-    Cartas.Remove(carta); 
+
+    Cartas.Remove(carta);
+
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial" && Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Evolucion)
+        {
+            if (Cartas.Count== 0 && Tutorial.instance.NowDigiEfectos==Tutorial.DigiEfectos.CartasCompletas)
+            {
+               StaticRules.instance.NowPhase = DigiCartas.Phases.PreparationPhase2;
+               Tutorial.instance.CanvasListo.SetActive(true);
+               StaticRules.instance.FinishEvolution = Tutorial.instance.CheckSkullGreymon;
+            }
+        }
     }
 
     public void DescartarCarta(CartaDigimon carta)
