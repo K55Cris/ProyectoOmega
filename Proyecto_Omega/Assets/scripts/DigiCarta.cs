@@ -60,8 +60,8 @@ namespace DigiCartas
         public List<string> ListaCatrgoria;
         public List<string> ListaCosto;
         //Son los requisitos que deben cumplirse antes de poder evolucionar al digimon //Indica los requisitos que deben cumplirse para activar la carta.
-        public List<string> ListaRequerimientos;
-        public List<string> ListaEfectos;
+        public List<string> ListaRequerimientos= new List<string>();
+        public List<string> ListaEfectos= new List<string>();
         public string Limite;
         public bool IsSupport;
         public bool IsActivateHand;

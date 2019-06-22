@@ -11,7 +11,9 @@ public class InspectCard : MonoBehaviour {
     public Image ImageDigimon;
     public CanvasGroup canvas;
     public List<Image> Evoluciones;
-    public GameObject Evolucion,ListaEvolucion,Ataques,DatosDigimon,DatosOption,Efectos;
+    public GameObject Evolucion,ListaEvolucion,Ataques,DatosDigimon,DatosOption,Efectos,PrefabEfecto;
+    public Transform Contenido2;
+
     public void OpenCard(DigiCarta Datos)
     {
         id.text = "St-" + Datos.id.ToString();
@@ -26,7 +28,7 @@ public class InspectCard : MonoBehaviour {
             DatosDigimon.SetActive(true);
             DatosOption.SetActive(false);
             Efectos.SetActive(false);
-
+            Evolucion.SetActive(true);
             Descripcion.text = Datos.descripcion;
             Familia.text = Datos.Familia;
             Atributo.text = Datos.Atributo;
@@ -37,10 +39,11 @@ public class InspectCard : MonoBehaviour {
             PoA.text = Datos.DanoAtaqueA.ToString();
             PoB.text = Datos.DanoAtaqueB.ToString();
             PoC.text = Datos.DanoAtaqueC.ToString();
-            if (Datos.ListaRequerimientos.Count > 0 && Datos.ListaRequerimientos!= null)
+            if (Datos.ListaRequerimientos.Count > 0 && Datos.ListaRequerimientos[0]!="")
             {
                 // cargar Evoluciones
                 ListaEvolucion.gameObject.SetActive(true);
+                
                 TituloEvolucion.text = "Evoluciona de:";
                 int Contador = 0;
                 //Clear
@@ -80,11 +83,37 @@ public class InspectCard : MonoBehaviour {
             DatosDigimon.SetActive(false);
             DatosOption.SetActive(true);
             Efectos.SetActive(true);
+            ListaEvolucion.gameObject.SetActive(false);
 
             FaseLimite.text = Datos.Limite;
             FaseActivacion.text = Datos.ListaActivacion[0];
             Capacidad.text = Datos.Capasidad.ToString();
-            
+
+            // Lista Efectos
+            for (int i = 0; i < Datos.ListaEfectosMostrar.Count; i++)
+            {
+                if (Contenido2.GetChild(i))
+                {
+                    Contenido2.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+            int bandera = 0;
+            foreach (Transform item in Contenido2)
+            {
+                if (item)
+                {
+                    if (Datos.ListaEfectosMostrar.Count > bandera)
+                    {
+                        item.GetComponent<ListaEvolucionesItem>().Crear(Datos.ListaEfectosMostrar[bandera]);
+                    }
+                    else
+                    {
+                        item.gameObject.SetActive(false);
+                    }
+                    bandera++;
+                }
+            }
+
         }
     }
     public void ClosePanel()

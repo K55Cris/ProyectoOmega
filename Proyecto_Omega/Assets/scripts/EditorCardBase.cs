@@ -4,11 +4,12 @@ using UnityEngine;
 using DigiCartas;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 public class EditorCardBase : MonoBehaviour {
 
     public DigiCarta DatosDigimon;
     public Image ImageCarta, Contorno;
-    public Text Cantida;
+    public TextMeshProUGUI Cantidad;
     public GameObject PanelPadre;
     public int num=1;
     private int IDCarta;
@@ -17,19 +18,19 @@ public class EditorCardBase : MonoBehaviour {
     {
         DatosDigimon = Datos;
         ImageCarta.sprite = DataManager.instance.GetSprite(DatosDigimon.id);
-        Cantida.gameObject.SetActive(false);
+        Cantidad.gameObject.SetActive(false);
     }
     public void RecibirDatosDeck(DigiCarta Datos)
     {
         DatosDigimon = Datos;
         ImageCarta.sprite = DataManager.instance.GetSprite(DatosDigimon.id);
-        Cantida.gameObject.SetActive(true);
+        Cantidad.gameObject.SetActive(true);
     }
     public void AumentarCantidad()
     {
         num++;
         ImageCarta.color = Color.white;
-        Cantida.text = "0"+num;
+        Cantidad.text = "0"+num;
     }
     public void ReducirCantidad()
     {
@@ -38,13 +39,13 @@ public class EditorCardBase : MonoBehaviour {
         {
             ImageCarta.color = Color.gray; 
         }
-        Cantida.text = "0" + num;
+        Cantidad.text = "0" + num;
     }
 
     public void CantidadCartas(int cant)
     {
         num = cant;
-        Cantida.text = "0" + num;
+        Cantidad.text = "0" + num;
 
     }
     public void UsarCarta(UnityAction<DigiCarta> evento)
@@ -54,7 +55,7 @@ public class EditorCardBase : MonoBehaviour {
             num = 0;
             ImageCarta.color = Color.gray;
             evento(DatosDigimon);
-            Cantida.text = "00" ;
+            Cantidad.text = "00" ;
         }
         else
         {
@@ -62,7 +63,7 @@ public class EditorCardBase : MonoBehaviour {
             {
                 num--;
                 evento(DatosDigimon);
-                Cantida.text = "0" + num;
+                Cantidad.text = "0" + num;
             }
         }
     }

@@ -39,7 +39,7 @@ public class WhoIsPlayer1 : MonoBehaviour {
         Cara.CrossFadeAlpha(0, 0.5f,true);
         Cruz.CrossFadeAlpha(0, 0.5f,true);
         Moneda.SetActive(true);
-      
+        GetComponent<Image>().CrossFadeAlpha(0, 1.5f, true);
         if (ran==1)
         {
             Am.SetBool("Cara", true);
@@ -68,7 +68,7 @@ public class WhoIsPlayer1 : MonoBehaviour {
             Titulo.text = Player2.Nombre + " juega primero";
         }
         
-        GetComponent<Image>().CrossFadeAlpha(0, 1.5f,true);
+   
         Invoke("CerrarPanel", 1F);
     }
    public void CerrarPanel()
