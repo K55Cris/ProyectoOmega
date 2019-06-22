@@ -5,22 +5,28 @@ using UnityEngine.Video;
 public class intro : MonoBehaviour {
    // public VideoPlayer Video;
 	// Use this for initialization
-	void Start () {
-        if (DataManager.instance.IntroVisto)
-        {
-            Continuar();
-        }
-        else
-        {
-         //   Invoke("Continuar", (float)Video.clip.length);
-            Continuar();
-        }
+	void Start ()
+    {
+        StartCoroutine(whaithFrame());
 	}
     private void Awake()
     {
     //    GetComponent<MeshRenderer>().enabled = true;
     }
 
+    public IEnumerator whaithFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        if (DataManager.instance.IntroVisto)
+        {
+            Continuar();
+        }
+        else
+        {
+            //   Invoke("Continuar", (float)Video.clip.length);
+            Continuar();
+        }
+    }
     // Update is called once per frame
     void Update () {
 		
@@ -59,5 +65,6 @@ public class intro : MonoBehaviour {
         PlayerManager.instance.bienvenida = false;
         MainMenu.instance.Opciones.SetActive(true);
         MainMenu.instance.Tutorial.SetActive(true);
+        PlayerManager.instance.SavePlayer();
     }
 }

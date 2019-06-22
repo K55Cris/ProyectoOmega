@@ -176,7 +176,7 @@ public class Tutorial : MonoBehaviour {
                 }
                 else
                 {
-                    //   StartCoroutine(Transicion(LteEvolucion.LPos[26].transform, 26, LteEvolucion.ListaCompleta, LectorTexto));
+                     StartCoroutine(Transicion(LteEvolucion.LPos[12].transform, 12, LteEvolucion.ListaCompleta, LectorTexto));
                 }
                 break;
             case TutoStates.Efectos:
@@ -238,7 +238,7 @@ public class Tutorial : MonoBehaviour {
         }
         else
         {
-            if (NowSelectTuto == TutoStates.Fases)
+            if (NowSelectTuto == TutoStates.Fases || NowSelectTuto == TutoStates.Evolucion)
             {
                 endPhases();
             }

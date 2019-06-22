@@ -1759,7 +1759,7 @@ public class StaticRules : MonoBehaviour
     {
         float Digimon1 = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().CanvasContador.PoderDeAtaque;
         float Digimon2 = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().CanvasContador.PoderDeAtaque;
-
+        Debug.Log("FinalPoints:" + Digimon1 + " | " + Digimon2);
         if (Digimon1 > Digimon2)
         {
             //Gano Digimon 1
@@ -2030,11 +2030,12 @@ public class StaticRules : MonoBehaviour
                 _ef5.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
                 _ef5.Jugador = StaticRules.instance.WhosPlayer;
                 _ef5.where = "allyL3 not use";
-                if (WhatNivelMayor(digienemigo._DigiCarta.DatosDigimon.Nivel, midigi._DigiCarta.DatosDigimon.Nivel))
+                if (WhatNivelMayor(digienemigo._DigiCarta.DatosDigimon.Nivel, midigi._DigiCarta.DatosDigimon.Nivel)&& digienemigo._DigiCarta.DatosDigimon.Nivel!= "III")
                 {
                     Debug.Log("El enemigo es mayor nivel");
                     EF.Add(_ef5);
                 }
+
                 break;
             case "QuitDigimonBox":
                 Efecto _ef7 = new Efecto();
@@ -2059,6 +2060,9 @@ public class StaticRules : MonoBehaviour
                 break;
             case "return to Lv3 allyLv4 or enemyLv4":
                 Efecto _ef11 = new Efecto();
+                DigimonBoxSlot midigi3 = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>();
+                DigimonBoxSlot digienemigo2 = MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.GetEnemy()).GetComponent<DigimonBoxSlot>();
+
                 _ef11.OptionCard = Opcard;
                 _ef11.NameEfecto = EfectosActivos.EnemyDesDigivolucionar;
                 _ef11.Limite = ConvertPhases(Opcard.DatosDigimon.Limite);
@@ -2072,6 +2076,8 @@ public class StaticRules : MonoBehaviour
                 }
                 _ef11.where = "IV to III";
                 EF.Add(_ef11);
+                
+     
                 break;
             case "allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea":
                 Efecto _ef8 = new Efecto();
@@ -2185,7 +2191,7 @@ public class StaticRules : MonoBehaviour
                     if (WhosPlayer._Mano.Cartas.Count > 0)
                     {
                         EfectoEnEspera = efect;
-                        WhaitBuffAtack(WhosPlayer._Mano.Cartas[0].cardNumber.ToString());
+                        WhaitDesDigivolucionar(WhosPlayer._Mano.Cartas[0].cardNumber.ToString());
                     }
                 }
                 break;
@@ -2227,6 +2233,7 @@ public class StaticRules : MonoBehaviour
             case EfectosActivos.lostcardgame:
                 break;
             case EfectosActivos.QuitDigimonBox:
+               
                 EfectosRonda.Add(efect);
                 break;
             case EfectosActivos.SetDarkArea:
@@ -2386,19 +2393,41 @@ public class StaticRules : MonoBehaviour
     public void WhaitDesDigivolucionar(string ID)
     {
         //descartamos carta 
+        bool Discar = false;
         foreach (var item in StaticRules.instance.WhosPlayer._Mano.Cartas)
         {
             int DID = Convert.ToInt32(ID);
             if (item.CardNumber == DID)
             {
                 SendDarkArea(item.transform, 0.4f);
+                Discar = true;
+                break;
+            }
+        }
+        if (Discar)
+        {
+            // si logramos descartar la carta procedemos con el efecto
+            if (EfectoEnEspera != null)
+            {
 
-                // si logramos descartar la carta procedemos con el efecto
-                if (EfectoEnEspera != null)
+                // REVIZAR SI ES UN CHAMPION EL DIGIMON CONTRINCANTE 
+                if (EfectoEnEspera.Jugador == PartidaManager.instance.Player1)
                 {
-                    MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, EfectoEnEspera.Jugador).
-                        GetComponent<DigimonBoxSlot>().DeEvolution(null, EfectoEnEspera.where);
-                    EfectoEnEspera = null;
+                    //player2 IA
+                    if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel == "IV")
+                    {
+                        MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(null);
+                    }
+                  
+                }
+                else
+                {
+                    // player 1
+                    if (MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel == "IV")
+                    {
+                        MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(null);
+                    }
+                 
                 }
             }
         }
@@ -2529,8 +2558,8 @@ public class StaticRules : MonoBehaviour
         switch (efect.NameEfecto)
         {
             case EfectosActivos.QuitDigimonBox:
-                efect.CartaAfecta[0].transform.parent.GetComponent<DigimonBoxSlot>().LostDigimon(Loaction);
-                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, efect.Jugador).GetComponent<DarkArea>().SetCard(efect.OptionCard.transform);
+                efect.OptionCard.transform.parent.GetComponent<OptionSlot>().Vaciar();
+                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, efect.Jugador).GetComponent<DarkArea>().AddListDescarte(efect.OptionCard,0.2f);
                 break;
             case EfectosActivos.dropCards:
                 ActivarCarta.instance.Activar(efect.OptionCard);

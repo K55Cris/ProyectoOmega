@@ -33,6 +33,7 @@ public class ContadorOffencivo : MonoBehaviour
     public void OpEfectCard(int cantidad)
     {
         PoderDeAtaque = cantidad;
+        StartCoroutine(EstablecerCantidad(cantidad));
     }
 
     public void EsperarEfectos()

@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour {
 
     private void Start()
     {
-        LoadName();
+  
    
     }
 
@@ -101,8 +101,8 @@ public class MainMenu : MonoBehaviour {
         {
             while (Panel.transform.localPosition.x < 430)
             {
-                yield return new WaitForSeconds(0.01f);
-                int Incremento = 10 * Signo;
+                yield return new WaitForSeconds(0.005f);
+                float Incremento =600f*Time.deltaTime * Signo;
                 Vector3 NewPos = new Vector3(0, 0, 0);
                 if (Signo > 0)
                 {

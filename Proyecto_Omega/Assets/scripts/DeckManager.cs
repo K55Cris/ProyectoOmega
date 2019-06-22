@@ -467,6 +467,16 @@ public class DeckManager : MonoBehaviour {
             nowpoint++;
         }
     }
+    public void GetIDs()
+    {
+        string DMazo= "";
+        foreach (var item in DeckInt)
+        {
+            DMazo += item;
+            DMazo += "\n";
+        }
+        Debug.Log(DMazo);
+    }
 
   
 }

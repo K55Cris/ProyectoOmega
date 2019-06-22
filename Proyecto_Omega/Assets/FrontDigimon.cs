@@ -38,7 +38,7 @@ public class FrontDigimon : MonoBehaviour {
         }
         SetAtackNames(Dcard);
 
-        if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
+        if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta==Dcard)
         {
             PartidaManager.instance.Player1Atack = ataque;
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.Player1).
@@ -50,6 +50,8 @@ public class FrontDigimon : MonoBehaviour {
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.Player2).
               GetComponent<DigimonBoxSlot>().CanvasContador.OpEfectCard(StaticRules.instance.WhatAtackUse(ataque, Dcard));
         }
+
+
     }
     public void QuitarDigimon()
     {
@@ -90,6 +92,7 @@ public class FrontDigimon : MonoBehaviour {
     }
     public void DuplicatePower(int multiplicador, CartaDigimon Dcard)
     {
+        Debug.Log("Doble powa");
         int poderA = Convert.ToInt32(PoderAtaques[0].text);
         int poderB = Convert.ToInt32(PoderAtaques[1].text);
         int poderC = Convert.ToInt32(PoderAtaques[2].text);

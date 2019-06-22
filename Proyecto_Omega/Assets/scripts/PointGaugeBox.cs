@@ -19,7 +19,7 @@ public class PointGaugeBox : MonoBehaviour
     }
     public void SetCard(int point)
     {
-        Debug.Log(transform.parent.name);
+        Debug.Log(transform.parent.name+point);
         Transform Padre = null;
         switch (point)
         {

@@ -131,14 +131,20 @@ public class DigimonBoxSlot : MonoBehaviour {
         foreach (var item in Evoluciones)
         {
             // mandamos a la dark area las evoluciones del jugador perdedor
-             item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
+            item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
 
 
-            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea,MesaManager.instance.
-                WhatSlotPlayer(this.transform,MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
+                WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
         }
         Evoluciones.Clear();
+
         _DigiCarta = DRoquin;
+
+        MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.
+        WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<FrontDigimon>().RevelarDigimon(DRoquin, PartidaManager.instance.WhoAtackUse(this.transform));
+
+   //     CanvasContador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.WhoAtackUse(this.transform), DRoquin),null);
     }
     public void DeEvolution(UnityAction<string> Loaction, string Condicion)
     {

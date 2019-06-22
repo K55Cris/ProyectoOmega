@@ -24,12 +24,13 @@ public class PlayerManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
-        GetData();
+        
     }
     public void Start()
     {
         // conseguimos los datos
-      
+        GetData();
+        MainMenu.instance.LoadName();
     }
 
     public void GetData()

@@ -169,6 +169,7 @@ MonoBehaviour:
       Victorias: 0
       Derrotas: 0
     Nivel: 0
+    Photo: 0
   Jugador:
     Nombre: 
     IDCartasMazo: 
@@ -176,7 +177,9 @@ MonoBehaviour:
     ALLCards: 0
     Progresos: []
     Nivel: 0
+    Photo: 0
   IaPlaying: 0
   DeckIA:
     Decks: []
   bienvenida: 1
+  ImagePhoto: {fileID: 0}
