@@ -174,7 +174,11 @@ public class PartidaManager : MonoBehaviour {
             }
             else
             {
-                Tutorial.instance.Iniciar();
+               if(Tutorial.instance.NowDigiEfectos != Tutorial.DigiEfectos.CartasCompletas)
+                {
+                    Tutorial.instance.Iniciar();
+                }
+             
                 StaticRules.SiguienteFase();
                 return;
             }

@@ -10,6 +10,7 @@ public class OptionSlot : Slot
     public GameObject CanvasAction;
     public GameObject ActivarCarta;
     public GameObject DescartarCarta;
+    public int TurnOpcard = 0;
     public void SetCard(Transform Carta)
     {
         if (Vacio)
@@ -22,7 +23,7 @@ public class OptionSlot : Slot
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
             {
-                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer&& Tutorial.instance.NowSelectTuto!= Tutorial.TutoStates.Evolucion) 
                 {
                     Tutorial.instance.Iniciar();
                 }
@@ -86,11 +87,15 @@ public class OptionSlot : Slot
             }
             CanvasAction.SetActive(false);
             StaticRules.ActivateOptionCard(OpCarta);
+            TurnOpcard = 0;
         }
     }
     public void Descartar()
     {
-        CanvasAction.SetActive(false);
+        if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
+        {
+            CanvasAction.SetActive(false);
+        }
         // Descartar carta 
         if (OpCarta)
         {
@@ -110,6 +115,7 @@ public class OptionSlot : Slot
     {
         OpCarta = null;
         Vacio = true;
+        TurnOpcard = 0;
       
     }
 }

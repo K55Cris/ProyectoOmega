@@ -155,14 +155,14 @@ public class DataManager : MonoBehaviour {
             {
                 if (item.Cantidad < 9)
                 {
-                    JuegoCompleto();
+                    GetCard();
                     break; 
                 }
             }
         }
         else
         {
-            GetCard();
+            JuegoCompleto();
         }
         
        

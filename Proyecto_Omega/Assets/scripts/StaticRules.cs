@@ -671,6 +671,21 @@ public class StaticRules : MonoBehaviour
         Debug.Log("This is GameSetup");
         StaticRules.instance.LostPlayerRound = null;
 
+        // aumentar Tuno a las Option Card de la Ia
+
+        if (MesaManager.instance.Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta)
+        {
+            MesaManager.instance.Campo2.OptionSlot1.GetComponent<OptionSlot>().TurnOpcard += 1;
+        }
+        if (MesaManager.instance.Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta)
+        {
+            MesaManager.instance.Campo2.OptionSlot2.GetComponent<OptionSlot>().TurnOpcard += 1;
+        }
+        if (MesaManager.instance.Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta)
+        {
+            MesaManager.instance.Campo2.OptionSlot3.GetComponent<OptionSlot>().TurnOpcard += 1;
+        }
+
         if (StaticRules.instance.PlayerFirstAtack != StaticRules.instance.WhosPlayer)
             StaticRules.instance.WhosPlayer = StaticRules.instance.PlayerFirstAtack;
         // jalar carta para ambos 
@@ -1041,7 +1056,6 @@ public class StaticRules : MonoBehaviour
                     {
                         DiscardRamdomCardHand(1);
                     }
-
                     SendDarkArea(item, 0.5f);
                 }
                 MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
@@ -1059,10 +1073,17 @@ public class StaticRules : MonoBehaviour
 
                 ListEvos.RemoveAll(x => x.DigiCarta == Evolucion);
                 MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>().TerminarEvolucionar();
+              
                 if (joggres)
                 {
-                    StaticRules.instance.InterTimePhase(0.4f);
+                StaticRules.instance.InterTimePhase(0.4f);
                 }
+
+                if (FinishEvolution != null)
+                {
+                    FinishEvolution.Invoke("Termino");
+                }
+
             }
         }
         else if(ignoreRe)
