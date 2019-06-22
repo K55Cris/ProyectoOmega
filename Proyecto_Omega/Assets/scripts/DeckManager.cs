@@ -348,22 +348,8 @@ public class DeckManager : MonoBehaviour {
                 DeckEditorContent.GetChild(i).gameObject.SetActive(false);
             }
         }
-        // Off Puntos 
-        foreach (var item in puntosDeck)
-        {
-            item.gameObject.SetActive(false);
-        }
-        // cargar Puntos Dinamicos
-        for (int i = 0; i < Paginas; i++)
-        {
-            puntosDeck[i].gameObject.SetActive(true);
-        }
-
         TextPaginasDeck.text = nowPageB + " de " + Paginas;
         puntosPaginas(puntosDeck, nowPageB);
-
-
-      
     }
 
     public void Avanzar()
@@ -406,12 +392,7 @@ public class DeckManager : MonoBehaviour {
         int arranque = (nowPageB-1) * 12;
 
         // apagamos todos
-        // Off Puntos 
-        foreach (var item in puntosBiblioteca)
-        {
-            item.gameObject.SetActive(false);
-        }
-
+        
         int CartasVisibles = 0;
         foreach (Transform item in BibliotecaContent)
         {
@@ -432,15 +413,8 @@ public class DeckManager : MonoBehaviour {
                 item.gameObject.SetActive(false);
             }
         }
-        // cargar Puntos Dinamicos
-        for (int i = 0; i < Paginas; i++)
-        {
-            puntosBiblioteca[i].gameObject.SetActive(true);
-        }
         TextPaginasBiblioteca.text = nowPageB + " de " + Paginas;
         puntosPaginas(puntosBiblioteca, nowPageB);
-
-       
     }
 	
 
@@ -458,7 +432,6 @@ public class DeckManager : MonoBehaviour {
             if (nowPage == nowpoint)
             {
                 item.GetComponent<Image>().color = PuntoSelect;
-                
             }
             else
             {

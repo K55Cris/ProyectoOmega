@@ -537,19 +537,6 @@ public class Tutorial : MonoBehaviour {
     public void ResetNet2(string result)
     {
         MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Evoluciones2");
-        Invoke("TomarCartas", 1F);
-    }
-
-    public void TomarCartas()
-    {
-        // jalar carta para ambos 
-        for (int i = PartidaManager.instance.Player1._Mano.Cartas.Count; i < 6; i++)
-        {
-            PartidaManager.instance.TomarCarta(PartidaManager.instance.ManoPlayer1, PartidaManager.instance.Player1, MesaManager.instance.Campo1.NetOcean);
-        }
-        StaticRules.instance.NowPhase = Phases.PreparationPhase;
-        StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
-        StaticRules.instance.NowPreparationPhase = 0;
     }
 
     public void CheckSkullGreymon(string result)
@@ -559,33 +546,11 @@ public class Tutorial : MonoBehaviour {
             Iniciar();
         }else
         {
-            Debug.LogError("CheckFalse");
             // salto de Face
             StaticRules.instance.NowPhase = Phases.PreparationPhase;
             StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
             StaticRules.instance.NowPreparationPhase = 0;
             MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(ResetNet2);
-            // Evolution Box Reset
-            foreach (var item in MesaManager.instance.Campo1.EvolutionBox.GetComponent<EvolutionBox>().Cartas) 
-            {
-                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
-            }
-            MesaManager.instance.Campo1.EvolutionBox.GetComponent<EvolutionBox>().Cartas.Clear();
-            // EvolutionRequeriment Reset
-            foreach (var item in MesaManager.instance.Campo1.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().Cartas)
-            {
-                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
-            }
-            MesaManager.instance.Campo1.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().Cartas.Clear();
-            // EvolutionRequeriment Reset x/o
-            foreach (var item in MesaManager.instance.Campo1.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaXO)
-            {
-                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
-            }
-            MesaManager.instance.Campo1.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaXO.Clear();
-
-          
-
         }
     }
 

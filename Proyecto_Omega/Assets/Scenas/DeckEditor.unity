@@ -10080,17 +10080,9 @@ MonoBehaviour:
   - {fileID: 1177422267}
   - {fileID: 371081424}
   - {fileID: 1453392029}
-  - {fileID: 1856652297}
-  - {fileID: 385401617}
   puntosDeck:
   - {fileID: 1423847133}
   - {fileID: 1654013297}
-  - {fileID: 1971389476}
-  - {fileID: 1365470547}
-  - {fileID: 3594505}
-  - {fileID: 1681811404}
-  - {fileID: 1869182460}
-  - {fileID: 1283698914}
   PuntoSelect: {r: 0.36764705, g: 0.93919677, b: 1, a: 1}
   PuntoDiseble: {r: 0.15679064, g: 0.39967015, b: 0.42647058, a: 1}
   Biblioteca: {fileID: 470429417}
@@ -14389,7 +14381,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 428346759}
   m_HandleRect: {fileID: 428346758}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21125,7 +21117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 33.870003, y: 6.0210004, z: 27.571001}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65.15, y: -8.525}
+  m_AnchoredPosition: {x: 84.01, y: -8.525024}
   m_SizeDelta: {x: 24.86, y: 13.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365470547
@@ -28614,7 +28606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 33.870003, y: 6.0210004, z: 27.571001}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65.15, y: -8.525}
+  m_AnchoredPosition: {x: 65.15, y: -8.525024}
   m_SizeDelta: {x: 24.86, y: 13.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971389476
@@ -29607,7 +29599,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 942683505}
   m_HandleRect: {fileID: 942683504}
   m_Direction: 2
+<<<<<<< HEAD
   m_Value: 1
+=======
+  m_Value: 0
+>>>>>>> parent of 85a01e6... Martes Desarrollo
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:

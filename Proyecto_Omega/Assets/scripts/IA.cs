@@ -261,32 +261,9 @@ public class IA : MonoBehaviour {
     private void PreparationPhase()
     {
         // CHECAMOS EL CHILD 
-        CheckOptiondiscard();
-        //
         CheckChangeChild();
 
     }
-
-    public void CheckOptiondiscard()
-    {
-        Campos Campo2 = MesaManager.instance.Campo2;
-        OptionSlot OptionSlot = Campo2.OptionSlot1.GetComponent<OptionSlot>();
-        if (CheckPriorityOptionCard(OptionSlot.OpCarta, OptionSlot.TurnOpcard))
-        {
-            OptionSlot.Descartar();
-        }
-        OptionSlot = Campo2.OptionSlot2.GetComponent<OptionSlot>();
-        if (CheckPriorityOptionCard(OptionSlot.OpCarta, OptionSlot.TurnOpcard))
-        {
-            OptionSlot.Descartar();
-        }
-        OptionSlot = Campo2.OptionSlot3.GetComponent<OptionSlot>();
-        if (CheckPriorityOptionCard(OptionSlot.OpCarta, OptionSlot.TurnOpcard))
-        {
-            OptionSlot.Descartar();
-        }
-    }
-
     public void DiscarPhase()
     {
         if (IAPlayer._Mano.Cartas.Count != 0)
@@ -675,54 +652,17 @@ public class IA : MonoBehaviour {
 
     public bool CheckPriorityOptionCard(CartaDigimon OpCard, bool BatallaSimulada)
     {
-        if (OpCard)
-        {
-            if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 56 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
-                return true;
-            else if (!BatallaSimulada && (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51))
-                return true;
-            else if (BatallaSimulada && OpCard.DatosDigimon.id == 58)
-                return true;
-            else if (!BatallaSimulada && OpCard.DatosDigimon.id == 52)
-                return true;
+        if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 56 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
+            return true;
+        else if (!BatallaSimulada && (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51))
+            return true;
+        else if (BatallaSimulada && OpCard.DatosDigimon.id == 58)
+            return true;
+        else if (!BatallaSimulada && OpCard.DatosDigimon.id == 52)
+            return true;
 
-            return false;
-        }
-        else
-            return false;
+        return false;
     }
-
-    public bool CheckPriorityOptionCard(CartaDigimon OpCard, int Turno)
-    {
-        if (OpCard)
-        {
-            if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 58 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
-                if (Turno >= 4)
-                {
-                    return true;
-                }
-
-                else if (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51 | OpCard.DatosDigimon.id == 52)
-            {
-                if (Turno >= 2)
-                {
-                    return true;
-                }
-            }
-            else if (OpCard.DatosDigimon.id == 59 | OpCard.DatosDigimon.id == 60)
-            {
-                if (Turno >= 3)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else
-            return false;
-        
-    }
-
 
     public CartaDigimon SerchCardInHand(string name, bool isChip=false) 
     {
