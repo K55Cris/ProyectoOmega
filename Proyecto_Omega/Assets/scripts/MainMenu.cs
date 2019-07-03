@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour {
     public static MainMenu instance;
     public GameObject PanelNewUser, Opciones, Tutorial, PanelCloseOpcion;
     public RectTransform Contendor;
-    public Dropdown Dropdown; 
+    public TMP_Dropdown Dropdown; 
 
     void Awake()
     {
@@ -29,8 +29,10 @@ public class MainMenu : MonoBehaviour {
 
     private void Start()
     {
-  
-   
+        AntiAliasing();
+        Anisotropic();
+        vSINC();
+        Application.targetFrameRate = 60;
     }
 
     public void Quit()
@@ -167,5 +169,21 @@ public class MainMenu : MonoBehaviour {
     public void ChangeGraficos()
     {
         QualitySettings.SetQualityLevel(Dropdown.value);
+    }
+    public void ChangeTexturas()
+    {
+        QualitySettings.masterTextureLimit = Dropdown.value;
+    }
+    public void Anisotropic()
+    {
+        QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
+    }
+    public void vSINC()
+    {
+        QualitySettings.vSyncCount = 0;
+    }
+    public void AntiAliasing()
+    {
+        QualitySettings.antiAliasing = 0;
     }
 }

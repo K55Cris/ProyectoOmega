@@ -9,6 +9,10 @@ public class UIPhases : MonoBehaviour {
     public UIParticleSystem Phase;
     public List<ParticleSystem> Particulas;
     public List<Material> MaterialPhases;
+    public Image Fondo;
+    public Color Jugador1;
+    public Color Jugador2;
+
 
     private void Start()
     {
@@ -57,10 +61,12 @@ public class UIPhases : MonoBehaviour {
         if (player)
         {
             Particulas[1].Stop();
+            Fondo.color = Jugador2;
         }
         else
         {
             Particulas[0].Stop();
+            Fondo.color = Jugador1;
         }
     }
 }

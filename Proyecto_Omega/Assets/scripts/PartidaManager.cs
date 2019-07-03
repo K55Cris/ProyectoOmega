@@ -12,8 +12,9 @@ public class PartidaManager : MonoBehaviour {
     public GameObject CartaPrefap;
     public Transform ManoPlayer1;
     public Transform ManoPlayer2;
+    public GameObject MenuPausa;
     public UIPhases MenuPhases;
-    public Button Listo;
+    public Button Listo,ListoOption;
     public Image PhasesPanel;
     public Text PhasesText;
     public static PartidaManager instance;
@@ -33,6 +34,37 @@ public class PartidaManager : MonoBehaviour {
             return Player2;
         else
             return Player1;
+    }
+    public void Update()
+    {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+            Pausa();
+            }
+    }
+    public void Salir()
+    {
+        // penalizar
+        Time.timeScale = 1;
+        SoundManager.instance.musicSource.UnPause();
+        SoundManager.instance.sfxSource.UnPause();
+        LevelLoader.instance.CargarEscena("Main Menu");
+      
+    }
+
+    public void Pausa()
+    {
+        MenuPausa.SetActive(true);
+        Time.timeScale = 0;
+        SoundManager.instance.musicSource.Pause();
+        SoundManager.instance.sfxSource.Pause();
+    }
+    public void Reanudar()
+    {
+        Time.timeScale = 1;
+        MenuPausa.SetActive(false);
+        SoundManager.instance.musicSource.UnPause();
+        SoundManager.instance.sfxSource.UnPause();
     }
 
     public string GetAtackUse(Player Jugador)
@@ -63,6 +95,7 @@ public class PartidaManager : MonoBehaviour {
         Player1.NombreCuenta.text= PlayerManager.instance.Jugador.Nombre;
         Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
         Player1.Photo.sprite = PlayerManager.instance.ImagePhoto;
+        Player2.Photo.sprite = DataManager.instance.IAPhotos.Find(p => p.name == PlayerManager.instance.IaPlaying.ToString());
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!= "Tutorial")
         {
 
@@ -289,7 +322,19 @@ public class PartidaManager : MonoBehaviour {
     public IEnumerator WhaitChangeFase()
     {
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         CambioFase = true;
+    }
+    public void Finishoptionbattle()
+    {
+        if (ListoOption)
+        {
+            ListoOption.gameObject.SetActive(false);
+        }
+        Listo.gameObject.SetActive(true);
+        IA.instance.TurnoIA(false);
+
     }
  
 }

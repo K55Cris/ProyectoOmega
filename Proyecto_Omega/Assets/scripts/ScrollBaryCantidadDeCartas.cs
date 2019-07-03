@@ -32,8 +32,5 @@ public class ScrollBaryCantidadDeCartas : MonoBehaviour {
     {
         return this.arrayRookie;
     }
-    // Update is called once per frame
-    void Update () {
 
-    }
 }

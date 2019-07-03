@@ -9,6 +9,7 @@ public class ContadorOffencivo : MonoBehaviour
     public TextMeshProUGUI Ataque;
     public int AtaqueBase = 0;
     public int PoderDeAtaque=0;
+    public GameObject Etiqueta;
 
     // Use this for initialization
     public void Empezar(int Daño,UnityAction<string> LoAction=null)
@@ -21,7 +22,7 @@ public class ContadorOffencivo : MonoBehaviour
     {
         PoderDeAtaque = 0;
         Ataque.color = Color.white;
-        this.gameObject.SetActive(false);
+        Etiqueta.gameObject.SetActive(false);
     }
 
     public void EFECTOS(int cantidad, UnityAction<string> LoAction)
@@ -40,6 +41,10 @@ public class ContadorOffencivo : MonoBehaviour
     {
       
     }
+    public void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 
     private IEnumerator EstablecerCantidad(int cantidad, UnityAction<string> loaction=null)
     {
@@ -48,6 +53,7 @@ public class ContadorOffencivo : MonoBehaviour
         {
             // Buffo
             Debug.Log("bUFFO");
+            
             int DIVISOR = cantidad / 50;
             for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
             {
@@ -67,6 +73,7 @@ public class ContadorOffencivo : MonoBehaviour
             // De-duff
             Debug.Log(PoderDeAtaque+":"+transform.parent.transform.parent.transform.parent.name);
             int DIVISOR = PoderDeAtaque / 60;
+            
             for (int i = PoderDeAtaque; i > cantidad; i-=DIVISOR)
             {
                 Ataque.text = i.ToString();

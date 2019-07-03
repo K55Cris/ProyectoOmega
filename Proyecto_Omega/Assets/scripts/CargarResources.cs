@@ -59,9 +59,5 @@ public class CargarResources : MonoBehaviour {
        CargarImagenes();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

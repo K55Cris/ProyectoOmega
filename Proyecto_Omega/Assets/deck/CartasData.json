@@ -1148,10 +1148,10 @@
       "DanoAtaqueB": 999,
       "NombreAtaqueC": "Guard (A→0)",
       "DanoAtaqueC": 999,
-      "PerdidaVidaIII": 80,
-      "PerdidaVidaIV": 70,
-      "PerdidaVidaPerfect": 60,
-      "PerdidaVidaUltimate": 50,
+      "PerdidaVidaIII": 70,
+      "PerdidaVidaIV": 60,
+      "PerdidaVidaPerfect": 50,
+      "PerdidaVidaUltimate": 40,
       "ListaRequerimientos": [ null ]
     }
   ],

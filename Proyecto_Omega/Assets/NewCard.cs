@@ -21,13 +21,13 @@ public class NewCard : MonoBehaviour {
         DataManager.instance.WinCard(SetResults);
        
     }
-    public void SetResults(int ID)
+    public void SetResults(int ID,bool desbloqueado)
     {
         Sprite NewDigimon = DataManager.instance.GetSprite(ID);
         if (NewDigimon)
         {
             ImgCard.sprite = NewDigimon;
-            Manager.GetCarta(ID);
+            Manager.GetCarta(ID,desbloqueado);
         }
 
     }

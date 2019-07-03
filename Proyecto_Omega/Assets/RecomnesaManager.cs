@@ -48,17 +48,14 @@ public class RecomnesaManager : MonoBehaviour {
     public void Salir()
     {
         // Mandar a guardar la carta obtnida al los datos del jugador  
-        SceneManager.LoadSceneAsync("Main Menu");
+        LevelLoader.instance.CargarEscena("Main Menu");
     }
-    public void GetCarta(int DigiId)
+    public void GetCarta(int DigiId,bool nuevo)
     {
         NewDigi = DataManager.instance.GetDigicarta(DigiId);
-        SetDatos();
+        NombreDigimon.text = NewDigi.Nombre;
+        Desbloqueado.gameObject.SetActive(nuevo);
     }
 
-    public void SetDatos()
-    {
-        NombreDigimon.text = NewDigi.Nombre;
-        Desbloqueado.gameObject.SetActive(true);
-    }
+ 
 }

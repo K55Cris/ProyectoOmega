@@ -12,10 +12,12 @@ public class DataManager : MonoBehaviour {
     public bool IntroVisto = false;
     public Cartas ColeccionDeCartas;
     public List<DigiCarta> TodasLasCartas;
-    private UnityAction<int> _Loaction;
+    private UnityAction<int,bool> _Loaction;
     public List<Sprite> ImagesType;
     public Texture[] arrayImage;
+    public List<Sprite> IAPhotos;
     public List<Sprite> PerfilPhotos;
+    private List<int> ListaExcluidos = new List<int>();
     
     void Awake()
     {
@@ -29,13 +31,14 @@ public class DataManager : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
-        Application.targetFrameRate = 30;
+
 
     }
 
     private void Start()
     {
         LoadCartas();
+        
     }
     public DigiCarta GetDigicarta(int codigo)
     {
@@ -58,7 +61,13 @@ public class DataManager : MonoBehaviour {
             TodasLasCartas.Add(item);
         }
         arrayImage = Resources.LoadAll<Texture>("Digimon");
-     //   arraySprites = Resources.LoadAll<Sprite>("Digimon");
+
+        Sprite[]  arrayIAPs = Resources.LoadAll<Sprite>("DigimonCaratula/");
+        foreach (var item in arrayIAPs)
+        {
+            IAPhotos.Add(item);
+        }
+        //   arraySprites = Resources.LoadAll<Sprite>("Digimon");
 
     }
     public Texture GetTextureDigimon(int IDigimon)
@@ -145,20 +154,22 @@ public class DataManager : MonoBehaviour {
     }
     public bool bandera = true;
 
-    public void WinCard(UnityAction<int> Loaction)
+    public void WinCard(UnityAction<int,bool> Loaction)
     {
+        ListaExcluidos.Clear();
         _Loaction = Loaction;
         // revisamos si de casualidad ya tiene todas las cartas
-        if (PlayerManager.instance.Jugador.IDCartasDisponibles.Count == 60)
+        if (PlayerManager.instance.Jugador.IDCartasDisponibles.Count <= 60)
         {
             foreach (var item in PlayerManager.instance.Jugador.IDCartasDisponibles)
             {
                 if (item.Cantidad < 9)
                 {
                     GetCard();
-                    break; 
+                    return; 
                 }
             }
+            JuegoCompleto();
         }
         else
         {
@@ -169,7 +180,12 @@ public class DataManager : MonoBehaviour {
     }
     public void GetCard()
     {
-        int  IDCard = Random.Range(1, TodasLasCartas.Count + 1);
+        Debug.Log(TodasLasCartas.Count);
+        int IDCard = Random.Range(1, TodasLasCartas.Count);
+        while (ListaExcluidos.Contains(IDCard))
+        {
+            IDCard = Random.Range(1, TodasLasCartas.Count);
+        }
         bool Encontrado = false;
         //Revisamos si la carta es nueva 
         foreach (var item in PlayerManager.instance.Jugador.IDCartasDisponibles)
@@ -181,18 +197,22 @@ public class DataManager : MonoBehaviour {
                     Encontrado = true;
                     // agregamos y salimos
                     PlayerManager.instance.NewCard(IDCard);
-                    _Loaction.Invoke(IDCard);
+                    _Loaction.Invoke(IDCard, false);
                     break;
                 }
                 else
+                {
                     GetCard();
+                    ListaExcluidos.Add(IDCard);
+                    return;
+                }
             }
         }
         if (!Encontrado)
         {
             // agregamos y salimos
             PlayerManager.instance.NewCard(IDCard);
-            _Loaction.Invoke(IDCard);
+            _Loaction.Invoke(IDCard,true);
         } 
     } 
 
@@ -200,8 +220,8 @@ public class DataManager : MonoBehaviour {
     {
         // mensaje de Ganador
         PlayerManager.instance.Jugador.ALLCards = true;
-        PlayerManager.instance.SavePlayer();
-        _Loaction.Invoke(61);
+        PlayerManager.instance.NewCard(61);
+        _Loaction.Invoke(61,true);
     }
 
     public Sprite GetSpriteForType(DigiCarta Datos)

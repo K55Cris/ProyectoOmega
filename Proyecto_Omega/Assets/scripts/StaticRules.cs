@@ -1456,11 +1456,8 @@ public class StaticRules : MonoBehaviour
     }
     
     private void StartBattlePhase2(string result)
-    {
 
-        if (!IsInvoking("StartBattlePhase2"))
-        {
-           
+    {
             DigimonBoxSlot DigimonBox1 = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>();
             DigimonBoxSlot DigimonBox2 = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>();
             // Activar habilidad de Digimon de jugador 2
@@ -1473,10 +1470,8 @@ public class StaticRules : MonoBehaviour
             else
             {
                 StaticRules.instance.EfectosDeAtaque(DigimonBox2._DigiCarta, DigimonBox1._DigiCarta, StaticRules.instance.StartBattlePhase3);
-
             }
             // revisar si ataco con C para efecto de Digimon jugador 2   
-        }
     }
 
     private void StartBattlePhase3(string result)
@@ -1497,8 +1492,6 @@ public class StaticRules : MonoBehaviour
     }
     private void StartBattlePhase4(string result)
     {
-        Debug.Log(result);
-
         // Jugador Dos ativa su carta y termina el Turno 
 
         PartidaManager.instance.CambioDePhase(true);
@@ -1508,27 +1501,26 @@ public class StaticRules : MonoBehaviour
     }
     private static void StartBattlePhase5(string result)
     {
-        Debug.Log(result + " 65");
         if (StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player2)
         {
-            // salto de phase por parte de la IA
+            //  IA
             IA.instance.TurnoIA(false);
         }
         else
         {
             // ESPACIO PARA CARTAS
+            PartidaManager.instance.ListoOption.gameObject.SetActive(true);
+            PartidaManager.instance.Listo.gameObject.SetActive(false);
+
         }
     }
 
 
     public void EfectosDeAtaque(CartaDigimon DigiCartaAfectada, CartaDigimon DigimonContrario, UnityAction<string> Phase)
     {
-        if (DigimonContrario.DatosDigimon.TipoBatalla == "C") {
-            
-         //   if (DigiCartaAfectada.DatosDigimon.NombreAtaqueC.Contains("Guard (A→0)"))
-         //   {
-                    Guard("A", DigiCartaAfectada.DatosDigimon.TipoBatalla, 0, DigimonContrario,Phase);
-         //   }
+        if (DigimonContrario.DatosDigimon.TipoBatalla == "C")
+        {
+            Guard("A", DigiCartaAfectada.DatosDigimon.TipoBatalla, 0, DigimonContrario,Phase);
         }
         else
         {

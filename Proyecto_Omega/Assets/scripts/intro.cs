@@ -27,10 +27,7 @@ public class intro : MonoBehaviour {
             Continuar();
         }
     }
-    // Update is called once per frame
-    void Update () {
-		
-	}
+
     public void Continuar()
     {
         if (PlayerManager.instance.bienvenida)

@@ -43,7 +43,7 @@ public class LevelLoader : MonoBehaviour {
     }
     public IEnumerator LoadNewScene(string nombreDeLaEscena)
     {
-
+        yield return null;
         // Abrimos pantalla de carga 
         Fondo.gameObject.SetActive(true);
         yield return new WaitForEndOfFrame();
@@ -54,24 +54,26 @@ public class LevelLoader : MonoBehaviour {
 
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
         AsyncOperation async = SceneManager.LoadSceneAsync(nombreDeLaEscena);
-        async.allowSceneActivation = false;
+        async.allowSceneActivation = true;
+        Carga.text = async.progress.ToString("N0") + "%";
         // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
         while (!async.isDone)
         {
             Carga.text = async.progress.ToString("N0") + "%";
-            if (async.progress==.9F)
+            if (async.progress>=.9F)
             {
                 Carga.text = "100%";
                 ps.Pause();
                 async.allowSceneActivation = true;
                 yield return new WaitForSeconds(0.5f);
-                Guilmon.gameObject.SetActive(false);
-                DataManager.instance.FadeCanvas(Fondo, false);
-                yield return new WaitForSeconds(0.5f);
+                
             }
         }
         yield return new WaitForEndOfFrame();
-
+        Guilmon.gameObject.SetActive(false);
+        DataManager.instance.FadeCanvas(Fondo, false);
+        yield return new WaitForSeconds(0.5f);
     }
-
+   
+    
 }

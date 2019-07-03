@@ -74,7 +74,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     }
     public void BattelPhase(int Ataque, UnityAction<string> LoUnityAction = null)
     {
-        CanvasContador.gameObject.SetActive(true);
+        CanvasContador.Etiqueta.SetActive(true);
         CanvasContador.Empezar(Ataque, LoUnityAction);
     }
     public void EndPhase()
