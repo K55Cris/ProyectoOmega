@@ -1893,7 +1893,7 @@ public class StaticRules : MonoBehaviour
             CartaDigimon Digimon = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo1.DarkArea, Digimon.transform, Ajustar);
             PlayerManager.instance.LosePlayer(StaticRules.instance.PointGaugePlayer2/10);
-            PartidaManager.instance.cambioEcena();
+            PartidaManager.instance.Victory(false);
             return;
         }
         else if (StaticRules.instance.PointGaugePlayer2 <= 0 && StaticRules.instance.PointGaugePlayer1 >= 0)
@@ -1902,24 +1902,17 @@ public class StaticRules : MonoBehaviour
             CartaDigimon Digimon = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>().DRoquin;
             PartidaManager.instance.SetMoveCard(MesaManager.instance.Campo2.DarkArea, Digimon.transform, Ajustar);
             PlayerManager.instance.WinPlayer(StaticRules.instance.PointGaugePlayer1/10);
-            StaticRules.instance.Invoke("ChangeRecompensa", 4f);
+            PartidaManager.instance.Victory(true);
         }
         else
         {
             PartidaManager.instance.Cambio("Empate");
             PlayerManager.instance.WinPlayer(-5);
-            PartidaManager.instance.cambioEcena();
+            PartidaManager.instance.Victory(true);
         }
         
     }
-    public void ChangeRecompensa()
-    {
-        LevelLoader.instance.CargarEscena("Recompensa");
-    }
-    public void MoveDigimonSlot()
-    {
-        LevelLoader.instance.CargarEscena("Recompensa");
-    }
+
 
     public static void ActivateOptionCard(CartaDigimon OpCard)
     {

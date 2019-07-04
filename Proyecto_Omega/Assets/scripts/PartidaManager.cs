@@ -5,6 +5,7 @@ using DigiCartas;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class PartidaManager : MonoBehaviour {
 
     public Player Player1;
@@ -15,7 +16,7 @@ public class PartidaManager : MonoBehaviour {
     public GameObject MenuPausa;
     public UIPhases MenuPhases;
     public Button Listo,ListoOption;
-    public Image PhasesPanel;
+    public Image PhasesPanel,FondoFinal,FondoPlayer;
     public Text PhasesText;
     public static PartidaManager instance;
     public string Player1Atack = "A";
@@ -24,6 +25,8 @@ public class PartidaManager : MonoBehaviour {
     public int EfectosCadena = 0;
     public bool CambioFase = true;
     public Sprite ListoOff, ListoON;
+    public CanvasGroup CanvasFinal;
+    public TextMeshProUGUI EtiquetaVictoria;
     private void Awake()
     {
         instance = this;
@@ -326,6 +329,7 @@ public class PartidaManager : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         CambioFase = true;
     }
+    private string ecena = "";
     public void Finishoptionbattle()
     {
         if (ListoOption)
@@ -335,6 +339,38 @@ public class PartidaManager : MonoBehaviour {
         Listo.gameObject.SetActive(true);
         IA.instance.TurnoIA(false);
 
+    }
+    public void finishGame()
+    {
+        // prender menu de Victoria
+        // Cargamos me3nu de recompensas
+        LevelLoader.instance.CargarEscena(ecena);
+    }
+  
+    public void ShowVictori()
+    {
+        DataManager.instance.FadeCanvas(CanvasFinal, true);
+        ecena = "Recompensa";
+        EtiquetaVictoria.text = "Victory";
+        FondoFinal.color = Color.green;
+       
+    }
+    public void ShowLose()
+    {
+        DataManager.instance.FadeCanvas(CanvasFinal, true);
+        ecena = "MainMenu";
+        EtiquetaVictoria.text = "Lost";
+        FondoFinal.color = Color.red;
+    }
+
+    public void Victory(bool Desicion)
+    {
+        FondoPlayer.gameObject.SetActive(false);
+
+        if (Desicion)
+            Invoke("ShowVictori", 4f);
+        else
+            Invoke("ShowLose", 4f);
     }
  
 }
