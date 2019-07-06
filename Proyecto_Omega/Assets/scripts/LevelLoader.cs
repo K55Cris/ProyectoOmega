@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using DigiCartas;
+using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour {
 
     public static LevelLoader instance;
     public ParticleSystem ps;
-    public CanvasGroup Fondo;
+    public CanvasGroup Fondo, NewItem;
     public Image Guilmon;
     public TextMeshProUGUI Carga;
+    public Animator AMColeccionable;
+    public List<GameObject> Contenedores;
+    public Button SalirColecionable;
+    public Transform PanelColecion;
+
     void Awake()
     {
 
@@ -74,6 +82,47 @@ public class LevelLoader : MonoBehaviour {
         DataManager.instance.FadeCanvas(Fondo, false);
         yield return new WaitForSeconds(0.5f);
     }
-   
+
+    public void GetNewItem(List<int> ID)
+    {
+        SalirColecionable.interactable = false;
+        PanelColecion.transform.localScale = new Vector3(0,0,1);
+        foreach (var item in Contenedores)
+        {
+            item.SetActive(false);
+        }
+        DataManager.instance.FadeCanvas(NewItem,true);
+        List<Coleccionables> TempColec = new List<Coleccionables>(); 
+        foreach (var item2 in ID)
+        {
+            foreach (var item in DataManager.instance.ListaColeccionables)
+            {
+                if (item.ID == item2)
+                {
+                    //Coleccionable encontrado
+                    TempColec.Add(item);
+                    PlayerManager.instance.SetNewColeccionable(item);
+                }
+            }
+        }
+        //Cargar Datos
+        for (int i = 0; i < TempColec.Count; i++)
+        {
+            Contenedores[i].SetActive(true);
+            Contenedores[i].GetComponent<ColeccionableItem>().CargarData(TempColec[i]);
+        }
+        Invoke("ShowItems", 0.5f);
+}
+    
+    public void ShowItems()
+    {
+        AMColeccionable.Play("OpenNewItem");
+        SalirColecionable.interactable = true;
+    }
+    
+    public void OutColecionable()
+    {
+        DataManager.instance.FadeCanvas(NewItem);
+    }
     
 }

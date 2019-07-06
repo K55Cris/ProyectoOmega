@@ -33,6 +33,8 @@ public class PlayerManager : MonoBehaviour {
         MainMenu.instance.LoadName();
     }
 
+
+
     public void GetData()
     {
         // cargar Deck EN EL JUGADOR
@@ -52,6 +54,17 @@ public class PlayerManager : MonoBehaviour {
         // Cargar Photo
         ImagePhoto = DataManager.instance.PerfilPhotos[Jugador.Photo];
     }
+    public void SetNewColeccionable(Coleccionables Nuevo)
+    {
+        foreach (var item in Jugador.MisColeccionables)
+        {
+            if (item.ID == Nuevo.ID)
+                return;
+        }
+        Jugador.MisColeccionables.Add(Nuevo);
+        SavePlayer();
+    }
+
     public List<int> GetDeck()
     {
         return Jugador.IDCartasMazo;

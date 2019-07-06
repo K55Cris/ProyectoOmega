@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -43,7 +43,7 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: d844398ad6de6e84786060f0dbc2d580, type: 3}
     duration: 2
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: d844398ad6de6e84786060f0dbc2d580,
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 0d8518cf5e45deb4794eaec270dc7b82,
     type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -316,8 +316,8 @@ PlayerSettings:
   templatePackageId: 
   templateDefaultScene: 
   AndroidTargetArchitectures: 5
-  AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 2800000, guid: d844398ad6de6e84786060f0dbc2d580, type: 3}
+  AndroidSplashScreenScale: 0
+  androidSplashScreen: {fileID: 2800000, guid: 08f255bdaaef2a54d8bfeacbea3967e5, type: 3}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
@@ -733,8 +733,10 @@ PlayerSettings:
   ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 0}
-  splashScreenBackgroundSourcePortrait: {fileID: 0}
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 617d2673d23a1f64eb06fe6f891af35c,
+    type: 3}
+  splashScreenBackgroundSourcePortrait: {fileID: 21300000, guid: 0d8518cf5e45deb4794eaec270dc7b82,
+    type: 3}
   spritePackerPolicy: 
   webGLMemorySize: 256
   webGLExceptionSupport: 1

@@ -1,21 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1151556936892854}
-  m_IsPrefabAsset: 1
 --- !u!1 &1151556936892854
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4021154240060000}
@@ -25,13 +15,14 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4021154240060000
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151556936892854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 811.0193, y: 526.06866, z: 0}
@@ -42,9 +33,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114166987957000764
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151556936892854}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -64,8 +56,60 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2ff0c93a7a7412044b15c8d4798445f3, type: 3}
   - {fileID: 21300000, guid: 3dabe010d67e1ab4f98853a10d891731, type: 3}
   arrayImage: []
+  IAPhotos: []
   PerfilPhotos:
   - {fileID: 21300000, guid: d6898ffbc3d96934090d0972be34f7ca, type: 3}
   - {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
   - {fileID: 21300000, guid: 74862f8739e1e7d41abc873c74c51128, type: 3}
+  ListaColeccionables:
+  - ID: 0
+    Nombre: Tablero 01
+    Image: {fileID: 21300000, guid: db0975bccf0a8a246a22b958dd4c1b68, type: 3}
+    Rareza: {r: 0, g: 1, b: 0.2024517, a: 1}
+    Tipo: 1
+  - ID: 1
+    Nombre: Tablero 02
+    Image: {fileID: 21300000, guid: d5e91b072f0cba647aafec0211284919, type: 3}
+    Rareza: {r: 0, g: 1, b: 0, a: 1}
+    Tipo: 1
+  - ID: 2
+    Nombre: Tablero 03
+    Image: {fileID: 21300000, guid: cc8d1d0acd21d94448d18a4a137ebead, type: 3}
+    Rareza: {r: 0, g: 1, b: 1, a: 1}
+    Tipo: 2
+  - ID: 3
+    Nombre: Tablero 04
+    Image: {fileID: 21300000, guid: b855fd05718861d42a02229b5ddd45f1, type: 3}
+    Rareza: {r: 0, g: 1, b: 1, a: 1}
+    Tipo: 2
+  - ID: 4
+    Nombre: Tablero 05
+    Image: {fileID: 21300000, guid: e82bcff602e70664d8e1da08afbe440c, type: 3}
+    Rareza: {r: 1, g: 0, b: 1, a: 1}
+    Tipo: 2
+  - ID: 5
+    Nombre: Tablero 06
+    Image: {fileID: 21300000, guid: 7997652348e0dea449e05d27a4c57c75, type: 3}
+    Rareza: {r: 1, g: 0, b: 1, a: 1}
+    Tipo: 2
+  - ID: 6
+    Nombre: Tablero 07
+    Image: {fileID: 21300000, guid: daf7226c620f8b64aa68be1c6fa96230, type: 3}
+    Rareza: {r: 1, g: 1, b: 0, a: 1}
+    Tipo: 2
+  - ID: 7
+    Nombre: Tablero 08
+    Image: {fileID: 21300000, guid: 2048ff687f7ff664e8ce93ad410df939, type: 3}
+    Rareza: {r: 1, g: 1, b: 0, a: 1}
+    Tipo: 2
+  - ID: 8
+    Nombre: K55
+    Image: {fileID: 21300000, guid: 74862f8739e1e7d41abc873c74c51128, type: 3}
+    Rareza: {r: 1, g: 0, b: 0, a: 1}
+    Tipo: 0
+  - ID: 9
+    Nombre: Taiga
+    Image: {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
+    Rareza: {r: 0, g: 1, b: 1, a: 1}
+    Tipo: 0
   bandera: 1

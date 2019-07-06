@@ -18,7 +18,7 @@ public class DataManager : MonoBehaviour {
     public List<Sprite> IAPhotos;
     public List<Sprite> PerfilPhotos;
     private List<int> ListaExcluidos = new List<int>();
-    
+    public List<Coleccionables> ListaColeccionables = new List<Coleccionables>();
     void Awake()
     {
         if (instance == null)

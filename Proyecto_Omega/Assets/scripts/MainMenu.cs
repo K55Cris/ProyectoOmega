@@ -186,4 +186,10 @@ public class MainMenu : MonoBehaviour {
     {
         QualitySettings.antiAliasing = 0;
     }
+
+
+    public void TestColecionables()
+    {
+        LevelLoader.instance.GetNewItem(new List<int> { 9 });
+    }
 }

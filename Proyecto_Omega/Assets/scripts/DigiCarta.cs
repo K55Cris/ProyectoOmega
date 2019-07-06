@@ -125,6 +125,7 @@ namespace DigiCartas
         public List<Progreso> Progresos;
         public int Nivel = 0;
         public int Photo;
+        public List<Coleccionables> MisColeccionables = new List<Coleccionables>();
     }
 
     [Serializable]
@@ -244,7 +245,20 @@ namespace DigiCartas
         public Phases Limite;
         public Player Jugador;
     }
-  
 
+
+    [Serializable]
+    public class Coleccionables
+    {
+        public int ID;
+        public string Nombre;
+        public Sprite Image;
+        public Color Rareza;
+        public ColeccionablesType Tipo;
+    }
+    public enum ColeccionablesType
+    {
+        PerfilFoto = 0, FondoTablero = 1 , Tablero=2
+    };
 
 }
