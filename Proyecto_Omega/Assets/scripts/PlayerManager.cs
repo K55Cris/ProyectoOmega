@@ -52,7 +52,7 @@ public class PlayerManager : MonoBehaviour {
             bienvenida = true;
         }
         // Cargar Photo
-        ImagePhoto = DataManager.instance.PerfilPhotos[Jugador.Photo];
+        ImagePhoto = DataManager.instance.GetPerfilPhoto(Jugador.Photo);
     }
     public void SetNewColeccionable(Coleccionables Nuevo)
     {
@@ -162,11 +162,10 @@ public class PlayerManager : MonoBehaviour {
             Jugador.Nivel = 0;
             SavePlayer();
     }
-    public void ChangePhoto(int Idex)
+    public void ChangePhoto(string Foto)
     {
-        Jugador.Photo = Idex;
-        ImagePhoto = DataManager.instance.PerfilPhotos[Jugador.Photo];
-        DeckManager.instance.LoadPhoto();
+        Jugador.Photo = Foto;
+        ImagePhoto = DataManager.instance.GetPerfilPhoto(Foto);
         SavePlayer();
     }
 }

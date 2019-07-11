@@ -158,11 +158,11 @@ public class MesaManager : MonoBehaviour {
         }
         else
         {
-            if (Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
+            if (Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta && Campo2.OptionSlot1.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
                 return Campo2.OptionSlot1;
-            if (Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
+            if (Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta && Campo2.OptionSlot2.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
                 return Campo2.OptionSlot2;
-            if (Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
+            if (Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta && Campo2.OptionSlot3.GetComponent<OptionSlot>().OpCarta.cardNumber == Dcarta.CardNumber)
                 return Campo2.OptionSlot3;
         }
         return null;

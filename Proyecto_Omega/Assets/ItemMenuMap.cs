@@ -99,4 +99,43 @@ public class ItemMenuMap : MonoBehaviour {
         Camera.main.transform.position = NewPos;
         MapDuelManager.instance.ShowInfo(this);
     }
+
+
+    public void Recompensa(int Wins,int Lost, int ID)
+    {
+        switch (ID)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 16:
+                break;
+
+
+            default:
+                break;
+        }
+    }
+
+    public IEnumerator LoadColecionable(List<int> Lista)
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        LevelLoader.instance.GetNewItem(Lista);
+
+    }
 }

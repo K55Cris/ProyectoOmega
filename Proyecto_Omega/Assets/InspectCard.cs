@@ -16,7 +16,7 @@ public class InspectCard : MonoBehaviour {
 
     public void OpenCard(DigiCarta Datos)
     {
-        id.text = "St-" + Datos.id.ToString();
+        id.text = Datos.codigo;
         Nombre.text = Datos.Nombre;
         ImageDigimon.sprite = DataManager.instance.GetSprite(Datos.id);
 

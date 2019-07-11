@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Sound
 {
     Evolucion, SetCard, Evolucion2 ,AtaqueA,AtaqueB,AtaqueC,Tornado , MainMenu, Duelo, Recompensa ,
-    Enter, Out,Barajear, tutorial
+    Enter, Out,Barajear, tutorial,Wincolecionable
 }
 public class SoundManager : MonoBehaviour {
 
@@ -39,6 +39,9 @@ public class SoundManager : MonoBehaviour {
     [Header("Main Menu")]
     public AudioClip EnterButton;
     public AudioClip OutButton;
+
+    [Header("Efectos")]
+    public AudioClip Wincolecionable;
     void Awake()
     {
         if (instance == null)
@@ -152,8 +155,11 @@ public class SoundManager : MonoBehaviour {
             case Sound.Out:
                 audioClip = OutButton;
                 break;
+            case Sound.Wincolecionable:
+                audioClip = Wincolecionable;
+                break;
 
-              
+
         }
         return audioClip;
     }

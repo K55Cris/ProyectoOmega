@@ -76,6 +76,8 @@ namespace DigiCartas
     {
         public List<DigiCarta> DigiCartas;
         public List<DigiCarta> CartaOption;
+        public List<DigiCarta> SXDigiCartas;
+        public List<DigiCarta> SXCartaOption;
     }
 
     [Serializable]
@@ -124,7 +126,7 @@ namespace DigiCartas
         public bool ALLCards;
         public List<Progreso> Progresos;
         public int Nivel = 0;
-        public int Photo;
+        public string Photo,Tablero,Funda,FondoTablero;
         public List<Coleccionables> MisColeccionables = new List<Coleccionables>();
     }
 
@@ -256,9 +258,10 @@ namespace DigiCartas
         public Color Rareza;
         public ColeccionablesType Tipo;
     }
+    [Serializable]
     public enum ColeccionablesType
     {
-        PerfilFoto = 0, FondoTablero = 1 , Tablero=2
+        PerfilFoto = 0, FondoTablero = 1 , Tablero=2 , Funda = 3
     };
 
 }

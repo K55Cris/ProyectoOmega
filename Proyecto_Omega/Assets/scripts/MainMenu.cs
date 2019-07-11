@@ -88,6 +88,10 @@ public class MainMenu : MonoBehaviour {
     public void SaveName()
     {
         PlayerManager.instance.SaveName(Nombre.text);
+        if(Nombre.text == "K55" || Nombre.text == "k55")
+        {
+            LevelLoader.instance.GetNewItem(new List<int> { 8 });
+        }
         LoadName();
     }
     public void LoadName()

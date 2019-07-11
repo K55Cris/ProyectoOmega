@@ -106,6 +106,7 @@ public class LevelLoader : MonoBehaviour {
             }
         }
         //Cargar Datos
+        SoundManager.instance.PlaySfx(Sound.Wincolecionable);
         for (int i = 0; i < TempColec.Count; i++)
         {
             Contenedores[i].SetActive(true);

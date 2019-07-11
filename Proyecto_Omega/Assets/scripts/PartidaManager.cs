@@ -98,6 +98,7 @@ public class PartidaManager : MonoBehaviour {
         Player1.NombreCuenta.text= PlayerManager.instance.Jugador.Nombre;
         Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
         Player1.Photo.sprite = PlayerManager.instance.ImagePhoto;
+        if(Player2.Photo)
         Player2.Photo.sprite = DataManager.instance.IAPhotos.Find(p => p.name == PlayerManager.instance.IaPlaying.ToString());
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!= "Tutorial")
         {

@@ -352,7 +352,7 @@
       "PerdidaVidaIV": 10,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "PIYOMON X","PALMON X" ]
+      "ListaRequerimientos": [ "PIYOMON X", "PALMON X" ]
     },
     {
       "id": 16,
@@ -634,7 +634,7 @@
       "PerdidaVidaIV": 10,
       "PerdidaVidaPerfect": 10,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "TENTOMON X","GOTTSUMON X X","OTAMAMON X" ]
+      "ListaRequerimientos": [ "TENTOMON X", "GOTTSUMON X X", "OTAMAMON X" ]
     },
     {
       "id": 28,
@@ -657,7 +657,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 20,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "KABUTERIMON 40%","TORTAMON 40%","BIRDRAMON 40%" ]
+      "ListaRequerimientos": [ "KABUTERIMON 40%", "TORTAMON 40%", "BIRDRAMON 40%" ]
     },
     {
       "id": 29,
@@ -943,7 +943,7 @@
       "PerdidaVidaIV": 30,
       "PerdidaVidaPerfect": 20,
       "PerdidaVidaUltimate": 10,
-      "ListaRequerimientos": [ "MARINDEVIMON + PERFECT" , "DAGOMON + PERFECT"]
+      "ListaRequerimientos": [ "MARINDEVIMON + PERFECT", "DAGOMON + PERFECT" ]
     },
     {
       "id": 41,
@@ -1162,7 +1162,7 @@
       "Nombre": "Plug-in Ofensivo A",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
@@ -1174,7 +1174,7 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ Durante el combate usas el ataque A indiferente del tipo de ataque oponente.",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1183,7 +1183,7 @@
       "Nombre": "Plug-in Ofensivo C",
       "Capasidad": 50,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
@@ -1195,7 +1195,7 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ Durante el combate usas el ataque C indiferente del tipo de ataque oponente.",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1204,7 +1204,7 @@
       "Nombre": "Plug-in De alta velocidad B",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Item" ],
       "ListaCosto": [ null ],
@@ -1217,7 +1217,7 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ Durante el combate usas el ataque B indiferente del tipo de ataque oponente.",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1226,7 +1226,7 @@
       "Nombre": "¡Si pierdo, te llevo conmigo!",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "drop in allyOptionSlot faceUp" ],
@@ -1237,7 +1237,7 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ Cuando pierdes una batalla envia 3 cartas del net ocean oponente al dark area",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1246,7 +1246,7 @@
       "Nombre": "Una pequeña mejora de metal",
       "Capasidad": 40,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "allyHand drop in allyDarkArea" ],
@@ -1257,9 +1257,9 @@
       ],
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
-		"◎ Descarta una Carta",
+        "◎ Descarta una Carta",
         "◎ Añade 50 a tu poder de ataque",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1268,7 +1268,7 @@
       "Nombre": "¡Un contraataque desde la crisis!",
       "Capasidad": 40,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ null ],
@@ -1280,10 +1280,10 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ Cuando batallas con un digimon de un nivel superior al tuyo, duplica tu poder de ataque",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
-		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
+        "◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
       ]
-	 
+
     },
     {
       "id": 55,
@@ -1291,7 +1291,7 @@
       "Nombre": "¡Transformate en Nivel IV!",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Evolution Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
@@ -1301,11 +1301,11 @@
         "allyL3 not use",
         "drop in allyDarkArea"
       ],
-      "Limite": "Evolution Phase" ,
-	  "IsActivateHand": true,
+      "Limite": "Evolution Phase",
+      "IsActivateHand": true,
       "ListaEfectosMostrar": [
         "◎ Ignora todos lo requisitos de evolucion y transforma tu digimon en el digimon nivel IV de tu mano o Evolution box",
-		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
+        "◎ Esta carta no puede ser usada cuando tu digimon es nivel III"
       ]
     },
     {
@@ -1314,21 +1314,21 @@
       "Nombre": "¡Apunta a la evolución más fuerte!",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Evolution Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
         "allyEvolutionRequierimets allyDigivolution to nextLvl all allyHand drop in allyDarkArea",
-		"drop allHand allyDarkArea",
+        "drop allHand allyDarkArea",
         "drop in allyDarkArea"
       ],
       "Limite": "Evolution Phase",
-	  "IsActivateHand": true,
+      "IsActivateHand": true,
       "ListaEfectosMostrar": [
         "◎ ignora todos los requisitos de evolucion y evoluciona tu digimon en el digimon de siguiente nivel colocado en tu evolution box",
-		"◎ luego de eso envia tu mano entera a la dark area"
+        "◎ luego de eso envia tu mano entera a la dark area"
       ]
     },
     {
@@ -1337,7 +1337,7 @@
       "Nombre": "Ese fue un buen momento",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "allyHand drop in allyDarkArea" ],
@@ -1349,7 +1349,7 @@
       "Limite": "Battle Phase",
       "ListaEfectosMostrar": [
         "◎ Regresa los digimons nivel IV del adversario al digimon nivel III que eran antes de evolucionar, sin ninguna condicion",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },
     {
@@ -1358,7 +1358,7 @@
       "Nombre": "¡La batalla en la que aposté mi orgullo!",
       "Capasidad": 20,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Battle Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "onlyOne (allyNetOcean top drop in allyDarkArea)3" ],
@@ -1369,9 +1369,9 @@
       "Limite": "End Phase",
       "ListaEfectosMostrar": [
         "◎ cuando ganas la batalla en el  turno en que esta carta fue jugada, duplica los puntos de daño realizados",
-		"◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
-		"◎ Esta carta no puede ser usada cuando tu digimon es nivel III",
-		"◎ Esta carta solo puede ser usada una vez por juego"
+        "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area",
+        "◎ Esta carta no puede ser usada cuando tu digimon es nivel III",
+        "◎ Esta carta solo puede ser usada una vez por juego"
       ]
     },
     {
@@ -1380,7 +1380,7 @@
       "Nombre": "¡Porcentaje de victorias: 40%!",
       "Capasidad": 20,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Evolution Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
@@ -1400,7 +1400,7 @@
       "Nombre": "¡Porcentaje de victorias: 60%!",
       "Capasidad": 30,
       "Borde": "Azul",
-	  "IsSupport": true,
+      "IsSupport": true,
       "ListaActivacion": [ "Evolution Phase" ],
       "ListaCatrgoria": [ "Program" ],
       "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
@@ -1412,8 +1412,241 @@
       "Limite": "Evolution Phase",
       "ListaEfectosMostrar": [
         "◎ evoluciona tu digimon a un digimon del siguiente nivel que tenga esta carta como requisito",
-		"◎ luego de evolucionar selecciona una carta de tu mano y enviala a la dark area"
+        "◎ luego de evolucionar selecciona una carta de tu mano y enviala a la dark area"
       ]
     }
-  ]
+  ],
+  "SXDigiCartas": [
+    {
+      "id": 1001,
+      "codigo": "Sx-1",
+      "Nombre": "Dorugoramon",
+      "descripcion": "Avatar de la ¡Destrucción!",
+      "TipoBatalla": "C",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Beast Dragon",
+      "Nivel": "Ultimate",
+      "Borde": "Rojo",
+      "NombreAtaqueA": "Brave Metal",
+      "DanoAtaqueA": 780,
+      "NombreAtaqueB": "DORU Din",
+      "DanoAtaqueB": 680,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 530,
+      "PerdidaVidaIII": 40,
+      "PerdidaVidaIV": 40,
+      "PerdidaVidaPerfect": 30,
+      "PerdidaVidaUltimate": 20,
+      "ListaRequerimientos": [ "DORUGUREMON 80%" ]
+    },
+    {
+      "id": 1002,
+      "codigo": "Sx-2",
+      "Nombre": "Dorumon",
+      "descripcion": "Parece ser un Digimon prototipo experimental de antes de que los Digimon fuesen descubiertos",
+      "TipoBatalla": "A",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Beast",
+      "Nivel": "III",
+      "Borde": "Rojo",
+      "NombreAtaqueA": "Metal Cannon",
+      "DanoAtaqueA": 380,
+      "NombreAtaqueB": "Dash Metal",
+      "DanoAtaqueB": 260,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 210,
+      "PerdidaVidaIII": 20,
+      "PerdidaVidaIV": 10,
+      "PerdidaVidaPerfect": 10,
+      "PerdidaVidaUltimate": 10,
+      "ListaRequerimientos": [ null ]
+    },
+    {
+      "id": 1003,
+      "codigo": "Sx-3",
+      "Nombre": "Dorugamon",
+      "descripcion": "Es un peso pesado del que la mayoría de Digimon huye con tan solo ver su sombra",
+      "TipoBatalla": "A",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Beast Dragon",
+      "Nivel": "IV",
+      "Borde": "Rojo",
+      "Habilidad": "Tiene la habilidad \"agarrar\"",
+      "NombreAtaqueA": "Power Metal",
+      "DanoAtaqueA": 500,
+      "NombreAtaqueB": "Cannonball",
+      "DanoAtaqueB": 380,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 260,
+      "PerdidaVidaIII": 30,
+      "PerdidaVidaIV": 20,
+      "PerdidaVidaPerfect": 10,
+      "PerdidaVidaUltimate": 10,
+      "ListaRequerimientos": [ "DORUMON 40%" ]
+    },
+    {
+      "id": 1004,
+      "codigo": "SX-4",
+      "Nombre": "Doruguremon",
+      "descripcion": "¡El \"Dragón\", que dormía dentro de lo más profundo de su DigiCore",
+      "TipoBatalla": "A",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Beast Dragon",
+      "Nivel": "Perfect",
+      "Borde": "Rojo",
+      "Habilidad": "Tiene la habilidad \"agarrar\"",
+      "NombreAtaqueA": "Metal Meteor",
+      "DanoAtaqueA": 660,
+      "NombreAtaqueB": "Bloody Tower",
+      "DanoAtaqueB": 620,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 430,
+      "PerdidaVidaIII": 40,
+      "PerdidaVidaIV": 30,
+      "PerdidaVidaPerfect": 20,
+      "PerdidaVidaUltimate": 10,
+      "ListaRequerimientos": [ "DORUGAMON 60%" ]
+    },
+    {
+      "id": 1099,
+      "codigo": "St-1099",
+      "Nombre": "Raptordramon",
+      "descripcion": "¡Este dragón rapaz posee instintos depredadores de otro nivel!",
+      "TipoBatalla": "A",
+      "Familia": "Virus Busters",
+      "Atributo": "Vacuna",
+      "Tipo": "Cyborg",
+      "Nivel": "IV",
+      "Borde": "Rojo",
+      "NombreAtaqueA": "Emboscada Crunch",
+      "DanoAtaqueA": 610,
+      "NombreAtaqueB": "Carga de choque",
+      "DanoAtaqueB": 500,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 300,
+      "PerdidaVidaIII": 30,
+      "PerdidaVidaIV": 30,
+      "PerdidaVidaPerfect": 20,
+      "PerdidaVidaUltimate": 10,
+      "ListaRequerimientos": [ "DORUMON 40%" ]
+    },
+    {
+      "id": 1101,
+      "codigo": "Sx-101",
+      "Nombre": "Grademon",
+      "descripcion": "¡Incontenible el atrevido y resuelto espadachín gemelo!",
+      "TipoBatalla": "B",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Warrior",
+      "Nivel": "Perfect",
+      "Borde": "Rojo",
+      "Habilidad": "Tiene la habilidad \"agarrar\"",
+      "NombreAtaqueA": "Cross Blade",
+      "DanoAtaqueA": 800,
+      "NombreAtaqueB": "Grade Slash",
+      "DanoAtaqueB": 710,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 520,
+      "PerdidaVidaIII": 40,
+      "PerdidaVidaIV": 40,
+      "PerdidaVidaPerfect": 40,
+      "PerdidaVidaUltimate": 30,
+      "ListaRequerimientos": [ "RAPTORDRAMON 60%" ]
+    },
+    {
+      "id": 1100,
+      "codigo": "Sx-100",
+      "Nombre": "Alphamon",
+      "descripcion": "¡Su Alpha InForce le permite recuperar el tiempo que ha transcurrido en un instante!",
+      "TipoBatalla": "C",
+      "Familia": "Nature Spirits",
+      "Atributo": "Vacuna",
+      "Tipo": "Holy Knight",
+      "Nivel": "Ultimate",
+      "Borde": "Rojo",
+      "Habilidad": "Tiene las habilidades \"gale\" y \"orgulloso\".,",
+      "NombreAtaqueA": "Digitalize of Soul",
+      "DanoAtaqueA": 1100,
+      "NombreAtaqueB": "Seiken Gradalpha",
+      "DanoAtaqueB": 780,
+      "NombreAtaqueC": "Guard (A→0)",
+      "DanoAtaqueC": 600,
+      "PerdidaVidaIII": 50,
+      "PerdidaVidaIV": 50,
+      "PerdidaVidaPerfect": 40,
+      "PerdidaVidaUltimate": 40,
+      "ListaRequerimientos": [ "Grademon 80%" ]
+    }
+  ],
+  "SXCartaOption": [
+    {
+      "id": 1028,
+      "codigo": "Sx-28",
+      "Nombre": "¡Porcentaje de victorias: 40%!",
+      "Capasidad": 20,
+      "Borde": "Rojo",
+      "IsSupport": true,
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
+      "ListaRequerimientos": [ null ],
+      "ListaEfectos": [
+        "Digivolution to nextLevel 40%",
+        "drop in allyDarkArea"
+      ],
+      "Limite": "Evolution Phase",
+      "ListaEfectosMostrar": [
+        "◎ evoluciona tu digimon a un digimon del siguiente nivel que tenga esta carta como requisito",
+        "◎ no se pueden recibir los efectos causados ​​por las tarjetas con marco azul."
+      ]
+    },
+    {
+      "id": 1029,
+      "codigo": "Sx-29",
+      "Nombre": "¡Porcentaje de victorias: 60%!",
+      "Capasidad": 30,
+      "Borde": "Rojo",
+      "IsSupport": true,
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ "drop in allyEvolutionRequirementsBox faceDown" ],
+      "ListaRequerimientos": [ null ],
+      "ListaEfectos": [
+        "Digivolution to nextLevel 60%",
+        "drop in allyDarkArea"
+      ],
+      "Limite": "Evolution Phase",
+      "ListaEfectosMostrar": [
+        "◎ Evoluciona tu digimon a un digimon del siguiente nivel que tenga esta carta como requisito",
+        "◎ Luego de evolucionar selecciona una carta de tu mano y enviala a la dark area",
+        "◎ No se pueden recibir los efectos causados ​​por las tarjetas con marco azul."
+      ]
+    },
+    {
+      "id": 1106,
+      "codigo": "Sx-106",
+      "Nombre": "¡Lanzamiento del caballero sellado! y 80%!",
+      "Capasidad": 90,
+      "Borde": "Rojo",
+      "IsSupport": true,
+      "ListaActivacion": [ "Evolution Phase" ],
+      "ListaCatrgoria": [ "Program" ],
+      "ListaCosto": [ null ],
+      "ListaRequerimientos": [ null ],
+      "ListaEfectos": [
+        "Digivolution to nextLevel 80%",
+        "drop in allyDarkArea"
+      ],
+      "Limite": "End Phase",
+      "ListaEfectosMostrar": [
+        "◎ Haz que tus Digimon se conviertan en un Digimon del siguiente nivel con el porcentaje de victorias: ¡80%!",
+        "◎ ¡Liberación del caballero sellado! Requisito de Evolucion."
+      ]
+    }
+  ]  
 }

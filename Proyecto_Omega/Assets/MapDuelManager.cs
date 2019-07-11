@@ -9,7 +9,7 @@ public class MapDuelManager : MonoBehaviour {
     public Image IAImage;
     public Button Play;
     public TextMeshProUGUI Nombre, Wins, DeckName,Loses, Nivel, level;
-
+    public GameObject Booss;
     public static MapDuelManager instance;
     // Use this for initialization
     void Awake()
@@ -24,7 +24,10 @@ public class MapDuelManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        if (PlayerManager.instance.Jugador.ALLCards)
+        {
+            Booss.SetActive(true);
+        }
         foreach (var item in PlayerManager.instance.GetProgress())
         {
             ItemMenuMap Nodo = Nodos.Find(K => K.ID == item.ID);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+
 using TMPro;
 using UnityEngine.SceneManagement;
 public class DeckManager : MonoBehaviour {
@@ -15,7 +16,7 @@ public class DeckManager : MonoBehaviour {
     public List<int> DeckInt;
     public GameObject CartaBase;
     public CanvasGroup CGViewDeck;
-    public Transform BibliotecaContent, ViewEditorContent, DeckEditorContent;
+    public Transform BibliotecaContent, ViewEditorContent, DeckEditorContent , ColecionableContent;
     private float MaxCartas=0;
     public int Paginas = 0;
     public int nowPageB = 1;
@@ -29,7 +30,10 @@ public class DeckManager : MonoBehaviour {
     public EditorCardBase CartaSeleccionada;
     public DeckItem[] SlotsDeck;
     public GameObject PanelAlertaBackDeck;
-
+    public Transform customConten;
+    public GameObject PrefabColecionable;
+    public Image Photo, Tablero, BackTablero, BackCard;
+    public TextMeshProUGUI TextPhoto,TextTablero, TextBackTablero,TextBackCard;
     private void Awake()
     {
         instance = this;
@@ -37,15 +41,7 @@ public class DeckManager : MonoBehaviour {
         ViewDeck();
     }
     // Use this for initialization
-    void Start () {
-        // Cargar datos del Player
-        LoadPhoto();
-    }
-    public void LoadPhoto()
-    {
-        PerfilPhoto.sprite = PlayerManager.instance.ImagePhoto;
-    }
-
+  
     public void BorarDatos()
     {
         PlayerPrefs.DeleteAll();
@@ -122,6 +118,13 @@ public class DeckManager : MonoBehaviour {
         CGViewDeck.interactable = false;
         EditDeck();
     }
+
+    public void OpenColec()
+    {
+        ColecionableContent.gameObject.SetActive(true);
+        LoadData();
+    }
+
     public void CloseViewDeck()
     {
         int cartasMaximos = 0;
@@ -207,7 +210,17 @@ public class DeckManager : MonoBehaviour {
     public void LoadAllCards()
     {
      
-        foreach (var item in DataManager.instance.TodasLasCartas)
+        foreach (var item in DataManager.instance.ColeccionDeCartas.DigiCartas)
+        {
+            if (item.id != 61)
+            {
+                GameObject NewCarta = Instantiate(CartaBase, BibliotecaContent);
+                NewCarta.GetComponent<EditorCardBase>().RecibirDatos(item);
+                MaxCartas++;
+            }
+        }
+
+        foreach (var item in DataManager.instance.ColeccionDeCartas.CartaOption)
         {
             if (item.id != 61)
             {
@@ -444,11 +457,6 @@ public class DeckManager : MonoBehaviour {
     }
 	
 
-    public void ChangePhoto(int Photo)
-    {
-        PlayerManager.instance.ChangePhoto(Photo);
-    }
-
 
     public void puntosPaginas(Image [] puntos, int nowPage)
     {
@@ -478,5 +486,105 @@ public class DeckManager : MonoBehaviour {
         Debug.Log(DMazo);
     }
 
+    public void OpenCustom(int valor)
+    {
+        switch (valor)
+        {
+            case 0:
+                llenarLista(ColeccionablesType.PerfilFoto);
+                break;
+            case 1:
+                llenarLista(ColeccionablesType.Tablero);
+                break;
+            case 2:
+                llenarLista(ColeccionablesType.FondoTablero);
+                break;
+            case 3:
+                llenarLista(ColeccionablesType.Funda);
+                break;
+        }
+    }
+
+    public void llenarLista(ColeccionablesType Tipo)
+    {
+        List<Coleccionables> TempDatos = new List<Coleccionables>();
+        foreach (var item in PlayerManager.instance.Jugador.MisColeccionables)
+        {
+            if (item.Tipo == Tipo)
+            {
+                TempDatos.Add(item);
+            }
+        }
+        LlenarColecionables(TempDatos);
+    }
+
+    public void LlenarColecionables(List<Coleccionables> Datos)
+    {
+        int contador = 0;
+        foreach (Transform item in customConten)
+        {
+            item.gameObject.SetActive(false);
+        }
+        foreach (var item in Datos)
+        {
+            if (contador < customConten.childCount)
+            {
+                //Rellenar Datos
+                customConten.GetChild(contador).gameObject.SetActive(true);
+                customConten.GetChild(contador).GetComponent<ColeccionableItem>().CargarData(item);
+            }
+            else
+            {
+                // crear nuevo contenedor
+                GameObject NewContent = Instantiate(PrefabColecionable, customConten);
+                NewContent.GetComponent<ColeccionableItem>().CargarData(item);
+            }
+            contador++;
+        }
+    }
+    public void ChangeData(Coleccionables Datos)
+    {
+        
+        switch (Datos.Tipo)
+        {
+            case ColeccionablesType.PerfilFoto:
+                Photo.sprite = Datos.Image;
+                PlayerManager.instance.ChangePhoto(Datos.Nombre);
+                TextPhoto.text = Datos.Nombre;
+                break;
+            case ColeccionablesType.FondoTablero:
+                BackTablero.sprite = Datos.Image;
+                PlayerManager.instance.Jugador.FondoTablero = Datos.Nombre;
+                TextBackTablero.text = Datos.Nombre;
+                break;
+            case ColeccionablesType.Tablero:
+                Tablero.sprite = Datos.Image;
+                PlayerManager.instance.Jugador.Tablero = Datos.Nombre;
+                TextTablero.text = Datos.Nombre;
+                break;
+            case ColeccionablesType.Funda:
+                BackCard.sprite = Datos.Image;
+                PlayerManager.instance.Jugador.Funda = Datos.Nombre;
+                TextBackCard.text = Datos.Nombre;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void LoadData()
+    {
+        Photo.sprite = DataManager.instance.GetPerfilPhoto(PlayerManager.instance.Jugador.Photo);
+        TextPhoto.text = PlayerManager.instance.Jugador.Photo;
+
+        BackTablero.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero,ColeccionablesType.FondoTablero); 
+        TextBackTablero.text = PlayerManager.instance.Jugador.FondoTablero;
+
+        Tablero.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Tablero, ColeccionablesType.Tablero);
+        TextTablero.text = PlayerManager.instance.Jugador.Tablero;
+
+        BackCard.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Funda, ColeccionablesType.Funda);
+        TextBackCard.text = PlayerManager.instance.Jugador.Funda;
+    }
   
 }

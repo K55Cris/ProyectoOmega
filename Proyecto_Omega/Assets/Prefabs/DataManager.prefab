@@ -48,6 +48,8 @@ MonoBehaviour:
   ColeccionDeCartas:
     DigiCartas: []
     CartaOption: []
+    SXDigiCartas: []
+    SXCartaOption: []
   TodasLasCartas: []
   ImagesType:
   - {fileID: 21300000, guid: 5f20614fe5aac5d45996f7d5d997e72e, type: 3}
@@ -112,4 +114,24 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
     Rareza: {r: 0, g: 1, b: 1, a: 1}
     Tipo: 0
+  - ID: 10
+    Nombre: Tacagi
+    Image: {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
+    Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+    Tipo: 0
+  - ID: 11
+    Nombre: Default
+    Image: {fileID: 21300000, guid: 5e128a4a15b0bb043a9fddd814bb8604, type: 3}
+    Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+    Tipo: 1
+  - ID: 12
+    Nombre: Default
+    Image: {fileID: 21300000, guid: cbd885a5ba2845f46ba9f2977a83d928, type: 3}
+    Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+    Tipo: 2
+  - ID: 13
+    Nombre: Default
+    Image: {fileID: 21300000, guid: 7cc36e5a503decd4e90a5d08375a74ee, type: 3}
+    Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+    Tipo: 3
   bandera: 1

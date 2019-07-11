@@ -55,13 +55,26 @@ public class DataManager : MonoBehaviour {
     public void LoadCartas()
     {
         ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text);
-        TodasLasCartas = ColeccionDeCartas.DigiCartas;
+
+        foreach (var item in ColeccionDeCartas.DigiCartas)
+        {
+            TodasLasCartas.Add(item);
+        }
+
         foreach (var item in ColeccionDeCartas.CartaOption)
         {
             TodasLasCartas.Add(item);
         }
+        foreach (var item in ColeccionDeCartas.SXDigiCartas)
+        {
+            TodasLasCartas.Add(item);
+        }
+        foreach (var item in ColeccionDeCartas.SXCartaOption)
+        {
+            TodasLasCartas.Add(item);
+        }
         arrayImage = Resources.LoadAll<Texture>("Digimon");
-
+        
         Sprite[]  arrayIAPs = Resources.LoadAll<Sprite>("DigimonCaratula/");
         foreach (var item in arrayIAPs)
         {
@@ -268,5 +281,13 @@ public class DataManager : MonoBehaviour {
             return true;
         else
             return false;
-     }
+    }
+    public Sprite GetPerfilPhoto(string Nombre)
+    {
+       return DataManager.instance.ListaColeccionables.Find(x => x.Nombre == Nombre).Image;
+    }
+    public Sprite GetSpriteObjet(string Nombre,ColeccionablesType Tipo)
+    {
+        return DataManager.instance.ListaColeccionables.Find(x => x.Tipo== Tipo&& x.Nombre==Nombre).Image;
+    }
 }
