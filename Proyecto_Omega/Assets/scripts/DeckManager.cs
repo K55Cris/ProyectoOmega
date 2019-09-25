@@ -556,16 +556,19 @@ public class DeckManager : MonoBehaviour {
                 BackTablero.sprite = Datos.Image;
                 PlayerManager.instance.Jugador.FondoTablero = Datos.Nombre;
                 TextBackTablero.text = Datos.Nombre;
+                PlayerManager.instance.SavePlayer();
                 break;
             case ColeccionablesType.Tablero:
                 Tablero.sprite = Datos.Image;
                 PlayerManager.instance.Jugador.Tablero = Datos.Nombre;
                 TextTablero.text = Datos.Nombre;
+                PlayerManager.instance.SavePlayer();
                 break;
             case ColeccionablesType.Funda:
                 BackCard.sprite = Datos.Image;
                 PlayerManager.instance.Jugador.Funda = Datos.Nombre;
                 TextBackCard.text = Datos.Nombre;
+                PlayerManager.instance.SavePlayer();
                 break;
             default:
                 break;

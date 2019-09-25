@@ -1,0 +1,61 @@
+{
+  "Coleccionables": [
+    {
+      "id": 5,
+      "nombre": "Tablero 01",
+      "image": "Tablero 01",
+      "rareza": 1,
+      "tipo": 0
+    },
+    {
+      "id": 6,
+      "nombre": "Tablero 02",
+      "image": "Tablero 02",
+      "rareza": 1,
+      "tipo": 2
+    },
+    {
+      "id": 7,
+      "nombre": "Tablero 03",
+      "image": "Tablero 03",
+      "rareza": 2,
+      "tipo": 2
+    },
+    {
+      "id": 8,
+      "nombre": "Tablero 04",
+      "image": "Tablero 04",
+      "rareza": 2,
+      "tipo": 2
+    },
+    {
+      "id": 9,
+      "nombre": "Tablero 05",
+      "image": "Tablero 05",
+      "rareza": 3,
+      "tipo": 2
+    },
+    {
+      "id": 9,
+      "nombre": "Tablero 06",
+      "image": "Tablero 06",
+      "rareza": 3,
+      "tipo": 2
+    },
+    {
+      "id": 9,
+      "nombre": "Tablero 07",
+      "image": "Tablero 07",
+      "rareza": 4,
+      "tipo": 2
+    },
+    {
+      "id": 9,
+      "nombre": "Tablero 08",
+      "image": "Tablero 08",
+      "rareza": 4,
+      "tipo": 2
+    }
+
+  ]
+}

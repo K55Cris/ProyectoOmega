@@ -91,6 +91,7 @@ public class ItemMenuMap : MonoBehaviour {
                 this.gameObject.GetComponent<Image>().color = Color.red;
             }
         }
+        Recompensa(Pros.Victorias, Pros.Derrotas, Pros.ID);
 
     }
     public void Centrar()
@@ -106,15 +107,25 @@ public class ItemMenuMap : MonoBehaviour {
         switch (ID)
         {
             case 1:
+                if(wins>=20)
+                StartCoroutine(LoadColecionable(new List<int> { 1}));
+                if (Loses >= 50)
+                StartCoroutine(LoadColecionable(new List<int> { 1 }));
                 break;
             case 2:
+                if (wins >= 30)
+                    StartCoroutine(LoadColecionable(new List<int> { 1 }));
                 break;
             case 3:
+                if (wins >= 40)
+                    StartCoroutine(LoadColecionable(new List<int> { 2 }));
                 break;
             case 4:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 3 }));
                 break;
             case 5:
-                break;
+               
             case 6:
                 break;
             case 7:
@@ -122,6 +133,32 @@ public class ItemMenuMap : MonoBehaviour {
             case 8:
                 break;
             case 9:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 10:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 11:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 12:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 13:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 14:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
+            case 15:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
                 break;
             case 16:
                 break;
@@ -134,8 +171,25 @@ public class ItemMenuMap : MonoBehaviour {
 
     public IEnumerator LoadColecionable(List<int> Lista)
     {
-        yield return new WaitForSecondsRealtime(2f);
-        LevelLoader.instance.GetNewItem(Lista);
+        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForEndOfFrame();
+        try
+        {
+            List<int> TempList = new List<int>();
+            TempList.AddRange(Lista);
+            foreach (var item2 in PlayerManager.instance.Jugador.MisColeccionables)
+            {
+                TempList.RemoveAll(x => x == item2.ID);
+            }
 
+            if (TempList.Count > 0)
+                LevelLoader.instance.GetNewItem(TempList);
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
     }
 }

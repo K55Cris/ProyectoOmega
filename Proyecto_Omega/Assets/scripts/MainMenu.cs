@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour {
         Anisotropic();
         vSINC();
         Application.targetFrameRate = 60;
+        LoadName();
     }
 
     public void Quit()
@@ -192,8 +193,5 @@ public class MainMenu : MonoBehaviour {
     }
 
 
-    public void TestColecionables()
-    {
-        LevelLoader.instance.GetNewItem(new List<int> { 9 });
-    }
+
 }

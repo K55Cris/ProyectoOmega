@@ -17,7 +17,7 @@ public class PartidaManager : MonoBehaviour {
     public UIPhases MenuPhases;
     public Button Listo,ListoOption;
     public Image PhasesPanel,FondoFinal,FondoPlayer;
-    public Text PhasesText;
+    public TextMeshProUGUI PhasesText;
     public static PartidaManager instance;
     public string Player1Atack = "A";
     public string Player2Atack = "A";
@@ -27,6 +27,7 @@ public class PartidaManager : MonoBehaviour {
     public Sprite ListoOff, ListoON;
     public CanvasGroup CanvasFinal;
     public TextMeshProUGUI EtiquetaVictoria;
+    public Material FondoTablero, Tablero;
     private void Awake()
     {
         instance = this;
@@ -100,6 +101,9 @@ public class PartidaManager : MonoBehaviour {
         Player1.Photo.sprite = PlayerManager.instance.ImagePhoto;
         if(Player2.Photo)
         Player2.Photo.sprite = DataManager.instance.IAPhotos.Find(p => p.name == PlayerManager.instance.IaPlaying.ToString());
+
+        FondoTablero.mainTexture= DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero, ColeccionablesType.FondoTablero).texture;
+        Tablero.mainTexture = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Tablero, ColeccionablesType.Tablero).texture;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!= "Tutorial")
         {
 
@@ -127,6 +131,13 @@ public class PartidaManager : MonoBehaviour {
             DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
+            // Cargar Skins
+            if (_Player == Player1)
+            {
+                DigiCarta.GetComponent<CartaDigimon>().Funda.GetComponent<MeshRenderer>().material.
+                    SetTexture("Funda",DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Funda, ColeccionablesType.Funda).texture);
+            }
+
             MazoPlayer.Add(DigiCarta.GetComponent<CartaDigimon>());
             contador++;
         }

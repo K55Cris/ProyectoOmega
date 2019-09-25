@@ -78,32 +78,32 @@ MonoBehaviour:
     Nombre: Tablero 03
     Image: {fileID: 21300000, guid: cc8d1d0acd21d94448d18a4a137ebead, type: 3}
     Rareza: {r: 0, g: 1, b: 1, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 3
     Nombre: Tablero 04
     Image: {fileID: 21300000, guid: b855fd05718861d42a02229b5ddd45f1, type: 3}
     Rareza: {r: 0, g: 1, b: 1, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 4
     Nombre: Tablero 05
     Image: {fileID: 21300000, guid: e82bcff602e70664d8e1da08afbe440c, type: 3}
     Rareza: {r: 1, g: 0, b: 1, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 5
     Nombre: Tablero 06
     Image: {fileID: 21300000, guid: 7997652348e0dea449e05d27a4c57c75, type: 3}
     Rareza: {r: 1, g: 0, b: 1, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 6
     Nombre: Tablero 07
     Image: {fileID: 21300000, guid: daf7226c620f8b64aa68be1c6fa96230, type: 3}
     Rareza: {r: 1, g: 1, b: 0, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 7
     Nombre: Tablero 08
     Image: {fileID: 21300000, guid: 2048ff687f7ff664e8ce93ad410df939, type: 3}
     Rareza: {r: 1, g: 1, b: 0, a: 1}
-    Tipo: 2
+    Tipo: 1
   - ID: 8
     Nombre: K55
     Image: {fileID: 21300000, guid: 74862f8739e1e7d41abc873c74c51128, type: 3}
@@ -116,7 +116,7 @@ MonoBehaviour:
     Tipo: 0
   - ID: 10
     Nombre: Tacagi
-    Image: {fileID: 21300000, guid: 823171f1445fa394da11eb00cff96f42, type: 3}
+    Image: {fileID: 21300000, guid: d6898ffbc3d96934090d0972be34f7ca, type: 3}
     Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
     Tipo: 0
   - ID: 11
@@ -134,4 +134,9 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: 7cc36e5a503decd4e90a5d08375a74ee, type: 3}
     Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
     Tipo: 3
+  - ID: 14
+    Nombre: New DW
+    Image: {fileID: 21300000, guid: 7cc36e5a503decd4e90a5d08375a74ee, type: 3}
+    Rareza: {r: 0, g: 1, b: 1, a: 1}
+    Tipo: 2
   bandera: 1

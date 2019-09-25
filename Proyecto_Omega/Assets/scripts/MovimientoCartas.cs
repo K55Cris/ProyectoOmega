@@ -9,7 +9,7 @@ public class MovimientoCartas : MonoBehaviour {
     public bool Cambio=false;
     public bool Mover = false;
     public int IdMove = 0;
-    public GameObject Muerte;
+    public GameObject Muerte, Funda;
     public LayoutElement Layout;
     // Use this for initialization
     float distancia;
@@ -149,13 +149,14 @@ public class MovimientoCartas : MonoBehaviour {
     public void DestruirCarta()
     {
         Muerte.SetActive(false);
+        Funda.SetActive(false);
         Muerte.SetActive(true);
         MeshRenderer Padre = transform.parent.GetComponent<MeshRenderer>();
         Padre.enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
         MeshRenderer MuerteM = Muerte.GetComponent<MeshRenderer>();
         
-        shaderProperty = Shader.PropertyToID("_Normal");
+        shaderProperty = Shader.PropertyToID("_DigiImage");
         MuerteM.material.SetTexture(shaderProperty, DataManager.instance.GetTextureDigimon(transform.parent.GetComponent<CartaDigimon>().DatosDigimon.id));
 
         Invoke("Regreso",2.2f);
@@ -163,6 +164,7 @@ public class MovimientoCartas : MonoBehaviour {
     public void Regreso()
     {
         Muerte.SetActive(false);
+        Funda.SetActive(true);
         MeshRenderer Padre = transform.parent.GetComponent<MeshRenderer>();
         Padre.enabled = true;
         GetComponent<MeshRenderer>().enabled = true;
@@ -207,5 +209,6 @@ public class MovimientoCartas : MonoBehaviour {
         StaticRules.ActivateOptionCard(transform.parent.GetComponent<CartaDigimon>());
         CanvasSeleted.SetActive(false);
     }
+
 
 }

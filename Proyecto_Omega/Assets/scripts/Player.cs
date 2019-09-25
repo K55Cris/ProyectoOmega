@@ -65,5 +65,10 @@ public class Player : MonoBehaviour {
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, this).GetComponent<DarkArea>().AddListDescarte(item,0.3f);
         }
     }
+
+    public void GetCard(Carta Carta)
+    {
+
+    }
 }
 

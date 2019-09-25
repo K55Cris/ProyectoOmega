@@ -264,4 +264,18 @@ namespace DigiCartas
         PerfilFoto = 0, FondoTablero = 1 , Tablero=2 , Funda = 3
     };
 
+    public enum RarezaType
+    {
+        Default = 0, Comun = 1, Raro = 2, Epico = 3 , Legendario = 4 , Unico=5
+    };
+    [Serializable]
+    public class ColeccionablesData
+    {
+        public int ID;
+        public string Nombre;
+        public string Image;
+        public RarezaType Rareza;
+        public ColeccionablesType Tipo;
+    }
+
 }

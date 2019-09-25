@@ -16,6 +16,7 @@ public class RecomnesaManager : MonoBehaviour {
     public AudioClip ClipNewCard;
     public AudioSource As;
     public GameObject Pucha;
+    public ParticleSystem PosOpen;
     public void Start()
     {
         SoundManager.instance.PlayMusic(Sound.Recompensa);
@@ -28,6 +29,7 @@ public class RecomnesaManager : MonoBehaviour {
             BtnAll.interactable = false;
             As.clip = ClipNewCard;
             As.Play();
+            PosOpen.gameObject.SetActive(false);
             Am.Play("WinCard");
             foreach (var item in Particulas)
             {
@@ -44,6 +46,8 @@ public class RecomnesaManager : MonoBehaviour {
     public void WhaitCard()
     {
         BtnAll.interactable = true;
+        PosOpen.gameObject.SetActive(true);
+        PosOpen.Play();
     }
     public void Salir()
     {
