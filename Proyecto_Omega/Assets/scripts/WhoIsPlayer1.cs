@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class WhoIsPlayer1 : MonoBehaviour {
+public class WhoIsPlayer1 : MonoBehaviour
+{
 
     public Animator Am;
     public GameObject Moneda;
@@ -15,7 +15,7 @@ public class WhoIsPlayer1 : MonoBehaviour {
     private Player Player1, Player2;
     private bool val;
     private bool PlayerValor;
-    
+
     private void Awake()
     {
         instance = this;
@@ -36,15 +36,15 @@ public class WhoIsPlayer1 : MonoBehaviour {
     {
         // Cara o Cruz
         int ran = Random.Range(1, 3);
-        Cara.CrossFadeAlpha(0, 0.5f,true);
-        Cruz.CrossFadeAlpha(0, 0.5f,true);
+        Cara.CrossFadeAlpha(0, 0.5f, true);
+        Cruz.CrossFadeAlpha(0, 0.5f, true);
         Moneda.SetActive(true);
         GetComponent<Image>().CrossFadeAlpha(0, 1.5f, true);
-        if (ran==1)
+        if (ran == 1)
         {
             Am.SetBool("Cara", true);
             val = true;
-  
+
         }
         else
         {
@@ -67,17 +67,17 @@ public class WhoIsPlayer1 : MonoBehaviour {
             Evento(Player2);
             Titulo.text = Player2.Nombre + " juega primero";
         }
-        
-   
+
+
         Invoke("CerrarPanel", 1F);
     }
-   public void CerrarPanel()
+    public void CerrarPanel()
     {
         Moneda.SetActive(false);
         StartCoroutine(ReduceAlpha(_CGroup));
     }
-    
-   public static IEnumerator ReduceAlpha(CanvasGroup cv)
+
+    public static IEnumerator ReduceAlpha(CanvasGroup cv)
     {
         while (cv.alpha > 0)
         {
@@ -87,5 +87,5 @@ public class WhoIsPlayer1 : MonoBehaviour {
         cv.blocksRaycasts = false;
         cv.interactable = false;
     }
-	
+
 }

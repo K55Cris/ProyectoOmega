@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CargarResources : MonoBehaviour {
+public class CargarResources : MonoBehaviour
+{
     [TooltipAttribute("Deck al que esta vinculado la carga")]
     public GameObject deckAUtilizar;
     private Sprite[] arrayImage;
@@ -13,7 +12,7 @@ public class CargarResources : MonoBehaviour {
     void CargarDeck()
     {
         //busca el deck desde un archivo
-        StreamReader reader = new StreamReader(Application.dataPath+"/deck/Deck.txt");
+        StreamReader reader = new StreamReader(Application.dataPath + "/deck/Deck.txt");
         //aux
         string s;
         //carga todo mientras no sea nulo
@@ -33,10 +32,10 @@ public class CargarResources : MonoBehaviour {
     {
         arrayImage = Resources.LoadAll<Sprite>("Digimon");
         ScrollBaryCantidadDeCartas.instance.SetArrayRookie(new List<Sprite>());
-      //  Deck.instance.SetArrayImage(new List<Sprite>());
+        //  Deck.instance.SetArrayImage(new List<Sprite>());
         foreach (var imagen in arrayImage)
         {
-     //       Deck.instance.GetArrayImage().Add(imagen);
+            //       Deck.instance.GetArrayImage().Add(imagen);
             foreach (var nombre in rookie)
             {
                 if (imagen.name.Equals(nombre))
@@ -46,17 +45,18 @@ public class CargarResources : MonoBehaviour {
             }
         }
         ScrollBaryCantidadDeCartas.instance.CargarDatos();
-     //   Deck.instance.FisherYates(Deck.instance.GetDeck());
+        //   Deck.instance.FisherYates(Deck.instance.GetDeck());
     }
     //Este es el que se deberia usar (si estubiera completo) en este carga todos los datos al DataManager
     void CargarListaCdartas()
     {
     }
     // Use this for initialization
-    void Start () {
-       CargarListaCdartas();
-       CargarDeck();
-       CargarImagenes();
+    void Start()
+    {
+        CargarListaCdartas();
+        CargarDeck();
+        CargarImagenes();
 
     }
 

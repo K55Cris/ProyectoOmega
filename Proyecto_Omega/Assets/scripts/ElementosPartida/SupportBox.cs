@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SupportBox : Slot
@@ -59,13 +57,13 @@ public class SupportBox : Slot
     public void SetDigimon(Transform Carta)
     {
         if (Carta.GetComponent<CartaDigimon>().DatosDigimon.IsSupport
-        && MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.codigo == 
+        && MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.codigo ==
         Carta.GetComponent<CartaDigimon>().DatosDigimon.codigo)
         {
             if (!Ocupado)
             {
                 PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
-                DCard= Carta.GetComponent<CartaDigimon>();
+                DCard = Carta.GetComponent<CartaDigimon>();
                 Ocupado = true;
             }
         }

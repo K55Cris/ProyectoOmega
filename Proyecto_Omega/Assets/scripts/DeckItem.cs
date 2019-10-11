@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DigiCartas;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DigiCartas;
-using TMPro;
-public class DeckItem : MonoBehaviour {
+public class DeckItem : MonoBehaviour
+{
     public TextMeshProUGUI Nombre;
     public Image Tipo;
     public DigiCarta _Datos;
@@ -22,12 +21,12 @@ public class DeckItem : MonoBehaviour {
     public void Resetear()
     {
         if (lleno)
-        { 
-        Nombre.text = "Empty Slot";
-        Tipo.color = Trasparente;
-        lleno = false;
-        DeckManager.instance.QuitDeck(_Datos);
+        {
+            Nombre.text = "Empty Slot";
+            Tipo.color = Trasparente;
+            lleno = false;
+            DeckManager.instance.QuitDeck(_Datos);
         }
     }
-  
+
 }

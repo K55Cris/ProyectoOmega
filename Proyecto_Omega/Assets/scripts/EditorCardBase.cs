@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DigiCartas;
-using UnityEngine.UI;
-using UnityEngine.Events;
+﻿using DigiCartas;
 using TMPro;
-public class EditorCardBase : MonoBehaviour {
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+public class EditorCardBase : MonoBehaviour
+{
 
     public DigiCarta DatosDigimon;
     public Image ImageCarta, Contorno;
     public TextMeshProUGUI Cantidad;
     public GameObject PanelPadre;
-    public int num=1;
+    public int num = 1;
     private int IDCarta;
 
     public void RecibirDatos(DigiCarta Datos)
@@ -30,14 +29,14 @@ public class EditorCardBase : MonoBehaviour {
     {
         num++;
         ImageCarta.color = Color.white;
-        Cantidad.text = "0"+num;
+        Cantidad.text = "0" + num;
     }
     public void ReducirCantidad()
     {
         num--;
-        if (num==0)
+        if (num == 0)
         {
-            ImageCarta.color = Color.gray; 
+            ImageCarta.color = Color.gray;
         }
         Cantidad.text = "0" + num;
     }
@@ -55,7 +54,7 @@ public class EditorCardBase : MonoBehaviour {
             num = 0;
             ImageCarta.color = Color.gray;
             evento(DatosDigimon);
-            Cantidad.text = "00" ;
+            Cantidad.text = "00";
         }
         else
         {

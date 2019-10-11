@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BattlelPhase : MonoBehaviour {
+public class BattlelPhase : MonoBehaviour
+{
     public GameObject[] DigimonPrefabs;
     public GameObject[] DigimonWireframes;
     public Material DigimonShow;
@@ -11,11 +10,12 @@ public class BattlelPhase : MonoBehaviour {
     // Use this for initialization
     public GameObject DigimonCombate;
     public GameObject DigimonReposo;
-    void Start () {
-       // Aparecer.Stop();
-       // Comenzar(0, "");
-	}
-	public void Comenzar(int IDigimon,string Ataque)
+    void Start()
+    {
+        // Aparecer.Stop();
+        // Comenzar(0, "");
+    }
+    public void Comenzar(int IDigimon, string Ataque)
     {
         Aparecer.Play();
         // Creamos las copias 
@@ -32,4 +32,4 @@ public class BattlelPhase : MonoBehaviour {
         Destroy(DigimonReposo, 1f);
     }
 }
-	
+

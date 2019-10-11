@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpawnEffect : MonoBehaviour {
+public class SpawnEffect : MonoBehaviour
+{
 
     public float spawnEffectTime = 2;
     public float pause = 1;
@@ -14,8 +13,8 @@ public class SpawnEffect : MonoBehaviour {
 
     int shaderProperty;
 
-	
-	void Update ()
+
+    void Update()
     {
         if (timer < spawnEffectTime + pause)
         {
@@ -28,6 +27,6 @@ public class SpawnEffect : MonoBehaviour {
         cantidad = fadeIn.Evaluate(Mathf.InverseLerp(-1, spawnEffectTime, timer));
 
         _renderer.material.SetFloat("_DeltaTime", cantidad);
-        
+
     }
 }

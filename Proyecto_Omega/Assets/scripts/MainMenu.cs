@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour
+{
 
     //Comentario Random
     public TMP_InputField Nombre;
@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour {
     public static MainMenu instance;
     public GameObject PanelNewUser, Opciones, Tutorial, PanelCloseOpcion;
     public RectTransform Contendor;
-    public TMP_Dropdown Dropdown; 
+    public TMP_Dropdown Dropdown;
 
     void Awake()
     {
@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void OpenOpciones()
     {
-        
+
         SoundManager.instance.PlaySfx(Sound.Enter);
         StartCoroutine(MovePanel(Contendor, 1));
     }
@@ -89,9 +89,9 @@ public class MainMenu : MonoBehaviour {
     public void SaveName()
     {
         PlayerManager.instance.SaveName(Nombre.text);
-        if(Nombre.text == "K55" || Nombre.text == "k55")
+        if (Nombre.text == "K55" || Nombre.text == "k55")
         {
-            LevelLoader.instance.GetNewItem(new List<int> { 8 });
+            LevelLoader.instance.GetNewItem(new List<int> { 8 ,14,15});
         }
         LoadName();
     }
@@ -102,14 +102,14 @@ public class MainMenu : MonoBehaviour {
             NombreCuenta.text = PlayerManager.instance.Jugador.Nombre;
         }
     }
-    public IEnumerator MovePanel(RectTransform Panel,int Signo)
+    public IEnumerator MovePanel(RectTransform Panel, int Signo)
     {
         if (Signo > 0)
         {
             while (Panel.transform.localPosition.x < 430)
             {
                 yield return new WaitForSeconds(0.005f);
-                float Incremento =600f*Time.deltaTime * Signo;
+                float Incremento = 600f * Time.deltaTime * Signo;
                 Vector3 NewPos = new Vector3(0, 0, 0);
                 if (Signo > 0)
                 {
@@ -138,7 +138,7 @@ public class MainMenu : MonoBehaviour {
         }
         else
         {
-            while (Panel.transform.localPosition.x >0)
+            while (Panel.transform.localPosition.x > 0)
             {
                 yield return new WaitForSeconds(0.01f);
                 int Incremento = 10 * Signo;

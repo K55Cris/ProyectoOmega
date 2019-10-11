@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -60,8 +59,8 @@ namespace DigiCartas
         public List<string> ListaCatrgoria;
         public List<string> ListaCosto;
         //Son los requisitos que deben cumplirse antes de poder evolucionar al digimon //Indica los requisitos que deben cumplirse para activar la carta.
-        public List<string> ListaRequerimientos= new List<string>();
-        public List<string> ListaEfectos= new List<string>();
+        public List<string> ListaRequerimientos = new List<string>();
+        public List<string> ListaEfectos = new List<string>();
         public string Limite;
         public bool IsSupport;
         public bool IsActivateHand;
@@ -101,8 +100,8 @@ namespace DigiCartas
     [Serializable]
     public class CartasBloqueadas
     {
-        public Player jugador= new Player();
-        public List<CartaDigimon> Cartasbloqueadas= new List<CartaDigimon>();
+        public Player jugador = new Player();
+        public List<CartaDigimon> Cartasbloqueadas = new List<CartaDigimon>();
     }
     [Serializable]
     public class bLOCKCARDS
@@ -126,7 +125,7 @@ namespace DigiCartas
         public bool ALLCards;
         public List<Progreso> Progresos;
         public int Nivel = 0;
-        public string Photo,Tablero,Funda,FondoTablero;
+        public string Photo, Tablero, Funda, FondoTablero;
         public List<Coleccionables> MisColeccionables = new List<Coleccionables>();
     }
 
@@ -137,7 +136,7 @@ namespace DigiCartas
         public float efects;
     }
 
-        [Serializable]
+    [Serializable]
     public class Progreso
     {
         public int ID;
@@ -146,7 +145,7 @@ namespace DigiCartas
         public int Victorias;
         public int Derrotas;
     }
-        [Serializable]
+    [Serializable]
     public class DIDCarta
     {
         public int ID;
@@ -166,7 +165,7 @@ namespace DigiCartas
     [Serializable]
     public class IADecks
     {
-       public List<DecksIA> Decks;
+        public List<DecksIA> Decks;
     }
     [Serializable]
     public class ListEfectos
@@ -181,21 +180,22 @@ namespace DigiCartas
 
     public enum EfectosActivos
     {
-        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel,DiscardHand, Ignor4, IgnorAll , EnemyDesDigivolucionar
+        allyChageAtack, dropCards, SetDarkArea, BuffAtack, doblePower, QuitDigimonBox, doublelostpoint, lostcardgame, checknivel, DiscardHand, Ignor4, IgnorAll, EnemyDesDigivolucionar
     };
 
     public enum Phases
     {
-        GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3,PreparationPhase2 = 4, EvolutionPhase = 5,
-        EvolutionPhase2 = 6,EvolutionRequirements = 7, FusionRequirements =8, AppearanceRequirements = 9,
-        BattlePhase = 10, OptionBattlePhase = 11, PointCalculationPhase = 12, EndPhase = 13
+        GameSetup = 0, DiscardPhase = 1, WhaitDiscardPhase = 2, PreparationPhase = 3, PreparationPhase2 = 4, EvolutionPhase = 5,
+        EvolutionPhase2 = 6, EvolutionRequirements = 7, EvolutionRequirements2=8,
+        FusionRequirements = 9, AppearanceRequirements = 10,
+        BattlePhase = 11, OptionBattlePhase = 12, PointCalculationPhase = 13, EndPhase = 14
     };
 
     public enum Campo
     {
         DigimonBox = 0, OptionSlot = 1, EvolutionSlot = 2, Requeriment = 3, Deck = 4,
         Netocean = 5, Support = 6,
-        
+
     };
     public enum Efectos
     {
@@ -203,7 +203,7 @@ namespace DigiCartas
     };
     public enum TypeTutorial
     {
-        Dialogo= 0, Action = 1
+        Dialogo = 0, Action = 1
     };
     [Serializable]
     public class TurnEfect
@@ -236,7 +236,7 @@ namespace DigiCartas
     public class Efecto
     {
         public EfectosActivos NameEfecto;
-        public List<CartaDigimon> CartaAfecta= new List<CartaDigimon>();
+        public List<CartaDigimon> CartaAfecta = new List<CartaDigimon>();
         public CartaDigimon OptionCard;
         public Transform Origen;
         public Transform Destino;
@@ -261,12 +261,12 @@ namespace DigiCartas
     [Serializable]
     public enum ColeccionablesType
     {
-        PerfilFoto = 0, FondoTablero = 1 , Tablero=2 , Funda = 3
+        PerfilFoto = 0, FondoTablero = 1, Tablero = 2, Funda = 3
     };
 
     public enum RarezaType
     {
-        Default = 0, Comun = 1, Raro = 2, Epico = 3 , Legendario = 4 , Unico=5
+        Default = 0, Comun = 1, Raro = 2, Epico = 3, Legendario = 4, Unico = 5
     };
     [Serializable]
     public class ColeccionablesData

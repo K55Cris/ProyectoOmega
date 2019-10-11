@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DigiCartas;
 using UnityEngine.Events;
-public class DigimonBoxSlot : MonoBehaviour {
+public class DigimonBoxSlot : MonoBehaviour
+{
     public bool Cambiado = false;
     public CartaDigimon _DigiCarta;
     public CartaDigimon DRoquin;
@@ -16,7 +16,7 @@ public class DigimonBoxSlot : MonoBehaviour {
     public TornadoAtaque Tornado;
     public ContadorOffencivo CanvasContador;
     public Animator Camera;
-    public List<CartaDigimon> Evoluciones= new List<CartaDigimon>();
+    public List<CartaDigimon> Evoluciones = new List<CartaDigimon>();
 
     public void NowPhase()
     {
@@ -54,7 +54,7 @@ public class DigimonBoxSlot : MonoBehaviour {
             }
 
         }
-       
+
     }
     public void PreparationPhase()
     {
@@ -88,21 +88,30 @@ public class DigimonBoxSlot : MonoBehaviour {
             case "A":
                 if (DataManager.GetDesicion())
                 {
-                  AtaqueA.Play();
-                  SoundManager.instance.PlaySfx(Sound.AtaqueA);
-                  
+                    AtaqueA.Play();
+                    SoundManager.instance.PlaySfx(Sound.AtaqueA);
+
                 }
                 else
                 {
                     Tornado.Atacar(_DigiCarta.DatosDigimon.Familia);
                     SoundManager.instance.PlaySfx(Sound.Tornado);
                 }
-               
+
                 break;
 
             case "B":
-                AtaqueB.Play();
-                SoundManager.instance.PlaySfx(Sound.AtaqueB);
+
+                if (DataManager.GetDesicion())
+                {
+                    AtaqueB.Play();
+                    SoundManager.instance.PlaySfx(Sound.AtaqueB);
+                }
+                else
+                {
+
+                }
+
                 break;
             case "C":
                 Animator Am = GetComponent<Animator>();
@@ -134,8 +143,7 @@ public class DigimonBoxSlot : MonoBehaviour {
             item.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().DestruirCarta();
 
 
-            MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
-                WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
+            item.GetComponent<CartaDigimon>().DarkArea.AddListDescarte(item, 0.5f);
         }
         Evoluciones.Clear();
 
@@ -144,7 +152,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.
         WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<FrontDigimon>().RevelarDigimon(DRoquin, PartidaManager.instance.WhoAtackUse(this.transform));
 
-   //     CanvasContador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.WhoAtackUse(this.transform), DRoquin),null);
+        //     CanvasContador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.WhoAtackUse(this.transform), DRoquin),null);
     }
     public void DeEvolution(UnityAction<string> Loaction, string Condicion)
     {
@@ -161,12 +169,12 @@ public class DigimonBoxSlot : MonoBehaviour {
             {
                 return;
             }
-          
+
         }
         // aplicamos condicion
         string[] sub = Condicion.Split(' ');
-        string NivelRequerido="";
-        string NivelObjetivo="";
+        string NivelRequerido = "";
+        string NivelObjetivo = "";
 
         if (sub[1] == "to")
         {
@@ -207,7 +215,7 @@ public class DigimonBoxSlot : MonoBehaviour {
             MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, MesaManager.instance.
             WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<FrontDigimon>().RevelarDigimon(_DigiCarta, PartidaManager.
             instance.GetAtackUse(MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)));
-            }
+        }
     }
 
 
@@ -216,7 +224,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         // Verificamos si hay Otro Digimon en el slot
         if (_DigiCarta)
         {
-            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel== "III")
+            if (Carta.GetComponent<CartaDigimon>().DatosDigimon.Nivel == "III")
             {
                 if (!Cambiado)
                 {
@@ -281,14 +289,14 @@ public class DigimonBoxSlot : MonoBehaviour {
         }
         else
         {
-            PartidaManager.instance.SetMoveCard(this.transform, Carta,InterAutoAjuste2);
+            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste2);
             _DigiCarta = Carta.GetComponent<CartaDigimon>();
             DRoquin = Carta.GetComponent<CartaDigimon>();
             _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
             SoundManager.instance.PlaySfx(Sound.SetCard);
-          
+
         }
-    
+
 
     }
     public void Evolution(Transform Evolucion)
@@ -304,7 +312,7 @@ public class DigimonBoxSlot : MonoBehaviour {
         }
     }
 
-    public void Evolucionar(string Nivel, bool _joggres=false)
+    public void Evolucionar(string Nivel, bool _joggres = false)
     {
         SoundManager.instance.sfxSource.Stop();
         SoundManager.instance.sfxSource.Play();
@@ -356,10 +364,10 @@ public class DigimonBoxSlot : MonoBehaviour {
 
     public IEnumerator AutoAjustar(Transform Carta)
     {
-    yield return new WaitForEndOfFrame();
-    Carta.localPosition = new Vector3(0, 0, -3+ transform.childCount);
-    Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
-    Carta.localScale = new Vector3(1, 1, 0.015f);
+        yield return new WaitForEndOfFrame();
+        Carta.localPosition = new Vector3(0, 0, -3 + transform.childCount);
+        Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
+        Carta.localScale = new Vector3(1, 1, 0.015f);
     }
     public IEnumerator AutoAjustarRoquin(Transform Carta)
     {

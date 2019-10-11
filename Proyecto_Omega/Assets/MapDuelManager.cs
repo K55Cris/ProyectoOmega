@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-public class MapDuelManager : MonoBehaviour {
+public class MapDuelManager : MonoBehaviour
+{
     public List<ItemMenuMap> Nodos;
     public CanvasGroup MoreInfo;
     public Image IAImage;
     public Button Play;
-    public TextMeshProUGUI Nombre, Wins, DeckName,Loses, Nivel, level;
+    public TextMeshProUGUI Nombre, Wins, DeckName, Loses, Nivel, level;
     public GameObject Booss;
     public static MapDuelManager instance;
     // Use this for initialization
@@ -22,7 +22,7 @@ public class MapDuelManager : MonoBehaviour {
         }
     }
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         if (PlayerManager.instance.Jugador.ALLCards)
         {
@@ -31,13 +31,13 @@ public class MapDuelManager : MonoBehaviour {
         foreach (var item in PlayerManager.instance.GetProgress())
         {
             ItemMenuMap Nodo = Nodos.Find(K => K.ID == item.ID);
-            if (Nodo!=null)
+            if (Nodo != null)
             {
                 Nodo.Cargar(item);
             }
         }
         Nivel.text = PlayerManager.instance.Jugador.Nivel.ToString();
-	}
+    }
     public void ShowInfo(ItemMenuMap nodo)
     {
         MoreInfo.alpha = 1;
@@ -54,12 +54,12 @@ public class MapDuelManager : MonoBehaviour {
             Play.interactable = false;
         else
         {
-          if(nodo.Accesible)
-            Play.interactable = true;
-          else
-            Play.interactable = false;
+            if (nodo.Accesible)
+                Play.interactable = true;
+            else
+                Play.interactable = false;
         }
-      
+
 
     }
 }

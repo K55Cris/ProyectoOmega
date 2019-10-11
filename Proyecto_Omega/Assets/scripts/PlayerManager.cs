@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using DigiCartas;
 using System.Collections.Generic;
 using UnityEngine;
-using DigiCartas;
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
 
     public static PlayerManager instance;
     public SavePlayer Default;
@@ -19,12 +19,12 @@ public class PlayerManager : MonoBehaviour {
             instance = this;
 
         }
-           
+
         else if (instance != this)
             Destroy(gameObject);
 
         DontDestroyOnLoad(this.gameObject);
-        
+
     }
     public void Start()
     {
@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour {
     {
         // cargar Deck EN EL JUGADOR
         string cartas = PlayerPrefs.GetString("SavePlayer");
-        if (cartas!="")
+        if (cartas != "")
         {
             Jugador = JsonUtility.FromJson<SavePlayer>(cartas);
             // Datos cargados
@@ -115,7 +115,7 @@ public class PlayerManager : MonoBehaviour {
         }
         if (!bandera)
         {
-            DIDCarta NewID = new  DIDCarta();
+            DIDCarta NewID = new DIDCarta();
             NewID.ID = ID;
             NewID.Cantidad = 1;
             Jugador.IDCartasDisponibles.Add(NewID);
@@ -127,7 +127,7 @@ public class PlayerManager : MonoBehaviour {
         if (IaPlaying != 0)
         {
             Jugador.Progresos.Find(x => x.ID == IaPlaying).Victorias++;
-            Jugador.Progresos.Find(x => x.ID == IaPlaying).Completo=true;
+            Jugador.Progresos.Find(x => x.ID == IaPlaying).Completo = true;
         }
         IaPlaying = 0;
         AddNivel(Puntos);
@@ -139,7 +139,7 @@ public class PlayerManager : MonoBehaviour {
             Jugador.Progresos.Find(x => x.ID == IaPlaying).Derrotas++;
         }
         IaPlaying = 0;
-        AddNivel(Puntos*-1);
+        AddNivel(Puntos * -1);
     }
 
     public void NodoCerca(int ID)
@@ -160,7 +160,7 @@ public class PlayerManager : MonoBehaviour {
             Jugador.Nivel = 200;
         if (Jugador.Nivel < 0)
             Jugador.Nivel = 0;
-            SavePlayer();
+        SavePlayer();
     }
     public void ChangePhoto(string Foto)
     {

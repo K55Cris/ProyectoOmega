@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿using DigiCartas;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using DigiCartas;
-using System.Collections.Generic;
 
-public class LevelLoader : MonoBehaviour {
+public class LevelLoader : MonoBehaviour
+{
 
     public static LevelLoader instance;
     public ParticleSystem ps;
@@ -68,13 +68,13 @@ public class LevelLoader : MonoBehaviour {
         while (!async.isDone)
         {
             Carga.text = async.progress.ToString("N0") + "%";
-            if (async.progress>=.9F)
+            if (async.progress >= .9F)
             {
                 Carga.text = "100%";
                 ps.Pause();
                 async.allowSceneActivation = true;
                 yield return new WaitForSeconds(0.5f);
-                
+
             }
         }
         yield return new WaitForEndOfFrame();
@@ -86,13 +86,13 @@ public class LevelLoader : MonoBehaviour {
     public void GetNewItem(List<int> ID)
     {
         SalirColecionable.interactable = false;
-        PanelColecion.transform.localScale = new Vector3(0,0,1);
+        PanelColecion.transform.localScale = new Vector3(0, 0, 1);
         foreach (var item in Contenedores)
         {
             item.SetActive(false);
         }
-        DataManager.instance.FadeCanvas(NewItem,true);
-        List<Coleccionables> TempColec = new List<Coleccionables>(); 
+        DataManager.instance.FadeCanvas(NewItem, true);
+        List<Coleccionables> TempColec = new List<Coleccionables>();
         foreach (var item2 in ID)
         {
             foreach (var item in DataManager.instance.ListaColeccionables)
@@ -113,17 +113,17 @@ public class LevelLoader : MonoBehaviour {
             Contenedores[i].GetComponent<ColeccionableItem>().CargarData(TempColec[i]);
         }
         Invoke("ShowItems", 0.5f);
-}
-    
+    }
+
     public void ShowItems()
     {
         AMColeccionable.Play("OpenNewItem");
         SalirColecionable.interactable = true;
     }
-    
+
     public void OutColecionable()
     {
         DataManager.instance.FadeCanvas(NewItem);
     }
-    
+
 }

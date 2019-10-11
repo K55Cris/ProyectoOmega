@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Deck : MonoBehaviour {
+public class Deck : MonoBehaviour
+{
     [TooltipAttribute("Modelado de la carta.")]
     public GameObject modeladoDeLaCarta;
 
     private List<string> deck = new List<string>();
     private UnityAction roboLisener;
-   
+
 
     private void OnEnable()
     {
-    //    EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
+        //    EventManager.StartListening("RobarYAcomodarEnMano", roboLisener);
     }
 
-/// Esto hay que Corrigirlo <<
+    /// Esto hay que Corrigirlo <<
 
-   
+
 
 
 

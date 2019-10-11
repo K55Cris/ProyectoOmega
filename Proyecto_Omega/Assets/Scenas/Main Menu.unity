@@ -15822,7 +15822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2781230.2, y: 31397.668}
+  m_AnchoredPosition: {x: -3133787, y: 40773.348}
   m_SizeDelta: {x: 0, y: 172.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1055706470
@@ -26091,10 +26091,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
         type: 3}
+      propertyPath: ListaColeccionables.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
       propertyPath: ListaColeccionables.Array.data[14].Image
       value: 
       objectReference: {fileID: 21300000, guid: be0a5ff7c47a8b145813782ceba0b280,
         type: 3}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].ID
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Nombre
+      value: New DW
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Image
+      value: 
+      objectReference: {fileID: 21300000, guid: cdd37cc37ac1b3c4f948470aa29b9158,
+        type: 3}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Rareza.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Rareza.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Rareza.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166987957000764, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0,
+        type: 3}
+      propertyPath: ListaColeccionables.Array.data[15].Tipo
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a1a5f91a7a18e8409fc03b9e6d83af0, type: 3}
 --- !u!1 &1811450812
@@ -31181,7 +31222,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 907709172}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.48113292
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

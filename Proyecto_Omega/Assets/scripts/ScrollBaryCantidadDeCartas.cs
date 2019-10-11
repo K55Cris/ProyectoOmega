@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ScrollBaryCantidadDeCartas : MonoBehaviour {
+public class ScrollBaryCantidadDeCartas : MonoBehaviour
+{
     public static ScrollBaryCantidadDeCartas instance;
     public GameObject prefCarta;
     public Transform contenedor;
@@ -13,7 +12,7 @@ public class ScrollBaryCantidadDeCartas : MonoBehaviour {
     {
         instance = this;
     }
-    
+
     public void CargarDatos()
     {
         foreach (var item in this.arrayRookie)
@@ -22,7 +21,7 @@ public class ScrollBaryCantidadDeCartas : MonoBehaviour {
             cartas.GetComponent<DetalleCarta>().Cargar(item);
         }
     }
-	
+
     public void SetArrayRookie(List<Sprite> arrayRookie)
     {
         this.arrayRookie = arrayRookie;

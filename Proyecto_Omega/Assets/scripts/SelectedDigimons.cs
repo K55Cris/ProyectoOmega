@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using DigiCartas;
+﻿using System.Collections.Generic;
 using TMPro;
-public class SelectedDigimons : MonoBehaviour {
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+public class SelectedDigimons : MonoBehaviour
+{
 
 
     public TextMeshProUGUI TITLE;
@@ -29,7 +28,7 @@ public class SelectedDigimons : MonoBehaviour {
         foreach (var item in cartas)
         {
             GameObject Carta = Instantiate(DigiCarta, Content);
-            Carta.GetComponent<SelectDigimon>().RecibirDatos(item.DatosDigimon,item.cardNumber,fase);
+            Carta.GetComponent<SelectDigimon>().RecibirDatos(item.DatosDigimon, item.cardNumber, fase);
         }
     }
     public void vaciar()
@@ -45,5 +44,5 @@ public class SelectedDigimons : MonoBehaviour {
         ScrollPanel.SetActive(false);
 
     }
-   
+
 }

@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Carta : MonoBehaviour {
+public class Carta : MonoBehaviour
+{
     //Id o nro de la carta.
-    
-    
+
+
     //Es el icono en la parte superior derecha, para CartaDigimon (battle type) puede ser A, B o C y para CartaOption (icon) Program, Item y Field.
     private string icon;
     //Imagen de la carta.

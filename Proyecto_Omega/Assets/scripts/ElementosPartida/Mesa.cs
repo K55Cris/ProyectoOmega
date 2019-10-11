@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Mesa : MonoBehaviour {
+public class Mesa : MonoBehaviour
+{
     public DigimonBox DigimonBox;
     public OptionSlot OptionSlot1;
     public OptionSlot OptionSlot2;

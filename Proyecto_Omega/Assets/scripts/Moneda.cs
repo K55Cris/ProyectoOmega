@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Moneda : MonoBehaviour {
+public class Moneda : MonoBehaviour
+{
 
     private void OnEnable()
     {

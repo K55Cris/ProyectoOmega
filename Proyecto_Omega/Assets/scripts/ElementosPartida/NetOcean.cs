@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DigiCartas;
 public class NetOcean : MonoBehaviour
 {
     public List<CartaDigimon> Cartas;
     public UnityAction<string> Loaction;
-    private Player _jugador= new Player();
+    private Player _jugador = new Player();
     public CartaDigimon Robar()
     {
         if (Cartas.Count == 0)
@@ -21,7 +20,7 @@ public class NetOcean : MonoBehaviour
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
         Cartas.RemoveAt(Cartas.Count - 1);
         PartidaManager.instance.SetMoveHand(PartidaManager.instance.GetHand(), Dcard.transform, AjustarInterno);
-      
+
     }
 
     public void AjustarInterno(CartaDigimon Dcard)
@@ -40,14 +39,14 @@ public class NetOcean : MonoBehaviour
             if (item.GetComponent<CartaDigimon>().DatosDigimon.Nombre == NombreDigimon)
             {
                 Cartas.Remove(item);
-               
+
                 return item;
             }
         }
         return null;
     }
 
-    public void Reiniciar(UnityAction<string> LoAction,Player Jugador )
+    public void Reiniciar(UnityAction<string> LoAction, Player Jugador)
     {
         this.Loaction = LoAction;
         // DigimonBox Slot
@@ -68,7 +67,7 @@ public class NetOcean : MonoBehaviour
         }
     }
 
-    public IEnumerator  Iteracion(List<CartaDigimon> ListaCartas)
+    public IEnumerator Iteracion(List<CartaDigimon> ListaCartas)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(0.5f);
@@ -84,7 +83,7 @@ public class NetOcean : MonoBehaviour
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().moviendo = false;
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().setAction(addDarkArea);
 
-        Debug.Log(ListaCartas.Count+":");
+        Debug.Log(ListaCartas.Count + ":");
         foreach (var item3 in ListaCartas)
         {
             Debug.Log(item3.GetComponent<CartaDigimon>().DatosDigimon.Nombre);
@@ -127,13 +126,13 @@ public class NetOcean : MonoBehaviour
     private bool Esperar = true;
     private void Mezclar()
     {
-        
+
     }
     public IEnumerator WhaitFrame(CartaDigimon Dcard)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform, InterAutoAjuste); 
+        PartidaManager.instance.SetMoveCard(this.transform, Dcard.transform, InterAutoAjuste);
     }
     public IEnumerator WhaitReinicio()
     {
@@ -157,7 +156,7 @@ public class NetOcean : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Loaction("Seguir");
         }
-       
+
 
         Loaction = null;
         Esperar = true;

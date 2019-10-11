@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ViewCards : MonoBehaviour {
+public class ViewCards : MonoBehaviour
+{
 
     public Image FondoNegro;
     public Transform Content;
@@ -19,7 +19,7 @@ public class ViewCards : MonoBehaviour {
         foreach (var item in cartas)
         {
             GameObject Carta = Instantiate(DigiCarta, Content);
-            Carta.GetComponent<SelectDigimon>().RecibirDatos(item.DatosDigimon, item.cardNumber,null);
+            Carta.GetComponent<SelectDigimon>().RecibirDatos(item.DatosDigimon, item.cardNumber, null);
         }
     }
     public void vaciar()

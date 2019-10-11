@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 
-public class FrontDigimon : MonoBehaviour {
+public class FrontDigimon : MonoBehaviour
+{
     public Image Digimon;
     public Image Ataque;
     public List<Sprite> Ataques;
@@ -38,7 +39,7 @@ public class FrontDigimon : MonoBehaviour {
         }
         SetAtackNames(Dcard);
 
-        if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta==Dcard)
+        if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta == Dcard)
         {
             PartidaManager.instance.Player1Atack = ataque;
             MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.Player1).
@@ -101,7 +102,7 @@ public class FrontDigimon : MonoBehaviour {
         PoderAtaques[2].text = (poderC * multiplicador).ToString();
         if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
         {
-            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard)*multiplicador, null);
+            Contador.EFECTOS(StaticRules.instance.WhatAtackUse(PartidaManager.instance.Player1Atack, Dcard) * multiplicador, null);
         }
         else
         {

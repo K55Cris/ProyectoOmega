@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BackgroundScrolling : MonoBehaviour
 {
@@ -11,5 +9,5 @@ public class BackgroundScrolling : MonoBehaviour
     public Material Render;
     private Vector2 offset;
     // Update is called once per frame
- 
+
 }

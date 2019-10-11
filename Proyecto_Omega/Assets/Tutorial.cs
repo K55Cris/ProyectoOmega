@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using DigiCartas;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
-using DigiCartas;
-public class Tutorial : MonoBehaviour {
+using UnityEngine.UI;
+public class Tutorial : MonoBehaviour
+{
 
     public TextMeshProUGUI Descripcion, Titulo, Dialogo;
     public GameObject Panel;
@@ -39,7 +40,7 @@ public class Tutorial : MonoBehaviour {
     };
     public enum DigiEfectos
     {
-        None = 0, CartasCompletas=1
+        None = 0, CartasCompletas = 1
     };
 
     public bool WhaitAction;
@@ -176,7 +177,7 @@ public class Tutorial : MonoBehaviour {
                 }
                 else
                 {
-                     StartCoroutine(Transicion(LteEvolucion.LPos[12].transform, 12, LteEvolucion.ListaCompleta, LectorTexto));
+                    StartCoroutine(Transicion(LteEvolucion.LPos[12].transform, 12, LteEvolucion.ListaCompleta, LectorTexto));
                 }
                 break;
             case TutoStates.Efectos:
@@ -426,7 +427,7 @@ public class Tutorial : MonoBehaviour {
                 Iniciar();
                 break;
             case 2:
-     /////////  poner carta de evolucion  y roquin , ademas de poner fase preparation
+                /////////  poner carta de evolucion  y roquin , ademas de poner fase preparation
 
                 // estableser todo el duelo en preparation , meter roquin 
                 StaticRules.instance.WhosPlayer = PartidaManager.instance.Player1;
@@ -453,7 +454,7 @@ public class Tutorial : MonoBehaviour {
             case 3:
                 // vaciamos mano 
                 PartidaManager.instance.Player1.DeleteAllHand();
-                
+
                 //Agregamos al Greymon 
 
                 GameObject Greymon = Instantiate(CartaPrefab, PartidaManager.instance.ManoPlayer1);
@@ -470,7 +471,7 @@ public class Tutorial : MonoBehaviour {
                 //
                 // ACTIVAR  panel de colocar SIGUIENTE FASE
                 MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Tutorial");
-     
+
 
 
 
@@ -517,9 +518,9 @@ public class Tutorial : MonoBehaviour {
                 PartidaManager.instance.ActivateHand(true);
 
                 NowDigiEfectos = DigiEfectos.CartasCompletas;
-               // Invoke("waithCardEfec", 1.1f);
+                // Invoke("waithCardEfec", 1.1f);
 
-               
+
                 break;
         }
         FasesID++;
@@ -531,7 +532,7 @@ public class Tutorial : MonoBehaviour {
     public void ResetNetOcean(string result)
     {
         MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().addDarkArea("Evoluciones");
-        Invoke("Iniciar",1F);
+        Invoke("Iniciar", 1F);
     }
 
     public void ResetNet2(string result)
@@ -557,7 +558,8 @@ public class Tutorial : MonoBehaviour {
         if (MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.id == 32)
         {
             Iniciar();
-        }else
+        }
+        else
         {
             Debug.LogError("CheckFalse");
             // salto de Face
@@ -566,7 +568,7 @@ public class Tutorial : MonoBehaviour {
             StaticRules.instance.NowPreparationPhase = 0;
             MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>().LostDigimon(ResetNet2);
             // Evolution Box Reset
-            foreach (var item in MesaManager.instance.Campo1.EvolutionBox.GetComponent<EvolutionBox>().Cartas) 
+            foreach (var item in MesaManager.instance.Campo1.EvolutionBox.GetComponent<EvolutionBox>().Cartas)
             {
                 MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().AddListDescarte(item, 0.5f);
             }
@@ -584,7 +586,7 @@ public class Tutorial : MonoBehaviour {
             }
             MesaManager.instance.Campo1.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaXO.Clear();
 
-          
+
 
         }
     }
@@ -603,7 +605,7 @@ public class Tutorial : MonoBehaviour {
     }
     public void Backtutorial()
     {
-        if (NowSelectTuto== TutoStates.Campos)
+        if (NowSelectTuto == TutoStates.Campos)
         {
             TargetID = 0;
             DataManager.instance.FadeCanvas(PanelTutorialDialog);
@@ -614,7 +616,7 @@ public class Tutorial : MonoBehaviour {
         {
             LevelLoader.instance.CargarEscena("Tutorial");
         }
-       
+
     }
 
     public IEnumerator WhaitFrame(GameObject Carta)

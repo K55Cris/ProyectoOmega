@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class PanelAlerta : MonoBehaviour {
+public class PanelAlerta : MonoBehaviour
+{
 
     public Transform Content;
     public GameObject DigiCarta;
     public GameObject ScrollPanel;
     public static PanelAlerta instance;
-    private UnityAction<string> LoAceptar=null;
-    private UnityAction<string> LoCancelar=null;
+    private UnityAction<string> LoAceptar = null;
+    private UnityAction<string> LoCancelar = null;
     public Text Mesaje;
 
     private void Awake()
@@ -19,7 +19,7 @@ public class PanelAlerta : MonoBehaviour {
         instance = this;
     }
 
-    public void Activar(UnityAction<string> Aceptar, UnityAction<string> Cancelar ,List<CartaDigimon> cartas, string mensaje)
+    public void Activar(UnityAction<string> Aceptar, UnityAction<string> Cancelar, List<CartaDigimon> cartas, string mensaje)
     {
         LoAceptar = Aceptar;
         LoCancelar = Cancelar;

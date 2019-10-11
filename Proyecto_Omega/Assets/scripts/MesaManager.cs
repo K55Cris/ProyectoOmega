@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DigiCartas;
 using UnityEngine;
-using DigiCartas;
-public class MesaManager : MonoBehaviour {
+public class MesaManager : MonoBehaviour
+{
     public Campos Campo1;
     public Campos Campo2;
     // Use this for initialization
@@ -15,17 +14,17 @@ public class MesaManager : MonoBehaviour {
     public enum Slots
     {
         OptionSlot1 = 0, OptionSlot2 = 1, OptionSlot3 = 2, DigimonSlot = 3, NetOcean = 4, DarkArea = 5,
-        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10, frontSlot=11,
+        EvolutionBox = 6, SupportBox = 7, Campo = 8, PointGauge = 9, EvolutionRequerimentBox = 10, frontSlot = 11,
     }
-   
-    public Transform GetSlot(Slots slot,Player player= null)
+
+    public Transform GetSlot(Slots slot, Player player = null)
     {
         Player _player = StaticRules.instance.WhosPlayer;
         if (player)
             _player = player;
 
 
-     if(PartidaManager.instance.Player1== _player)
+        if (PartidaManager.instance.Player1 == _player)
         {
             switch (slot)
             {
@@ -167,7 +166,7 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
-    public static Transform SetOptionSlot(GameObject Carta , bool Campo=false)
+    public static Transform SetOptionSlot(GameObject Carta, bool Campo = false)
     {
         if (Campo)
         {
@@ -179,20 +178,20 @@ public class MesaManager : MonoBehaviour {
             foreach (Transform item in MesaManager.instance.Campo1.Campo)
             {
                 Vector3 PosCampo = item.position;
-                
+
                 float dist = Vector3.Distance(LocalPos, PosCampo);
-                Debug.Log(dist+":"+item);
+                Debug.Log(dist + ":" + item);
                 if (dist < 32)
                 {
                     Debug.Log(item);
                     return item;
-          
+
                 }
             }
         }
         return null;
     }
-    public Player WhatSlotPlayer(Transform Slot, Slots slot) 
+    public Player WhatSlotPlayer(Transform Slot, Slots slot)
     {
         Player jugador1 = PartidaManager.instance.Player1;
         Player jugador2 = PartidaManager.instance.Player2;
@@ -252,7 +251,7 @@ public class MesaManager : MonoBehaviour {
                     return null;
                 }
             case Slots.OptionSlot1:
-                if (Campo1.OptionSlot1 == Slot || Campo1.OptionSlot2 == Slot || Campo1.OptionSlot3==Slot)
+                if (Campo1.OptionSlot1 == Slot || Campo1.OptionSlot2 == Slot || Campo1.OptionSlot3 == Slot)
                 {
                     return jugador1;
                 }
@@ -267,5 +266,5 @@ public class MesaManager : MonoBehaviour {
         }
         return null;
     }
- 
+
 }

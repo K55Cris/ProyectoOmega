@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TornadoAtaque : MonoBehaviour {
+public class TornadoAtaque : MonoBehaviour
+{
     public Transform Padre;
     public Color32 Selec;
     public Color32 SelecMeta;
@@ -44,16 +45,16 @@ public class TornadoAtaque : MonoBehaviour {
             G--;
             B--;
         }
-        SelecMeta = new Color32(R,G,B, 200);
+        SelecMeta = new Color32(R, G, B, 200);
 
         foreach (var item in TornadoPize)
         {
             var main = item.main;
-            main.startColor = new Color(Selec.r/255f,Selec.g/255f,Selec.b/255f,255);
+            main.startColor = new Color(Selec.r / 255f, Selec.g / 255f, Selec.b / 255f, 255);
             item.Play();
         }
         var main2 = TornadoInterior.main;
-        main2.startColor = new Color(SelecMeta.r/255F, SelecMeta.g/255F, SelecMeta.b/255F, 255);
+        main2.startColor = new Color(SelecMeta.r / 255F, SelecMeta.g / 255F, SelecMeta.b / 255F, 255);
         TornadoInterior.Play();
         StartCoroutine(Transicion());
     }
@@ -68,7 +69,7 @@ public class TornadoAtaque : MonoBehaviour {
         {
             heading = Mover - Padre.position;
             distance = heading.magnitude;
-            float step = 25*Time.deltaTime;
+            float step = 25 * Time.deltaTime;
             Padre.position = Vector3.MoveTowards(Padre.position, Mover, step);
             yield return new WaitForSecondsRealtime(0.01F);
         }

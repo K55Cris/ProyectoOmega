@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DigiCartas;
 
 public class DarkArea : MonoBehaviour
 {

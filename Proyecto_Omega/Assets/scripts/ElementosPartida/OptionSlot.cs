@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OptionSlot : Slot
 {
     public bool AddOrRemove = false;
-    public bool Vacio=true;
+    public bool Vacio = true;
     public CartaDigimon OpCarta;
     public GameObject CanvasAction;
     public GameObject ActivarCarta;
@@ -15,7 +13,7 @@ public class OptionSlot : Slot
     {
         if (Vacio)
         {
-          
+
             Vacio = false;
             OpCarta = Carta.GetComponent<CartaDigimon>();
             PartidaManager.instance.SetMoveCard(this.transform, Carta, StaticRules.Ajustar);
@@ -23,7 +21,7 @@ public class OptionSlot : Slot
             SoundManager.instance.PlaySfx(Sound.SetCard);
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
             {
-                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer&& Tutorial.instance.NowSelectTuto!= Tutorial.TutoStates.Evolucion) 
+                if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer && Tutorial.instance.NowSelectTuto != Tutorial.TutoStates.Evolucion)
                 {
                     Tutorial.instance.Iniciar();
                 }
@@ -41,28 +39,28 @@ public class OptionSlot : Slot
     }
     private void OnMouseDown()
     {
-     
+
         if (!Vacio && PartidaManager.instance.Player1 == MesaManager.instance.WhatSlotPlayer(this.transform, MesaManager.Slots.OptionSlot1))
         {
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
             {
                 VentanaMoreInfo.instance.Show(OpCarta.DatosDigimon);
             }
-                if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase || StaticRules.instance.NowPhase == DigiCartas.Phases.OptionBattlePhase)
-                {
-                    CanvasAction.SetActive(true);
-                    ActivarCarta.SetActive(true);
-                    DescartarCarta.SetActive(false);
-                }
-                if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2)
-                {
-                    CanvasAction.SetActive(true);
-                    DescartarCarta.SetActive(true);
-                    ActivarCarta.SetActive(false);
-                }
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.BattlePhase || StaticRules.instance.NowPhase == DigiCartas.Phases.OptionBattlePhase)
+            {
+                CanvasAction.SetActive(true);
+                ActivarCarta.SetActive(true);
+                DescartarCarta.SetActive(false);
+            }
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase || StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2)
+            {
+                CanvasAction.SetActive(true);
+                DescartarCarta.SetActive(true);
+                ActivarCarta.SetActive(false);
+            }
 
         }
-        
+
     }
 
     public CartaDigimon GetOpCard()
@@ -72,7 +70,7 @@ public class OptionSlot : Slot
     void OnMouseExit()
     {
         if (CanvasAction)
-        CanvasAction.SetActive(false);
+            CanvasAction.SetActive(false);
     }
     public void ActivarOPtion()
     {
@@ -99,7 +97,7 @@ public class OptionSlot : Slot
         // Descartar carta 
         if (OpCarta)
         {
-          
+
             MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().SetCard(OpCarta.transform);
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
             {
@@ -116,6 +114,6 @@ public class OptionSlot : Slot
         OpCarta = null;
         Vacio = true;
         TurnOpcard = 0;
-      
+
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum Sound
 {
-    Evolucion, SetCard, Evolucion2 ,AtaqueA,AtaqueB,AtaqueC,Tornado , MainMenu, Duelo, Recompensa ,
-    Enter, Out,Barajear, tutorial,Wincolecionable
+    Evolucion, SetCard, Evolucion2, AtaqueA, AtaqueB, AtaqueC, Tornado, MainMenu, Duelo, Recompensa,
+    Enter, Out, Barajear, tutorial, Wincolecionable
 }
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
     public static SoundManager instance;
     public AudioSource sfxSource;
@@ -172,7 +172,7 @@ public class SoundManager : MonoBehaviour {
         musicSource.volume = newVol;
     }
 
-    public void SaveSettings() 
+    public void SaveSettings()
     {
         PlayerPrefs.SetFloat("SaveMusic", musicSource.volume);
         PlayerPrefs.SetFloat("EfectMusic", sfxSource.volume);
@@ -190,9 +190,9 @@ public class SoundManager : MonoBehaviour {
     }
     public float GetSliderVolume(int slider)
     {
-        if (slider==0)
+        if (slider == 0)
         {
-            return musicSource.volume; 
+            return musicSource.volume;
         }
         else
         {

@@ -1,17 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
-public class intro : MonoBehaviour {
-   // public VideoPlayer Video;
-	// Use this for initialization
-	void Start ()
+public class intro : MonoBehaviour
+{
+    // public VideoPlayer Video;
+    // Use this for initialization
+    void Start()
     {
         StartCoroutine(whaithFrame());
-	}
+    }
     private void Awake()
     {
-    //    GetComponent<MeshRenderer>().enabled = true;
+        //    GetComponent<MeshRenderer>().enabled = true;
     }
 
     public IEnumerator whaithFrame()
@@ -46,16 +45,16 @@ public class intro : MonoBehaviour {
         {
             DataManager.instance.IntroVisto = true;
             gameObject.SetActive(false);
-          
+
         }
 
-      
+
         SoundManager.instance.PlayMusic(Sound.MainMenu);
     }
     public void OnMouseDown()
     {
         Continuar();
-       
+
     }
     public void CloseNewUser()
     {

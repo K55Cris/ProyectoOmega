@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-public class DeckManager : MonoBehaviour {
+using UnityEngine.UI;
+public class DeckManager : MonoBehaviour
+{
 
     public static DeckManager instance;
     public Image PerfilPhoto;
@@ -16,8 +16,8 @@ public class DeckManager : MonoBehaviour {
     public List<int> DeckInt;
     public GameObject CartaBase;
     public CanvasGroup CGViewDeck;
-    public Transform BibliotecaContent, ViewEditorContent, DeckEditorContent , ColecionableContent;
-    private float MaxCartas=0;
+    public Transform BibliotecaContent, ViewEditorContent, DeckEditorContent, ColecionableContent;
+    private float MaxCartas = 0;
     public int Paginas = 0;
     public int nowPageB = 1;
     public TextMeshProUGUI TextPaginasBiblioteca, TextPaginasDeck;
@@ -25,7 +25,7 @@ public class DeckManager : MonoBehaviour {
     public Image[] puntosDeck;
     public Color PuntoSelect;
     public Color PuntoDiseble;
-    public GameObject Biblioteca,DeckEditor;
+    public GameObject Biblioteca, DeckEditor;
     public List<DIDCarta> IDCartasDisponibles;
     public EditorCardBase CartaSeleccionada;
     public DeckItem[] SlotsDeck;
@@ -33,7 +33,7 @@ public class DeckManager : MonoBehaviour {
     public Transform customConten;
     public GameObject PrefabColecionable;
     public Image Photo, Tablero, BackTablero, BackCard;
-    public TextMeshProUGUI TextPhoto,TextTablero, TextBackTablero,TextBackCard;
+    public TextMeshProUGUI TextPhoto, TextTablero, TextBackTablero, TextBackCard;
     private void Awake()
     {
         instance = this;
@@ -41,7 +41,7 @@ public class DeckManager : MonoBehaviour {
         ViewDeck();
     }
     // Use this for initialization
-  
+
     public void BorarDatos()
     {
         PlayerPrefs.DeleteAll();
@@ -52,25 +52,25 @@ public class DeckManager : MonoBehaviour {
     {
         if (CartaSeleccionada)
         {
-            if (CartaSeleccionada.num >= 1 && TemporalDeckEdition.Count<30)
+            if (CartaSeleccionada.num >= 1 && TemporalDeckEdition.Count < 30)
             {
                 bool CartaRepetida = false;
 
                 foreach (var grouping in TemporalDeckEdition.GroupBy(t => t.id).Where(t => t.Count() != 1))
                 {
-                    if(grouping.Key==CartaSeleccionada.DatosDigimon.id&& grouping.Count() >= 3)
+                    if (grouping.Key == CartaSeleccionada.DatosDigimon.id && grouping.Count() >= 3)
                     {
                         Debug.Log(string.Format("'{0}' está repetido {1} veces.", grouping.Key, grouping.Count()));
                         CartaRepetida = true;
                     }
-                  
+
                 }
                 if (!CartaRepetida)
                 {
                     TemporalDeckEdition.Add(CartaSeleccionada.DatosDigimon);
                     CartaSeleccionada.ReducirCantidad();
                     // buscamos un slot vacio 
-                    int slotVacio=-1;
+                    int slotVacio = -1;
                     for (int i = 0; i < SlotsDeck.Length; i++)
                     {
                         if (!SlotsDeck[i].lleno)
@@ -96,7 +96,7 @@ public class DeckManager : MonoBehaviour {
     {
         foreach (Transform item in DeckEditorContent)
         {
-            if (item.GetComponent<EditorCardBase>().DatosDigimon==Carta)
+            if (item.GetComponent<EditorCardBase>().DatosDigimon == Carta)
             {
                 TemporalDeckEdition.Remove(Carta);
                 item.GetComponent<EditorCardBase>().AumentarCantidad();
@@ -104,7 +104,7 @@ public class DeckManager : MonoBehaviour {
         }
     }
 
-   
+
 
     public void AbrirBiblioteca()
     {
@@ -159,7 +159,7 @@ public class DeckManager : MonoBehaviour {
         }
         foreach (var item in SlotsDeck)
         {
-            item.lleno=false;
+            item.lleno = false;
         }
         TemporalDeckEdition = new List<DigiCarta>();
         ViewDeck();
@@ -209,7 +209,7 @@ public class DeckManager : MonoBehaviour {
 
     public void LoadAllCards()
     {
-     
+
         foreach (var item in DataManager.instance.ColeccionDeCartas.DigiCartas)
         {
             if (item.id != 61)
@@ -233,7 +233,7 @@ public class DeckManager : MonoBehaviour {
     }
     public void EntreHojas()
     {
-        Paginas = Mathf.CeilToInt( MaxCartas/ 12);
+        Paginas = Mathf.CeilToInt(MaxCartas / 12);
         CargarListaCartas();
     }
 
@@ -257,7 +257,7 @@ public class DeckManager : MonoBehaviour {
                 DeckInt.Add(item.id);
             }
         }
-           
+
 
         foreach (Transform item in ViewEditorContent)
         {
@@ -280,9 +280,9 @@ public class DeckManager : MonoBehaviour {
         }
         foreach (var item in ListaTemporal)
         {
-                GameObject NewCarta = Instantiate(CartaBase, ViewEditorContent);
-                NewCarta.GetComponent<EditorCardBase>().RecibirDatosDeck(DataManager.instance.GetDigicarta(item));
-             
+            GameObject NewCarta = Instantiate(CartaBase, ViewEditorContent);
+            NewCarta.GetComponent<EditorCardBase>().RecibirDatosDeck(DataManager.instance.GetDigicarta(item));
+
         }
         foreach (var item in ListaRepetidos)
         {
@@ -314,7 +314,7 @@ public class DeckManager : MonoBehaviour {
 
     public IEnumerator AddUIDeck(EditorCardBase temporal)
     {
-        yield return new  WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         CartaSeleccionada = temporal;
         AddDeck();
         yield return new WaitForEndOfFrame();
@@ -340,11 +340,11 @@ public class DeckManager : MonoBehaviour {
     }
     public void CargarListaCartasDeck()
     {
-        int arranque = (nowPageB -1) * 10;
+        int arranque = (nowPageB - 1) * 10;
         int CartasVisibles = 0;
         for (int i = 0; i < DeckEditorContent.childCount; i++)
         {
-            if (i>= arranque)
+            if (i >= arranque)
             {
                 if (CartasVisibles < 10)
                 {
@@ -376,7 +376,7 @@ public class DeckManager : MonoBehaviour {
         puntosPaginas(puntosDeck, nowPageB);
 
 
-      
+
     }
 
     public void Avanzar()
@@ -416,7 +416,7 @@ public class DeckManager : MonoBehaviour {
 
     public void CargarListaCartas()
     {
-        int arranque = (nowPageB-1) * 12;
+        int arranque = (nowPageB - 1) * 12;
 
         // apagamos todos
         // Off Puntos 
@@ -453,12 +453,12 @@ public class DeckManager : MonoBehaviour {
         TextPaginasBiblioteca.text = nowPageB + " de " + Paginas;
         puntosPaginas(puntosBiblioteca, nowPageB);
 
-       
+
     }
-	
 
 
-    public void puntosPaginas(Image [] puntos, int nowPage)
+
+    public void puntosPaginas(Image[] puntos, int nowPage)
     {
         int nowpoint = 1;
         foreach (var item in puntos)
@@ -466,7 +466,7 @@ public class DeckManager : MonoBehaviour {
             if (nowPage == nowpoint)
             {
                 item.GetComponent<Image>().color = PuntoSelect;
-                
+
             }
             else
             {
@@ -477,7 +477,7 @@ public class DeckManager : MonoBehaviour {
     }
     public void GetIDs()
     {
-        string DMazo= "";
+        string DMazo = "";
         foreach (var item in DeckInt)
         {
             DMazo += item;
@@ -544,7 +544,7 @@ public class DeckManager : MonoBehaviour {
     }
     public void ChangeData(Coleccionables Datos)
     {
-        
+
         switch (Datos.Tipo)
         {
             case ColeccionablesType.PerfilFoto:
@@ -580,7 +580,7 @@ public class DeckManager : MonoBehaviour {
         Photo.sprite = DataManager.instance.GetPerfilPhoto(PlayerManager.instance.Jugador.Photo);
         TextPhoto.text = PlayerManager.instance.Jugador.Photo;
 
-        BackTablero.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero,ColeccionablesType.FondoTablero); 
+        BackTablero.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero, ColeccionablesType.FondoTablero);
         TextBackTablero.text = PlayerManager.instance.Jugador.FondoTablero;
 
         Tablero.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Tablero, ColeccionablesType.Tablero);
@@ -589,5 +589,5 @@ public class DeckManager : MonoBehaviour {
         BackCard.sprite = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Funda, ColeccionablesType.Funda);
         TextBackCard.text = PlayerManager.instance.Jugador.Funda;
     }
-  
+
 }

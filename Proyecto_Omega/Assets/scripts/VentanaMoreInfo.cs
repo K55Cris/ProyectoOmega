@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DigiCartas;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DigiCartas;
-using TMPro;
-using System;
 
-public class VentanaMoreInfo : MonoBehaviour {
+public class VentanaMoreInfo : MonoBehaviour
+{
 
     public static VentanaMoreInfo instance;
     public Image DigimonImage, Type;
     public DigiCarta Datos;
     public TextMeshProUGUI NombreAtaqueA, NombreAtaqueB, NombreAtaqueC, Habilidad, Evolucion1, Evolucion2, Evolucion3, NombreDigimon, Capacidad;
-    public TextMeshProUGUI valorE,DañoA, DañoB, DañoC , Phase, atributo, Familia, Tipo,PerdidaVida1, PerdidaVida2,PerdidaVida3, PerdidaVida4, Coste;
+    public TextMeshProUGUI valorE, DañoA, DañoB, DañoC, Phase, atributo, Familia, Tipo, PerdidaVida1, PerdidaVida2, PerdidaVida3, PerdidaVida4, Coste;
     public CanvasGroup Panel;
     public GameObject DigimonCard, OptionCard;
     public ListaEvolucionesItem[] ItemEvoText;
@@ -108,8 +107,8 @@ public class VentanaMoreInfo : MonoBehaviour {
             //ListaCategoria
 
             Type.overrideSprite = DataManager.instance.GetSpriteForType(DatosDigimon);
-           
-            Coste.text= string.Empty;
+
+            Coste.text = string.Empty;
             foreach (var item in Datos.ListaCosto)
             {
                 Coste.text = "\r\n";
@@ -155,8 +154,8 @@ public class VentanaMoreInfo : MonoBehaviour {
         {
             if (i <= 2)
             {
-                    ItemEvoText[i].gameObject.SetActive(true);
-                    ItemEvoText[i].Crear(DatosDigimon.ListaRequerimientos[i]);
+                ItemEvoText[i].gameObject.SetActive(true);
+                ItemEvoText[i].Crear(DatosDigimon.ListaRequerimientos[i]);
             }
         }
 
@@ -191,7 +190,7 @@ public class VentanaMoreInfo : MonoBehaviour {
     }
     public void Cerrando()
     {
-       StartCoroutine(WhoIsPlayer1.ReduceAlpha(Panel));
+        StartCoroutine(WhoIsPlayer1.ReduceAlpha(Panel));
     }
 
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using DigiCartas;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DigiCartas;
-public class ItemMenuMap : MonoBehaviour {
+public class ItemMenuMap : MonoBehaviour
+{
     public ParticleSystem Nodo;
     public ParticleSystem General;
     public int ID;
@@ -14,11 +15,11 @@ public class ItemMenuMap : MonoBehaviour {
     public int Loses;
     public int NivelNecesario;
     public List<ParticleSystem> Conexiones;
-    public List<ItemMenuMap> NodosVecinos= new List<ItemMenuMap>();
-    public bool Accesible=false;
+    public List<ItemMenuMap> NodosVecinos = new List<ItemMenuMap>();
+    public bool Accesible = false;
     public IADecks Decks;
     // Use this for initialization
-    void Awake ()
+    void Awake()
     {
         // Apagamos Todas las Particulas
         foreach (var item in Conexiones)
@@ -28,8 +29,8 @@ public class ItemMenuMap : MonoBehaviour {
         Nodo.Stop();
         General.Stop();
 
-	}
-	public void Cargar(Progreso Pros)
+    }
+    public void Cargar(Progreso Pros)
     {
         if (Pros.Cerca)
         {
@@ -37,7 +38,7 @@ public class ItemMenuMap : MonoBehaviour {
             wins = Pros.Victorias;
             Loses = Pros.Derrotas;
             if (Pros.Completo)
-            {  
+            {
 
                 // Cargar Nivel completo pero sin El nivel necesario
                 if (PlayerManager.instance.Jugador.Nivel < NivelNecesario)
@@ -63,12 +64,12 @@ public class ItemMenuMap : MonoBehaviour {
                 }
                 General.Play();
                 Nodo.Play();
-     
+
                 foreach (var item in NodosVecinos)
                 {
                     item.Accesible = true;
                     PlayerManager.instance.NodoCerca(item.ID);
-                }   
+                }
             }
             else
             {
@@ -86,7 +87,7 @@ public class ItemMenuMap : MonoBehaviour {
         {
             Accesible = false;
             // Cargar Nivel no completo no cerca y sin nivel necesario
-            if(PlayerManager.instance.Jugador.Nivel< NivelNecesario)
+            if (PlayerManager.instance.Jugador.Nivel < NivelNecesario)
             {
                 this.gameObject.GetComponent<Image>().color = Color.red;
             }
@@ -102,15 +103,15 @@ public class ItemMenuMap : MonoBehaviour {
     }
 
 
-    public void Recompensa(int Wins,int Lost, int ID)
+    public void Recompensa(int Wins, int Lost, int ID)
     {
         switch (ID)
         {
             case 1:
-                if(wins>=20)
-                StartCoroutine(LoadColecionable(new List<int> { 1}));
+                if (wins >= 20)
+                    StartCoroutine(LoadColecionable(new List<int> { 1 }));
                 if (Loses >= 50)
-                StartCoroutine(LoadColecionable(new List<int> { 1 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 1 }));
                 break;
             case 2:
                 if (wins >= 30)
@@ -125,7 +126,7 @@ public class ItemMenuMap : MonoBehaviour {
                     StartCoroutine(LoadColecionable(new List<int> { 3 }));
                 break;
             case 5:
-               
+
             case 6:
                 break;
             case 7:

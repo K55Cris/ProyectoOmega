@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EvolutionRequerimentBox : Slot
 {
@@ -51,17 +49,18 @@ public class EvolutionRequerimentBox : Slot
             if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
             {
 
-                if (Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Efectos) {
+                if (Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Efectos)
+                {
                     Tutorial.instance.Iniciar();
                 }
                 if (Tutorial.instance.NowSelectTuto == Tutorial.TutoStates.Evolucion)
                 {
                     SetRequerimientos(null);
-                    if (Tutorial.instance.NowDigiEfectos==Tutorial.DigiEfectos.None)
+                    if (Tutorial.instance.NowDigiEfectos == Tutorial.DigiEfectos.None)
                     {
                         Tutorial.instance.Iniciar();
                     }
-                    
+
                 }
 
             }
@@ -73,40 +72,40 @@ public class EvolutionRequerimentBox : Slot
         }
     }
 
-    public void SetRequerimientos(CartaDigimon Carta,bool condicion=false )
+    public void SetRequerimientos(CartaDigimon Carta, bool condicion = false)
     {
-        if(!Carta&&condicion==true)
-        EndEvolution();
+        if (!Carta && condicion == true)
+            EndEvolution();
 
-        if(condicion)
+        if (condicion)
             EndEvolution();
 
         Cartas = new List<CartaDigimon>();
         Cartas = MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas;
 
 
-        for (int i = 0;i < Cartas.Count; i++)
+        for (int i = 0; i < Cartas.Count; i++)
         {
             if (i == 0)
             {
-                CodeRequest(Cartas[i],MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta, Carta, condicion);
+                CodeRequest(Cartas[i], MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot).GetComponent<DigimonBoxSlot>()._DigiCarta, Carta, condicion);
             }
             else
             {
 
-                CodeRequest(Cartas[i], Cartas[i-1], Carta,condicion);
+                CodeRequest(Cartas[i], Cartas[i - 1], Carta, condicion);
             }
-            
+
         }
-   
+
     }
 
 
-    public void CodeRequest(CartaDigimon DEvo, CartaDigimon Base,CartaDigimon SetCard, bool condicion=false)
+    public void CodeRequest(CartaDigimon DEvo, CartaDigimon Base, CartaDigimon SetCard, bool condicion = false)
     {
-     
-        List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(DEvo.DatosDigimon,Base.DatosDigimon);
-         
+
+        List<string> requerimientos = StaticRules.GetListRequerimentsDigimon(DEvo.DatosDigimon, Base.DatosDigimon);
+
 
         if (requerimientos.Count > 0)
         {
@@ -117,7 +116,7 @@ public class EvolutionRequerimentBox : Slot
             }
             foreach (var item in requerimientos)
             {
-               
+
                 if (item == "O")
                 {
                     if (!condicion)
@@ -126,24 +125,24 @@ public class EvolutionRequerimentBox : Slot
                         if (!SetCard)
                         {
                             Adds = true;
-                            JalarCartaNetOcean(O,null);
-                
+                            JalarCartaNetOcean(O, null);
+
                         }
-                       
+
                         else
                         {
                             Adds = true;
-                            JalarCartaNetOcean(O,SetCard);
+                            JalarCartaNetOcean(O, SetCard);
                             break;
                         }
-                       
+
                     }
                     else
                     {
                         if (!Adds)
                             ListaRequerimientos.Add("O");
                     }
-                    
+
                 }
                 else if (item == ("X"))
                 {
@@ -153,7 +152,7 @@ public class EvolutionRequerimentBox : Slot
                         if (!SetCard)
                         {
                             Adds = true;
-                            JalarCartaNetOcean(X,null);
+                            JalarCartaNetOcean(X, null);
                         }
 
                         else
@@ -163,7 +162,7 @@ public class EvolutionRequerimentBox : Slot
                             break;
 
                         }
-                     
+
                     }
                     else
                     {
@@ -179,7 +178,8 @@ public class EvolutionRequerimentBox : Slot
                         {
                             ListaRequerimientos.Add(item);
                         }
-                    }else
+                    }
+                    else
                     {
                         if (Adds)
                             CheckRequeriment(SetCard, item);
@@ -187,7 +187,7 @@ public class EvolutionRequerimentBox : Slot
                 }
             }
             Activado = true;
-            
+
         }
     }
     public void CheckRequeriment(CartaDigimon RCard, string item)
@@ -244,7 +244,7 @@ public class EvolutionRequerimentBox : Slot
                     SoundManager.instance.PlaySfx(Sound.SetCard);
                     break;
                 }
-            } 
+            }
         }
         /*foreach (var item in ListaRequerimientos)
         {
@@ -269,12 +269,12 @@ public class EvolutionRequerimentBox : Slot
             }
         }
         */
-        
+
     }
-   public IEnumerator QuitarDeListaRequerimientos(string request)
+    public IEnumerator QuitarDeListaRequerimientos(string request)
     {
         yield return new WaitForEndOfFrame();
-      //  int index = ListaRequerimientos.FindIndex(x => x==request);
+        //  int index = ListaRequerimientos.FindIndex(x => x==request);
         ListaRequerimientos.Remove(request);
     }
 
@@ -282,8 +282,8 @@ public class EvolutionRequerimentBox : Slot
     {
         NowPhase();
 
-        if(!Activado)
-        Canvas.SetActive(true);
+        if (!Activado)
+            Canvas.SetActive(true);
     }
     void OnMouseExit()
     {
@@ -324,8 +324,8 @@ public class EvolutionRequerimentBox : Slot
     public void AjusteIntermedio(CartaDigimon _DCard)
     {
         _DCard.AjustarSlot();
-        if(StaticRules.instance.WhosPlayer!=IA.instance.IAPlayer)
-        PartidaManager.instance.CambioDePhase(true);
+        if (StaticRules.instance.WhosPlayer != IA.instance.IAPlayer)
+            PartidaManager.instance.CambioDePhase(true);
     }
 
 }

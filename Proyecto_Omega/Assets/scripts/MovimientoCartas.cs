@@ -1,21 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class MovimientoCartas : MonoBehaviour {
+public class MovimientoCartas : MonoBehaviour
+{
     public GameObject particle;
     public Camera Maincam;
-    public bool Cambio=false;
+    public bool Cambio = false;
     public bool Mover = false;
     public int IdMove = 0;
-    public GameObject Muerte, Funda;
+    public GameObject Muerte, Funda, _Shader;
     public LayoutElement Layout;
     // Use this for initialization
     float distancia;
-    public bool AddOrRemove=false;
+    public bool AddOrRemove = false;
     public GameObject CanvasSeleted;
     public Image BotonDiscardPhase, BotonActivate;
+
     public Sprite Descar, Cancelar, activar;
     private int shaderProperty;
 
@@ -26,19 +27,19 @@ public class MovimientoCartas : MonoBehaviour {
 
     void OnMouseDown()
     {
-       if (((StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase && 
-            StaticRules.instance.PlayerFirstAtack==PartidaManager.instance.Player1) | 
-            (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 &&
-            StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1) 
-            && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand))
-        { 
+        if (((StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase &&
+             StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1) |
+             (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 &&
+             StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1)
+             && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand))
+        {
             Layout.ignoreLayout = true;
-           
+
             this.distancia = Vector3.Distance(Maincam.transform.position, this.transform.position);
         }
         else
         {
-            if (transform.parent.transform.parent.name.Contains("Espacio")&& StaticRules.instance.NowPhase == DigiCartas.Phases.DiscardPhase)
+            if (transform.parent.transform.parent.name.Contains("Espacio") && StaticRules.instance.NowPhase == DigiCartas.Phases.DiscardPhase)
             {
                 BotonActivate.gameObject.SetActive(false);
                 BotonDiscardPhase.gameObject.SetActive(true);
@@ -47,11 +48,12 @@ public class MovimientoCartas : MonoBehaviour {
                     BotonDiscardPhase.sprite = Descar;
                 else
                     BotonDiscardPhase.sprite = Cancelar;
-            }else if ((StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase &&
-                StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1) |
-                (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase2 &&
-                StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1) && 
-                transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+            }
+            else if ((StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase &&
+               StaticRules.instance.PlayerFirstAtack == PartidaManager.instance.Player1) |
+               (StaticRules.instance.NowPhase == DigiCartas.Phases.EvolutionPhase2 &&
+               StaticRules.instance.PlayerFirstAtack != PartidaManager.instance.Player1) &&
+               transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
             {
                 // se puede activar la carta de la mano 
                 BotonActivate.gameObject.SetActive(true);
@@ -60,14 +62,14 @@ public class MovimientoCartas : MonoBehaviour {
                 CanvasSeleted.SetActive(true);
             }
         }
-      
+
     }
 
     void OnMouseDrag()
     {
         if (Mover)
         {
-            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase | StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand )
+            if (StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase | StaticRules.instance.NowPhase == DigiCartas.Phases.PreparationPhase2 && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
             {
                 Vector3 temp = Input.mousePosition;
                 temp.z = this.distancia;
@@ -79,11 +81,11 @@ public class MovimientoCartas : MonoBehaviour {
     private void OnMouseUp()
     {
 
-        if (StaticRules.instance.NowPhase != DigiCartas.Phases.DiscardPhase&& Mover &&!transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
+        if (StaticRules.instance.NowPhase != DigiCartas.Phases.DiscardPhase && Mover && !transform.parent.GetComponent<CartaDigimon>().DatosDigimon.IsActivateHand)
         {
             // Reralizar Cambio 
             // Obtener Slot de la Carta
-            Transform Slot= MesaManager.SetOptionSlot(transform.parent.gameObject);
+            Transform Slot = MesaManager.SetOptionSlot(transform.parent.gameObject);
             // Mandar a Revisar si la carta se puede colocar en el Slot
             StaticRules.CheckSetDigiCardSlot(Slot, transform.parent, true);
             StartCoroutine(TerminarDesicion());
@@ -91,13 +93,13 @@ public class MovimientoCartas : MonoBehaviour {
     }
     IEnumerator TerminarDesicion()
     {
-       yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         if (!Cambio)
         {
             transform.parent.localPosition = Vector3.zero;
             Layout.ignoreLayout = false;
             particle.SetActive(false);
-           
+
         }
         else
         {
@@ -105,20 +107,20 @@ public class MovimientoCartas : MonoBehaviour {
             Mover = false;
             StaticRules.instance.WhosPlayer._Mano.JugarCarta(transform.parent.transform.GetComponent<CartaDigimon>());
         }
-  
+
     }
     public void OnMouseOver()
     {
         VentanaMoreInfo.instance.Show(transform.parent.GetComponent<CartaDigimon>().DatosDigimon);
     }
 
-    public void MoverCarta(Transform Destino , UnityAction<Transform, CartaDigimon,int> LoAction, int ID)
+    public void MoverCarta(Transform Destino, UnityAction<Transform, CartaDigimon, int> LoAction, int ID)
     {
         IdMove = ID;
-        StartCoroutine(Transicion(Destino,LoAction));
+        StartCoroutine(Transicion(Destino, LoAction));
     }
 
-    public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon,int> LoAction)
+    public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon, int> LoAction)
     {
         yield return new WaitForEndOfFrame();
         if (Destino)
@@ -136,7 +138,7 @@ public class MovimientoCartas : MonoBehaviour {
                 yield return new WaitForSecondsRealtime(0.01F);
             }
         }
-        LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>(),IdMove);
+        LoAction.Invoke(Destino, transform.parent.transform.GetComponent<CartaDigimon>(), IdMove);
 
     }
     public void disebleCard()
@@ -149,21 +151,23 @@ public class MovimientoCartas : MonoBehaviour {
     public void DestruirCarta()
     {
         Muerte.SetActive(false);
+        _Shader.SetActive(false);
         Funda.SetActive(false);
         Muerte.SetActive(true);
         MeshRenderer Padre = transform.parent.GetComponent<MeshRenderer>();
         Padre.enabled = false;
         GetComponent<MeshRenderer>().enabled = false;
         MeshRenderer MuerteM = Muerte.GetComponent<MeshRenderer>();
-        
+
         shaderProperty = Shader.PropertyToID("_DigiImage");
         MuerteM.material.SetTexture(shaderProperty, DataManager.instance.GetTextureDigimon(transform.parent.GetComponent<CartaDigimon>().DatosDigimon.id));
 
-        Invoke("Regreso",2.2f);
+        Invoke("Regreso", 2.2f);
     }
     public void Regreso()
     {
         Muerte.SetActive(false);
+        _Shader.SetActive(true);
         Funda.SetActive(true);
         MeshRenderer Padre = transform.parent.GetComponent<MeshRenderer>();
         Padre.enabled = true;
@@ -173,12 +177,12 @@ public class MovimientoCartas : MonoBehaviour {
     {
         if (!AddOrRemove)
         {
-      
+
             Renderer rend = GetComponent<Renderer>();
             //Set the main Color of the Material to green
             Debug.Log("Desactivado:" + rend.material.name);
             rend.material.color = Color.gray;
-          
+
         }
         else
         {
@@ -205,7 +209,7 @@ public class MovimientoCartas : MonoBehaviour {
 
     public void ActivarCarta()
     {
-       
+
         StaticRules.ActivateOptionCard(transform.parent.GetComponent<CartaDigimon>());
         CanvasSeleted.SetActive(false);
     }

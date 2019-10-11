@@ -5,14 +5,15 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class DataManager : MonoBehaviour {
+public class DataManager : MonoBehaviour
+{
 
     public static DataManager instance;
     public TextAsset jsonData;
     public bool IntroVisto = false;
     public Cartas ColeccionDeCartas;
     public List<DigiCarta> TodasLasCartas;
-    private UnityAction<int,bool> _Loaction;
+    private UnityAction<int, bool> _Loaction;
     public List<Sprite> ImagesType;
     public Texture[] arrayImage;
     public List<Sprite> IAPhotos;
@@ -38,20 +39,20 @@ public class DataManager : MonoBehaviour {
     private void Start()
     {
         LoadCartas();
-        
+
     }
     public DigiCarta GetDigicarta(int codigo)
     {
         foreach (var item in TodasLasCartas)
         {
-            if (item.id==codigo)
+            if (item.id == codigo)
             {
                 return item;
             }
         }
         return new DigiCarta(); // error
     }
-   
+
     public void LoadCartas()
     {
         ColeccionDeCartas = JsonUtility.FromJson<Cartas>(jsonData.text);
@@ -74,8 +75,8 @@ public class DataManager : MonoBehaviour {
             TodasLasCartas.Add(item);
         }
         arrayImage = Resources.LoadAll<Texture>("Digimon");
-        
-        Sprite[]  arrayIAPs = Resources.LoadAll<Sprite>("DigimonCaratula/");
+
+        Sprite[] arrayIAPs = Resources.LoadAll<Sprite>("DigimonCaratula/");
         foreach (var item in arrayIAPs)
         {
             IAPhotos.Add(item);
@@ -94,7 +95,7 @@ public class DataManager : MonoBehaviour {
     }
     public Sprite GetSprite(int id)
     {
-       Sprite arraySprite = Resources.Load<Sprite>("Digimon/"+id.ToString());
+        Sprite arraySprite = Resources.Load<Sprite>("Digimon/" + id.ToString());
 
         return arraySprite;
     }
@@ -102,14 +103,14 @@ public class DataManager : MonoBehaviour {
     {
         foreach (var item in TodasLasCartas)
         {
-            if (item.Nombre.ToUpper()==Name)
+            if (item.Nombre.ToUpper() == Name)
             {
                 return item.id;
             }
-          
+
         }
         return 0;
-        
+
     }
     public Sprite GetSprite8(int id)
     {
@@ -118,7 +119,7 @@ public class DataManager : MonoBehaviour {
         return arraySprite;
     }
 
-    public void FadeCanvas(CanvasGroup _Canvas,bool Sw=false)
+    public void FadeCanvas(CanvasGroup _Canvas, bool Sw = false)
     {
         if (!Sw)
         {
@@ -128,15 +129,15 @@ public class DataManager : MonoBehaviour {
         {
             StartCoroutine(InFadeCanvas(_Canvas));
         }
-      
+
     }
     public IEnumerator _FadeCanvas(CanvasGroup _Canvas)
     {
         _Canvas.blocksRaycasts = false;
-        while (_Canvas.alpha>0)
+        while (_Canvas.alpha > 0)
         {
             yield return new WaitForSeconds(0.01f);
-            _Canvas.alpha-=0.08f;
+            _Canvas.alpha -= 0.08f;
         }
         _Canvas.blocksRaycasts = false;
         _Canvas.gameObject.SetActive(false);
@@ -155,7 +156,7 @@ public class DataManager : MonoBehaviour {
 
     public void EndFrame(UnityAction<string> funcion, float segundos)
     {
-        StartCoroutine(_EndFrame(funcion,segundos));
+        StartCoroutine(_EndFrame(funcion, segundos));
     }
     public IEnumerator _EndFrame(UnityAction<string> funcion, float segundos)
     {
@@ -167,7 +168,7 @@ public class DataManager : MonoBehaviour {
     }
     public bool bandera = true;
 
-    public void WinCard(UnityAction<int,bool> Loaction)
+    public void WinCard(UnityAction<int, bool> Loaction)
     {
         ListaExcluidos.Clear();
         _Loaction = Loaction;
@@ -179,7 +180,7 @@ public class DataManager : MonoBehaviour {
                 if (item.Cantidad < 9)
                 {
                     GetCard();
-                    return; 
+                    return;
                 }
             }
             JuegoCompleto();
@@ -188,8 +189,8 @@ public class DataManager : MonoBehaviour {
         {
             JuegoCompleto();
         }
-        
-       
+
+
     }
     public void GetCard()
     {
@@ -225,21 +226,21 @@ public class DataManager : MonoBehaviour {
         {
             // agregamos y salimos
             PlayerManager.instance.NewCard(IDCard);
-            _Loaction.Invoke(IDCard,true);
-        } 
-    } 
+            _Loaction.Invoke(IDCard, true);
+        }
+    }
 
     public void JuegoCompleto()
     {
         // mensaje de Ganador
         PlayerManager.instance.Jugador.ALLCards = true;
         PlayerManager.instance.NewCard(61);
-        _Loaction.Invoke(61,true);
+        _Loaction.Invoke(61, true);
     }
 
     public Sprite GetSpriteForType(DigiCarta Datos)
     {
-        Sprite Tipo=null;
+        Sprite Tipo = null;
         if (Datos.IsSupport)
         {
             switch (Datos.ListaCatrgoria[0])
@@ -263,15 +264,15 @@ public class DataManager : MonoBehaviour {
                     Tipo = ImagesType[1];
                     break;
                 case "C":
-                    Tipo= ImagesType[2];
+                    Tipo = ImagesType[2];
                     break;
             }
         }
         return Tipo;
     }
-    public static int GetRandom(int inicio , int final)
+    public static int GetRandom(int inicio, int final)
     {
-        int ran = Random.Range(inicio,final);
+        int ran = Random.Range(inicio, final);
         return ran;
     }
     public static bool GetDesicion()
@@ -284,10 +285,10 @@ public class DataManager : MonoBehaviour {
     }
     public Sprite GetPerfilPhoto(string Nombre)
     {
-       return DataManager.instance.ListaColeccionables.Find(x => x.Nombre == Nombre).Image;
+        return DataManager.instance.ListaColeccionables.Find(x => x.Nombre == Nombre).Image;
     }
-    public Sprite GetSpriteObjet(string Nombre,ColeccionablesType Tipo)
+    public Sprite GetSpriteObjet(string Nombre, ColeccionablesType Tipo)
     {
-        return DataManager.instance.ListaColeccionables.Find(x => x.Tipo== Tipo&& x.Nombre==Nombre).Image;
+        return DataManager.instance.ListaColeccionables.Find(x => x.Tipo == Tipo && x.Nombre == Nombre).Image;
     }
 }

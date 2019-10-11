@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DigiCartas;
 using UnityEngine;
-using UnityEngine.UI;
-using DigiCartas;
 using UnityEngine.Events;
-public class SelectDigimon : MonoBehaviour {
+using UnityEngine.UI;
+public class SelectDigimon : MonoBehaviour
+{
 
     public DigiCarta DatosDigimon;
     public Image ImageCarta;
-    public UnityAction<string> Localfase=null;
+    public UnityAction<string> Localfase = null;
     private int IDCarta;
-    public void RecibirDatos(DigiCarta Datos,int IDcard, UnityAction<string> fase)
+    public void RecibirDatos(DigiCarta Datos, int IDcard, UnityAction<string> fase)
     {
         DatosDigimon = Datos;
         ImageCarta.sprite = DataManager.instance.GetSprite(DatosDigimon.id);

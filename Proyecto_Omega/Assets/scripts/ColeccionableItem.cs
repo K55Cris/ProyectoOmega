@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DigiCartas;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using DigiCartas;
 public class ColeccionableItem : MonoBehaviour
 {
     public Image Imagen;

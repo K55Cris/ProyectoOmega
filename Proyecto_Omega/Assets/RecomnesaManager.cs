@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using DigiCartas;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
-using DigiCartas;
-public class RecomnesaManager : MonoBehaviour {
+public class RecomnesaManager : MonoBehaviour
+{
     public bool PresOne = false;
     public Button BtnAll;
     public List<GameObject> Particulas;
@@ -54,12 +53,12 @@ public class RecomnesaManager : MonoBehaviour {
         // Mandar a guardar la carta obtnida al los datos del jugador  
         LevelLoader.instance.CargarEscena("Main Menu");
     }
-    public void GetCarta(int DigiId,bool nuevo)
+    public void GetCarta(int DigiId, bool nuevo)
     {
         NewDigi = DataManager.instance.GetDigicarta(DigiId);
         NombreDigimon.text = NewDigi.Nombre;
         Desbloqueado.gameObject.SetActive(nuevo);
     }
 
- 
+
 }

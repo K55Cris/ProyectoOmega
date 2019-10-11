@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 public class EvolutionBox : Slot
 {
     public GameObject Canvas;
@@ -31,7 +29,7 @@ public class EvolutionBox : Slot
 
         }
     }
-    
+
     void OnMouseDown()
     {
         Debug.Log("Evolution slot");
@@ -47,12 +45,12 @@ public class EvolutionBox : Slot
     }
     public void EvolutionPhase()
     {
-     //   Canvas.SetActive(true);
-     //   Cartas.Remove(Cartas[0]);
+        //   Canvas.SetActive(true);
+        //   Cartas.Remove(Cartas[0]);
     }
     public void EvolutionRequirements()
     {
-       
+
     }
     public void FusionRequirements()
     {
@@ -62,7 +60,7 @@ public class EvolutionBox : Slot
     {
 
     }
-    public void SetDigimon(Transform Carta , bool IsIgnore=false)
+    public void SetDigimon(Transform Carta, bool IsIgnore = false)
     {
         if (IsIgnore)
         {
@@ -78,15 +76,15 @@ public class EvolutionBox : Slot
             {
                 if (StaticRules.instance.WhosPlayer == PartidaManager.instance.Player1)
                 {
-                if (StaticRules.instance.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
-                {
-                    StaticRules.instance.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
-                    PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
-                    Cartas.Add(Carta.GetComponent<CartaDigimon>());
-                    Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
-                    SoundManager.instance.PlaySfx(Sound.SetCard);
-                    MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
-                    return;
+                    if (StaticRules.instance.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
+                    {
+                        StaticRules.instance.NowPreparationPhase = StaticRules.PreparationPhase.SetEvolition;
+                        PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
+                        Cartas.Add(Carta.GetComponent<CartaDigimon>());
+                        Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
+                        SoundManager.instance.PlaySfx(Sound.SetCard);
+                        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
+                        return;
                     }
                 }
                 else
@@ -106,21 +104,21 @@ public class EvolutionBox : Slot
                 {
                     if (StaticRules.instance.NowPreparationPhase < StaticRules.PreparationPhase.ActivarOption)
                     {
-                    // obtener evolucion
-                    CartaDigimon Evo = Cartas[Cartas.Count - 1].GetComponent<CartaDigimon>();
-                    foreach (string item in Carta.transform.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
-                    {
-                        string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
-                        if (item.Contains(nameDigi))
+                        // obtener evolucion
+                        CartaDigimon Evo = Cartas[Cartas.Count - 1].GetComponent<CartaDigimon>();
+                        foreach (string item in Carta.transform.GetComponent<CartaDigimon>().DatosDigimon.ListaRequerimientos)
                         {
-                            PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
-                            Cartas.Add(Carta.GetComponent<CartaDigimon>());
-                            Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
-                            SoundManager.instance.PlaySfx(Sound.SetCard);
-                            MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
-                            return;
+                            string nameDigi = Evo.DatosDigimon.Nombre.ToUpper().Trim().Replace(" ", "");
+                            if (item.Contains(nameDigi))
+                            {
+                                PartidaManager.instance.SetMoveCard(this.transform, Carta, InterAutoAjuste);
+                                Cartas.Add(Carta.GetComponent<CartaDigimon>());
+                                Carta.GetComponent<CartaDigimon>().Front.GetComponent<MovimientoCartas>().Mover = false;
+                                SoundManager.instance.PlaySfx(Sound.SetCard);
+                                MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox).GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null, true);
+                                return;
+                            }
                         }
-                    }
                     }
                 }
                 else
@@ -158,7 +156,7 @@ public class EvolutionBox : Slot
     {
         foreach (var item in Cartas)
         {
-            if (item.DatosDigimon.Nombre==DCarta.DatosDigimon.Nombre)
+            if (item.DatosDigimon.Nombre == DCarta.DatosDigimon.Nombre)
             {
                 return true;
             }
@@ -172,7 +170,7 @@ public class EvolutionBox : Slot
     public IEnumerator AutoAjustar(Transform Carta)
     {
         yield return new WaitForEndOfFrame();
-        Carta.localPosition = new Vector3(0, 0, -1 + Cartas.Count/2);
+        Carta.localPosition = new Vector3(0, 0, -1 + Cartas.Count / 2);
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Carta.localScale = new Vector3(1, 1, 0.015f);
 
@@ -197,6 +195,6 @@ public class EvolutionBox : Slot
     }
     public void OnBeforeTransformParentChanged()
     {
-        
+
     }
 }

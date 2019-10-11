@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using DigiCartas;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DigiCartas;
-using System;
 using UnityEngine.Events;
 
-public class IA : MonoBehaviour {
+public class IA : MonoBehaviour
+{
     public List<DecksIA> Decks;
     public int Nivel;
     public DecksIA ChoseDeck;
@@ -17,10 +18,10 @@ public class IA : MonoBehaviour {
     public DecksIA Defaul;
     public void Start()
     {
-            IAPlayer = PartidaManager.instance.Player2;
-            ManoEspacio = PartidaManager.instance.ManoPlayer2;
-            CargarDificultad();
-            ChoiseDeck();
+        IAPlayer = PartidaManager.instance.Player2;
+        ManoEspacio = PartidaManager.instance.ManoPlayer2;
+        CargarDificultad();
+        ChoiseDeck();
     }
     void Awake()
     {
@@ -34,21 +35,21 @@ public class IA : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    public void TurnoIA(bool espera=false)
+    public void TurnoIA(bool espera = false)
     {
         PanelClosePlayer.gameObject.SetActive(true);
         PartidaManager.instance.MenuPhases.ChangePhase(false);
         StaticRules.instance.WhosPlayer = IAPlayer;
-        if(espera)
-        StartCoroutine(Whaiting(NowPhase,3f));
+        if (espera)
+            StartCoroutine(Whaiting(NowPhase, 3f));
         else
-        StartCoroutine(Whaiting(NowPhase,1f));
+            StartCoroutine(Whaiting(NowPhase, 1f));
     }
 
 
     public void NowPhase(string Result)
     {
-       
+
         switch (StaticRules.instance.NowPhase)
         {
             case DigiCartas.Phases.PreparationPhase:
@@ -61,7 +62,7 @@ public class IA : MonoBehaviour {
                 StartEvolutionPhase();
                 break;
             case DigiCartas.Phases.EvolutionPhase2:
-                EvolutionPhase();
+                StartEvolutionPhase();
                 break;
 
             case DigiCartas.Phases.OptionBattlePhase:
@@ -72,7 +73,7 @@ public class IA : MonoBehaviour {
                 AppearanceRequirements();
                 break;
             case DigiCartas.Phases.PointCalculationPhase:
-                
+
                 break;
             default:
                 Debug.Log("Fase no recocida para este Slot");
@@ -110,7 +111,7 @@ public class IA : MonoBehaviour {
             if (MesaManager.instance.GetOptionSlotForCard(wins))
             {
                 // revisamos si non es child
-                if (Digimon.DatosDigimon.Nivel!= "III")
+                if (Digimon.DatosDigimon.Nivel != "III")
                 {
                     // Activamos la carta
                     StaticRules.ActivateOptionCard(MesaManager.instance.
@@ -223,12 +224,17 @@ public class IA : MonoBehaviour {
                         return;
                     }
                 }
-                TurnoJugador(true);
+
 
                 if (MesaManager.instance.GetOptionSlotForCard(Lost))
                 {
-
+                    // SI PERDEMOS activamos carta
+                    StaticRules.ActivateOptionCard(MesaManager.instance.
+                      GetOptionSlotForCard(Lost).GetComponent<OptionSlot>().OpCarta);
+                    TurnoJugador(true);
+                    return;
                 }
+                TurnoJugador(true);
             }
             else
             {
@@ -243,7 +249,7 @@ public class IA : MonoBehaviour {
     {
         StaticRules.instance.WhaitPlayersReadyBattlet(action);
         StartCoroutine(Whaiting(TerminarBatalla, 0.5f));
-     
+
     }
 
     public void EndBattlePhases()
@@ -251,12 +257,6 @@ public class IA : MonoBehaviour {
 
     }
 
-    private void EvolutionPhase()
-    {
-        // Pensar si se decidi seguir evolucionando
-        StartEvolutionPhase();
-
-    }
 
     private void PreparationPhase()
     {
@@ -271,6 +271,8 @@ public class IA : MonoBehaviour {
     {
         Campos Campo2 = MesaManager.instance.Campo2;
         OptionSlot OptionSlot = Campo2.OptionSlot1.GetComponent<OptionSlot>();
+
+
         if (CheckPriorityOptionCard(OptionSlot.OpCarta, OptionSlot.TurnOpcard))
         {
             OptionSlot.Descartar();
@@ -305,7 +307,7 @@ public class IA : MonoBehaviour {
         else
         {
             // esperar a tener cartas 
-            Invoke("DiscarPhase",2f);
+            Invoke("DiscarPhase", 2f);
         }
     }
     public void SimulateThinkIADiscard()
@@ -319,10 +321,10 @@ public class IA : MonoBehaviour {
 
     public void CargarDificultad()
     {
-       int Cant = PlayerManager.instance.Jugador.Nivel;
-        if (Cant<25)
+        int Cant = PlayerManager.instance.Jugador.Nivel;
+        if (Cant < 25)
             IALevel = Dificultad.Facil;
-        else if(Cant < 50)
+        else if (Cant < 50)
             IALevel = Dificultad.Normal;
         else if (Cant < 75)
             IALevel = Dificultad.Dificil;
@@ -334,7 +336,7 @@ public class IA : MonoBehaviour {
     public void ChoiseDeck()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
-        {  
+        {
             List<DecksIA> DecksWhitDificult = new List<DecksIA>();
 
             foreach (var item in PlayerManager.instance.DeckIA.Decks)
@@ -356,7 +358,7 @@ public class IA : MonoBehaviour {
     public void SelectChild(UnityAction<string> fase, List<CartaDigimon> cartas)
     {
         // CARGAMOS UNA carta Aleatoria
-        int Rand = DataManager.GetRandom(0,cartas.Count);
+        int Rand = DataManager.GetRandom(0, cartas.Count);
         fase.Invoke(cartas[Rand].cardNumber.ToString());
     }
 
@@ -432,7 +434,7 @@ public class IA : MonoBehaviour {
                     // el child gana por su cuenta asi que paramos aqui
                     Debug.Log("el child NO EVOuciona pero si gana");
                     ChangeChild(Child, CheckSetEvolutions);
-                   
+
                 }
                 else
                 {
@@ -443,7 +445,7 @@ public class IA : MonoBehaviour {
                         {
                             // ste child Gana asi que cambiemos a este 
                             Debug.Log("el child pierde pero este child si gana");
-                            ChangeChild(item,CheckSetEvolutions);
+                            ChangeChild(item, CheckSetEvolutions);
                             break;
                         }
                     }
@@ -468,21 +470,22 @@ public class IA : MonoBehaviour {
         if (Child == null)
             Child = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
 
-            // Revisamos si tenemos una carta en la mano para que el evolucione
-            foreach (var item2 in IAPlayer._Mano.Cartas)
+        // Revisamos si tenemos una carta en la mano para que el evolucione
+        foreach (var item2 in IAPlayer._Mano.Cartas)
+        {
+            if (StaticRules.CheckEvolutionList(item2, Child))
             {
-                if (StaticRules.CheckEvolutionList(item2, Child))
-                {
                 // El digimon Evoluciona y puede ganar 
                 //>>>>>>>
                 if (CheckRequeriments(item2, Child))
                 {
+                    Debug.LogWarning("owooo");
                     JugarCarta(item2, Campo.EvolutionSlot);
                     AnotherCardEvolution(item2);
                     return;
                 }
-                }
             }
+        }
         // saltamos a colocar los chips
         SetOptionCards("Salto");
     }
@@ -511,38 +514,39 @@ public class IA : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         JugarCarta(Evo, Campo.EvolutionSlot);
         yield return new WaitForSeconds(1.5f);
-        Invoke("SetRequeriments", 0.5f); 
+        Invoke("SetRequeriments", 0.5f);
     }
     public List<CartaDigimon> Requesitos = new List<CartaDigimon>();
 
     public void SetRequeriments()
     {
 
-       List<string> Requerimientos = MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaRequerimientos;
+        List<string> Requerimientos = MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaRequerimientos;
 
         bool Colocar = false;
         Requesitos = new List<CartaDigimon>();
         foreach (var item in Requerimientos)
         {
-            if(item=="X" | item == "O")
+            if (item == "X" | item == "O")
             {
                 Colocar = true;
-            }else if (item != "+")
+            }
+            else if (item != "+")
             {
-                if(item == "40%")
+                if (item == "40%")
                 {
                     // setear carta de 40
                     Requesitos.Add(SerchCardInHand("40", true));
                 }
-                else if(item == "60%")
+                else if (item == "60%")
                 {
                     // setear Carta de 60
-                    Requesitos.Add(SerchCardInHand("60",true));
+                    Requesitos.Add(SerchCardInHand("60", true));
                 }
                 else
                 {
                     // Revisemos que no sea el digimon ya puesto 
-                    if(item!= MesaManager.instance.Campo2.DigimonSlot.GetComponent
+                    if (item != MesaManager.instance.Campo2.DigimonSlot.GetComponent
                         <DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nombre.ToUpper().Replace(" ", ""))
                     {
 
@@ -550,10 +554,10 @@ public class IA : MonoBehaviour {
                         // setear carta de la mano 
                         foreach (var item2 in MesaManager.instance.Campo2.EvolutionBox.GetComponent<EvolutionBox>().Cartas)
                         {
-                            if(!item2.DatosDigimon.Nombre.ToUpper().Replace(" ", "").Contains(item))
+                            if (!item2.DatosDigimon.Nombre.ToUpper().Replace(" ", "").Contains(item))
                             {
                                 // Seteamos la Carta 
-                               Requesitos.Add(SerchCardInHand(item));
+                                Requesitos.Add(SerchCardInHand(item));
                             }
                         }
                     }
@@ -577,28 +581,28 @@ public class IA : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitForEndOfFrame();
-      
+
         foreach (var item in Dcards)
         {
             JugarCarta(item, place);
             yield return new WaitForSeconds(time);
         }
-        if (LoAction != null) 
-        LoAction.Invoke("");
+        if (LoAction != null)
+            LoAction.Invoke("");
     }
 
     public void EnterOtherRequeriments(string result)
     {
         StartCoroutine(SetCardsTime(0.3f, Requesitos, Campo.Requeriment, SetOptionCards));
     }
-    
+
     public void SetOptionCards(string result)
     {
 
         // Aqui desidimos  que Chips Colocar
         // obtenemos los chips posibles de la mano
         List<CartaDigimon> Options = new List<CartaDigimon>();
-        List<CartaDigimon> CartasJugadas= new List<CartaDigimon>();
+        List<CartaDigimon> CartasJugadas = new List<CartaDigimon>();
         foreach (var item in IAPlayer._Mano.Cartas)
         {
             if (item.DatosDigimon.IsSupport && !item.DatosDigimon.IsActivateHand)
@@ -608,17 +612,17 @@ public class IA : MonoBehaviour {
         {
             foreach (var item in Options)
             {
-            switch (IALevel)
-            {
-                case Dificultad.Facil:
+                switch (IALevel)
+                {
+                    case Dificultad.Facil:
                         // Se colocan todos los chips que se tengan en la mano y puedan ponerse
                         CartasJugadas.Add(item);
                         break;
-                case Dificultad.Normal:
+                    case Dificultad.Normal:
                         if (DataManager.GetRandom(1, 3) == 1)
                         {
                             // revisamos si Esat carta Tiene prioridad
-                            if(CheckPriorityOptionCard(item, SimularBatalla(MesaManager.instance.Campo2.
+                            if (CheckPriorityOptionCard(item, SimularBatalla(MesaManager.instance.Campo2.
                                 DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta)))
                             {
                                 CartasJugadas.Add(item);
@@ -628,9 +632,9 @@ public class IA : MonoBehaviour {
                         {
                             CartasJugadas.Add(item);
                         }
-                    break;
-                case Dificultad.Dificil:
-                        if (1f/DataManager.GetRandom(1, 5) >= .26f)
+                        break;
+                    case Dificultad.Dificil:
+                        if (1f / DataManager.GetRandom(1, 5) >= .26f)
                         {
                             // revisamos si Esta carta Tiene prioridad
                             if (CheckPriorityOptionCard(item, SimularBatalla(MesaManager.instance.Campo2.
@@ -644,7 +648,7 @@ public class IA : MonoBehaviour {
                             CartasJugadas.Add(item);
                         }
                         break;
-                case Dificultad.Experto:
+                    case Dificultad.Experto:
                         // revisamos si Esta carta Tiene prioridad
                         if (CheckPriorityOptionCard(item, SimularBatalla(MesaManager.instance.Campo2.
                             DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta)))
@@ -652,9 +656,9 @@ public class IA : MonoBehaviour {
                             CartasJugadas.Add(item);
                         }
                         break;
-                default:
-                    break;
-            } 
+                    default:
+                        break;
+                }
             }
             // seteamos las cartas
             StartCoroutine(SetCardsTime(0.3f, CartasJugadas, Campo.OptionSlot, FinishPreparation));
@@ -663,9 +667,9 @@ public class IA : MonoBehaviour {
         {
             FinishPreparation("");
         }
-        
-     
-     
+
+
+
     }
     public void FinishPreparation(string result)
     {
@@ -697,21 +701,23 @@ public class IA : MonoBehaviour {
         if (OpCard)
         {
             if (OpCard.DatosDigimon.id == 53 | OpCard.DatosDigimon.id == 58 | OpCard.DatosDigimon.id == 54 | OpCard.DatosDigimon.id == 57)
-                if (Turno >= 4)
+            {
+                if (Turno >= 5)
                 {
                     return true;
                 }
 
-                else if (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51 | OpCard.DatosDigimon.id == 52)
+            }
+            else if (OpCard.DatosDigimon.id == 49 | OpCard.DatosDigimon.id == 50 | OpCard.DatosDigimon.id == 51 | OpCard.DatosDigimon.id == 52)
             {
-                if (Turno >= 2)
+                if (Turno >= 3)
                 {
                     return true;
                 }
             }
             else if (OpCard.DatosDigimon.id == 59 | OpCard.DatosDigimon.id == 60)
             {
-                if (Turno >= 3)
+                if (Turno >= 4)
                 {
                     return true;
                 }
@@ -720,11 +726,11 @@ public class IA : MonoBehaviour {
         }
         else
             return false;
-        
+
     }
 
 
-    public CartaDigimon SerchCardInHand(string name, bool isChip=false) 
+    public CartaDigimon SerchCardInHand(string name, bool isChip = false)
     {
         if (!isChip)
         {
@@ -753,14 +759,22 @@ public class IA : MonoBehaviour {
                 }
                 else
                 {
-                    if(item.Equals(Base.DatosDigimon.Nombre.ToUpper().Replace(" ", "")))
+                    if (item.Equals(Base.DatosDigimon.Nombre.ToUpper().Replace(" ", "")))
                     {
                         // IGNORAMOS
                         CONTADOR++;
-                    }else if (item == "60%")
+                    }
+                    else if (item == "60%")
                     {
                         // buscamos en la mano
-                        if(IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.id == 60))
+                        if (IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.id == 60))
+                        {
+                            CONTADOR++;
+                        }
+                        DigiCarta digicard = new DigiCarta();
+                        digicard.id = 60;
+                        Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
+                        if (slot)
                         {
                             CONTADOR++;
                         }
@@ -772,12 +786,20 @@ public class IA : MonoBehaviour {
                         {
                             CONTADOR++;
                         }
+                        // BUSCAMOS en el campo
+                        DigiCarta digicard = new DigiCarta();
+                        digicard.id = 59;
+                        Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
+                        if (slot)
+                        {
+                            CONTADOR++;
+                        }
                     }
                     else
                     {
                         // buscamos en la mano el digimon faltante
                         if (IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.Nombre.
-                        ToUpper().Replace(" ", "")==item))
+                        ToUpper().Replace(" ", "") == item))
                         {
                             CONTADOR++;
                         }
@@ -789,11 +811,13 @@ public class IA : MonoBehaviour {
                 // si jugamos esta carta
                 return true;
             }
+            Debug.LogWarning(CONTADOR);
         }
+
         return false;
     }
 
-    public void ChangeChild(CartaDigimon Child,UnityAction<CartaDigimon> Paso2Preparation)
+    public void ChangeChild(CartaDigimon Child, UnityAction<CartaDigimon> Paso2Preparation)
     {
         // revisamos si el child es el mismo 
         CartaDigimon DRoquin = MesaManager.instance.Campo2.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
@@ -834,6 +858,7 @@ public class IA : MonoBehaviour {
     {
         if (Result)
         {
+            Debug.LogWarning("owooo en espera");
             StartCoroutine(Whaiting(TerminarTurno, 2f));
         }
         else
@@ -841,7 +866,7 @@ public class IA : MonoBehaviour {
             FinishTurnoIA();
         }
     }
-   
+
 
     public bool CheckUso(CartaDigimon Dcard)
     {
@@ -906,27 +931,30 @@ public class IA : MonoBehaviour {
                 string Nivel = StaticRules.ConvertToNivel(StaticRules.ConvertNivel(MesaManager.instance.Campo2.
                     DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta.DatosDigimon.Nivel) + 1);
 
-                foreach (var item in IAPlayer._Mano.Cartas)
+                if (Nivel!= null)
                 {
-                    if (Nivel == item.DatosDigimon.Nivel)
+                    foreach (var item in IAPlayer._Mano.Cartas)
                     {
-                        // Activamos el efecto
-                        StaticRules.ActivateOptionCard(Chip56);
-                        LoAction(true);
-                        return;
+                        if (Nivel == item.DatosDigimon.Nivel)
+                        {
+                            // Activamos el efecto
+                            StaticRules.ActivateOptionCard(Chip56);
+                            LoAction(true);
+                            return;
+                        }
                     }
                 }
                 LoAction(false);
             }
             else
             {
-                // por ahóra la Ia no usara este chip 
+                // por ahóra la Ia no usara este chip ya que ya se cuenta con una previa evolucion
                 LoAction(false);
             }
         }
         else
         {
-            // buscamos el chip 
+            // EL cHIP 56 no se encuentra
             LoAction(false);
         }
     }
@@ -935,7 +963,7 @@ public class IA : MonoBehaviour {
 
     public void JugarCarta(CartaDigimon Dcard, Campo Destino)
     {
-        Transform Lugar=null;
+        Transform Lugar = null;
         switch (Destino)
         {
             case Campo.DigimonBox:
@@ -963,7 +991,7 @@ public class IA : MonoBehaviour {
                  addNetocean(Dcard);
                 break;
             case Campo.Support:
-               // Lugar = MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox, IAPlayer);
+                // Lugar = MesaManager.instance.GetSlot(MesaManager.Slots.SupportBox, IAPlayer);
                 break;
             default:
                 break;
@@ -997,18 +1025,18 @@ public class IA : MonoBehaviour {
         // Obtenemos ataques
         string Digimon1 = D1.DatosDigimon.TipoBatalla;
         string Digimon2 = TCard.DatosDigimon.TipoBatalla;
-        
+
 
         // obtenemos Fuerza de los ataques
-        int OffD1 = StaticRules.instance.WhatAtackUse(Digimon2,D1);
-        int OffD2 = StaticRules.instance.WhatAtackUse(Digimon1,TCard);
+        int OffD1 = StaticRules.instance.WhatAtackUse(Digimon2, D1);
+        int OffD2 = StaticRules.instance.WhatAtackUse(Digimon1, TCard);
 
         if (Digimon1 == "C" && Digimon2 == "A")
             OffD2 = 0;
         if (Digimon2 == "C" && Digimon1 == "A")
             OffD1 = 0;
 
-        Debug.Log(D1.DatosDigimon.Nombre + ":" + OffD1 +"|"+ TCard.DatosDigimon.Nombre + ":" + OffD2);
+        Debug.Log(D1.DatosDigimon.Nombre + ":" + OffD1 + "|" + TCard.DatosDigimon.Nombre + ":" + OffD2);
         // Verificamos si ganamos
         if (OffD2 >= OffD1)
             return true;
@@ -1016,7 +1044,7 @@ public class IA : MonoBehaviour {
             return false;
     }
 
-    public bool SimularBatallaAtaque(CartaDigimon TCard,string ataque, int BUFFO)
+    public bool SimularBatallaAtaque(CartaDigimon TCard, string ataque, int BUFFO)
     {
         CartaDigimon D1 = MesaManager.instance.Campo1.DigimonSlot.GetComponent<DigimonBoxSlot>()._DigiCarta;
         // Obtenemos ataques
@@ -1031,10 +1059,10 @@ public class IA : MonoBehaviour {
             Digimon2 = ataque;
 
         // obtenemos Fuerza de los ataques
-        
+
         int OffD2 = StaticRules.instance.WhatAtackUse(Digimon2, TCard);
 
-        OffD2 +=BUFFO;
+        OffD2 += BUFFO;
         Debug.Log(D1.DatosDigimon.Nombre + ":" + OffD1 + "|" + TCard.DatosDigimon.Nombre + ":" + OffD2);
         // Verificamos si ganamos
         if (OffD2 >= OffD1)
@@ -1055,7 +1083,7 @@ public class IA : MonoBehaviour {
             return false;
     }
 
-    public  IEnumerator WhaitFase(UnityAction<CartaDigimon> Loaction,CartaDigimon Dcard,float segundos)
+    public IEnumerator WhaitFase(UnityAction<CartaDigimon> Loaction, CartaDigimon Dcard, float segundos)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(segundos);

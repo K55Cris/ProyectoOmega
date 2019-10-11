@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MapController : MonoBehaviour {
+public class MapController : MonoBehaviour
+{
     public Vector3 mouse;
     public Camera Camara;
     public int ID = 0;
-     
+
     public void Move()
     {
-   
+
         this.transform.position = Input.mousePosition;
         //Vector3 NewPos =new Vector3(this.transform.position.x,
         //    transform.position.y, Camara.transform.localPosition.z);
@@ -17,11 +16,11 @@ public class MapController : MonoBehaviour {
         Vector3 NewPos = this.transform.localPosition;
         float x = NewPos.x;
         float y = NewPos.y;
-        if (x<-450F)
+        if (x < -450F)
         {
             x = -450F;
         }
-        if (x>450F)
+        if (x > 450F)
         {
             x = 450F;
         }
@@ -33,10 +32,10 @@ public class MapController : MonoBehaviour {
         {
             y = 240F;
         }
-        
-        NewPos = new Vector3(x,y, Camara.transform.localPosition.z);
-        float step = 500* Time.deltaTime;
-        Camara.transform.localPosition=Vector3.MoveTowards(Camara.transform.localPosition, NewPos, step);
+
+        NewPos = new Vector3(x, y, Camara.transform.localPosition.z);
+        float step = 500 * Time.deltaTime;
+        Camara.transform.localPosition = Vector3.MoveTowards(Camara.transform.localPosition, NewPos, step);
     }
     public void EndMove()
     {

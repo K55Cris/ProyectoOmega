@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
-public class UIPhases : MonoBehaviour {
+public class UIPhases : MonoBehaviour
+{
 
     public UIParticleSystem Phase;
     public List<ParticleSystem> Particulas;
@@ -53,7 +53,7 @@ public class UIPhases : MonoBehaviour {
 
     }
 
-    
+
     public void ChangeMaterial(int material, bool player)
     {
         Phase.material = MaterialPhases[material];

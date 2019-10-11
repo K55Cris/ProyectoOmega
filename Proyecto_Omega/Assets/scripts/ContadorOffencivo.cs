@@ -1,18 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
 public class ContadorOffencivo : MonoBehaviour
 {
     public TextMeshProUGUI Ataque;
     public int AtaqueBase = 0;
-    public int PoderDeAtaque=0;
+    public int PoderDeAtaque = 0;
     public GameObject Etiqueta;
 
     // Use this for initialization
-    public void Empezar(int Daño,UnityAction<string> LoAction=null)
+    public void Empezar(int Daño, UnityAction<string> LoAction = null)
     {
         AtaqueBase = Daño;
         PartidaManager.instance.CambioDePhase(false);
@@ -28,7 +26,7 @@ public class ContadorOffencivo : MonoBehaviour
     public void EFECTOS(int cantidad, UnityAction<string> LoAction)
     {
         Debug.Log(cantidad + ":" + PoderDeAtaque);
-        StartCoroutine(EstablecerCantidad(cantidad,LoAction));
+        StartCoroutine(EstablecerCantidad(cantidad, LoAction));
     }
 
     public void OpEfectCard(int cantidad)
@@ -39,23 +37,23 @@ public class ContadorOffencivo : MonoBehaviour
 
     public void EsperarEfectos()
     {
-      
+
     }
     public void OnDisable()
     {
         StopAllCoroutines();
     }
 
-    private IEnumerator EstablecerCantidad(int cantidad, UnityAction<string> loaction=null)
+    private IEnumerator EstablecerCantidad(int cantidad, UnityAction<string> loaction = null)
     {
         yield return new WaitForEndOfFrame();
-        if (cantidad>PoderDeAtaque)
+        if (cantidad > PoderDeAtaque)
         {
             // Buffo
             Debug.Log("bUFFO");
-            
+
             int DIVISOR = cantidad / 50;
-            for (int i = PoderDeAtaque; i < cantidad; i+=DIVISOR)
+            for (int i = PoderDeAtaque; i < cantidad; i += DIVISOR)
             {
                 Ataque.text = i.ToString();
                 yield return new WaitForSecondsRealtime(0.008f);
@@ -71,10 +69,10 @@ public class ContadorOffencivo : MonoBehaviour
         else
         {
             // De-duff
-            Debug.Log(PoderDeAtaque+":"+transform.parent.transform.parent.transform.parent.name);
+            Debug.Log(PoderDeAtaque + ":" + transform.parent.transform.parent.transform.parent.name);
             int DIVISOR = PoderDeAtaque / 60;
-            
-            for (int i = PoderDeAtaque; i > cantidad; i-=DIVISOR)
+
+            for (int i = PoderDeAtaque; i > cantidad; i -= DIVISOR)
             {
                 Ataque.text = i.ToString();
                 yield return new WaitForSecondsRealtime(0.01f);
@@ -87,7 +85,7 @@ public class ContadorOffencivo : MonoBehaviour
                 loaction.Invoke("De-Buff a habilidad");
             }
         }
-     
-           
+
+
     }
 }

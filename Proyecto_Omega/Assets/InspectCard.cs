@@ -1,17 +1,17 @@
-﻿using System.Collections;
+﻿using DigiCartas;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DigiCartas;
-using TMPro;
-public class InspectCard : MonoBehaviour {
+public class InspectCard : MonoBehaviour
+{
 
-    public TextMeshProUGUI Nombre, Descripcion, Familia, Atributo, Tipo,Nivel, Habilidad,id,Capacidad,FaseLimite,FaseActivacion;
-    public TextMeshProUGUI PoA,PoB,PoC, TituloEvolucion;
+    public TextMeshProUGUI Nombre, Descripcion, Familia, Atributo, Tipo, Nivel, Habilidad, id, Capacidad, FaseLimite, FaseActivacion;
+    public TextMeshProUGUI PoA, PoB, PoC, TituloEvolucion;
     public Image ImageDigimon;
     public CanvasGroup canvas;
     public List<Image> Evoluciones;
-    public GameObject Evolucion,ListaEvolucion,Ataques,DatosDigimon,DatosOption,Efectos,PrefabEfecto;
+    public GameObject Evolucion, ListaEvolucion, Ataques, DatosDigimon, DatosOption, Efectos, PrefabEfecto;
     public Transform Contenido2;
 
     public void OpenCard(DigiCarta Datos)
@@ -35,15 +35,15 @@ public class InspectCard : MonoBehaviour {
             Nivel.text = Datos.Nivel;
             Tipo.text = Datos.Tipo;
             Habilidad.text = Datos.Habilidad;
-           
+
             PoA.text = Datos.DanoAtaqueA.ToString();
             PoB.text = Datos.DanoAtaqueB.ToString();
             PoC.text = Datos.DanoAtaqueC.ToString();
-            if (Datos.ListaRequerimientos.Count > 0 && Datos.ListaRequerimientos[0]!="")
+            if (Datos.ListaRequerimientos.Count > 0 && Datos.ListaRequerimientos[0] != "")
             {
                 // cargar Evoluciones
                 ListaEvolucion.gameObject.SetActive(true);
-                
+
                 TituloEvolucion.text = "Evoluciona de:";
                 int Contador = 0;
                 //Clear

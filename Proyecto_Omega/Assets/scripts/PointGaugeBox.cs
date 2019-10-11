@@ -19,7 +19,7 @@ public class PointGaugeBox : MonoBehaviour
     }
     public void SetCard(int point)
     {
-        Debug.Log(transform.parent.name+point);
+        Debug.Log(transform.parent.name + point);
         Transform Padre = null;
         switch (point)
         {
@@ -68,7 +68,8 @@ public class PointGaugeBox : MonoBehaviour
         {
             StaticRules.Victori();
         }
-        else {
+        else
+        {
             PartidaManager.instance.SetMoveCard(Padre, Dcard.transform, StaticRules.Ajustar);
         }
     }

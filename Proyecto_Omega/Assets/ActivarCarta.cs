@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-public class ActivarCarta : MonoBehaviour {
+public class ActivarCarta : MonoBehaviour
+{
     public Image DCarta;
     public CartaDigimon CartaUsada;
     public Animator Am;
@@ -20,10 +19,11 @@ public class ActivarCarta : MonoBehaviour {
     public void Activar(CartaDigimon Carta)
     {
         Debug.Log(Carta.DatosDigimon.Nombre);
-        if (CartaUsada != Carta) {
-            DCarta.overrideSprite= DataManager.instance.GetSprite(Carta.DatosDigimon.id);
+        if (CartaUsada != Carta)
+        {
+            DCarta.overrideSprite = DataManager.instance.GetSprite(Carta.DatosDigimon.id);
         }
-     
+
         Am.Play("Efectos");
     }
 }

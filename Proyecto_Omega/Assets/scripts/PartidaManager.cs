@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using DigiCartas;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using DigiCartas;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using TMPro;
-public class PartidaManager : MonoBehaviour {
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+public class PartidaManager : MonoBehaviour
+{
 
     public Player Player1;
     public Player Player2;
@@ -15,8 +15,8 @@ public class PartidaManager : MonoBehaviour {
     public Transform ManoPlayer2;
     public GameObject MenuPausa;
     public UIPhases MenuPhases;
-    public Button Listo,ListoOption;
-    public Image PhasesPanel,FondoFinal,FondoPlayer;
+    public Button Listo, ListoOption;
+    public Image PhasesPanel, FondoFinal, FondoPlayer;
     public TextMeshProUGUI PhasesText;
     public static PartidaManager instance;
     public string Player1Atack = "A";
@@ -27,7 +27,7 @@ public class PartidaManager : MonoBehaviour {
     public Sprite ListoOff, ListoON;
     public CanvasGroup CanvasFinal;
     public TextMeshProUGUI EtiquetaVictoria;
-    public Material FondoTablero, Tablero;
+    public Renderer FondoTablero, Tablero;
     private void Awake()
     {
         instance = this;
@@ -41,10 +41,10 @@ public class PartidaManager : MonoBehaviour {
     }
     public void Update()
     {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             Pausa();
-            }
+        }
     }
     public void Salir()
     {
@@ -53,7 +53,7 @@ public class PartidaManager : MonoBehaviour {
         SoundManager.instance.musicSource.UnPause();
         SoundManager.instance.sfxSource.UnPause();
         LevelLoader.instance.CargarEscena("Main Menu");
-      
+
     }
 
     public void Pausa()
@@ -91,20 +91,21 @@ public class PartidaManager : MonoBehaviour {
         }
     }
 
-    
+
     private void Start()
     {
- 
+
         Player1.Nombre = PlayerManager.instance.Jugador.Nombre;
-        Player1.NombreCuenta.text= PlayerManager.instance.Jugador.Nombre;
+        Player1.NombreCuenta.text = PlayerManager.instance.Jugador.Nombre;
         Player1.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
         Player1.Photo.sprite = PlayerManager.instance.ImagePhoto;
-        if(Player2.Photo)
-        Player2.Photo.sprite = DataManager.instance.IAPhotos.Find(p => p.name == PlayerManager.instance.IaPlaying.ToString());
+        if (Player2.Photo)
+            Player2.Photo.sprite = DataManager.instance.IAPhotos.Find(p => p.name == PlayerManager.instance.IaPlaying.ToString());
 
-        FondoTablero.mainTexture= DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero, ColeccionablesType.FondoTablero).texture;
-        Tablero.mainTexture = DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Tablero, ColeccionablesType.Tablero).texture;
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!= "Tutorial")
+        FondoTablero.material.SetTexture("_BaseMap",DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.FondoTablero, ColeccionablesType.FondoTablero).texture);
+
+        Tablero.material.SetTexture("_BaseMap", DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Tablero, ColeccionablesType.Tablero).texture);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
         {
 
             // Musica de Duelo
@@ -114,9 +115,9 @@ public class PartidaManager : MonoBehaviour {
         }
         else
         {
-           // tutorial
+            // tutorial
         }
-       
+
     }
 
 
@@ -130,12 +131,21 @@ public class PartidaManager : MonoBehaviour {
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
             DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
+     
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
             // Cargar Skins
             if (_Player == Player1)
             {
-                DigiCarta.GetComponent<CartaDigimon>().Funda.GetComponent<MeshRenderer>().material.
-                    SetTexture("Funda",DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Funda, ColeccionablesType.Funda).texture);
+
+                DigiCarta.GetComponent<CartaDigimon>().DarkArea = MesaManager.instance.Campo1.DarkArea.GetComponent<DarkArea>();
+                DigiCarta.GetComponent<CartaDigimon>().Funda.GetComponent<Renderer>().material.SetTexture("_BaseMap",
+                    DataManager.instance.GetSpriteObjet(PlayerManager.instance.Jugador.Funda, ColeccionablesType.Funda).texture);
+            }
+            else
+            {
+                DigiCarta.GetComponent<CartaDigimon>().DarkArea = MesaManager.instance.Campo2.DarkArea.GetComponent<DarkArea>();
+
+                // cargar skin de la IA
             }
 
             MazoPlayer.Add(DigiCarta.GetComponent<CartaDigimon>());
@@ -157,15 +167,15 @@ public class PartidaManager : MonoBehaviour {
         {
             yield return new WaitForSecondsRealtime(0.3f);
 
-            CartaDigimon Carta =  MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
+            CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
             PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
             if (jugador == Player1)
                 jugador._Mano.RecibirCarta(Carta, true);
             else
                 jugador._Mano.RecibirCarta(Carta);
 
-            
-           // Carta.transform.localPosition = Vector3.zero;
+
+            // Carta.transform.localPosition = Vector3.zero;
             //Carta.transform.localScale = new Vector3(25, 40, 0.015f);
         }
     }
@@ -175,12 +185,12 @@ public class PartidaManager : MonoBehaviour {
 
         CartaDigimon Carta = MesaManager.instance.GetSlot(MesaManager.Slots.NetOcean, jugador).GetComponent<NetOcean>().Robar();
         if (Carta)
-        { 
-        PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
-        if (jugador == Player1)
-            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
-        else
-            jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
+        {
+            PartidaManager.instance.SetMoveCard(Mano, Carta.transform, InterAjuste);
+            if (jugador == Player1)
+                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>(), true);
+            else
+                jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
         }
     }
 
@@ -222,11 +232,11 @@ public class PartidaManager : MonoBehaviour {
             }
             else
             {
-               if(Tutorial.instance.NowDigiEfectos != Tutorial.DigiEfectos.CartasCompletas)
+                if (Tutorial.instance.NowDigiEfectos != Tutorial.DigiEfectos.CartasCompletas)
                 {
                     Tutorial.instance.Iniciar();
                 }
-             
+
                 StaticRules.SiguienteFase();
                 return;
             }
@@ -234,7 +244,7 @@ public class PartidaManager : MonoBehaviour {
 
         StaticRules.SiguienteFase();
 
-       
+
     }
     public Transform GetHand()
     {
@@ -247,11 +257,11 @@ public class PartidaManager : MonoBehaviour {
             return ManoPlayer2;
         }
     }
-    public void SetMoveCard(Transform Padre,Transform Carta, UnityAction<CartaDigimon> Loaction)
+    public void SetMoveCard(Transform Padre, Transform Carta, UnityAction<CartaDigimon> Loaction)
     {
         if (PartidaManager.instance.Player1 == StaticRules.instance.WhosPlayer)
         {
-            Player1.moveCard(Padre, Carta.GetComponent<CartaDigimon>(),Loaction);
+            Player1.moveCard(Padre, Carta.GetComponent<CartaDigimon>(), Loaction);
         }
         else
         {
@@ -315,18 +325,18 @@ public class PartidaManager : MonoBehaviour {
     {
         StartCoroutine(CadenaEfectos(loAction));
     }
-    public void RecurisvoEfectoID(UnityAction<string> loAction,string ID)
+    public void RecurisvoEfectoID(UnityAction<string> loAction, string ID)
     {
-        StartCoroutine(CadenaEfectosID(loAction,ID));
+        StartCoroutine(CadenaEfectosID(loAction, ID));
     }
     public IEnumerator CadenaEfectos(UnityAction<string> loAction)
     {
- 
+
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(1f);
         loAction.Invoke("Siguiente cadena");
     }
-    public IEnumerator CadenaEfectosID(UnityAction<string> loAction,string ID)
+    public IEnumerator CadenaEfectosID(UnityAction<string> loAction, string ID)
     {
 
         yield return new WaitForEndOfFrame();
@@ -358,14 +368,14 @@ public class PartidaManager : MonoBehaviour {
         // Cargamos me3nu de recompensas
         LevelLoader.instance.CargarEscena(ecena);
     }
-  
+
     public void ShowVictori()
     {
         DataManager.instance.FadeCanvas(CanvasFinal, true);
         ecena = "Recompensa";
         EtiquetaVictoria.text = "Victory";
         FondoFinal.color = Color.green;
-       
+
     }
     public void ShowLose()
     {
@@ -384,5 +394,5 @@ public class PartidaManager : MonoBehaviour {
         else
             Invoke("ShowLose", 4f);
     }
- 
+
 }

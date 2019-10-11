@@ -1252,8 +1252,7 @@
       "ListaCosto": [ "allyHand drop in allyDarkArea" ],
       "ListaRequerimientos": [ null ],
       "ListaEfectos": [
-        "allyAttackPoints + 50",
-        "drop in allyDarkArea"
+        "allyAttackPoints + 50"
       ],
       "Limite": "End Phase",
       "ListaEfectosMostrar": [

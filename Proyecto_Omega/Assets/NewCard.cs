@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-public class NewCard : MonoBehaviour {
+public class NewCard : MonoBehaviour
+{
     public Image ImgCard;
     public RecomnesaManager Manager;
 
@@ -19,15 +18,15 @@ public class NewCard : MonoBehaviour {
     public void StartNewCard()
     {
         DataManager.instance.WinCard(SetResults);
-       
+
     }
-    public void SetResults(int ID,bool desbloqueado)
+    public void SetResults(int ID, bool desbloqueado)
     {
         Sprite NewDigimon = DataManager.instance.GetSprite(ID);
         if (NewDigimon)
         {
             ImgCard.sprite = NewDigimon;
-            Manager.GetCarta(ID,desbloqueado);
+            Manager.GetCarta(ID, desbloqueado);
         }
 
     }
