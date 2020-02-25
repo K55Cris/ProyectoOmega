@@ -48,6 +48,7 @@ public class MapDuelManager : MonoBehaviour
         Loses.text = nodo.Loses.ToString();
         PlayerManager.instance.IaPlaying = nodo.ID;
         PlayerManager.instance.DeckIA = nodo.Decks;
+        PlayerManager.instance.MusicaDuelo = nodo.NowSound;
         level.text = nodo.NivelNecesario.ToString();
 
         if (PlayerManager.instance.Jugador.Nivel < nodo.NivelNecesario)

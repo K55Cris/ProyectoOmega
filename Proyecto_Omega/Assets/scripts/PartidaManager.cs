@@ -28,6 +28,7 @@ public class PartidaManager : MonoBehaviour
     public CanvasGroup CanvasFinal;
     public TextMeshProUGUI EtiquetaVictoria;
     public Renderer FondoTablero, Tablero;
+    public ParticleSystem Heal;
     private void Awake()
     {
         instance = this;
@@ -54,6 +55,11 @@ public class PartidaManager : MonoBehaviour
         SoundManager.instance.sfxSource.UnPause();
         LevelLoader.instance.CargarEscena("Main Menu");
 
+    }
+    public void ViewHeal()
+    {
+        Heal.gameObject.SetActive(true);
+        Heal.Play(true);
     }
 
     public void Pausa()
@@ -108,8 +114,11 @@ public class PartidaManager : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
         {
 
-            // Musica de Duelo
-            SoundManager.instance.PlayMusic(Sound.Duelo);
+            // Musica de Duelo obtenemos la cancion de parte de la IA
+
+            SoundManager.instance.PlayMusic(PlayerManager.instance.MusicaDuelo);
+
+
             StaticRules.SelectDigimonChild();
 
         }
@@ -131,7 +140,7 @@ public class PartidaManager : MonoBehaviour
             GameObject DigiCarta = Instantiate(CartaPrefap, Espacio);
             DigiCarta.GetComponent<CartaDigimon>().AjustarSlot();
             DigiCarta.GetComponent<CartaDigimon>().cardNumber = contador;
-     
+            DigiCarta.GetComponent<CartaDigimon>()._jugador = _Player;
             DigiCarta.GetComponent<CartaDigimon>().DatosDigimon = DatosDigi.Find(x => x.id == carta);
             // Cargar Skins
             if (_Player == Player1)
@@ -192,6 +201,7 @@ public class PartidaManager : MonoBehaviour
             else
                 jugador._Mano.RecibirCarta(Carta.GetComponent<CartaDigimon>());
         }
+        SoundManager.instance.PlaySfx(Sound.Takecard);
     }
 
     public void InterAjuste(CartaDigimon Carta)

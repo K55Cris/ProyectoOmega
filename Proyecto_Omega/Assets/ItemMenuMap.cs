@@ -7,6 +7,7 @@ public class ItemMenuMap : MonoBehaviour
 {
     public ParticleSystem Nodo;
     public ParticleSystem General;
+    public Sound NowSound;
     public int ID;
     public Sprite IAImage;
     public string Nombre;

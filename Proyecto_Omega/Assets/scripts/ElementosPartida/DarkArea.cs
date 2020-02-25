@@ -104,7 +104,7 @@ public class DarkArea : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Tutorial"&&StaticRules.instance.WhosPlayer==PartidaManager.instance.Player1)
         {
             VistaDarkArea.Activar(_Cartas);
         }

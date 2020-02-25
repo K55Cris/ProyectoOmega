@@ -240,7 +240,12 @@ public class DigimonBoxSlot : MonoBehaviour
                             Cambiado = true;
                             _DigiCarta.Front.GetComponent<MovimientoCartas>().Mover = false;
                             DRoquin = Carta.GetComponent<CartaDigimon>();
-                            SoundManager.instance.PlaySfx(Sound.SetCard);
+
+
+                            // activamos su habilidad
+
+                            StaticRules.instance.ActiveHAbiliti(_DigiCarta);
+
                             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
                             {
                                 Tutorial.instance.Iniciar();
@@ -304,11 +309,16 @@ public class DigimonBoxSlot : MonoBehaviour
         if (Evolucion)
         {
             PartidaManager.instance.SetMoveCard(this.transform, Evolucion, InterAutoAjuste);
+
             _DigiCarta = Evolucion.GetComponent<CartaDigimon>();
             Evolucion.GetComponent<CartaDigimon>().Volteo();
             Evoluciones.Add(Evolucion.GetComponent<CartaDigimon>());
             MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot).GetComponent<FrontDigimon>().SetAtackNames(_DigiCarta);
             StartCoroutine(Quitar(Evolucion));
+
+            // activamos su habilidad
+
+            StaticRules.instance.ActiveHAbiliti(_DigiCarta);
         }
     }
 
@@ -368,6 +378,7 @@ public class DigimonBoxSlot : MonoBehaviour
         Carta.localPosition = new Vector3(0, 0, -3 + transform.childCount);
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(180, 0, 0));
         Carta.localScale = new Vector3(1, 1, 0.015f);
+        SoundManager.instance.PlaySfx(Sound.SetCard);
     }
     public IEnumerator AutoAjustarRoquin(Transform Carta)
     {
@@ -375,5 +386,6 @@ public class DigimonBoxSlot : MonoBehaviour
         Carta.localPosition = new Vector3(0, 0, 0);
         Carta.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Carta.localScale = new Vector3(1, 1, 0.015f);
+        SoundManager.instance.PlaySfx(Sound.SetCard);
     }
 }

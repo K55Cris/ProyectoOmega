@@ -141,6 +141,7 @@ public class StaticRules : MonoBehaviour
         Transform Deck2 = MesaManager.instance.Campo2.NetOcean;
         // barajear mazo player 1
         PartidaManager.Barajear(Deck1);
+        SoundManager.instance.PlaySfx(Sound.Barajear);
         // barajear mazo player 2
         PartidaManager.Barajear(Deck2);
 
@@ -274,35 +275,43 @@ public class StaticRules : MonoBehaviour
         return instance;
     }
 
-
-    public static string Habilidades(DigiCarta digimon)
-    {
-        // aqui se verifican que es lo que hacen las habilidades 
-        string Habilidad = "";
-        switch (digimon.Habilidad)
-        {
-            default:
-                Habilidad = "Volador";
-                break;
-        }
-        return Habilidad;
-    }
-
-
-    public static void RecuperPuntos(DigiCarta Digimon, int player)
+    public void ActiveHAbiliti(CartaDigimon Digimon)
     {
         StaticRules loRule = FailSafeInstance();
-        // se verifica que el digicarta tenga esa habilidad 
-        if (Habilidades(Digimon) == "RestoreLife")
-            if (player == 1)
+        if (Digimon.Habilidades.Count > 0)
+        {
+            // tiene alguna habilidad
+            Debug.LogWarning("owo");
+
+            if (Digimon.Habilidades.Contains(Habilidades.Heal))
             {
-                loRule.PointGaugePlayer1 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+                Debug.LogWarning("owo2");
+                if (Digimon._jugador == PartidaManager.instance.Player1)
+                {
+                    loRule.PointGaugePlayer1 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+
+                    if (loRule.PointGaugePlayer1 > 100)
+                        loRule.PointGaugePlayer1 = 100;
+
+                        MesaManager.instance.Campo1.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer1);
+                }
+                else
+                {
+                    MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
+                    loRule.PointGaugePlayer2 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+
+                    if (loRule.PointGaugePlayer2 > 100)
+                        loRule.PointGaugePlayer2 = 100;
+
+                    MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
+                }
+                PartidaManager.instance.ViewHeal();
+                SoundManager.instance.PlaySfx(Sound.Heal);
             }
-            else
-            {
-                loRule.PointGaugePlayer2 += 0; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
-            }
+           
+        }
     }
+
     private bool WaithPlayer = false;
 
     public void WaithPlayers(UnityAction<string> Siguiente)

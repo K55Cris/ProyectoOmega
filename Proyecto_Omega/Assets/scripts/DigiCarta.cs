@@ -65,6 +65,7 @@ namespace DigiCartas
         public bool IsSupport;
         public bool IsActivateHand;
         public List<string> ListaEfectosMostrar;
+        public List<string> IDHabilidad;
     }
 
 
@@ -176,6 +177,11 @@ namespace DigiCartas
     public enum Dificultad
     {
         Facil, Normal, Dificil, Experto
+    };
+
+    public enum Habilidades
+    {
+        Heal=1,Sky=2, Underwater=3, underground = 4, Flame=5 , Freezing=6, Proud=7, Gale=8, Marksmanship=9, Fency=10, Strategy=11, Ardor=12, DiscardDarkOponetWin=13, MismoDestino=14
     };
 
     public enum EfectosActivos

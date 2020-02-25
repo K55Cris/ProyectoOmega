@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     public SavePlayer Default;
     public SavePlayer Jugador;
+    public Sound MusicaDuelo;
     public int IaPlaying;
     public IADecks DeckIA;
     public bool bienvenida = true;

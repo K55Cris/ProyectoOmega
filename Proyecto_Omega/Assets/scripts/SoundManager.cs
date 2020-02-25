@@ -4,7 +4,7 @@ using UnityEngine;
 public enum Sound
 {
     Evolucion, SetCard, Evolucion2, AtaqueA, AtaqueB, AtaqueC, Tornado, MainMenu, Duelo, Recompensa,
-    Enter, Out, Barajear, tutorial, Wincolecionable
+    Enter, Out, Barajear, tutorial, Wincolecionable , Heal, ButterFly,BreakUp,DarkDuel,Takecard
 }
 public class SoundManager : MonoBehaviour
 {
@@ -22,12 +22,24 @@ public class SoundManager : MonoBehaviour
     public AudioClip Recompensas;
     public AudioClip Duelo;
     public AudioClip Tutorial;
+    public AudioClip ButterFly;
+    public AudioClip BreakUp;
+    public AudioClip DarkDuel;
 
     [Header("Colocar Cartas")]
     public AudioClip SetCard1;
     public AudioClip SetCard2;
     public AudioClip SetCard3;
     public AudioClip SetCard4;
+    public AudioClip TakeCard;
+    public AudioClip TakeCard2;
+    public AudioClip TakeCard3;
+    public AudioClip TakeCard4;
+    public AudioClip TakeCard5;
+    public AudioClip TakeCard6;
+    public AudioClip TakeCard7;
+
+
     public AudioClip Barajear;
 
     [Header("Ataques")]
@@ -42,6 +54,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("Efectos")]
     public AudioClip Wincolecionable;
+    public AudioClip Heal;
     void Awake()
     {
         if (instance == null)
@@ -146,6 +159,36 @@ public class SoundManager : MonoBehaviour
                         break;
                 }
                 break;
+            case Sound.Takecard:
+                int ran2 = Random.Range(1, 8);
+                switch (ran2)
+                {
+                    case 1:
+                        audioClip = TakeCard;
+                        break;
+                    case 2:
+                        audioClip = TakeCard2;
+                        break;
+                    case 3:
+                        audioClip = TakeCard3;
+                        break;
+                    case 4:
+                        audioClip = TakeCard4;
+                        break;
+                    case 5:
+                        audioClip = TakeCard3;
+                        break;
+                    case 6:
+                        audioClip = TakeCard4;
+                        break;
+                    case 7:
+                        audioClip = TakeCard3;
+                        break;
+                    case 8:
+                        audioClip = TakeCard4;
+                        break;
+                }
+                break;
             case Sound.Enter:
                 audioClip = EnterButton;
                 break;
@@ -157,6 +200,18 @@ public class SoundManager : MonoBehaviour
                 break;
             case Sound.Wincolecionable:
                 audioClip = Wincolecionable;
+                break;
+            case Sound.BreakUp:
+                audioClip = BreakUp;
+                break;
+            case Sound.ButterFly:
+                audioClip = ButterFly;
+                break;
+            case Sound.DarkDuel:
+                audioClip = DarkDuel;
+                break;
+            case Sound.Heal:
+                audioClip = Heal;
                 break;
 
 

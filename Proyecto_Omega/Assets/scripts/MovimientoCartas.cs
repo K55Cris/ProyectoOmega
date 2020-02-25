@@ -123,6 +123,7 @@ public class MovimientoCartas : MonoBehaviour
     public IEnumerator Transicion(Transform Destino, UnityAction<Transform, CartaDigimon, int> LoAction)
     {
         yield return new WaitForEndOfFrame();
+        SoundManager.instance.PlaySfx(Sound.Takecard);
         if (Destino)
         {
             var heading = Destino.position - transform.parent.position;

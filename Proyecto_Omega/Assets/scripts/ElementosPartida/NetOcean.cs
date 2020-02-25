@@ -20,7 +20,7 @@ public class NetOcean : MonoBehaviour
         CartaDigimon Dcard = Cartas[Cartas.Count - 1];
         Cartas.RemoveAt(Cartas.Count - 1);
         PartidaManager.instance.SetMoveHand(PartidaManager.instance.GetHand(), Dcard.transform, AjustarInterno);
-
+        SoundManager.instance.PlaySfx(Sound.Takecard);
     }
 
     public void AjustarInterno(CartaDigimon Dcard)
@@ -122,6 +122,7 @@ public class NetOcean : MonoBehaviour
             StartCoroutine(WhaitReinicio());
         }
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea).GetComponent<DarkArea>().Vaciar();
+
     }
     private bool Esperar = true;
     private void Mezclar()
