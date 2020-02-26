@@ -4,7 +4,8 @@ using UnityEngine;
 public enum Sound
 {
     Evolucion, SetCard, Evolucion2, AtaqueA, AtaqueB, AtaqueC, Tornado, MainMenu, Duelo, Recompensa,
-    Enter, Out, Barajear, tutorial, Wincolecionable , Heal, ButterFly,BreakUp,DarkDuel,Takecard
+    Enter, Out, Barajear, tutorial, Wincolecionable , Heal, ButterFly,BreakUp,DarkDuel,Takecard,Changephase,Apocaly,Alpha,
+    Card,NecroMagic,Neutralize
 }
 public class SoundManager : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip ButterFly;
     public AudioClip BreakUp;
     public AudioClip DarkDuel;
+    public AudioClip Apocaly;
+    public AudioClip Alpha;
+    public AudioClip Card;
 
     [Header("Colocar Cartas")]
     public AudioClip SetCard1;
@@ -38,8 +42,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip TakeCard5;
     public AudioClip TakeCard6;
     public AudioClip TakeCard7;
-
-
     public AudioClip Barajear;
 
     [Header("Ataques")]
@@ -48,6 +50,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip DisparoElectrico;
     public AudioClip Tornado;
 
+
     [Header("Main Menu")]
     public AudioClip EnterButton;
     public AudioClip OutButton;
@@ -55,6 +58,9 @@ public class SoundManager : MonoBehaviour
     [Header("Efectos")]
     public AudioClip Wincolecionable;
     public AudioClip Heal;
+    public AudioClip CambioPhase;
+    public AudioClip NecroMagic;
+    public AudioClip Neutralize;
     void Awake()
     {
         if (instance == null)
@@ -212,6 +218,24 @@ public class SoundManager : MonoBehaviour
                 break;
             case Sound.Heal:
                 audioClip = Heal;
+                break;
+            case Sound.Changephase:
+                audioClip = CambioPhase;
+                break;
+            case Sound.Alpha:
+                audioClip = Alpha;
+                break;
+            case Sound.Apocaly:
+                audioClip = Apocaly;
+                break;
+            case Sound.Card:
+                audioClip = Card;
+                break;
+            case Sound.NecroMagic:
+                audioClip = NecroMagic;
+                break;
+            case Sound.Neutralize:
+                audioClip = Neutralize;
                 break;
 
 

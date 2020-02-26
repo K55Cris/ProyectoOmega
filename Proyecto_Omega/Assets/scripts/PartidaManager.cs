@@ -28,7 +28,7 @@ public class PartidaManager : MonoBehaviour
     public CanvasGroup CanvasFinal;
     public TextMeshProUGUI EtiquetaVictoria;
     public Renderer FondoTablero, Tablero;
-    public ParticleSystem Heal;
+    public ParticleSystem Heal,Discard,Neutralize;
     private void Awake()
     {
         instance = this;
@@ -56,10 +56,30 @@ public class PartidaManager : MonoBehaviour
         LevelLoader.instance.CargarEscena("Main Menu");
 
     }
-    public void ViewHeal()
+
+    public void ViewEffectHabiliti(Habilidades Hab)
     {
-        Heal.gameObject.SetActive(true);
-        Heal.Play(true);
+        switch (Hab)
+        {
+            case Habilidades.Heal:
+                
+                Heal.gameObject.SetActive(true);
+                Heal.Play(true);
+                break;
+            case Habilidades.DiscardDarkOponetWin:
+                Discard.gameObject.SetActive(true);
+                Discard.Play(true);
+                break;
+            case Habilidades.MismoDestino:
+
+                Neutralize.gameObject.SetActive(true);
+                Neutralize.Stop();
+                Neutralize.Clear();
+                Neutralize.Play(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public void Pausa()
@@ -312,6 +332,7 @@ public class PartidaManager : MonoBehaviour
     public void Cambio(string PhaseName)
     {
         PhasesText.text = PhaseName;
+        SoundManager.instance.PlaySfx(Sound.Changephase);
         PhasesPanel.transform.GetComponent<Animator>().Play("StartPhase");
     }
     public void cambioEcena()

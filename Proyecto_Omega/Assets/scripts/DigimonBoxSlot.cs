@@ -134,6 +134,10 @@ public class DigimonBoxSlot : MonoBehaviour
                 return;
             }
         }
+
+        StaticRules.instance.ActiveHAbiliti(_DigiCarta, DigiCartas.Habilidades.MismoDestino);
+
+
         MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, MesaManager.instance.
         WhatSlotPlayer(this.transform, MesaManager.Slots.DigimonSlot)).GetComponent<DarkArea>().GetComponent<DarkArea>().setAction(Loaction);
 
@@ -244,7 +248,7 @@ public class DigimonBoxSlot : MonoBehaviour
 
                             // activamos su habilidad
 
-                            StaticRules.instance.ActiveHAbiliti(_DigiCarta);
+                            StaticRules.instance.ActiveHAbiliti(_DigiCarta, DigiCartas.Habilidades.Heal);
 
                             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Tutorial")
                             {
@@ -318,7 +322,7 @@ public class DigimonBoxSlot : MonoBehaviour
 
             // activamos su habilidad
 
-            StaticRules.instance.ActiveHAbiliti(_DigiCarta);
+            StaticRules.instance.ActiveHAbiliti(_DigiCarta,DigiCartas.Habilidades.Heal);
         }
     }
 

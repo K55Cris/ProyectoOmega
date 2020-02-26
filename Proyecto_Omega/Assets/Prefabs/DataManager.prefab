@@ -136,7 +136,12 @@ MonoBehaviour:
     Tipo: 3
   - ID: 14
     Nombre: New DW
-    Image: {fileID: 21300000, guid: 7cc36e5a503decd4e90a5d08375a74ee, type: 3}
+    Image: {fileID: 21300000, guid: be0a5ff7c47a8b145813782ceba0b280, type: 3}
     Rareza: {r: 0, g: 1, b: 1, a: 1}
     Tipo: 2
+  - ID: 15
+    Nombre: New DW
+    Image: {fileID: 21300000, guid: cdd37cc37ac1b3c4f948470aa29b9158, type: 3}
+    Rareza: {r: 0, g: 1, b: 1, a: 1}
+    Tipo: 3
   bandera: 1

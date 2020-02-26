@@ -983,11 +983,10 @@ public class IA : MonoBehaviour
                     SetDigimon(Dcard.transform);
                 break;
             case Campo.Requeriment:
-                MesaManager.instance.Campo2.EvolutionBox.GetComponent<EvolutionRequerimentBox>().
-                    SetRequerimientos(Dcard);
+                MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().SetRequerimientos(Dcard);
                 break;
             case Campo.Netocean:
-                MesaManager.instance.Campo2.EvolutionBox.GetComponent<NetOcean>().
+                MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().
                  addNetocean(Dcard);
                 break;
             case Campo.Support:

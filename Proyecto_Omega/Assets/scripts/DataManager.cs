@@ -103,7 +103,14 @@ public class DataManager : MonoBehaviour
     {
         foreach (var item in TodasLasCartas)
         {
-            if (item.Nombre.ToUpper() == Name)
+            string[] words = item.Nombre.Split(' ');
+            string Digimon = "";
+            foreach (var word in words)
+            {
+                Digimon += word;
+            }
+            Debug.Log(Digimon + ":" + Name);
+            if (Digimon.ToUpper() == Name.ToUpper())
             {
                 return item.id;
             }
@@ -195,10 +202,10 @@ public class DataManager : MonoBehaviour
     public void GetCard()
     {
         Debug.Log(TodasLasCartas.Count);
-        int IDCard = Random.Range(1, TodasLasCartas.Count);
+        int IDCard = Random.Range(1, 61);
         while (ListaExcluidos.Contains(IDCard))
         {
-            IDCard = Random.Range(1, TodasLasCartas.Count);
+            IDCard = Random.Range(1, 61);
         }
         bool Encontrado = false;
         //Revisamos si la carta es nueva 

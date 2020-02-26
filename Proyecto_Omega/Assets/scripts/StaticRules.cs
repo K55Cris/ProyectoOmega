@@ -275,40 +275,111 @@ public class StaticRules : MonoBehaviour
         return instance;
     }
 
-    public void ActiveHAbiliti(CartaDigimon Digimon)
+    public void ActiveHAbiliti(CartaDigimon Digimon, Habilidades hab)
     {
         StaticRules loRule = FailSafeInstance();
         if (Digimon.Habilidades.Count > 0)
         {
-            // tiene alguna habilidad
-            Debug.LogWarning("owo");
-
-            if (Digimon.Habilidades.Contains(Habilidades.Heal))
+            switch (hab)
             {
-                Debug.LogWarning("owo2");
-                if (Digimon._jugador == PartidaManager.instance.Player1)
-                {
-                    loRule.PointGaugePlayer1 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+                case Habilidades.Heal:
+                    if (Digimon.Habilidades.Contains(Habilidades.Heal))
+                    {
+                        if (Digimon._jugador == PartidaManager.instance.Player1)
+                        {
+                            loRule.PointGaugePlayer1 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
 
-                    if (loRule.PointGaugePlayer1 > 100)
-                        loRule.PointGaugePlayer1 = 100;
+                            if (loRule.PointGaugePlayer1 > 100)
+                                loRule.PointGaugePlayer1 = 100;
 
-                        MesaManager.instance.Campo1.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer1);
-                }
-                else
-                {
-                    MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
-                    loRule.PointGaugePlayer2 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
+                            MesaManager.instance.Campo1.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer1);
+                        }
+                        else
+                        {
+                            MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
+                            loRule.PointGaugePlayer2 += 30; // aqui va otro metoido para calucular cuanto sube dicha habilidad especial
 
-                    if (loRule.PointGaugePlayer2 > 100)
-                        loRule.PointGaugePlayer2 = 100;
+                            if (loRule.PointGaugePlayer2 > 100)
+                                loRule.PointGaugePlayer2 = 100;
 
-                    MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
-                }
-                PartidaManager.instance.ViewHeal();
-                SoundManager.instance.PlaySfx(Sound.Heal);
+                            MesaManager.instance.Campo2.PointGauge.GetComponent<PointGaugeBox>().SetCard(loRule.PointGaugePlayer2);
+                        }
+                        PartidaManager.instance.ViewEffectHabiliti(Habilidades.Heal);
+                        SoundManager.instance.PlaySfx(Sound.Heal);
+                    }
+                    break;
+               
+                case Habilidades.DiscardDarkOponetWin:
+                    if (Digimon.Habilidades.Contains(Habilidades.DiscardDarkOponetWin))
+                    {
+                        if (Digimon._jugador == PartidaManager.instance.Player1)
+                        {
+                            if (Digimon._jugador != StaticRules.instance.LostPlayerRound)// Revisamos si el gano la partida
+                            {
+
+                                //Descartamos una carta del Net ocean del oponente
+                                CartaDigimon _Card = MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Robar();
+
+                                // Descartamos
+                                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, PartidaManager.instance.Player2).GetComponent<DarkArea>().AddListDescarte(_Card, 1f, true);
+                                PartidaManager.instance.ViewEffectHabiliti(Habilidades.DiscardDarkOponetWin);
+                                SoundManager.instance.PlaySfx(Sound.NecroMagic);
+                            }
+                        }
+                        else
+                        {
+                            if (Digimon._jugador != StaticRules.instance.LostPlayerRound)// Revisamos si el gano la partida
+                            {
+
+                                //Descartamos una carta del Net ocean del oponente
+                                CartaDigimon _Card = MesaManager.instance.Campo1.NetOcean.GetComponent<NetOcean>().Robar();
+
+                                // Descartamos
+                                MesaManager.instance.GetSlot(MesaManager.Slots.DarkArea, PartidaManager.instance.Player1).GetComponent<DarkArea>().AddListDescarte(_Card, 1f, true);
+                                PartidaManager.instance.ViewEffectHabiliti(Habilidades.DiscardDarkOponetWin);
+                                SoundManager.instance.PlaySfx(Sound.NecroMagic);
+                            }
+                        }
+
+                    }
+                    break;
+                case Habilidades.MismoDestino:
+                    if (Digimon.Habilidades.Contains(Habilidades.MismoDestino))
+                    {
+                        if (Digimon._jugador == PartidaManager.instance.Player1)
+                        {
+                            if (Digimon._jugador == StaticRules.instance.LostPlayerRound && ConvertNivel(MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, PartidaManager.instance.Player2)
+                                .GetComponent<FrontDigimon>().DigimonCombatiente.DatosDigimon.Nivel) >= 2)// Revisamos si Perdio la partida contra un nivel 4 o superior
+                            {
+
+
+                                //Destruimos el Digimon Enemigo
+
+                                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.Player2).GetComponent<DigimonBoxSlot>().LostDigimon(null);
+                                PartidaManager.instance.ViewEffectHabiliti(Habilidades.MismoDestino);
+                                SoundManager.instance.PlaySfx(Sound.Neutralize);
+                            }
+                        }
+                        else
+                        {
+                            if (Digimon._jugador == StaticRules.instance.LostPlayerRound && ConvertNivel(MesaManager.instance.GetSlot(MesaManager.Slots.frontSlot, PartidaManager.instance.Player1)
+                            .GetComponent<FrontDigimon>().DigimonCombatiente.DatosDigimon.Nivel) >= 2)// Revisamos si Perdio la partida contra un nivel 4 o superior
+                            {
+
+                                //Destruimos el Digimon Enemigo
+
+                                MesaManager.instance.GetSlot(MesaManager.Slots.DigimonSlot, PartidaManager.instance.Player1).GetComponent<DigimonBoxSlot>().LostDigimon(null);
+                                PartidaManager.instance.ViewEffectHabiliti(Habilidades.MismoDestino);
+                                SoundManager.instance.PlaySfx(Sound.Neutralize);
+                            }
+                        }
+
+                    }
+                    break;
+                default:
+                    break;
             }
-           
+
         }
     }
 
@@ -388,8 +459,8 @@ public class StaticRules : MonoBehaviour
                         {
                             if (!isDigimonOrChip(_Carta))
                             {
-                                bool pase = true
-; foreach (var item in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
+                                bool pase = true; 
+                                foreach (var item in MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionBox).GetComponent<EvolutionBox>().Cartas)
                                 {
                                     if (item.DatosDigimon.id == _Carta.id)
                                     {
@@ -655,7 +726,10 @@ public class StaticRules : MonoBehaviour
                 break;
             case Phases.EndPhase:
                 PartidaManager.instance.CambioDePhase(false);
-                PartidaManager.instance.Cambio("End Phase");
+
+                // Activamos Habilidades de ambos Digimon 
+                StaticRules.instance.ActiveHAbiliti(MesaManager.instance.Campo1.FronDigimon.GetComponent<FrontDigimon>().DigimonCombatiente,Habilidades.DiscardDarkOponetWin);
+                StaticRules.instance.ActiveHAbiliti(MesaManager.instance.Campo2.FronDigimon.GetComponent<FrontDigimon>().DigimonCombatiente, Habilidades.DiscardDarkOponetWin);
                 StartEndPhase("");
                 break;
             default:

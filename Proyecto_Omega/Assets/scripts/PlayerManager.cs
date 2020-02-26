@@ -54,6 +54,13 @@ public class PlayerManager : MonoBehaviour
         }
         // Cargar Photo
         ImagePhoto = DataManager.instance.GetPerfilPhoto(Jugador.Photo);
+
+        // Cargar Coleccionables
+        foreach (var item in Jugador.MisColeccionables)
+        {
+            Coleccionables _cole = DataManager.instance.ListaColeccionables.Find(x => x.ID == item.ID);
+            item.Image = _cole.Image;
+        }
     }
     public void SetNewColeccionable(Coleccionables Nuevo)
     {

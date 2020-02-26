@@ -13,6 +13,7 @@ public class FrontDigimon : MonoBehaviour
     public ContadorOffencivo Contador;
     public List<TextMeshProUGUI> NameAtaques;
     public List<TextMeshProUGUI> PoderAtaques;
+    public CartaDigimon DigimonCombatiente;
     // Use this for initialization
     public void Start()
     {
@@ -23,6 +24,7 @@ public class FrontDigimon : MonoBehaviour
     {
         Digimon.color = Color.white;
         Ataque.color = Color.white;
+        DigimonCombatiente = Dcard;
         Digimon.sprite = DataManager.instance.GetSprite8(Dcard.DatosDigimon.id);
         switch (ataque)
         {

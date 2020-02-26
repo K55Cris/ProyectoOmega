@@ -171,22 +171,22 @@ MonoBehaviour:
     Funda: Default
     FondoTablero: Default
     MisColeccionables:
-    - ID: 1
+    - ID: 10
       Nombre: Tacagi
       Image: {fileID: 21300000, guid: d6898ffbc3d96934090d0972be34f7ca, type: 3}
       Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
       Tipo: 0
-    - ID: 2
+    - ID: 11
       Nombre: Default
       Image: {fileID: 21300000, guid: 5e128a4a15b0bb043a9fddd814bb8604, type: 3}
       Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
       Tipo: 1
-    - ID: 3
+    - ID: 12
       Nombre: Default
       Image: {fileID: 21300000, guid: cbd885a5ba2845f46ba9f2977a83d928, type: 3}
       Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
       Tipo: 2
-    - ID: 4
+    - ID: 13
       Nombre: Default
       Image: {fileID: 21300000, guid: 7cc36e5a503decd4e90a5d08375a74ee, type: 3}
       Rareza: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
@@ -203,6 +203,7 @@ MonoBehaviour:
     Funda: 
     FondoTablero: 
     MisColeccionables: []
+  MusicaDuelo: 0
   IaPlaying: 0
   DeckIA:
     Decks: []
