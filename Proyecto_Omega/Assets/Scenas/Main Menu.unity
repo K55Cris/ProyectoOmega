@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7488,8 +7488,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 517768597}
   musicSource: {fileID: 517768596}
-  EvolucionRoquin: {fileID: 8300000, guid: a1a4ce896f7255b459b463563f7a47d8, type: 3}
-  EvolucionChampion: {fileID: 8300000, guid: afa31c14eb6d4b644bbbda7dd8a0afe8, type: 3}
+  EvolucionRoquin: {fileID: 8300000, guid: 0b0e09d0548c75241a2c3cf7f7772bc6, type: 3}
+  EvolucionChampion: {fileID: 8300000, guid: cc9fc07cb9fcea94e8eb9fb68286f008, type: 3}
+  Joggres: {fileID: 8300000, guid: 0c5d4dfa4a6dc99488096eaace3f6d9c, type: 3}
   MainMenu: {fileID: 8300000, guid: 6dc32e55146b8944393b27ed7a58b2a3, type: 3}
   Recompensas: {fileID: 8300000, guid: 91ae79eddc0505048b7c1e56ff926650, type: 3}
   Duelo: {fileID: 8300000, guid: 2bb5cd518e8308a4e9f42d62ceb750dd, type: 3}
@@ -15892,7 +15893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4340278.5, y: 63304.05}
+  m_AnchoredPosition: {x: -4419469.5, y: 65121.043}
   m_SizeDelta: {x: 0, y: 172.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1055706470

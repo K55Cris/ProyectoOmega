@@ -64,10 +64,14 @@ public class PartidaManager : MonoBehaviour
             case Habilidades.Heal:
                 
                 Heal.gameObject.SetActive(true);
+                Heal.Stop();
+                Heal.Clear();
                 Heal.Play(true);
                 break;
             case Habilidades.DiscardDarkOponetWin:
                 Discard.gameObject.SetActive(true);
+                Discard.Stop();
+                Discard.Clear();
                 Discard.Play(true);
                 break;
             case Habilidades.MismoDestino:

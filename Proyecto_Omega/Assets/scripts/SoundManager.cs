@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum Sound
 {
-    Evolucion, SetCard, Evolucion2, AtaqueA, AtaqueB, AtaqueC, Tornado, MainMenu, Duelo, Recompensa,
+    Evolucion, SetCard, Evolucion2,Joggres, AtaqueA, AtaqueB, AtaqueC, Tornado, MainMenu, Duelo, Recompensa,
     Enter, Out, Barajear, tutorial, Wincolecionable , Heal, ButterFly,BreakUp,DarkDuel,Takecard,Changephase,Apocaly,Alpha,
     Card,NecroMagic,Neutralize
 }
@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
     [Header("Evolucion")]
     public AudioClip EvolucionRoquin;
     public AudioClip EvolucionChampion;
+    public AudioClip Joggres;
 
     [Header("Musica de Fondo")]
     public AudioClip MainMenu;
@@ -236,6 +237,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case Sound.Neutralize:
                 audioClip = Neutralize;
+                break;
+            case Sound.Joggres:
+                audioClip = Joggres;
                 break;
 
 

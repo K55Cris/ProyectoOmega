@@ -110,9 +110,7 @@ public class ItemMenuMap : MonoBehaviour
         {
             case 1:
                 if (wins >= 20)
-                    StartCoroutine(LoadColecionable(new List<int> { 1 }));
-                if (Loses >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 1 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 0 }));
                 break;
             case 2:
                 if (wins >= 30)
@@ -127,42 +125,55 @@ public class ItemMenuMap : MonoBehaviour
                     StartCoroutine(LoadColecionable(new List<int> { 3 }));
                 break;
             case 5:
-
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                break;
             case 6:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 16 }));
                 break;
             case 7:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 17 }));
                 break;
             case 8:
+                if (wins >= 50)
+                    StartCoroutine(LoadColecionable(new List<int> { 18 }));
                 break;
             case 9:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 19 }));
                 break;
             case 10:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 5 }));
                 break;
             case 11:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 6 }));
                 break;
             case 12:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 7 }));
                 break;
             case 13:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 9 }));
                 break;
             case 14:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 14 }));
+                if (wins >= 100)
+                    StartCoroutine(LoadColecionable(new List<int> { 22 }));
                 break;
             case 15:
                 if (wins >= 50)
-                    StartCoroutine(LoadColecionable(new List<int> { 4 }));
+                    StartCoroutine(LoadColecionable(new List<int> { 15,20 }));
+                if (wins >= 100)
+                    StartCoroutine(LoadColecionable(new List<int> { 21 }));
                 break;
             case 16:
+                // Final
                 break;
 
 
