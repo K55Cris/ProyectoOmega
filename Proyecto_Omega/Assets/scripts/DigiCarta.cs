@@ -130,6 +130,16 @@ namespace DigiCartas
         public List<Coleccionables> MisColeccionables = new List<Coleccionables>();
     }
 
+
+    [Serializable]
+    public class QuickPlayer
+    {
+        public string Nombre;
+        public List<int> IDCartasMazo;
+        public int Nivel = 0;
+        public string Photo, Tablero, Funda, FondoTablero;
+    }
+
     [Serializable]
     public struct AudioSettings
     {

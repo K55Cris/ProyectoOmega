@@ -2,26 +2,20 @@
 using SWNetwork; 
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// Basic lobby matchmaking implementation.
 /// </summary>
 public class Lobby : MonoBehaviour
 {
-    /// <summary>
-    /// Button for checking into SocketWeaver services
-    /// </summary>
-    public Button registerButton;
 
-    /// <summary>
-    /// Button for joining or creating room
-    /// </summary>
-    public Button playButton;
-
-    /// <summary>
-    /// Button for entering custom playerId
-    /// </summary>
-    public InputField customPlayerIdField;
+    public enum LobbyState
+    {
+        Default,
+        JoinedRoom
+    }
+    public LobbyState State = LobbyState.Default;
 
     void Start()
     {
@@ -34,9 +28,24 @@ public class Lobby : MonoBehaviour
         // Add an event handler for the OnLobbyConnectedEvent
         NetworkClient.Lobby.OnLobbyConnectedEvent += Lobby_OnLobbyConncetedEvent;
 
-        // allow player to register
-        registerButton.gameObject.SetActive(true);
-        playButton.gameObject.SetActive(false);
+        NetworkClient.Lobby.OnNewPlayerJoinRoomEvent += OnNewPlayerJoinRoomEven;
+
+    }
+
+    private void OnNewPlayerJoinRoomEven(SWJoinRoomEventData eventData)
+    {
+        if (NetworkClient.Lobby.IsOwner)
+        {
+            // Actualizar
+
+            // Cargar datos de jugador 2
+            DigiCartas.QuickPlayer roomCustomData = new DigiCartas.QuickPlayer();
+            roomCustomData = JsonUtility.FromJson<DigiCartas.QuickPlayer>(eventData.data);
+            MultiPlayer.instance.CargarPlayer2(roomCustomData);
+
+            MultiPlayer.instance.StartGame.gameObject.SetActive(true);
+            MultiPlayer.instance.StartGame.interactable = true;
+        }
     }
 
     void onDestroy()
@@ -46,6 +55,14 @@ public class Lobby : MonoBehaviour
         NetworkClient.Lobby.OnFailedToStartRoomEvent -= Lobby_OnFailedToStartRoomEvent;
         NetworkClient.Lobby.OnLobbyConnectedEvent -= Lobby_OnLobbyConncetedEvent;
     }
+
+    public void RemoveAll()
+    {
+        NetworkClient.Lobby.OnRoomReadyEvent -= Lobby_OnRoomReadyEvent;
+        NetworkClient.Lobby.OnFailedToStartRoomEvent -= Lobby_OnFailedToStartRoomEvent;
+        NetworkClient.Lobby.OnLobbyConnectedEvent -= Lobby_OnLobbyConncetedEvent;
+    }
+
 
     /* Lobby events handlers */
     void Lobby_OnRoomReadyEvent(SWRoomReadyEventData eventData)
@@ -72,40 +89,50 @@ public class Lobby : MonoBehaviour
     /// </summary>
     public void Register()
     {
-        string customPlayerId = customPlayerIdField.text;
-
+        ResetData();
+        string customPlayerId = PlayerManager.instance.Jugador.Nombre;
+        Debug.Log("ENTRO");
         if(customPlayerId != null && customPlayerId.Length > 0)
         {
+            Debug.Log("ENTRO1");
             // use the user entered playerId to check into SocketWeaver. Make sure the PlayerId is unique.
             NetworkClient.Instance.CheckIn(customPlayerId,(bool ok, string error) =>
             {
                 if (!ok)
                 {
                     Debug.LogError("Check-in failed: " + error);
+
                 }
             });
+       
         }
         else
         {
+            Debug.Log("ENTRO2");
             // use a randomly generated playerId to check into SocketWeaver.
             NetworkClient.Instance.CheckIn((bool ok, string error) =>
             {
                 if (!ok)
                 {
                     Debug.LogError("Check-in failed: " + error);
+                  
                 }
             });
         }
+
+    }
+
+
+
+    public void ResetData()
+    {
+        MultiPlayer.instance.Reset();
     }
 
     /// <summary>
     /// Play button was clicked
     /// </summary>
-    public void Play()
-    {
-        // Here we use the JoinOrCreateRoom method to get player into rooms quickly.
-        NetworkClient.Lobby.JoinOrCreateRoom(true, 2, 60, HandleJoinOrCreatedRoom);
-    }
+
 
     /* Lobby helper methods*/
     /// <summary>
@@ -113,23 +140,35 @@ public class Lobby : MonoBehaviour
     /// </summary>
     void RegisterPlayer()
     {
-        NetworkClient.Lobby.Register((successful, reply, error) =>
+        // conver Quick data
+        DigiCartas.QuickPlayer qp = new DigiCartas.QuickPlayer();
+        qp.Nombre = PlayerManager.instance.Jugador.Nombre;
+        qp.IDCartasMazo = PlayerManager.instance.Jugador.IDCartasMazo;
+        qp.Nivel = PlayerManager.instance.Jugador.Nivel;
+        qp.Photo= PlayerManager.instance.Jugador.Photo;
+        qp.Tablero = PlayerManager.instance.Jugador.Tablero;
+
+        NetworkClient.Lobby.Register(qp,(successful, reply, error) =>
         {
             if (successful)
             {
                 Debug.Log("Registered " + reply);
 
-                if (reply.started)
+                if (string.IsNullOrEmpty(reply.roomId))
                 {
-                    // player is already in a room and the room has started.
-                    // We can connect to the room's game servers now.
+                    JoinOrCreateRoom();
+                }
+                else if(reply.started)
+                {
+                    State = LobbyState.JoinedRoom;
                     ConnectToRoom();
                 }
                 else
                 {
-                    // allow player to join or create room
-                    playButton.gameObject.SetActive(true);
-                    registerButton.gameObject.SetActive(false);
+                    State = LobbyState.JoinedRoom;
+                    ShowJoinedRoomPopOver();
+                    //
+                    GetPlayersInRoom();
                 }
             }
             else
@@ -139,6 +178,70 @@ public class Lobby : MonoBehaviour
         });
     }
 
+
+
+    void JoinOrCreateRoom()
+    {
+        NetworkClient.Lobby.JoinOrCreateRoom(false, 2, 0, (successful, reply, error) =>
+        {
+            if (successful)
+            {
+                Debug.Log("Joined room randomly " + reply);
+                State = LobbyState.JoinedRoom;
+                // 
+                ShowJoinedRoomPopOver();
+                GetPlayersInRoom();
+            }
+            else
+            {
+                Debug.Log("Failed to Join room randomly" + error);
+            }
+        });
+    }
+
+    void GetPlayersInRoom()
+    {
+        NetworkClient.Lobby.GetPlayersInRoom((successful, reply, error) => {
+            if (successful)
+            {
+                Debug.Log("Got players " + reply);
+                if (reply.players.Count==1)
+                {
+
+                    // Cargar datos de jugador 1
+                    DigiCartas.QuickPlayer roomCustomData = new DigiCartas.QuickPlayer();
+                    roomCustomData = JsonUtility.FromJson<DigiCartas.QuickPlayer>(reply.players[0].data);
+                    Debug.Log("Owo " + roomCustomData.Nombre+":"+roomCustomData.Photo);
+                    MultiPlayer.instance.CargarPlayer1(roomCustomData);
+
+                }
+                else
+                {
+                    //Cargar Datos de Jugador 1
+
+                    DigiCartas.QuickPlayer roomCustomData1 = new DigiCartas.QuickPlayer();
+                    roomCustomData1 = JsonUtility.FromJson<DigiCartas.QuickPlayer>(reply.players[0].data);
+                    MultiPlayer.instance.CargarPlayer1(roomCustomData1);
+
+                    // Cargar datos de jugador 2
+                    DigiCartas.QuickPlayer roomCustomData = new DigiCartas.QuickPlayer();
+                    roomCustomData = JsonUtility.FromJson<DigiCartas.QuickPlayer>(reply.players[1].data);
+                    MultiPlayer.instance.CargarPlayer2(roomCustomData);
+
+                    if (NetworkClient.Lobby.IsOwner)
+                    {
+                        //Marcar boton de empezar
+                        MultiPlayer.instance.StartGame.gameObject.SetActive(true);
+                        MultiPlayer.instance.StartGame.interactable = true;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Failed to get players " + error);
+            }
+        });
+    }
     /// <summary>
     /// Callback method for NetworkClient.Lobby.JoinOrCreateRoom().
     /// </summary>
@@ -207,11 +310,53 @@ public class Lobby : MonoBehaviour
         if (connected)
         {
             Debug.Log("Connected to room");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("VsTamer");
         }
         else
         {
             Debug.Log("Failed to connect to room");
         }
     }
+
+
+    public void OnCancelClicked()
+    {
+        Debug.Log("cANCEL");
+        if (State == LobbyState.JoinedRoom)
+        {
+            // Cerrar Room
+            Debug.Log("2");
+            LeaveRoom();
+        }
+        else
+        {
+            Debug.Log(State);
+        }
+    }
+
+    private void LeaveRoom()
+    {
+        NetworkClient.Lobby.LeaveRoom((successful, error) =>
+        {
+            if (successful)
+            {
+                Debug.Log("Left Room");
+                State = LobbyState.Default;
+                MultiPlayer.instance.Inicio.gameObject.SetActive(true);
+                MultiPlayer.instance.Room.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("fAILED TO LEAVE ROOM"+ error);
+            }
+        });
+    }
+
+
+    public void ShowJoinedRoomPopOver()
+    {
+        MultiPlayer.instance.Inicio.gameObject.SetActive(false);
+        MultiPlayer.instance.Room.gameObject.SetActive(true);
+    }
+
 }
