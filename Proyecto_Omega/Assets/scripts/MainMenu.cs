@@ -91,7 +91,7 @@ public class MainMenu : MonoBehaviour
         PlayerManager.instance.SaveName(Nombre.text);
         if (Nombre.text == "K55" || Nombre.text == "k55")
         {
-            LevelLoader.instance.GetNewItem(new List<int> { 8 ,14,15});
+            LevelLoader.instance.GetNewItem(new List<int> { 8 ,14,23});
         }
         LoadName();
     }

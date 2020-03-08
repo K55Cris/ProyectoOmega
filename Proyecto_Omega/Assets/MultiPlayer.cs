@@ -40,4 +40,10 @@ public class MultiPlayer : MonoBehaviour
         Player1.Reset("", DefaultImage,0);
         Player2.Reset("...", DefaultImage,1);
     }
+    public void LeaveGame()
+    {
+        Inicio.gameObject.SetActive(true);
+        Room.gameObject.SetActive(false);
+        StartGame.gameObject.SetActive(false);
+    }
 }

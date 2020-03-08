@@ -173,7 +173,6 @@ public class DataManager : MonoBehaviour
         yield return new WaitForSeconds(segundos);
         funcion("");
     }
-    public bool bandera = true;
 
     public void WinCard(UnityAction<int, bool> Loaction)
     {

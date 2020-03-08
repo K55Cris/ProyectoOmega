@@ -1375,6 +1375,7 @@
       "Limite": "Battle Phase",
       "ListaEfectosMostrar": [
         "◎ Regresa los digimons nivel IV del adversario al digimon nivel III que eran antes de evolucionar, sin ninguna condicion",
+        "◎ Descarta una Carta",
         "◎ Al final del turno en que esta carta fue jugada, enviala a la dark area"
       ]
     },

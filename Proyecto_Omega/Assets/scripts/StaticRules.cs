@@ -2623,7 +2623,7 @@ public class StaticRules : MonoBehaviour
         SkipEfect = false;
         EfectosRond = EfectosRonda.Count;
         Debug.Log("efecto lel");
-        if (EfectosRonda.Count != 0)
+        if (EfectosRonda.Count > 0)
         {
             if (EfectosRonda[TurnoEfect].Limite == NowPhase)
             {

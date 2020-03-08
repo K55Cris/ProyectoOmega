@@ -85,5 +85,6 @@ public class PointGaugeBox : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             item.Prender();
         }
+        SetCard(100);
     }
 }

@@ -513,8 +513,8 @@ public class IA : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(1.5f);
         JugarCarta(Evo, Campo.EvolutionSlot);
-        yield return new WaitForSeconds(1.5f);
-        Invoke("SetRequeriments", 0.5f);
+        yield return new WaitForSeconds(2f);
+        SetRequeriments();
     }
     public List<CartaDigimon> Requesitos = new List<CartaDigimon>();
 
@@ -522,26 +522,58 @@ public class IA : MonoBehaviour
     {
 
         List<string> Requerimientos = MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().ListaRequerimientos;
-
+        Debug.LogWarning("SetRequeriment Evolution");
         bool Colocar = false;
         Requesitos = new List<CartaDigimon>();
+        int XandO = 0;
+        
         foreach (var item in Requerimientos)
         {
             if (item == "X" | item == "O")
             {
                 Colocar = true;
+                XandO++;
             }
             else if (item != "+")
             {
                 if (item == "40%")
                 {
-                    // setear carta de 40
-                    Requesitos.Add(SerchCardInHand("40", true));
+                    // revisamos si ya tiene un chip de 40% seteado
+
+                    DigiCarta digicard = new DigiCarta();
+                    digicard.id = 59;
+                    Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
+                    if (slot)
+                    { 
+                        // si lo tenemos entonces saltar 
+
+                    }
+                    else
+                    {
+                        // no existe aun -- setear de la mano 
+                        CartaDigimon Chip59 = SerchCardInHand(59, true);
+                        // jugamos la Carta 
+                        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox,IAPlayer).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(Chip59.transform);
+                    }
+
                 }
                 else if (item == "60%")
                 {
-                    // setear Carta de 60
-                    Requesitos.Add(SerchCardInHand("60", true));
+                    DigiCarta digicard = new DigiCarta();
+                    digicard.id = 60;
+                    Transform slot = MesaManager.instance.GetOptionSlotForCard(digicard);
+                    if (slot)
+                    {
+                        // si lo tenemos entonces saltar 
+
+                    }
+                    else
+                    {
+                        // no existe aun -- setear de la mano 
+                        CartaDigimon Chip60 = SerchCardInHand(60, true);
+                        // jugamos la Carta 
+                        MesaManager.instance.GetSlot(MesaManager.Slots.EvolutionRequerimentBox, IAPlayer).GetComponent<EvolutionRequerimentBox>().SetAdicionalRequiriment(Chip60.transform);
+                    }
                 }
                 else
                 {
@@ -557,7 +589,7 @@ public class IA : MonoBehaviour
                             if (!item2.DatosDigimon.Nombre.ToUpper().Replace(" ", "").Contains(item))
                             {
                                 // Seteamos la Carta 
-                                Requesitos.Add(SerchCardInHand(item));
+                                Requesitos.Add(SerchCardInHand(item2.DatosDigimon.id));
                             }
                         }
                     }
@@ -568,7 +600,33 @@ public class IA : MonoBehaviour
         // mandamos a poner las X y O
         if (Colocar)
         {
-            MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().Requerimientos();
+            // revisamos si hay cartas el netOcean
+
+            if (MesaManager.instance.Campo2.NetOcean.GetComponent<NetOcean>().Cartas.Count>0)
+            {
+                MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().SetRequerimientos(null);
+            }
+            else
+            {
+                // colocamos cartas necesarias de la mano
+                for (int i = 0; i < XandO; i++)
+                {
+
+                    for (int j = 0; j < IAPlayer._Mano.Cartas.Count; j++)
+                    {
+                        if (CheckPriorityOptionCard(IAPlayer._Mano.Cartas[i+j], true))
+                        {
+                            // Colocamos la Carta de forma manual 
+                            MesaManager.instance.Campo2.EvolutionRequerimentBox.GetComponent<EvolutionRequerimentBox>().SetRequerimientos((IAPlayer._Mano.Cartas[i + j].GetComponent<CartaDigimon>()));
+
+                        }
+                    }
+
+                  
+                }
+            }
+
+
             StartCoroutine(Whaiting(EnterOtherRequeriments, 1f));
         }
         else
@@ -730,15 +788,15 @@ public class IA : MonoBehaviour
     }
 
 
-    public CartaDigimon SerchCardInHand(string name, bool isChip = false)
+    public CartaDigimon SerchCardInHand(int ID, bool isChip = false)
     {
         if (!isChip)
         {
-            return IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.Nombre.ToUpper().Replace(" ", "") == name);
+            return IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.id == ID);
         }
         else
         {
-            return IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.id == Convert.ToInt32(name));
+            return IAPlayer._Mano.Cartas.Find(x => x.DatosDigimon.id == ID);
         }
     }
 

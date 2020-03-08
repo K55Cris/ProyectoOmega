@@ -104,6 +104,8 @@ public class DigimonBoxSlot : MonoBehaviour
 
                 if (DataManager.GetDesicion())
                 {
+                    AtaqueB.Stop();
+                    AtaqueB.Clear();
                     AtaqueB.Play();
                     SoundManager.instance.PlaySfx(Sound.AtaqueB);
                 }

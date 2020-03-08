@@ -342,8 +342,7 @@ public class Lobby : MonoBehaviour
             {
                 Debug.Log("Left Room");
                 State = LobbyState.Default;
-                MultiPlayer.instance.Inicio.gameObject.SetActive(true);
-                MultiPlayer.instance.Room.gameObject.SetActive(false);
+                MultiPlayer.instance.LeaveGame();
             }
             else
             {

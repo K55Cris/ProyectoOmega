@@ -415,7 +415,7 @@ public class PartidaManager : MonoBehaviour
     public void ShowLose()
     {
         DataManager.instance.FadeCanvas(CanvasFinal, true);
-        ecena = "MainMenu";
+        ecena = "Main Menu";
         EtiquetaVictoria.text = "Lost";
         FondoFinal.color = Color.red;
     }
